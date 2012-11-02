@@ -21,6 +21,15 @@ out/epub/**/*
 *.4tc
 *.lg
 *.log
+*.lof
+*.lol
+*.lot
 *.tmp
 *.xref
 *.zip
+
+# might be needed in the future?
+*.html
+*.css
+*.pdf
+*.epub
