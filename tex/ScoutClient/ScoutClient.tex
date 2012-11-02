@@ -1,0 +1,246 @@
+% =========================================================================== %
+% The Scout Client
+% =========================================================================== %
+
+\ifx\wholebook\relax\else
+  \documentclass[a4paper,10pt,twoside]{book}
+  \input{../common}
+  \pagestyle{headings}
+  \graphicspath{{figures/} {../figures/}}
+  \begin{document}
+  \sloppy
+\fi
+
+
+% --------------------------------------------------------------------------- %
+\chapter{Overview}
+needs text
+  
+% --------------------------------------------------------------------------- %
+\section{Client Model}
+needs text
+  * client session
+  * ui
+  * other
+  
+% --------------------------------------------------------------------------- %
+\section{UI Model and UI Technologies}
+needs text
+  * why separation is a good thing
+  * swing
+  * swt
+  * rap
+
+\section{Test for Listing}
+
+introductionary listing
+
+\lstinputlisting[
+  caption=The DesktopForm.java in the UI,
+]
+{../code/helloworld/org.eclipse.scout.helloworld.client/src/org/eclipse/scout/helloworld/client/ui/forms/DesktopForm.java}
+
+
+some text before listing\index{listing} \ref{samplecode}.
+
+\lstinputlisting[
+  label=samplecode,
+  caption=The HelloWorld.java sample with emphasys on \it{println},
+  index={println,main,String},
+  float,
+  emph={println}
+]
+{../code/helloworldJava/HelloWorld.java}
+
+
+\lstinputlisting[
+  label=samplecode-main,
+  caption=Snippet containing the main method,
+  linerange={14-18},
+  float
+]
+{../code/helloworldJava/HelloWorld.java}
+
+
+some text after listing \ref{samplecode} and \ref{samplecode-main}.
+
+% --------------------------------------------------------------------------- %
+\chapter{Other Things you need to understand first}
+needs text
+  
+% --------------------------------------------------------------------------- %
+\section{Internationalization}
+needs text
+
+\begin{lstlisting}[
+  float,
+  caption=A floating HelloWorld example,
+  index={main},
+  gobble=2
+]
+    /*************************************************
+     * main method
+     *************************************************/
+    public static void main(String[] args) {
+        // some normal line comment
+        System.out.println("Hello, World");
+        Some.big().andEspeciallyLong().getThisOrThat().orSomething("string", null).doThis().doThat;
+    }
+\end{lstlisting}
+
+% --------------------------------------------------------------------------- %
+\section{Codes and Code Types}
+  * codes and codetypes
+  * static code types
+  * dynamic code types
+  * hierarchical code types
+
+\lstinputlisting[
+  language=xml,
+  label=samplecode-xml,
+  caption=The \tt{plugin.xml} file,
+  float
+]
+{../code/helloworldJava/xml/plugin.xml}
+
+and then some listing with the config.ini.
+
+\lstinputlisting[
+  language=ini,
+  label=samplecode-ini,
+  caption=The \tt{config.ini} file
+]
+{../code/helloworldJava/ini/config.ini}
+
+% --------------------------------------------------------------------------- %
+\section{Looking things up}
+  * lookup call
+  * lookup service
+
+% --------------------------------------------------------------------------- %
+\chapter{UI components}
+needs text
+
+% --------------------------------------------------------------------------- %
+\section{Desktop}
+needs text
+
+\subsection{Toolbar}
+needs text
+
+\subsection{Status Line}
+needs text
+
+% --------------------------------------------------------------------------- %
+\section{Menu}
+needs text
+
+% --------------------------------------------------------------------------- %
+\section{Outlines}
+needs text
+
+% --------------------------------------------------------------------------- %
+\section{Pages}
+needs text
+    * page with table
+	* page with nodes
+
+% --------------------------------------------------------------------------- %
+\section{Forms}
+needs text
+
+    * layout manager
+    * life cycle
+	* form handler
+	* form validation
+
+% --------------------------------------------------------------------------- %
+\section{Trees}
+needs text
+
+    * tree nodes
+	* tree form
+	* tree field
+
+% --------------------------------------------------------------------------- %
+\section{Tables}
+needs text
+	* context menues
+	* editable tables
+    * column types
+
+% --------------------------------------------------------------------------- %
+\section{Simple Form Fields}
+needs text
+
+    * common aspects
+	  * exec methods
+	  * field validation
+	* grouping components
+	  * group box
+	  * tab box
+	  * sequence box
+      * radio button group
+	* label field
+	* string field
+	* integer field
+	* number field
+	* date field
+	* button field
+
+% --------------------------------------------------------------------------- %
+\section{Additional Form Fields}
+needs text
+
+	* smart field
+	* list box
+	* tree box
+	* table field
+	* image field	
+	* html field
+	* svg field
+	* browser field
+	* calendar field
+	* file chooser field
+  
+
+% --------------------------------------------------------------------------- %
+\chapter{Custom UI Components}
+needs text
+
+  * concept
+  * showcase: drawing application
+    
+% --------------------------------------------------------------------------- %
+\chapter{Advanced Topics}
+needs text
+
+
+% --------------------------------------------------------------------------- %
+\section{Bookmarks}
+needs text
+  
+% --------------------------------------------------------------------------- %
+\section{Client notification}
+needs text
+    
+% --------------------------------------------------------------------------- %
+\section{Client only Applications}
+needs text
+  
+% --------------------------------------------------------------------------- %
+\section{Miscellaneous}
+needs text
+
+  * startup and shutdown
+  * caching
+  * file up-/download
+  
+% --------------------------------------------------------------------------- %
+
+\ifx\wholebook\relax\else
+   \input{../bibliography}
+   \end{document}
+\fi
+
+% =========================================================================== %

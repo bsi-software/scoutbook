@@ -1,0 +1,106 @@
+% =========================================================================== %
+% Introduction
+% =========================================================================== %
+
+\ifx\wholebook\relax\else
+  \documentclass[a4paper,10pt,twoside]{book}
+  \input{../common}
+  \pagestyle{headings}
+  \graphicspath{{figures/} {../figures/}}
+  \begin{document}
+  \sloppy
+\fi
+
+
+% --------------------------------------------------------------------------- %
+\chapter{Introduction}
+
+% --------------------------------------------------------------------------- %
+\section{What is Eclipse Scout?}
+needs text
+
+\section{Benefits of Scout}
+
+Eclipse Scout is a mature and open framework for modern, 
+service oriented business applications.
+
+With its multi-frontend support, Scout applications may run as desktop 
+applications, in the web or on a mobile using a single codebase.
+
+Scout substantially boosts developer productivity and is simple to learn.
+
+User friendly applications are straight forward to implement with Scout’s 
+comprehensive set of user interface components.
+
+Completely based on Java/Eclipse, Scout Applications are easy to integrate 
+in most IT environments.
+
+\subsection{A short History}
+needs text
+
+\subsection{Outlook}
+needs text
+
+% --------------------------------------------------------------------------- %
+\section{What should I read?} 
+\seclabel{whatshouldiread}
+needs text
+
+\subsection{I know tons of both Java and Eclipse}
+needs text
+
+\subsection{I know some Java}
+needs text
+
+\subsection{I am a manager}
+needs text
+
+% --------------------------------------------------------------------------- %
+\chapter{The 15' Warming Up}
+needs text
+
+\section{The "Hello World" Application}
+needs text
+
+\section{Installation and Setup}
+needs text
+
+\section{Creating a new Application}
+needs text
+  
+\section{The User Interface Part}
+needs text
+
+\begin{figure}
+\includegraphics[width=15cm]{sdk_helloworld_messagefield.png}
+\caption{Scout SDK showing the \it{MessageField}}
+\figlabel{helloworld_messagefield}
+\end{figure}
+
+
+\section{The Server Part}
+needs text
+
+here comes a listing
+
+\lstinputlisting[
+  label=lst:helloworld.load,
+  caption=Assigning "hello world" to the form data's message field.,
+  index={DesktopFormData,DesktopProcessService},
+  emph={getMessage,setValue},
+  linerange={10-14},
+  float
+]
+{../code/helloworld/org.eclipse.scout.helloworld.server/src/org/eclipse/scout/helloworld/server/services/process/DesktopProcessService.java}
+
+\section{Running the Application}
+needs text
+
+% --------------------------------------------------------------------------- %
+
+\ifx\wholebook\relax\else
+   \input{../bibliography}
+   \end{document}
+\fi
+
+% =========================================================================== %

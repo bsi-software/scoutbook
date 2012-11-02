@@ -1,0 +1,26 @@
+# output directories
+out/pdf/**/*
+out/html/**/*
+out/epub/**/*
+
+# latex/htlatex stuff
+*.dvi
+*.aux
+*.log
+*.out
+*.glo
+*.toc
+*.ilg
+*.blg
+*.idx
+*.idv
+*.ind
+*.4ct
+*.4dx
+*.4ix
+*.4tc
+*.lg
+*.log
+*.tmp
+*.xref
+*.zip

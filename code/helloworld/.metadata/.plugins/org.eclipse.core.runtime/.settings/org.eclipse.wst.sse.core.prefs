@@ -1,0 +1,2 @@
+eclipse.preferences.version=1
+task-tag-projects-already-scanned=org.eclipse.scout.helloworld.client,org.eclipse.scout.helloworld.server,org.eclipse.scout.helloworld.shared,org.eclipse.scout.helloworld.ui.rap,org.eclipse.scout.helloworld.ui.swing,org.eclipse.scout.helloworld.ui.swt
