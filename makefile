@@ -4,14 +4,19 @@
 
 # export TEXINPUTS:=.:local
 
+# Root Paths
+BIN=c:\latex
+LATEXROOT=${BIN}\MiKTeX 2.9\miktex\bin\x64
+
 # PDFLATEX = pdflatex -file-line-error
-PDFLATEX = "c:\lyx\MiKTeX 2.9\miktex\bin\pdflatex.exe" -file-line-error
-MAKEINDEX = "c:\lyx\MiKTeX 2.9\miktex\bin\makeindex.exe" -s book_index_style.ist 
-HTLATEX = "c:\lyx\MiKTeX 2.9\miktex\bin\htlatex.exe"
-TEX = "c:\lyx\MiKTeX 2.9\miktex\bin\tex.exe"
-EBOOKCONVERT = "c:\Program Files\Calibre2\ebook-convert.exe" 
-ZIP =zip -R 
-UNZIP = "unzip"
+PDFLATEX = "${LATEXROOT}\pdflatex.exe" -file-line-error
+MAKEINDEX = "${LATEXROOT}\makeindex.exe" -s book_index_style.ist 
+HTLATEX = "${LATEXROOT}\htlatex.exe"
+TEX = "${LATEXROOT}\tex.exe"
+
+EBOOKCONVERT = "${BIN}\Calibre2\ebook-convert.exe" 
+ZIP ="c:\Program Files\7-Zip\7z.exe" a -r
+UNZIP ="c:\Program Files\7-Zip\7z.exe" x
 COPY =copy
 
 HTMLOUTPARAM = "html,2,info" # use "html,3,next" to produce output on section level
