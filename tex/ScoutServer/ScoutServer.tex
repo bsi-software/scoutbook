@@ -15,7 +15,12 @@
 % --------------------------------------------------------------------------- %
 \chapter{Overview}
 needs text
-  
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item concept wiki \url{http://wiki.eclipse.org/Scout/Concepts/Server_Plug-In}
+\end{itemize}
+
 % --------------------------------------------------------------------------- %
 \section{Server Session}
 needs text
@@ -24,38 +29,129 @@ needs text
 \section{Scout Services}
 needs text
 
+\noindent Existing Documentation
+\begin{itemize}
+  \item concept wiki \url{http://wiki.eclipse.org/Scout/Concepts/Server_Plug-In#Service_Types}
+\end{itemize}
+
 \subsection{Link to OSGi Services}
 needs text
 
-\subsection{Convenience}
+\subsection{Service Initialization}
 needs text
-  
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum: extending AbstractService \url{http://www.eclipse.org/forums/index.php/t/170431/}
+\end{itemize}
+
+\subsection{Lookup Services}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item presentation: \url{http://wiki.eclipse.org/images/c/c9/20111102_EclipseConEurope2011-EclipseScout-DiscoverThePotential.pdf}
+  \item concept wiki: \url{http://wiki.eclipse.org/Scout/Concepts/Lookup_Service}
+\end{itemize}
+
+\subsection{Code Services}
+needs text
+
+\subsection{Process Services}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item concept wiki: \url{http://wiki.eclipse.org/Scout/Concepts/Process_Service}
+\end{itemize}
+
+\subsection{Workflow Services}
+needs text
+
+\subsection{Outline Services}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item concept wiki: \url{http://wiki.eclipse.org/Scout/Concepts/Outline_Service}
+\end{itemize}
+
+\subsection{Remote File Services}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item remotefileservice forum \url{http://www.eclipse.org/forums/index.php/t/266862/}
+\end{itemize}
+
+\subsection{SQL Services}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item remotefileservice forum \url{http://www.eclipse.org/forums/index.php/t/266862/}
+\end{itemize}
+
+\subsection{Accessing Scout Services from Outside}
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item from another servlet \url{http://www.eclipse.org/forums/index.php/t/209307/}
+\end{itemize}
+
+
 % --------------------------------------------------------------------------- %
 \section{Client Server Communication}
 needs text
 
+\noindent Existing Documentation
+\begin{itemize}
+  \item concept wiki \url{http://wiki.eclipse.org/Scout/Concepts/Communication}
+\end{itemize}
+
+same pointer in onedaytutorial and server
+
+\subsection{The Server is a Servlet}
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item concept wiki servicetunnelservlet /process \url{http://wiki.eclipse.org/Scout/Concepts/Server_Plug-In#Transaction_Handling}
+\end{itemize}
+
 \subsection{Service Tunnel Basics}
 needs text
-strict client version check \url{http://www.eclipse.org/forums/index.php/t/341417/}
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum: strict client version check \url{http://www.eclipse.org/forums/index.php/t/341417/}
+\end{itemize}
 
 \subsection{Remoting}
 needs text
-  
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum: remote service calls, service tunnel \url{http://www.eclipse.org/forums/index.php/t/243161/}
+\end{itemize}
+
 \subsection{Service Tunnel Configuration}
 needs text
   
-
 % --------------------------------------------------------------------------- %
 \section{Authentication and Authorization}
 needs text
 
-\subsection{Security Filters}
+\subsection{Servlets and Security Filters}
 needs text
-\url{http://www.eclipse.org/forums/index.php/t/417257/}
-\url{http://www.eclipse.org/forums/index.php/t/377822/}
-\url{http://www.eclipse.org/forums/index.php/t/366995/}
 
-tomcat user case \url{http://www.eclipse.org/forums/index.php/t/293244/}
+\noindent Existing Documentation
+\begin{itemize}
+  \item presentation: \url{http://wiki.eclipse.org/images/e/ea/20121022_BahBah_Slides.pdf}
+  \item forum: \url{http://www.eclipse.org/forums/index.php/t/417257/}
+  \item forum: \url{http://www.eclipse.org/forums/index.php/t/377822/}
+  \item forum: \url{http://www.eclipse.org/forums/index.php/t/366995/}
+  \item forum: tomcat user case \url{http://www.eclipse.org/forums/index.php/t/293244/}
+\end{itemize}
 
 \subsection{Anonymous Auth}
 needs text
@@ -68,10 +164,22 @@ needs text
 
 \subsection{Simple Permission Model}
 needs text
-\url{http://wiki.eclipse.org/Scout/Tutorial/3.8/Minicrm/Permissions} (\url{http://www.eclipse.org/forums/index.php/t/413746/})
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item wiki tutorial \url{http://wiki.eclipse.org/Scout/Tutorial/3.8/Minicrm/Permissions}
+  \item forum: \url{http://www.eclipse.org/forums/index.php/t/413746/})
+\end{itemize}
+
+same pointer in scout server, security, and one day tutorial
+
 
 \subsection{Access Control Service}
-permission cache invalidation: \url{http://www.eclipse.org/forums/index.php/t/326359/}
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum: permission cache invalidation: \url{http://www.eclipse.org/forums/index.php/t/326359/}
+\end{itemize}
 
 \subsection{Something more complex}
 needs text
@@ -79,118 +187,293 @@ needs text
 \subsection{Showcase: Role based Permissions}
 needs text
 
+
 % --------------------------------------------------------------------------- %
-\chapter{Common Server Tasks}
+\section{Transaction Handling}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item concept wiki: \url{http://wiki.eclipse.org/Scout/Concepts/Server_Plug-In#Transaction_Handling}
+\end{itemize}
+
+% --------------------------------------------------------------------------- %
+\chapter{Logging}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item concept wiki \url{http://wiki.eclipse.org/Scout/Concepts/Logging}
+\end{itemize}
+
+% --------------------------------------------------------------------------- %
+\section{Simple Approach}
 needs text
   
 % --------------------------------------------------------------------------- %
-\section{Database Access}
+\section{Configure Logging}
 needs text
 
-\subsection{Database Integration}
+\noindent Existing Documentation
+\begin{itemize}
+  \item concept wiki: \url{http://wiki.eclipse.org/Scout/Concepts/Logging#Logger_Setup}
+  \item how-to wiki: \url{http://wiki.eclipse.org/Scout/HowTo/3.8/Setup_different_Log-Configuration_for_Production_and_Development}
+\end{itemize}
+
+% --------------------------------------------------------------------------- %
+\section{Setting Log-Level Dynamically}
 needs text
 
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum: dwi example \url{http://www.eclipse.org/forums/index.php/t/183221/}
+  \item how-to wiki: \url{http://wiki.eclipse.org/Scout/HowTo/Make_use_of_the_additional_Scout_logging_features}
+\end{itemize}
+
+% --------------------------------------------------------------------------- %
+\section{Add your own Logging Framework}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item concept wiki \url{http://wiki.eclipse.org/Scout/Concepts/Logging#Custom_Logger_.28e.g._Log4J.29}
+\end{itemize}
+
+% --------------------------------------------------------------------------- %
+\section{Showcase: Log4j}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item how-to wiki \url{http://wiki.eclipse.org/Scout/HowTo/Create_a_CustomLogManager_for_log4j}
+\end{itemize}
+
+% --------------------------------------------------------------------------- %
+\chapter{Database Integration}
+needs text
+
+% --------------------------------------------------------------------------- %
+\section{Database Support}
+
+\subsection{Derby}
 derby database support
-\url{http://www.eclipse.org/forums/index.php/t/293244/}
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum \url{http://www.eclipse.org/forums/index.php/t/293244/}
+\end{itemize}
+
+\subsection{MySQL}
 support for other dbs via market place
 
-\subsection{Database Auth}
+\noindent Existing Documentation
+\begin{itemize}
+  \item wiki tutorial mysql, postgresql, oracle: \url{http://wiki.eclipse.org/Scout/Tutorial/3.8/Add_JDBC_Drivers_for_Eclipse_Scout}
+\end{itemize}
+
+\subsection{PostgreSql}
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item wiki tutorial mysql, postgresql, oracle: \url{http://wiki.eclipse.org/Scout/Tutorial/3.8/Add_JDBC_Drivers_for_Eclipse_Scout}
+\end{itemize}
+
+\subsection{Oracle}
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item wiki tutorial mysql, postgresql, oracle: \url{http://wiki.eclipse.org/Scout/Tutorial/3.8/Add_JDBC_Drivers_for_Eclipse_Scout}
+\end{itemize}
+
+% --------------------------------------------------------------------------- %
+\section{Database Authentication}
 needs text, probably remove this from here and put it into the security chapter or move to authentication section in this chapter
 maybe also keep it here with minimal information pointing to the other two places just mentioned.
 
-\subsection{Convenience Class SQL}
+% --------------------------------------------------------------------------- %
+\section{Scout SQL Class}
+
+\subsection{Establishing the Connection}
+
+\subsection{SQL Commands}
 needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum: bean array holder \url{http://www.eclipse.org/forums/index.php/t/310526/}
+\end{itemize}
+
 * SQL.select
 * holder mechanism
 * SQL.selectInto
 * SQL.insert
 * SQL.update
-* bean array holder \url{http://www.eclipse.org/forums/index.php/t/310526/}
 
-\subsection{Accessing multiple databases}
+\subsection{Form Data Statement Builder}
 needs text
-\url{http://www.eclipse.org/forums/index.php/t/369585/}
 
-\subsection{Transaction management}
-needs text
-Cancellation of Server Jobs
-\url{http://www.eclipse.org/forums/index.php/t/378157/}
-more details \url{http://www.eclipse.org/forums/index.php/t/308208/}
+\noindent Existing Documentation
+\begin{itemize}
+  \item concept wiki \url{http://wiki.eclipse.org/Scout/Concepts/StatementBuilder}
+\end{itemize}
 
-\subsection{Scout Integration for your favorite DBMS}
-needs text
-\url{http://wiki.eclipse.org/Scout/HowTo/3.8/Write_a_jdbc_connection_bundle}
-\url{http://www.eclipse.org/forums/index.php/t/410167/}
 
-\subsection{Showcase: MySql}
+% --------------------------------------------------------------------------- %
+\section{Transaction Management}
 needs text
-  
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum: Cancellation of Server Jobs \url{http://www.eclipse.org/forums/index.php/t/378157/}
+  \item more details \url{http://www.eclipse.org/forums/index.php/t/308208/}
+  \item older post: \url{http://www.eclipse.org/forums/index.php/t/245472/}
+  \item support for long transactions \url{http://www.eclipse.org/forums/index.php/t/236586/}
+\end{itemize}
+
+% --------------------------------------------------------------------------- %
+\section{Accessing Multiple Databases}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum: \url{http://www.eclipse.org/forums/index.php/t/369585/}
+\end{itemize}
+
+% --------------------------------------------------------------------------- %
+\section{Scout Integration for your favorite DBMS}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item wiki howto \url{http://wiki.eclipse.org/Scout/HowTo/3.8/Write_a_jdbc_connection_bundle}
+  \item forum: \url{http://www.eclipse.org/forums/index.php/t/410167/}
+\end{itemize}
+
+% --------------------------------------------------------------------------- %
+\chapter{Web Service Integration}
+needs text
+
+% --------------------------------------------------------------------------- %
+\section{Scout JAX-WS Integration}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item wiki tutorial \url{http://wiki.eclipse.org/Scout/Tutorial/3.8/webservices/Webservices_with_JAX-WS}
+  \item concept wiki: \url{http://wiki.eclipse.org/Category:Scout_JAXWS-RT}
+  \item concept wiki: \url{http://wiki.eclipse.org/Category:Scout_JAXWS-SDK}
+\end{itemize}
+
+% --------------------------------------------------------------------------- %
+\section{A Simple Consumer}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item concept wiki: \url{http://wiki.eclipse.org/Scout/SDK/JAXWS-SDK/Webservice_consumer_Property_View}
+\end{itemize}
+
+% --------------------------------------------------------------------------- %
+\section{A Simple Provider}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item concept wiki: \url{http://wiki.eclipse.org/Scout/SDK/JAXWS-SDK/Create_webservice_provider}
+  \item concept wiki: \url{http://wiki.eclipse.org/Scout/SDK/JAXWS-SDK/Webservice_provider_Property_View}
+\end{itemize}
+
+% --------------------------------------------------------------------------- %
+\section{Something Advanced}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item concept wiki: \url{http://wiki.eclipse.org/Scout/SDK/JAXWS-SDK/Change_alias}
+  \item concept wiki: \url{http://wiki.eclipse.org/Scout/Concepts/JAXWS-RT/Transactional_handlers}
+\end{itemize}
+
+% --------------------------------------------------------------------------- %
+\section{Related Stuff}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum: \url{http://www.eclipse.org/forums/index.php/t/394559/}
+  \item forum: date handling \url{http://www.eclipse.org/forums/index.php/t/369809/}
+\end{itemize}
+
+% --------------------------------------------------------------------------- %
+\chapter{Email Integration}
+needs text
+
+\subsection{SMTP and IMAP}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item wiki tutorial \url{http://wiki.eclipse.org/Scout/Tutorial/3.8/IMAP_Step-by-Step}
+  \end{itemize}
+
+% --------------------------------------------------------------------------- %
+\chapter{Scheduling}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item concept wiki \url{http://wiki.eclipse.org/Scout/Concepts/Scheduler}
+\end{itemize}
+
+% --------------------------------------------------------------------------- %
+\section{Simple Scheduling}
+needs text
+
+% --------------------------------------------------------------------------- %
+\section{Showcase: Quartz}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum: example \url{http://www.eclipse.org/forums/index.php/t/234236/}
+\end{itemize}
+
+% --------------------------------------------------------------------------- %
+\chapter{Miscellaneous}
+needs text
+
 % --------------------------------------------------------------------------- %
 \section{File Upload and Downlaod}
 needs text
-\url{http://www.eclipse.org/forums/index.php/t/368166/}
-\url{http://www.eclipse.org/forums/index.php/t/366585/}
-  
-% --------------------------------------------------------------------------- %
-\section{Logging}
-needs text
 
-\subsection{Simple Approach}
-needs text
-  
-\subsection{Configure Logging}
-needs text
-  
-\subsection{Add your own Logging Framework}
-needs text
-  
-\subsection{Showcase: Log4j}
-needs text
-    
-% --------------------------------------------------------------------------- %
-\section{Scheduling}
-needs text
-
-\subsection{Simple Scheduling}
-needs text
-
-\subsection{Showcase: Quarz}
-needs text
-    
+\noindent Existing Documentation
+\begin{itemize}
+  \item how-to wiki: \url{http://wiki.eclipse.org/Scout/HowTo/3.8/Transfer_a_file_from_the_client_to_the_server}
+  \item how-to wiki: \url{http://wiki.eclipse.org/Scout/HowTo/3.8/Use_RemoteFileService}
+  \item forum: \url{http://www.eclipse.org/forums/index.php/t/368166/}
+  \item forum: \url{http://www.eclipse.org/forums/index.php/t/366585/}
+\end{itemize}
 
 % --------------------------------------------------------------------------- %
-\section{Web Service Integration}
+\section{Server Side Equinox}
 needs text
 
-\subsection{Scout JAX-WS Integration}
-needs text
-
-\subsection{A Simple Consumer}
-needs text
-
-\subsection{A Simple Producer}
-needs text
-
-\subsection{Something Advanced}
-needs text
-
-\subsection{Related Stuff}
-needs text
-? \url{http://www.eclipse.org/forums/index.php/t/394559/}
-date handling \url{http://www.eclipse.org/forums/index.php/t/369809/}
+\noindent Existing Documentation
+\begin{itemize}
+  \item concept wiki server side equinox: \url{http://wiki.eclipse.org/Scout/Concepts/Server_Plug-In#Server_Side_Equinox}
+\end{itemize}
 
 % --------------------------------------------------------------------------- %
-\section{SMTP and IMAP}
+\section{Startup and Shutdown}
 needs text
 
-% --------------------------------------------------------------------------- %
-\section{Miscellaneous}
-needs text
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum: os independent *product/confg.ini \url{http://www.eclipse.org/forums/index.php/t/261674/}
+  \item forum: \url{http://www.eclipse.org/forums/index.php/t/279543/}
+\end{itemize}
 
-\subsection{startup and shutdown}
   * caching
   * process servlet
-  \url{http://www.eclipse.org/forums/index.php/t/279543/}
   
 \begin{table}
 \begin{center}

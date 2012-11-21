@@ -12,13 +12,25 @@
 \fi
 
 
-% --------------------------------------------------------------------------- %
+% =========================================================================== %
 \chapter{Overview}
 needs text
   
+\noindent Existing Documentation
+\begin{itemize}
+  \item concept wiki \url{http://wiki.eclipse.org/Scout/Concepts/Client_Plug-In}
+\end{itemize}
+
 % --------------------------------------------------------------------------- %
-\section{Client Model}
+\section{Client Component Model}
 needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item wiki concept \url{http://wiki.eclipse.org/Scout/Concepts/Client_Plug-In#Component_Model}
+  \item concept wiki \url{http://wiki.eclipse.org/Scout/Concepts/ClientSession}
+\end{itemize}
+
   * client session
   * ui
   * other
@@ -26,7 +38,12 @@ needs text
 % --------------------------------------------------------------------------- %
 \section{UI Model and UI Technologies}
 needs text
-  * why separation is a good thing
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item wiki concept \url{http://wiki.eclipse.org/Scout/Concepts/Client_Plug-In#Separation_of_UI_and_GUI}
+\end{itemize}
+  
   * swing
   * swt
   * rap
@@ -64,13 +81,25 @@ some text before listing\index{listing} \ref{samplecode}.
 
 some text after listing \ref{samplecode} and \ref{samplecode-main}.
 
-% --------------------------------------------------------------------------- %
+% =========================================================================== %
 \chapter{Other Things you need to understand first}
 needs text
   
 % --------------------------------------------------------------------------- %
-\section{Internationalization}
+\section{Texts / i18n / NLS Support}
 needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item concept wiki: \url{http://wiki.eclipse.org/Scout/Concepts/Texts}
+  \item forum: \url{http://www.eclipse.org/forums/index.php/t/319136/}
+  \item forum: \url{http://www.eclipse.org/forums/index.php/t/326343/}
+  \item forum: overwriting texts provided by scout \url{http://www.eclipse.org/forums/index.php/t/308273/}
+  \item forum: additional text provider service \url{http://www.eclipse.org/forums/index.php/t/317565/}
+  \item forum: changing default language for scout apps \url{http://www.eclipse.org/forums/index.php/t/367177/}
+  \item forum: export/import not possible: \url{http://www.eclipse.org/forums/index.php/t/326320/}
+  \item forum: usage counts for text entries: \url{http://www.eclipse.org/forums/index.php/t/261235/}
+\end{itemize}
 
 \begin{lstlisting}[
   float,
@@ -89,13 +118,42 @@ needs text
 \end{lstlisting}
 
 % --------------------------------------------------------------------------- %
+\section{Icons}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item how-to wiki \url{http://wiki.eclipse.org/Scout/HowTo/3.8/Add_an_icon}
+  \item how-to wiki \url{http://wiki.eclipse.org/Scout/HowTo/3.8/Exchange_Default_Images}
+\end{itemize}
+
+% --------------------------------------------------------------------------- %
+\section{Data Binding}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item form data/dto \url{http://www.eclipse.org/forums/index.php/t/169334/}
+\end{itemize}
+
+% --------------------------------------------------------------------------- %
 \section{Codes and Code Types}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item how-to wiki: \url{http://wiki.eclipse.org/Scout/Tutorial/3.8/Minicrm/Code_Types}
+  \item concept wiki \url{http://wiki.eclipse.org/Scout/Concepts/CodeType}
+  \item forum: codes from database \url{http://www.eclipse.org/forums/index.php/t/282531/}
+\end{itemize}
+
   * codes and codetypes
   * static code types
   * dynamic code types
-  - codes from database \url{http://www.eclipse.org/forums/index.php/t/282531/}
   * hierarchical code types
 
+  
+  
 \lstinputlisting[
   language=xml,
   label=samplecode-xml,
@@ -114,13 +172,42 @@ and then some listing with the config.ini.
 {../code/helloworldJava/ini/config.ini}
 
 % --------------------------------------------------------------------------- %
-\section{Looking things up}
-  * lookup call
+\section{Looking Things Up}
+needs text
+ 
+\noindent Existing Documentation
+\begin{itemize}
+  \item presentation: \url{http://wiki.eclipse.org/images/c/c9/20111102_EclipseConEurope2011-EclipseScout-DiscoverThePotential.pdf}
+  \item concept wiki: \url{http://wiki.eclipse.org/Scout/Concepts/LookupCall}
+  \item forum: \url{http://www.eclipse.org/forums/index.php/t/279108/}
+\end{itemize}
+
+    * lookup call
   * lookup service
   * sqllookup service
-  \url{http://www.eclipse.org/forums/index.php/t/279108/}
 
 % --------------------------------------------------------------------------- %
+\section{Permissions}
+
+needs text, topic is relevant for client, server, and security. what to present where to be decided
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item how-to wiki: \url{http://wiki.eclipse.org/Scout/HowTo/3.8/Create_Permissions}
+  \item concept wiki: \url{http://wiki.eclipse.org/Scout/Concepts/Permission}
+  \item forum: \url{http://www.eclipse.org/forums/index.php/t/243966/}
+\end{itemize}
+
+% =========================================================================== %
+\chapter{Layouting}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item concept wiki \url{http://wiki.eclipse.org/Scout/Concepts/Client_Plug-In#Layouting}
+\end{itemize}
+
+% =========================================================================== %
 \chapter{UI components}
 needs text
 
@@ -132,17 +219,26 @@ needs text
 \section{Login Box}
 needs text
 
-
 % --------------------------------------------------------------------------- %
 \section{Desktop}
 needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item concept wiki \url{http://wiki.eclipse.org/Scout/Concepts/Desktop}
+\end{itemize}
 
 \subsection{Info Dialog}
 needs text
 
 \subsection{Toolbar}
 needs text
-feature request \url{http://www.eclipse.org/forums/index.php/t/366440/}
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum: feature request \url{http://www.eclipse.org/forums/index.php/t/366440/}
+  \item concept wiki \url{http://wiki.eclipse.org/Scout/Concepts/Tool}
+\end{itemize}
 
 \subsection{Status Line}
 needs text
@@ -151,33 +247,62 @@ needs text
 \section{Menu}
 needs text
 
+\noindent Existing Documentation
+\begin{itemize}
+  \item concept wiki \url{http://wiki.eclipse.org/Scout/Concepts/Menu}
+  \item forum: hard coded swt menues \url{http://www.eclipse.org/forums/index.php/t/236071/}. is this still an issue with scout kepler?
+\end{itemize}
+
 % --------------------------------------------------------------------------- %
 \section{Outlines}
 needs text
 
+\noindent Existing Documentation
+\begin{itemize}
+  \item concept wiki \url{http://wiki.eclipse.org/Scout/Concepts/Outline}
+\end{itemize}
+
 % --------------------------------------------------------------------------- %
 \section{Pages}
 needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item how-to wiki: \url{http://wiki.eclipse.org/Scout/HowTo/3.8/Display_images_in_a_table_page}	
+  \item concept wiki: \url{http://wiki.eclipse.org/Scout/Concepts/Page}
+  \item forum: pages linking to forms \url{http://www.eclipse.org/forums/index.php/t/367595/}
+  \item forum: changing page icons \url{http://www.eclipse.org/forums/index.php/t/262151/}
+\end{itemize}
+
     * page with table
 	* page with nodes
-	
-	* pages linking to forms \url{http://www.eclipse.org/forums/index.php/t/367595/}
 
 % --------------------------------------------------------------------------- %
 \section{Forms}
 needs text
 
-    * layout manager \url{http://www.eclipse.org/forums/index.php/t/404048/}
-    * life cycle \url{http://www.eclipse.org/forums/index.php/t/369890/}
-	* form handler
+\noindent Existing Documentation
+\begin{itemize}
+  \item concept wiki \url{http://wiki.eclipse.org/Scout/Concepts/Form}
+  \item concept wiki form handler\url{http://wiki.eclipse.org/Scout/Concepts/Form_Handler}
+  \item how-to wiki \url{http://wiki.eclipse.org/Scout/HowTo/3.8/Open_a_Form_in_a_View}
+  \item forum: layout manager \url{http://www.eclipse.org/forums/index.php/t/404048/}
+  \item forum: life cycle \url{http://www.eclipse.org/forums/index.php/t/369890/}
+\end{itemize}
+
 	* form validation
-	* forms as views \url{http://wiki.eclipse.org/Scout/HowTo/Open_a_Form_in_a_View}
+	
 
 % --------------------------------------------------------------------------- %
 \section{Search Forms}
 needs text
 
-position of search form \url{http://www.eclipse.org/forums/index.php/t/353895/}
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum: position of search form \url{http://www.eclipse.org/forums/index.php/t/353895/}
+  \item forum: statement builder stuff \url{http://www.eclipse.org/forums/index.php/t/165805/}
+\end{itemize}
+
 
 % --------------------------------------------------------------------------- %
 \section{Trees}
@@ -190,144 +315,392 @@ needs text
 % --------------------------------------------------------------------------- %
 \section{Tables}
 needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum: editable column \url{http://www.eclipse.org/forums/index.php/t/220019/}
+  \item forum: default visibility of columns \url{http://www.eclipse.org/forums/index.php/t/166052/}
+  \item forum: row deletion \url{http://www.eclipse.org/forums/index.php/t/210744/}
+\end{itemize}
+
 	* context menues
 	* editable tables
     * column types
 
-row deletion \url{http://www.eclipse.org/forums/index.php/t/210744/}
-
 \subsection{Image Columns}
 needs text
-\url{http://www.eclipse.org/forums/index.php/t/369626/}
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum: \url{http://www.eclipse.org/forums/index.php/t/369626/}
+\end{itemize}
 
 \subsection{HTML inside Table Cells}
 needs text
-\url{http://www.eclipse.org/forums/index.php/t/370714/}
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum: \url{http://www.eclipse.org/forums/index.php/t/370714/}
+  \item forum: summary row \url{http://www.eclipse.org/forums/index.php/t/235749/}
+\end{itemize}
 
 \subsection{Table Status Bar}
 nees text
-\url{http://www.eclipse.org/forums/index.php/t/367326/}
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum: \url{http://www.eclipse.org/forums/index.php/t/367326/}
+\end{itemize}
 
 \subsection{Injecting Columns at Runtime}
 needs text
-\url{http://www.eclipse.org/forums/index.php/t/364715/}
 
-% --------------------------------------------------------------------------- %
-\section{Simple Form Fields}
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum: \url{http://www.eclipse.org/forums/index.php/t/364715/}
+  \item forum : dynamic columns \url{http://www.eclipse.org/forums/index.php/t/216731/}
+\end{itemize}
+
+% =========================================================================== %
+\chapter{Form Fields}
 needs text
 
-    * common aspects
-	  * exec methods
-	  * field validation
-	  * label position \url{http://www.eclipse.org/forums/index.php/t/369109/}
-	* grouping components
-	  * group box
-	  * tab box
-	  * sequence box \url{http://www.eclipse.org/forums/index.php/t/414629/}
-	  * split box
-      * radio button group \url{http://www.eclipse.org/forums/index.php/t/366324/}
-	* label field
-	* string field \url{http://www.eclipse.org/forums/index.php/t/369263/}
-	* integer field
-	* number field
-	* date field
-	* button field
+\noindent Existing Documentation
+\begin{itemize}
+  \item concept wiki (links) \url{http://wiki.eclipse.org/Scout/Concepts/Client_Plug-In#Form_fields}
+  \item concept wiki screenshots \url{http://wiki.eclipse.org/Scout/Concepts/Field}
+\end{itemize}
 
 % --------------------------------------------------------------------------- %
-\section{Additional Form Fields}
+\section{Common Aspects}
 needs text
 
-	* smart field \url{http://www.eclipse.org/forums/index.php/t/369542/}
-	* list box
-	* tree box
-	* table field \url{http://www.eclipse.org/forums/index.php/t/392053/}
-	* page field \url{http://www.eclipse.org/forums/index.php/t/395360/}
-	* image field 
-	  - scrollbars \url{http://www.eclipse.org/forums/index.php/t/291205/}
-	* html field
-	* svg field
-	* browser field \url{http://www.eclipse.org/forums/index.php/t/414483/}, 
-	\url{http://www.eclipse.org/forums/index.php/t/369963/}, mozilla as default: http://www.eclipse.org/forums/index.php/t/342433/
-	* calendar field \url{http://www.eclipse.org/forums/index.php/t/370052/}
-	  - execloaditems \url{http://www.eclipse.org/forums/index.php/t/277447/}
-	  - filtering items \url{http://www.eclipse.org/forums/index.php/t/285644/}
-	* file chooser field \url{http://www.eclipse.org/forums/index.php/t/377581/}
-	  open with default file name: \url{http://www.eclipse.org/forums/index.php/t/351352/}
-  
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum: label position \url{http://www.eclipse.org/forums/index.php/t/369109/}
+\end{itemize}
+
+* exec methods
+* field validation
+
+	
+% --------------------------------------------------------------------------- %
+\section{Grouping Components}
+needs text
+
+* layouting
+* group box
+* tab box
+* sequence box 
+* split box
+
+% --------------------------------------------------------------------------- %
+\section{Group Box}
+needs text
+
+% --------------------------------------------------------------------------- %
+\section{Tab Box}
+needs text
+
+% --------------------------------------------------------------------------- %
+\section{Sequence Box}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum: \url{http://www.eclipse.org/forums/index.php/t/414629/}
+\end{itemize}
+
+* exec methods
+* field validation
+
+
+% --------------------------------------------------------------------------- %
+\section{Split Box}
+needs text
+
+% --------------------------------------------------------------------------- %
+\section{Radio Button Group}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum: \url{http://www.eclipse.org/forums/index.php/t/366324/}
+\end{itemize}
+
+% --------------------------------------------------------------------------- %
+\section{Label Field}
+needs text
+	
+% --------------------------------------------------------------------------- %
+\section{String Field}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum: \url{http://www.eclipse.org/forums/index.php/t/369263/}
+  \item forum: validation on any key \url{http://www.eclipse.org/forums/index.php/t/198123/}
+\end{itemize}
+
+% --------------------------------------------------------------------------- %
+\section{Integer Field}
+needs text
+	
+% --------------------------------------------------------------------------- %
+\section{Number Field}
+needs text
+	
+% --------------------------------------------------------------------------- %
+\section{Date Field}
+needs text
+
+% --------------------------------------------------------------------------- %
+\section{Button Field}
+needs text
+
+% --------------------------------------------------------------------------- %
+\section{Link Field}
+needs text
+
+% --------------------------------------------------------------------------- %
+\section{Smart Field}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item presentation: \url{http://wiki.eclipse.org/images/c/c9/20111102_EclipseConEurope2011-EclipseScout-DiscoverThePotential.pdf}
+  \item forum: \url{http://www.eclipse.org/forums/index.php/t/369542/}
+\end{itemize}
+
+% --------------------------------------------------------------------------- %
+\section{List Box}
+needs text
+
+% --------------------------------------------------------------------------- %
+\section{Tree Box}
+needs text
+
+% --------------------------------------------------------------------------- %
+\section{Table Field}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item wiki tutorial \url{http://wiki.eclipse.org/Scout/Tutorial/3.8/Minicrm/Table_Field}
+  \item forum: \url{http://www.eclipse.org/forums/index.php/t/392053/}
+  \item forum: load/save data \url{http://www.eclipse.org/forums/index.php/t/253311/}
+\end{itemize}
+
+% --------------------------------------------------------------------------- %
+\section{Page Field}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum: \url{http://www.eclipse.org/forums/index.php/t/395360/}
+\end{itemize}
+
+% --------------------------------------------------------------------------- %
+\section{Image Field}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum: scrollbars \url{http://www.eclipse.org/forums/index.php/t/291205/}
+\end{itemize}
+
+% --------------------------------------------------------------------------- %
+\section{HTML Field}
+needs text
+
+% --------------------------------------------------------------------------- %
+\section{Image Field}
+needs text
+
+% --------------------------------------------------------------------------- %
+\section{SVG Field}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item wiki tutorial \url{http://wiki.eclipse.org/Scout/Tutorial/3.8/SVG_Field}
+\end{itemize}
+
+% --------------------------------------------------------------------------- %
+\section{Browser Field}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum: \url{http://www.eclipse.org/forums/index.php/t/414483/}, 
+  \item forum: \url{http://www.eclipse.org/forums/index.php/t/369963/}, 
+  \item forum: mozilla as default: \url{http://www.eclipse.org/forums/index.php/t/342433/}
+\end{itemize}
+
+% --------------------------------------------------------------------------- %
+\section{Calendar Field}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum: calendar field \url{http://www.eclipse.org/forums/index.php/t/370052/}
+  \item forum: execloaditems \url{http://www.eclipse.org/forums/index.php/t/277447/}
+  \item forum: filtering items \url{http://www.eclipse.org/forums/index.php/t/285644/}
+  \item forum: usage example \url{http://www.eclipse.org/forums/index.php/t/265028/}
+\end{itemize}
+
+% --------------------------------------------------------------------------- %
+\section{File Chooser Field}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum: file chooser field \url{http://www.eclipse.org/forums/index.php/t/377581/}
+  \item forum: open with default file name: \url{http://www.eclipse.org/forums/index.php/t/351352/}
+  \item how-to wiki: rap file chooser \url {http://wiki.eclipse.org/Scout/HowTo/3.8/Add_FileChooser_support_for_RAP_UI}
+\end{itemize}
+
 % --------------------------------------------------------------------------- %
 \section{Master Slave Fields}
 needs text
-\url{http://www.eclipse.org/forums/index.php/t/366931/}
 
-% --------------------------------------------------------------------------- %
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum: \url{http://www.eclipse.org/forums/index.php/t/366931/}
+\end{itemize}
+
+% =========================================================================== %
+\chapter{Template Fields}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item concept wiki: \url{http://wiki.eclipse.org/Scout/Concepts/Template}
+  \item forum: form data for template fields \url{http://www.eclipse.org/forums/index.php/t/261235/}
+  \item forum: form ''modularisation'' \url{http://www.eclipse.org/forums/index.php/t/245857/}
+\end{itemize}
+
+
+% =========================================================================== %
 \chapter{Custom UI Components}
 needs text
 
+\noindent Existing Documentation
+\begin{itemize}
+  \item how-to wiki: \url{http://wiki.eclipse.org/Scout/HowTo/3.8/Add_a_custom_GUI_component}
+  \item forum: wrap existing javaview.de swing component \url{http://www.eclipse.org/forums/index.php/t/262755/}
+\end{itemize}
+
   * concept
   * showcase: drawing application
-    
-% --------------------------------------------------------------------------- %
+
+% =========================================================================== %
 \chapter{Additional Topics}
 needs text
 
 \section{Progress Bar}
-needs text, no so rocky support \url{http://www.eclipse.org/forums/index.php/t/305966/}
+needs text
 
-% --------------------------------------------------------------------------- %
-\section{Internationalizatin / i18n / NLS Support}
-Needs text 
-\url{http://www.eclipse.org/forums/index.php/t/319136/}
-\url{http://www.eclipse.org/forums/index.php/t/326343/}
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum: no so rocky support \url{http://www.eclipse.org/forums/index.php/t/305966/}
+\end{itemize}
 
-overwriting texts provided by scout \url{http://www.eclipse.org/forums/index.php/t/308273/}
-additional text provider service \url{http://www.eclipse.org/forums/index.php/t/317565/}
-changing default language for scout apps \url{http://www.eclipse.org/forums/index.php/t/367177/}
-export/import not possible: \url{http://www.eclipse.org/forums/index.php/t/326320/}
 
 % --------------------------------------------------------------------------- %
 \section{Modifying the UI at Runtime}
 needs text
-inject fields in form \url{http://www.eclipse.org/forums/index.php/t/367124/}
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum: inject fields in form \url{http://www.eclipse.org/forums/index.php/t/367124/}
+\end{itemize}
 
 % --------------------------------------------------------------------------- %
 \section{Branding Scout Applications}
-
 needs text
-\url{http://www.eclipse.org/forums/index.php/t/373921/}
-* Splash \url{http://www.eclipse.org/forums/index.php/t/263003/}
-* Login Box \url{http://www.eclipse.org/forums/index.php/t/417248/}
-* App Icon \url{http://www.eclipse.org/forums/index.php/t/263221/}
-* Desktop \url{http://www.eclipse.org/forums/index.php/t/373921/}
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum: \url{http://www.eclipse.org/forums/index.php/t/373921/}
+  \item forum: Splash \url{http://www.eclipse.org/forums/index.php/t/263003/}, 
+  \item forum: Splash \url{http://www.eclipse.org/forums/index.php/t/164495/}
+  \item forum: Login Box \url{http://www.eclipse.org/forums/index.php/t/417248/}
+  \item forum: App Icon \url{http://www.eclipse.org/forums/index.php/t/263221/}
+  \item forum: App Name \url{http://www.eclipse.org/forums/index.php/t/262121/}
+  \item forum: Desktop \url{http://www.eclipse.org/forums/index.php/t/373921/}
+  \item forum: Scout info form \url{http://www.eclipse.org/forums/index.php/t/236630/}
+\end{itemize}
+
 * Icons
 * Fonts / Colors
 * Look and Feel (Swing)
-* Rayo Look and Feel (Swing and Web)
-\url{http://www.eclipse.org/forums/index.php/t/369809/}
+
+% --------------------------------------------------------------------------- %
+\section{Rayo Look and Feel (Swing and Web)}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum \url{http://www.eclipse.org/forums/index.php/t/369809/}
+  \item wiki tutorial \url{http://wiki.eclipse.org/Scout/Tutorial/3.8/Rayo_Look_and_Feel}
+\end{itemize}
+
+\subsection{Branding the Swing Client}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item how-to wiki: for logo \url{http://wiki.eclipse.org/Scout/HowTo/3.8/Branding_the_Swing_Client}
+  \item how-to wiki: app logo \url{http://wiki.eclipse.org/Scout/HowTo/3.8/Exchange_Default_Images}
+\end{itemize}
 
 \subsection{Branding Scout Webapplications}
 needs text
-\url{http://www.eclipse.org/forums/index.php/t/367983/}
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum \url{http://www.eclipse.org/forums/index.php/t/367983/}
+\end{itemize}
 
 % --------------------------------------------------------------------------- %
 \section{Workflows and Wizards}
 Needs text
-\url{http://www.eclipse.org/forums/index.php/t/391607/}
-\url{http://wiki.eclipse.org/Scout/Concepts/Wizard}
-\url{http://www.eclipse.org/forums/index.php/t/382579/}
-\url{http://www.eclipse.org/forums/index.php/t/366971/}
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item concept wiki \url{http://wiki.eclipse.org/Scout/Concepts/Wizard}
+  \item forum: \url{http://www.eclipse.org/forums/index.php/t/391607/}
+  \item forum: \url{http://www.eclipse.org/forums/index.php/t/382579/}
+  \item forum: \url{http://www.eclipse.org/forums/index.php/t/366971/}
+\end{itemize}
 
 % --------------------------------------------------------------------------- %
 \section{Focus Handling}
-\url{http://www.eclipse.org/forums/index.php/t/369585/}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum: \url{http://www.eclipse.org/forums/index.php/t/369585/}
+\end{itemize}
 
 % --------------------------------------------------------------------------- %
 \section{Keyboard control}
 needs text
-\url{http://www.eclipse.org/forums/index.php/t/351417/}
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum: \url{http://www.eclipse.org/forums/index.php/t/351417/}
+\end{itemize}
 
 % --------------------------------------------------------------------------- %
 \section{Master Detail Pages}
-\url{http://www.eclipse.org/forums/index.php/t/405999/}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item \url{http://www.eclipse.org/forums/index.php/t/405999/}
+\end{itemize}
 
 % --------------------------------------------------------------------------- %
 \section{Bookmarks}
@@ -336,23 +709,71 @@ needs text
 % --------------------------------------------------------------------------- %
 \section{Client notification}
 needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item presentation: \url{http://wiki.eclipse.org/images/e/ea/20121022_BahBah_Slides.pdf}
+  \item concept wiki: \url{http://wiki.eclipse.org/Scout/Concepts/Client_Notification}
+  \item forum: \url{http://www.eclipse.org/forums/index.php/t/241053/}
+\end{itemize}
     
 % --------------------------------------------------------------------------- %
 \section{Client only Applications}
 needs text
-  
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item how-to wiki: \url{http://wiki.eclipse.org/Scout/HowTo/3.8/Create_a_Standalone_Client_with_DB_Access}
+  \item forum: client only \url{http://www.eclipse.org/forums/index.php/t/210183/}
+  \item forum: offline capable client \url{http://www.eclipse.org/forums/index.php/t/210183/}
+\end{itemize}
+
 % --------------------------------------------------------------------------- %
 \section{Miscellaneous}
 needs text
 
-  * config ini file \url{http://www.eclipse.org/forums/index.php/t/365140/}
-  * startup
-  - reading command line parameters \url{http://www.eclipse.org/forums/index.php/t/281816/}
-  * shutdown
-  * caching
-  * file up-/download
-  * headless client \url{http://www.eclipse.org/forums/index.php/t/262563/}
+\subsection{Config.ini File}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item config ini file forum \url{http://www.eclipse.org/forums/index.php/t/365140/}
+  \item os independent *product/confg.ini forum \url{http://www.eclipse.org/forums/index.php/t/261674/}
+\end{itemize}
+
+\subsection{Client Startup}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item reading command line parameters forum \url{http://www.eclipse.org/forums/index.php/t/281816/}
+  \item do something right after login forum \url{http://www.eclipse.org/forums/index.php/t/261999/}
+\end{itemize}
+
+\subsection{Client Shutdown}
+needs text
+
+\subsection{Caching}
+needs text
   
+\subsection{File Up-/Download}
+needs text, same topic addressed in scout server. decide where to put this topic
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item remotefileservice forum \url{http://www.eclipse.org/forums/index.php/t/266862/}
+  \item file download forum \url{http://www.eclipse.org/forums/index.php/t/263896/}
+\end{itemize}
+
+\subsection{Other Things}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item headless client forum \url{http://www.eclipse.org/forums/index.php/t/262563/}
+  \item threading and jobs concept wiki \url{http://wiki.eclipse.org/Scout/Concepts/Client_Plug-In#Threading_and_Jobs}
+\end{itemize}
+
 % --------------------------------------------------------------------------- %
 
 \ifx\wholebook\relax\else
