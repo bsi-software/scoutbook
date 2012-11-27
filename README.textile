@@ -1,0 +1,4 @@
+h1. Scout Book
+
+* "Project page":http://wiki.eclipse.org/Scout/Book/3.9
+* "Distribution folder":http://tools.bsiag.com/scoutbook/
