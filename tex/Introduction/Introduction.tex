@@ -12,7 +12,7 @@
 \fi
 
 
-% --------------------------------------------------------------------------- %
+% =========================================================================== %
 \chapter{Introduction}
 
 % --------------------------------------------------------------------------- %
@@ -60,6 +60,8 @@ needs text
 \subsection{Outlook}
 needs text
 
+\newpage
+
 % --------------------------------------------------------------------------- %
 \section{What should I read?} 
 \seclabel{whatshouldiread}
@@ -70,36 +72,99 @@ We first address the needs of junior Java developers that like to learn more abo
 Then, we suggest a list of sections relevant for software wizards that already have a solid understanding of the Eclipse platform, Java enterprise technolgies, and real world applications.
 Finally, the information needs of IT managers are considered.
 
+% ........................................................................... %
 \subsection{I know some Java}
 
 The good news first.
 This book is written for you! 
-No prior knowledge regarding the \href{http://wiki.eclipse.org/Platform}{Eclipse Platform} is needed. 
-Of course, having used the Eclipse IDE for Java development is helpful - please do not mistake the Eclipse IDE with the Platform.
-We do not even assume that you have a meaningful understanding of the 
-\href{http://en.wikipedia.org/wiki/Java_Platform,_Enterprise_Edition}{Java enterprise edition}.
+No prior knowledge of the Eclipse Platform\footnote{Eclipse Platform: \url{http://wiki.eclipse.org/Platform}} is needed. 
+We do not even assume that you have a meaningful understanding of the Java Enterprise Edition 
+(Java EE)\footnote{Java Enterprise Edition: \url{http://en.wikipedia.org/wiki/Java_Platform,_Enterprise_Edition}}.
+Of course, having prior experience in client server programming with Java is helpful.
+It also helps having used the Eclipse IDE for Java development before --- please do not mistake the IDE with the Eclipse 
+platform\footnote{By reading through the book you will learn that there is much more to the Eclipse platform than just the IDE}.
+However, prior knowledge of Java EE and the Eclipse platform is not required for this book.
 
-The bad news is, that writing Scout applications requires you to have a solid understanding of 
-\href{http://en.wikipedia.org/wiki/Java_%28software_platform%29}{Java}.
-To properly benefit from this book, we assume that you have been developing software for at least a year.
-In addition you should master the 
-\href{http://en.wikipedia.org/wiki/Java_SE}{Java standard edition} 
-to a significant extent. 
-To be more explicit, you are expected to be comfortable with all material required for the 
-\href{http://docs.oracle.com/javase/tutorial/extra/certification/javase-7-programmer1.html}{Programmer Level I Exam}
-and most of the material required for the
-\href{http://docs.oracle.com/javase/tutorial/extra/certification/javase-7-programmer2.html}{Programmer Level II Exam}.
+The ``bad'' news is, that writing Scout applications requires a solid understanding of Java.
+To properly benefit from this book, we assume that you have been developing software for a year or more.
+And you should have masterd the Java Standard Edition 
+(Java SE)\footnote{Java Standard Edition: \url{http://en.wikipedia.org/wiki/Java_SE}} to a significant extent. 
+To be more explicit, you are expected to be comfortable with all material required for the Java Programmer Level I 
+Exam\footnote{Level I Exam: \url{docs.oracle.com/javase/tutorial/extra/certification/javase-7-programmer1.html}}
+and most of the material required for 
+Level II\footnote{Level II Exam: \url{docs.oracle.com/javase/tutorial/extra/certification/javase-7-programmer2.html}}.
 
-In this book we try to provide all necessary material that will help you to successfully build high quality enterprise applications.
+As the focus of this book is on writing Scout applications and not on learning Java, Java EE, or the Eclipse platform, the necessary background material has been moved into corresponding appendices.
+To get a more precise picture which parts of Java and Eclipse are important to Scout applications, consult the appendices listed below.
 
+\begin{itemize}
+  \item \appref{java_basics} highlighs relevant advanced Java SE concepts and necessary Java EE topics. 
+        In addition, the appendix contains recommendations for introductory material as well as pointers to further reading regarding Java EE technology.
+  \item \appref{eclipse_basics} provides a brief introduction for Eclipse concepts used in Scout. 
+        This includes the OSGi/Equinox foundation as well as additional elements such as Eclipse plugins, feature and product files.
+\end{itemize}
+
+We now propose to start downloading and installing Scout as described in \appref{install_scout} and do some actual coding.
+To do so, please continue with the ``Hello World'' example provided in \charef{helloworld}.
+You can expect to complete this example in less than two hours including the necessary download and installation steps.
+Afterwards, you might want to continue with the remaining material in ``Getting Started''. 
+Working through the complete ``Getting Started'' should take no more than two days. 
+This exercise will provide you with a broad overview of Eclipse Scout and enough hands-on material to decide how much Scout will help you with your current and future projects.
+
+How you continue after ``Getting Started'' will depend on your current interests or your specific project. 
+``The Frontend'' and ``The Backend'' walk you through the Scout application model covering the client, the server, and the necessary communication in the context of a typical business application.
+``Developing Applications'' contains additional Scout features, relevant aspects for integrating Scout applications in an enterprise envrionment, and typical topics important to professional software development.
+
+Once you work with the Scout framework on a regular basis, you might want to ask questions in the Scout 
+forum\footnote{Eclipse Scout forum: \url{http://www.eclipse.org/forums/eclipse.scout}}.
+When your question gets answered, please ask yourself if your initial problem could have been solved by better documentation.
+In that case, you might want to help the Scout community by fixing or amending the Scout wiki pages\footnote{Eclipse Scout wiki: \url{http://wiki.eclipse.org/Scout}}.
+Or this book. 
+If you find a bug in Eclipse Scout that makes your life miserable you can report it. 
+When your bug is fixed, you can test the fix.
+To help speed up the bugfixing process you can contribute patches.
+All of these actions will add to the healthy grow of the Scout community.
+And this is exactly the topic of ``Contributing'', the last part of this book.
+
+% ........................................................................... %
 \subsection{I know tons of both Java and Eclipse}
-needs text
 
+This means that you are one of these software wizards that get easily bored.
+You probably hate going through lengthy descriptions of widely known concepts.
+In that case let us assume that you are prepared to spend two hours to grasp the scope of Eclipse Scout and get an impression of its strengths and limitations.
+
+In that case you will not need to actually download, install, and code. 
+Rather, it will suffice to flip through a couple of diagrams and screenshots, read about some central Scout concepts, and look at some code snippets provided in this book.
+The list below suggests a sequence of sections to digest including a brief motivation for each one.
+
+\begin{itemize}
+  \item read ''getting started'' but skip the larger example
+  \item read overview and client modeling in frontend 
+  \item flip though the form fields provided out of the box
+  \item maybe check custom fields to see how to add missing form fields
+  \item read overview and transaction management in backend
+  \item read application extensions to learn how scout applications can be properly modularized 
+  \item maybe check how to use your favorite logging framework with scout
+  \item glance at web and mobile application to learn how scout can use a single codebase to run an application on the desktop in the web, and on mobile devices
+  \item glance over the shocase sections in "integrating 3rd party" to see how scout applications integrate with other frameworks
+  \item flip though testing/profiling to convince yourself that developing scout applications is not different from developing other java/eclise applications	
+\end{itemize}
+
+% ........................................................................... %
 \subsection{I am a manager}
-needs text
 
-% --------------------------------------------------------------------------- %
+Beeing a manager and actually reading this book may indicate one of the following situations:
+
+\begin{itemize}
+  \item Your developer tried to convince you that Eclipse Scout can help you with implementing business applications in a shorter time and for less money.
+        And you did not understand why (again) a new technology should work better than the ones you already use. 
+	
+\end{itemize}
+
+% =========================================================================== %
 \chapter{"Hello World"}
+\chalabel{helloworld}
+
 needs text
 
 \noindent Existing Documentation
