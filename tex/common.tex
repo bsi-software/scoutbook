@@ -99,6 +99,13 @@
   stringstyle=\color{black}
 }
 
+% settings for console output
+\lstdefinelanguage{console}
+{
+  morecomment=[l]{C:},
+  commentstyle=\color{darkblue}
+}
+
 % default settings (for java files)
 \lstset{
   language=Java,
@@ -108,6 +115,15 @@
   morecomment=[s][\color{lightblue}]{/**}{*/},
   stringstyle=\color{darkblue},
 }
+
+% --------------------------------------------------------------------------- %
+% eclipse stuff macros
+% --------------------------------------------------------------------------- %
+\newcommand{\menu}[1]{\textsc{#1} menu}
+\newcommand{\button}[1]{\textsc{#1} button}
+\newcommand{\tab}[1]{\textsc{#1} tab}
+\newcommand{\icon}[1]{\textsc{#1} icon}
+\newcommand{\field}[1]{\textit{#1} field}
 
 % --------------------------------------------------------------------------- %
 % cross reference macros
@@ -134,6 +150,7 @@
 \graphicspath{
   {figures/}
   {Introduction/figures/}
+  {ScoutInstallation/figures/}  
 }
 
 %=============================================================================%
