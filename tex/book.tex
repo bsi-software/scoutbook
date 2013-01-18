@@ -23,6 +23,14 @@
 % http://tex.stackexchange.com/questions/20538/what-is-the-right-order-when-using-tableofcontents-frontmatter-mainmatter
 % =========================================================================== %
 \begin{document}
+
+\ifpdf
+  \includepdf[pages=-]{ScoutBookCover.pdf}
+\else
+  \includegraphics{ScoutBookCover.png}
+\fi
+
+\thispagestyle{empty}
 \frontmatter
 
 % --------------------------------------------------------------------------- %
