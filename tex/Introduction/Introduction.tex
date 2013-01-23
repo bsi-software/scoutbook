@@ -182,7 +182,11 @@ Beeing a manager and actually reading this book may indicate one of the followin
 \chapter{''Hello World''}
 \chalabel{helloworld}
 
-needs text
+The ''Hello World'' chapter walks you through the creation of an Eclipse Scout ''Hello World'' client server application.
+Except for a single line of code, we will be using the tooling provided by the Scout SDK.
+
+The goal of this chapter is to provide a first impression of working with the Scout framework using the Scout SDK.
+For this, we will start with building the application from scratch and end deploying the complete application to a Tomcat webserver.
 
 \noindent Existing Documentation
 \begin{itemize}
@@ -198,12 +202,70 @@ After successful completion of the installation, you are ready to create your fi
 
 % --------------------------------------------------------------------------- %
 \section{Creating a new Project}
-needs text
+
+Start your Eclipse IDE and select an empty directory for your 
+workspace\footnote{The term \textit{workspace} is used for a directory containing the relevant project artefacts such as the Java souce files or configuration files.} 
+as described in \secref{download_install}.
+To create a new Scout project, either select the \contextmenu{New Scout Project...} as shown in \figref{sdk_create_new_scout_project} or use the Eclipse \menu{File|New|Project...}.
+In the latter case you are shown the generic \wizard{New Project} of Eclipse.
+On the first dialog step, select the \wizard{Scout Project} below the Scout folder according to \figref{sdk_new_project_wizard}.
+With the \button{Next} you will be directed to the next dialog step, the \wizard{New Scout Project}.
+
+\begin{figure}
+\includegraphics[width=13cm]{sdk_create_new_scout_project.png}
+\caption{Create a new Scout project}
+\figlabel{sdk_create_new_scout_project}
+\end{figure}
+
+In the \wizard{New Scout Project} you first enter a name for you Scout project. 
+As we are creating a ''Hello World'' application use \texttt{org.eclipse.scout.helloworld} for the \field{Project Name}.
+As shown on the right hand side of \figref{sdk_new_project_wizard}, the wizard will automatically use the part after the last period of the project name as the application alias. 
+(TODO: explain what the project alias is used for. E.g. in development server servlet is usually mapped to http://localhost:8080/''alias''/). 
+Now, click the \button{Finish} to let the Scout SDK create the initial project code for you.
+
+\begin{figure}
+\includegraphics[width=7cm]{sdk_new_project_1.png} \hspace{5mm}
+\includegraphics[width=7cm]{sdk_new_project_2.png}
+\caption{The new project wizard. The dialog on the left side is only shown when using the generic \wizard{New Project} of Eclipse}
+\figlabel{sdk_new_project_wizard}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=13cm]{sdk_initial_helloworld_project.png}
+\caption{The Scout SDK showing the tree representation of the ''hello world'' application in the Scout Explorer.
+In the Scout Object Properties displays the product launchers for the server and the available clients.}
+\figlabel{sdk_initial_helloworld_project}
+\end{figure}
+
+After having built the initial project code, the Scout SDK displays the application model in the \textit{Scout Explorer}.
+This model is visually presented as a tree structure covering both the client and the server part of the application.
+In \figref{sdk_initial_helloworld_project} the Scout Explorer displays the top level elements of the complete Scout application.
+Selecting the root node \texttt{org.eclipse.scout.helloworld} in the Scout Explorer displays the product launchers in the \textit{Scout Object Properties}.
+As we can see in \figref{sdk_initial_helloworld_project}, we have shortcut icons to launch and stop four different development 
+products\footnote{Product (XML) files are used to define all necessary elements constituting an application.}.
+
+\begin{itemize}
+  \item \textbf{Server}: the Scout server application
+  \item \textbf{Swing}: the Swing client application
+  \item \textbf{SWT}: the SWT client application
+  \item \textbf{RAP}: the Scout AJAX server application used for running Scout in a browser
+\end{itemize}
 
 \noindent Existing Documentation
 \begin{itemize}
   \item how-to wiki \url{http://wiki.eclipse.org/Scout/HowTo/3.8/Create_a_new_project}
 \end{itemize}
+
+% --------------------------------------------------------------------------- %
+\section{Run the Initial Application}
+
+\begin{figure}
+\includegraphics[width=4.5cm]{hellworld_empty_swing.png} \hspace{3mm}
+\includegraphics[width=4.5cm]{hellworld_empty_swt.png} \hspace{3mm}
+\includegraphics[width=4.5cm]{hellworld_empty_rap.png}
+\caption{Running the three empty client applications from the Scout SDK. From left to right: The Swing client, the SWT client, and the webclient}
+\figlabel{helloworld_empty}
+\end{figure}
 
 % --------------------------------------------------------------------------- %
 \section{The User Interface Part}
