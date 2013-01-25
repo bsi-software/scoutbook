@@ -188,11 +188,14 @@ Except for a single line of code, we will be using the tooling provided by the S
 The goal of this chapter is to provide a first impression of working with the Scout framework using the Scout SDK.
 For this, we will start with building the application from scratch and end deploying the complete application to a Tomcat webserver.
 
+\fbox{
+  \parbox{12cm}{
 \noindent Existing Documentation
 \begin{itemize}
   \item wiki tutorial \url{http://wiki.eclipse.org/Scout/Tutorial/3.8/HelloWorld}
 \end{itemize}
-
+  }
+}
 % --------------------------------------------------------------------------- %
 \section{Installation and Setup}
 
@@ -240,24 +243,45 @@ In the Scout Object Properties displays the product launchers for the server and
 After having built the initial project code, the Scout SDK displays the application model in the \textit{Scout Explorer}.
 This model is visually presented as a tree structure covering both the client and the server part of the application.
 In \figref{sdk_initial_helloworld_project} the Scout Explorer displays the top level elements of the complete Scout application.
-Selecting the root node \texttt{org.eclipse.scout.helloworld} in the Scout Explorer displays the product launchers in the \textit{Scout Object Properties}.
+Selecting the application's root node \texttt{org.eclipse.scout.helloworld} in the Scout Explorer displays the product launchers in the \textit{Scout Object Properties}.
 As we can see in \figref{sdk_initial_helloworld_project}, we have shortcut icons to launch and stop four different development 
-products\footnote{Product (XML) files are used to define all necessary elements constituting an application.}.
+products\footnote{Product files define all necessary elements constituting an application in an XML document.}.
 
 \begin{itemize}
-  \item \textbf{Server}: the Scout server application
+  \item \textbf{Server}: the server application
   \item \textbf{Swing}: the Swing client application
   \item \textbf{SWT}: the SWT client application
-  \item \textbf{RAP}: the Scout AJAX server application used for running Scout in a browser
+  \item \textbf{RAP}: the RAP server application
 \end{itemize}
 
+The server box provides links to the Eclipse product file \texttt{helloworld-server-dev.product}, the server configuration file \texttt{config.ini} as well as three icons to launch and stop the Scout server in the Scout SDK.
+The same layout is used for controlling the other three products.
+Both the Swing and the
+SWT\footnote{Standard Widget Toolkit (SWT): \url{http://en.wikipedia.org/wiki/Standard_Widget_Toolkit}.} 
+boxes represent rich clients\footnote{Rich client: \url{http://en.wikipedia.org/wiki/Fat_client}} 
+that run on the desktop.
+The RAP server application is used to enable Scout application to run in a browser, a tablet, or a mobile device.
+RAP\footnote{Remote Application Platform (RAP): \url{http://www.eclipse.org/rap/}} in itself is a framework that allows to use Java for server-side 
+Ajax\footnote{Asynchronous JavaScript and XML (AJAX): \url{http://en.wikipedia.org/wiki/Ajax_\%28programming\%29}}.
+
+\fbox{
+  \parbox{12cm}{
 \noindent Existing Documentation
 \begin{itemize}
   \item how-to wiki \url{http://wiki.eclipse.org/Scout/HowTo/3.8/Create_a_new_project}
 \end{itemize}
+  }
+}
 
 % --------------------------------------------------------------------------- %
 \section{Run the Initial Application}
+
+First, start the Scout server using the product launcher icons provided in the server box of the Scout Object Properties associated with the root node of the application.
+For this, either click on the icon with the white triangle in the green circle of the right hand side of the box, or, click on the green bug right below to start the server in debug mode.
+
+Once the server is running, you may start the Swing client, the SWT client, and the RAP server in the same way.
+To dispay the Scout client in a web browser, type the address \texttt{http://localhost:8082/web} into the browser's navigation bar.
+You should then see the three different clients with an empty desktop on each as shown in \figref{helloworld_empty}.
 
 \begin{figure}
 \includegraphics[width=4.5cm]{hellworld_empty_swing.png} \hspace{3mm}
@@ -269,7 +293,27 @@ products\footnote{Product (XML) files are used to define all necessary elements 
 
 % --------------------------------------------------------------------------- %
 \section{The User Interface Part}
-needs text
+
+In this section we add a simple text field to the empty desktop of the ''Hello World'' application.
+To find the correct place to add the field, we first navigate to the orange \node{client} in the Scout Explorer and double click the \node{Desktop} just below.
+This will open the associated Java file \texttt{Desktop.java} in the editor view of the Scout SDK.
+
+The desktop represents the container of all visible elements in the Scout client.
+Of interest at this stage is the overwritten callback method \java{execOpend} shown in \lstref{helloworld.execopend}.
+This method has been added in the project creation step by the Scout SDK.
+It is called by the Scout framework after the desktop frame of the client application is created and becomes visible on the display.
+
+\lstinputlisting[
+  label=\lstlabel{helloworld.execopend},
+  caption=Creating and starting a form in the client's Desktop callback method \java{execOpened}.,
+  index={DesktopForm},
+  linerange={42-48},
+  float
+]
+{../code/helloworld/org.eclipse.scout.helloworld.client/src/org/eclipse/scout/helloworld/client/ui/desktop/Desktop.java}
+
+We now navigate to the class \java{DesktopForm} which is located in the \folder{Forms} below the Desktop node in the Scout Explorer.
+
 
 \begin{figure}
 \includegraphics[width=15cm]{sdk_helloworld_messagefield.png}
