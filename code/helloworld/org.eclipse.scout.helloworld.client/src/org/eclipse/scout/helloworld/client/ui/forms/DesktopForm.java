@@ -81,8 +81,8 @@ public class DesktopForm extends AbstractForm {
       exportFormData(formData);
       formData = service.load(formData);
       importFormData(formData);
-
     }
+
   }
 
   public void startView() throws ProcessingException {
