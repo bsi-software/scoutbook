@@ -296,19 +296,35 @@ You should then see the three different clients with an empty desktop on each as
 \section{The User Interface Part}
 
 In this section we add a simple text field to the empty desktop of the ''Hello World'' application.
-To find the correct place to add the field, we first navigate to the orange \node{client} in the Scout Explorer and double click the \node{Desktop} just below.
-This will open the associated Java file \texttt{Desktop.java} in the editor view of the Scout SDK.
+Before we are going to add some content to the empty desktop we will introduce some central elements of the Scout application model that are involved in the user interface (UI) part of the ''Hello World'' application.
 
-The desktop represents the container of all visible elements in the Scout client.
-Of interest at this stage is the overwritten callback method \java{execOpend} shown in \lstref{helloworld.execopend}.
-This method has been added in the project creation step by the Scout SDK described in \secref{create_project_simple}.
+\begin{itemize}
+  \item Desktop
+  \item Form
+  \item Form handler
+  \item Process service
+  \item Form data
+  \item Form field
+\end{itemize}
+  
+Each element is represented by a Java class in Scout.
+This allows us to explain the basic concept using the source code in our ''Hello World'' application.
+Please note, that all this Java code has been added in the project creation step by the Scout SDK described in \secref{create_project_simple}.
+Obviously, this implies that you are free to adapt/change this code according to your needs.
+
+\subsection{Desktop}
+
+The desktop inherits from Scout class \java{AbstractDesktop} that represents the central container of all visible elements of the Scout client application.
+The desktop in itself is the empty application frame with attached elements, such as menues or outlines\footnote{
+In Scout, the term \textit{outline} is used for the concept of perspectives in the Eclipse IDE.
+}.
+To find the desktop class in the Scout Explorer, we first navigate to the orange \node{client} and double click the \node{Desktop} just below.
+This will open the associated Java file \texttt{Desktop.java} in the editor view of the Scout SDK.
+Of interest is the overwritten callback method \java{execOpend} shown in \lstref{helloworld.execopend}.
+
 Method \java{execOpend} is called by the Scout framework after the desktop frame of the client application is created and becomes visible on the display.
-The only thing that happens here is the creation of the 
-form\footnote{A Scout form is a UI container that can either be displayed in its own window or shown as a view inside of another UI container.}
-\java{desktopForm}.
-The desktop form then gets assigned an icon before it is started via method \java{startView}.
-The class \java{DesktopForm} has also been added in the initial project creation step.
-In the next paragraph we will describe how to navigate to the class \java{DesktopForm} and what method \java{startView} is doing.
+The only thing that happens here is the creation of a \java{desktopForm} object, that gets assigned an icon before it is started via method \java{startView}.
+For more complex applications having various parts in its UI, method \java{execOpend} will also need to deal with many more things.
 
 \lstinputlisting[
   label=\lstlabel{helloworld.execopend},
@@ -318,6 +334,41 @@ In the next paragraph we will describe how to navigate to the class \java{Deskto
   float
 ]
 {../code/helloworld/org.eclipse.scout.helloworld.client/src/org/eclipse/scout/helloworld/client/ui/desktop/Desktop.java}
+
+
+\subsection{Form}
+
+A Scout form always inherits from Scout class \java{AbstractForm}.
+Scout forms are UI containers that can either be displayed as a dialog in its own window or shown as a view inside of another UI container.
+In the ''Hello World'' application a form of class \java{DesktopForm} is created and displayed inside of the applications Desktop.
+To find the desktop form class in the Scout Explorer, expand the orange \node{client}\footnote{
+To expand elements (nodes, folders, etc.) in the Scout Explorer, use a double click on the element or a single click on the plus icon in front of the element.}.
+Below this node, you will find the \folder{Forms}. 
+Expanding this folder will show the \element{DesktopForm} as shown in \figref{helloworld_viewhandler}.
+
+\begin{figure}
+\includegraphics[width=15cm]{sdk_helloworld_viewhandler.png}
+\caption{Scout SDK showing the DesktopForm's \textit{ViewHandler}.}
+\figlabel{helloworld_viewhandler}
+\end{figure}
+
+Expanding \element{DesktopForm} in the Scout Explorer reveals its children \element{Variables}, \element{MainBox}, and \element{Handlers}.
+In subfolder \element{Variables} we can add any non-visible variables to a form.
+We do not need this for the ''Hello World'' application but the feature comes in very handy at times.
+In subfolder \element{MainBox} all visible UI elements of the form are shown.
+Currently, the main box of our \java{DesktopForm} is empty. 
+But we will change this as soon as we are starting to add form fields.
+Finally, subfolder \element{Handlers} contains all available form handlers. 
+As shown in \figref{helloworld_viewhandler} we already have a view handler available for our desktop form.
+But this is the topic of the following section.
+
+\subsection{Form Handler}
+
+Form handlers inherit from the Scout class \java{AbstractFormHandler} and are used to specify custom behaviour before a form is opend, or after it is closed.
+The implementation of these handlers define how and from where the relevant data is loaded into the form before it is presented to the user.
+After a user has entered or changed data in a from, the form handler implementation defines what happens to the changed data after the form is closed by the user.
+To implement the desired custom behaviour, we only need to overwrite one of the callback methods defined in \java{AbstractFormHandler}.
+The necessary wiring is provided by the framework. 
 
 \lstinputlisting[
   label=\lstlabel{helloworld.viewhandler},
@@ -329,44 +380,47 @@ In the next paragraph we will describe how to navigate to the class \java{Deskto
 ]
 {../code/helloworld/org.eclipse.scout.helloworld.client/src/org/eclipse/scout/helloworld/client/ui/forms/DesktopForm.java}
 
-\begin{figure}
-\includegraphics[width=15cm]{sdk_helloworld_viewhandler.png}
-\caption{Scout SDK showing the DesktopForm's \textit{ViewHandler}.}
-\figlabel{helloworld_viewhandler}
-\end{figure}
+For the ''Hello World'' example application, the desktop form will only display a text string obtained from the server.
+For this, the available view handler is sufficient and the callback method to override is named \java{execLoad}.
+To open the Java editor for the \java{ViewHandler}, double click on the \element{ViewHandler} in the Scout Explorer.
+Your Scout SDK should then be in a state similar to \figref{helloworld_viewhandler}.
+In the lower part of code snipped provided in \lstref{helloworld.viewhandler} we can see the wiring between the desktop form and the view handler in method \java{startView}.
+Further up, we find the overwritten method \java{execLoad} of the view handler class.
 
-In the Explorer View of the Scout SDK expand the orange \node{client}
-\footnote{To expand elements (nodes, folders, etc.) in the Scout Explorer of the Scout SDK use a double click on the element or a single click on the plus icon in front of the element.}.
-Below it, you will find the \folder{Forms}. 
-Expanding the Forms folder will then show the \element{DesktopForm} as shown in \figref{helloworld_viewhandler}.
-According to this screenshot, drill down to the \element{ViewHandler} element.
-A double on this ViewHandler element opens the corresponding source code in the Java editor.
-The corresponding code is also shown in \lstref{helloworld.viewhandler}.
-
-We will now have a more detailed look at the view handler of class \java{DesktopForm}.
-The class \java{ViewHandler} is responsible for the live cycle handling of our desktop form.
-In the Scout framework form handler classes are used to specify custom behaviour before a form is opend, after it is closed, or when entered data needs to be saved. 
-Overwriting the correct callback method of a form handler is enough.
-The necessary wiring is provided by the framework. 
-According to \lstref{helloworld.viewhandler} only the \java{execLoad} method is implemented in the handler of the desktop form. 
-Before we discuss the provided implementation of method \java{execLoad}, we want to shed some light on when this method will actually be called.
-As we have seen in the \java{Desktop} class in \lstref{helloworld.execopend}, the form's method \java{startView} is called after creating the desktop form.
+Before we discuss the method's implementation, let us briefly investigate when \java{execLoad} is actually called.
+As we have seen in the \java{Desktop} class in \lstref{helloworld.execopend}, the form's method \java{startView} is executed after creating the desktop form.
 Inside this method, the desktop form is started/opened using \java{startInternal}.
 In method \java{startInternal} a view handler is created and passed as a parameter.
-This eventually leads to the call of our custom implementation of \java{execLoad}.
+This eventually leads to the call of our \java{execLoad} custom implementation.
 
-We are now ready to describe the implementation of method \java{execLoad} of the desktop form's view handler.
-The central piece is the call of the \java{load} method emphasized in \lstref{helloworld.viewhandler}.
-In the code before, a reference to a process service is first obtained.
+We are now ready to dive into the implementation of method \java{execLoad} of the desktop form's view handler.
+First, a reference to a process service named \java{IDesktopProcessService} is obtained using \java{SERVICES.getService}.
+Then, a form data object is created.
+All current form field values are then exported into the form data via method \java{exportFormData}.
+Next, using the \java{load} service method highlighted in \lstref{helloworld.viewhandler}, new form field values are obtained.
+Finally, these new values are then imported into the form via the \java{importFormData} method.
+
+If the above description of method \java{execLoad} is not clear to you please continue with the next section.
+There we will introduce process services and form data objects.
+
+\subsection{Process Services and Form Data Objects}
+
+For the time being it is sufficent to know that this (Scout)service is associated with the desktop form and responsible for fetching data from the 
+service.
+When we are looking at the server part of our ''Hello World'' application, we will talk more about this desktop process service.
+
 Then, a form data is created and passed as a parameter to the \java{load} service method.
 Just before the call of the load method, some exporting and importing is going on.
 
 As we will see in the next section, this service is not located in the client, but on the server side.
 For now, it is enough to know that we can get a reference to this service to the convenience method \java{SERVICES.getService}.
 
+Form data objects inherit from \java{AbstractFormData} and are specialized data transfer objects\footnote{
+Data Transfer Object (DTO): \url{http://en.wikipedia.org/wiki/Data_transfer_object}.
+}
+for the transfer of form field values between a Scout client application and a Scout server application.
 
 
-The code of \java{ViewHandler} is provided in \lstref{helloworld.viewhandler} in the context of \java{DesktopForm} and its \java{startView} method.
 
 \begin{figure}
 \includegraphics[width=15cm]{sdk_helloworld_messagefield.png}
