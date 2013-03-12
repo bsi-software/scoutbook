@@ -194,7 +194,7 @@ The client then copies the content obtained from the server into a text field wi
 Finally, the client displays the message obtained from the server in a text field widget.
 
 The goal of this chapter is to provide a first impression of working with the Scout framework using the Scout SDK.
-For this, we will start with building the application from scratch and end deploying the complete application to a Tomcat webserver.
+We will start by building the application from scratch and then we'll deploy the complete application to a Tomcat webserver.
 Except for a single line of code in the server part of the ''Hello World'' application, we will only be using the tooling provided by the Scout SDK.
 
 \fbox{
@@ -209,8 +209,8 @@ Except for a single line of code in the server part of the ''Hello World'' appli
 \section{Installation and Setup}
 
 Before you can start with the Scout ''Hello World'' example you need to have a complete and working installation.
-For this, follow the step-by-step installation guide provided in \appref{install_scout}.
-After successful completion of the installation, you are ready to create your first Scout project.
+See the step-by-step installation guide provided in \appref{install_scout}.
+Once you have everything installed, you are ready to create your first Scout project.
 
 % --------------------------------------------------------------------------- %
 \section{Creating a new Project}
@@ -221,7 +221,7 @@ workspace\footnote{The term \textit{workspace} is used for a directory containin
 as described in \secref{download_install}.
 To create a new Scout project, either select the \contextmenu{New Scout Project...} as shown in \figref{sdk_create_new_scout_project} or use the Eclipse \menu{File|New|Project...}.
 In the latter case you are shown the generic \wizard{New Project} of Eclipse.
-On the first dialog step, select the \wizard{Scout Project} below the Scout folder according to \figref{sdk_new_project_wizard}.
+On the first dialog step, select the \wizard{Scout Project} below the Scout folder as seen in \figref{sdk_new_project_wizard}.
 With the \button{Next} you will be directed to the next dialog step, the \wizard{New Scout Project}.
 
 \begin{figure}
@@ -231,7 +231,7 @@ With the \button{Next} you will be directed to the next dialog step, the \wizard
 \end{figure}
 
 In the \wizard{New Scout Project} you first enter a name for you Scout project. 
-As we are creating a ''Hello World'' application use \texttt{org.eclipse.scout.helloworld} for the \field{Project Name}.
+As we are creating a ''Hello World'' application, use \texttt{org.eclipse.scout.helloworld} for the \field{Project Name}.
 As shown on the right hand side of \figref{sdk_new_project_wizard}, the wizard will automatically use the part after the last period of the project name as the application alias. 
 (TODO: explain what the project alias is used for. E.g. in development server servlet is usually mapped to http://localhost:8080/''alias''/). 
 Now, click the \button{Finish} to let the Scout SDK create the initial project code for you.
@@ -245,17 +245,17 @@ Now, click the \button{Finish} to let the Scout SDK create the initial project c
 
 \begin{figure}
 \includegraphics[width=13cm]{sdk_initial_helloworld_project.png}
-\caption{The Scout SDK showing the tree representation of the ''hello world'' application in the Scout Explorer.
-In the Scout Object Properties displays the product launchers for the server and the available clients.}
+\caption{The Scout SDK showing the tree representation of our ''hello world'' application in the Scout Explorer.
+Scout Object Properties displays the product launchers for the server and the available clients.}
 \figlabel{sdk_initial_helloworld_project}
 \end{figure}
 
-After having built the initial project code, the Scout SDK displays the application model in the \textit{Scout Explorer}.
+Once the initial project code is built, the Scout SDK displays the application model in the \textit{Scout Explorer}.
 This model is visually presented as a tree structure covering both the client and the server part of the application.
 In \figref{sdk_initial_helloworld_project} the Scout Explorer displays the top level elements of the complete Scout application.
 Selecting the application's root node \texttt{org.eclipse.scout.helloworld} in the Scout Explorer displays the product launchers in the \textit{Scout Object Properties}.
 As we can see in \figref{sdk_initial_helloworld_project}, we have shortcut icons to launch and stop four different development 
-products\footnote{Product files define all necessary elements constituting an application.}.
+products\footnote{Product files define all the necessary elements of an application.}.
 
 \begin{itemize}
   \item \textbf{Server}: the server application
@@ -271,7 +271,7 @@ SWT\footnote{Standard Widget Toolkit (SWT): \url{http://en.wikipedia.org/wiki/St
 boxes represent rich clients\footnote{Rich client: \url{http://en.wikipedia.org/wiki/Fat_client}} 
 that run on the desktop.
 The RAP server application is used to enable Scout application to run in a browser, a tablet, or a mobile device.
-RAP\footnote{Remote Application Platform (RAP): \url{http://www.eclipse.org/rap/}} in itself is a framework that allows to use Java for server-side 
+RAP\footnote{Remote Application Platform (RAP): \url{http://www.eclipse.org/rap/}} is a framework that allows to use Java for server-side 
 Ajax\footnote{Asynchronous JavaScript and XML (AJAX): \url{http://en.wikipedia.org/wiki/Ajax_\%28programming\%29}}.
 
 \fbox{
@@ -286,8 +286,8 @@ Ajax\footnote{Asynchronous JavaScript and XML (AJAX): \url{http://en.wikipedia.o
 % --------------------------------------------------------------------------- %
 \section{Run the Initial Application}
 
-First, start the Scout server using the product launcher icons provided in the server box of the Scout Object Properties associated with the root node of the application.
-For this, either click on the icon with the white triangle in the green circle of the right hand side of the box, or, click on the green bug icon right below to start the server in debug mode.
+Start the Scout server using the product launcher icons provided in the server box of the Scout Object Properties associated with the root node of the application.
+Either click on the icon with the white triangle in the green circle of the right hand side of the box, or, click on the green bug icon right below to start the server in debug mode.
 
 Once the server is running, you may start the Swing client, the SWT client, and the RAP server in the same way.
 To dispay the Scout client in a web browser, type the address \texttt{http://localhost:8082/web} into the browser's navigation bar.
@@ -304,10 +304,9 @@ You should then see the three different clients with an empty desktop on each as
 % --------------------------------------------------------------------------- %
 \section{Walking through the Initial Application}
 
-In this section we walk you through the central pieces of the generated initial application. 
+In this section, we walk you through the central pieces of the generated initial application. 
 This exercise will introduce you to important elements of the Scout application model.
-A basic understanding of these model elements will help you to understand the structure and working of the ''Hello World'' application.
-The elements to be discussed in this section are the following.
+A basic understanding of these model elements will help you understand the structure and working of the ''Hello World'' application.
 
 \begin{itemize}
   \item Desktop
@@ -369,19 +368,18 @@ Its value is set to 'View' to display the desktop form as a view and not as a di
 \figlabel{helloworld_viewhandler}
 \end{figure}
 
-Expanding the \element{DesktopForm} further, its children \element{Variables}, \element{MainBox}, and \element{Handlers} are revealed.
-In subfolder \element{Variables} we can add any non-visible variables to a form.
-However, for the ''Hello World'' application we do not need such elements.
-In subfolder \element{MainBox} all form fields contained in this form are shown.
-Currently, the main box of our \java{DesktopForm} is empty but we will change this later when we add the text field widget.
-Finally, subfolder \element{Handlers} contains all available form handlers. 
+Expanding the \element{DesktopForm}, its children \element{Variables}, \element{MainBox}, and \element{Handlers} are revealed.
+The \element{Variables} subfolder contains variables. They are invisible to the application user.
+The ''Hello World'' application is so simple, it does not need variables.
+The subfolder \element{MainBox} contains form fields. These are the visible user interface elements.
+Currently, the main box of our \java{DesktopForm} is empty. We will change this later.
+Finally, the \element{Handlers} subfolder contains all available form handlers.
 As shown in \figref{helloworld_viewhandler}, we already have a view handler available for our desktop form.
-But this is the topic of the next section.
 
 \subsection{Form Handler}
 \seclabel{helloworld.formhandler}
 
-Form handlers are used to manage their life cycle.
+Form handlers are used to manage the form's life cycle.
 Scout form handlers inherit from \java{AbstractFormHandler} and allow the implementation of desired behaviour before a form is opend, or after it is closed.
 This is achieved by overwriting callback methods defined in \java{AbstractFormHandler}.
 The necessary wiring is provided by the Scout framework, either by the initial project creation step or when using one of the provided Scout SDK wizards.
