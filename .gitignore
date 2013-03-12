@@ -3,6 +3,10 @@ out/pdf/**/*
 out/html/**/*
 out/epub/**/*
 
+# code stuff
+code/helloworld/.metadata/**/*
+*.class
+
 # latex/htlatex stuff
 *.dvi
 *.aux
