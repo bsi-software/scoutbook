@@ -1,2 +1,0 @@
-eclipse.preferences.version=1
-pref_scout_project_prod_launcher_org.eclipse.scout.helloworld=/org.eclipse.scout.helloworld.ui.rap/products/development/helloworld-rap-dev.product,/org.eclipse.scout.helloworld.ui.swt/products/development/helloworld-swt-client-dev.product,/org.eclipse.scout.helloworld.ui.swing/products/development/helloworld-swing-client-dev.product,/org.eclipse.scout.helloworld.server/products/development/helloworld-server-dev.product

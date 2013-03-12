@@ -4,7 +4,7 @@ out/html/**/*
 out/epub/**/*
 
 # code stuff
-code/helloworld/.metadata/**/*
+code/*/.metadata/**/*
 *.class
 
 # latex/htlatex stuff
