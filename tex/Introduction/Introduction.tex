@@ -431,10 +431,10 @@ To add clarity and background to the implementation of the \java{execLoad} above
 
 \subsection{Process Services and Form Data Objects}
 
-Process services and form data objects are used in the Scout framework to exchange information between the client and the server of a Scout application.
+Process services and form data objects are used in the Scout framework to exchange information between client and server of a Scout application.
 When needed, a service implemented on the server side can register a corresponding proxy service on the client.
-Through this proxy service, the client can then invoke the server service methods as if the service would be implemented locally on the client.
-In fact, when we get a service reference through \java{SERVICES.getService}, we do not need to know if this service is running locally on the client or remotely on the server.
+This proxy service is invoked by the client as if it were implemented locally.
+In fact, when we get a service reference using \java{SERVICES.getService}, we do not need to know if this service runs locally on the client or remotely on the server.
 
 In the ''Hello World'' example application, the client's desktop form has an associated desktop process service running on the server.
 This correspondence between forms and process services is also reflected in the \element{Links} section of the Scout Object Properties of the desktop form.
@@ -443,7 +443,7 @@ On the client, this interface is used to identify and register the proxy service
 
 To transfer data between the client and the server, the ''Hello World'' application uses a \java{DesktopFormData} object as a DTO.
 This form data object holds all form variables and values for all the form fields contained in the form.
-Taking advantage of this correspondence, the Scout framework can provide the convenience methods \java{exportFormData} and \java{importFormData}.
+Taking advantage of this correspondence, the Scout framework provides the convenience methods \java{exportFormData} and \java{importFormData}.
 As a result, the developer does not need to deal with any mapping code between the form data object and the form fields.
 
 The actual implementation of the desktop process service in class \java{DesktopProcessService} is implemented on the server side.
@@ -516,10 +516,11 @@ As shown in \lstref{helloworld.mainbox}, the message field and the desktop box f
 Using nested Java classes to model the form's content is a central aspect of the UI part of the Scout application model.
 Among other benefits, it allows the Scout SDK to easily parse the form's Java code on the fly and directly reflect changes in the Scout Explorer and the Scout Property View.
 
-Deriving the form model directly from the nested structure of inner classes also supports another important feature of the Scout SDK.
-Keeping the form data classes in sync with all the forms of the application.
-This includes adding all necessary getter and setter methods to access the values for all fields defined on a form.
-As a result, the Scout developer is freed from the time consuming and error prone task of updating form data objects after fields are added, changed or removed on a form.
+Deriving the form model directly from the nested structure of inner classes also supports another important feature of the Scout SDK:
+it keeps the form data classes in sync with the forms of the application.
+This includes adding all the necessary getter and setter methods to access the values of all the fields defined on a form.
+As a result, Scout developers don't need to update the form data objects after a form is changed.
+The SDK takes care of this time consuming and error prone task.
 
 % --------------------------------------------------------------------------- %
 \section{The Server Part}
@@ -540,7 +541,7 @@ This status of the Scout Explorer is also shown in \figref{helloworld_viewhandle
 
 According to the signature of the \java{load} method, a desktop \java{formData} object is passed into this method that is then handed back to the caller in the return statement.
 To complete the implementation of the \java{load} method it is sufficient to assign the text 'hello world' to the part of the form data that corresponds to the message field in the desktop form.
-As we have learned in the previous section, the Scout SDK is taking care of updating the form data after changes to a form.
+As we have learned in the previous section, the Scout SDK takes care of updating the form data when a form is changed.
 This reduces the coding part of the ''Hello World'' appliction to the addition of the following statement:
 
 \begin{lstlisting}[backgroundcolor=\color{white}]
@@ -548,9 +549,9 @@ This reduces the coding part of the ''Hello World'' appliction to the addition o
 \end{lstlisting}
 
 The complete implementation of the load method is provided in \lstref{helloworld.load}.
-Although this method does look simple and innocent, it is exactely in such method bodies of process services where a Scout application integrates best with its environment.
-This is the place where information obtained from databases, webservices (or completely different sources) are mapped to the UI elements that are presented to a user.
-It is also here where information provided by a user is sent to a webservice, saved in a database or used to something completely different.
+Even though this particular method looks simple and innocent, these process service methods are where the bulk of your server side code will end up.
+This is the place where information obtained from databases, webservices (or completely different sources) is mapped to the UI elements presented to the user.
+This is the place where information provided by the user is sent to webservices, saved in a database or processed in some way.
 
 \lstinputlisting[
   label=\lstlabel{helloworld.load},
