@@ -358,7 +358,7 @@ In the ''Hello World'' application a \java{DesktopForm} object is created and di
 To find the desktop form class in the Scout Explorer, expand the orange \node{client}\footnote{
 To expand elements (nodes, folders, etc.) in the Scout Explorer, use a double click on the element or a single click on the plus icon in front of the element.}.
 Below this node, you will find the \folder{Forms}. 
-Expanding this folder will show the \element{DesktopForm} as shown in \figref{helloworld_viewhandler}.
+Expand this folder to show the \element{DesktopForm} as shown in \figref{helloworld_viewhandler}.
 In the Scout Object Property window in the screenshot, we can also see the \property{Display Hint}.
 Its value is set to 'View' to display the desktop form as a view and not as a dialog in its own frame.
 
@@ -368,7 +368,7 @@ Its value is set to 'View' to display the desktop form as a view and not as a di
 \figlabel{helloworld_viewhandler}
 \end{figure}
 
-Expanding the \element{DesktopForm}, its children \element{Variables}, \element{MainBox}, and \element{Handlers} are revealed.
+Expand the \element{DesktopForm} to show its children: \element{Variables}, \element{MainBox} and \element{Handlers}.
 The \element{Variables} subfolder contains variables. They are invisible to the application user.
 The ''Hello World'' application is so simple, it does not need variables.
 The subfolder \element{MainBox} contains form fields. These are the visible user interface elements.
@@ -478,7 +478,7 @@ In the first dialog of the form field wizard shown in \figref{helloworld_groupbo
 To select the desired field type, we either select the desired type with the mouse or use the serach field to filter the list of available field types.
 In the second wizard dialog, we do not provide a label for the group box in the \field{Name}.
 As we have only a single group box in the ''Hello World'' desktop form we omit the name and enter 'Desktop' into the \field{Class Name} before we close the wizard with the \button{Finish}.
-In the background, the Scout SDK is then adding the necessary Java code for the \java{DesktopBox}.
+The Scout SDK will add the necessary Java code for the \java{DesktopBox} in the background.
 
 \begin{figure}
 \includegraphics[width=6cm]{sdk_new_field_stringfield_1.png} \hspace{8mm}
@@ -535,7 +535,7 @@ The message widget is the field that we have added to the desktop form in the pr
 
 To navigate to the implementation of the desktop process service in the Scout SDK we first expand the blue top-level \node{server} in the Scout Explorer.
 Below the server node, we further expand the \folder{Process Services} which shows the \element{DesktopProcessService} element.
-Expanding the \element{DesktopProcessService} node, its \java{load} method becomes visible.
+Expand the \element{DesktopProcessService} node to show its \java{load} method.
 This status of the Scout Explorer is also shown in \figref{helloworld_viewhandler}.
 
 According to the signature of the \java{load} method, a desktop \java{formData} object is passed into this method that is then handed back to the caller in the return statement.
