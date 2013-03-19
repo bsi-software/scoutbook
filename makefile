@@ -5,8 +5,8 @@
 # export TEXINPUTS:=.:local
 
 # Root Paths
-BIN=c:\latex
-LATEXROOT=${BIN}\MiKTeX 2.9\miktex\bin\x64
+BIN=${ProgramFiles}
+LATEXROOT=${BIN}\MiKTeX 2.9\miktex\bin
 
 # PDFLATEX = pdflatex -file-line-error
 PDFLATEX = "${LATEXROOT}\pdflatex.exe" -file-line-error
@@ -15,8 +15,8 @@ HTLATEX = "${LATEXROOT}\htlatex.exe"
 TEX = "${LATEXROOT}\tex.exe"
 
 EBOOKCONVERT = "${BIN}\Calibre2\ebook-convert.exe" 
-ZIP ="c:\Program Files\7-Zip\7z.exe" a -r
-UNZIP ="c:\Program Files\7-Zip\7z.exe" x
+ZIP ="${BIN}\7-Zip\7z.exe" a -r
+UNZIP ="${BIN}\7-Zip\7z.exe" x
 COPY =copy
 
 HTMLOUTPARAM = "html,2,info" # use "html,3,next" to produce output on section level
