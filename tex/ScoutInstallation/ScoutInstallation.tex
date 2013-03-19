@@ -39,30 +39,30 @@ The first step to install Scout is to have an existing and working installation 
 It is recommended to go for the most recent download of Java 7.
 
 You may also use Scout with Java 6.
-However, be aware that the communicated end of life for Oracles Java 6 is February 
-2013\footnote{Java 6 End of Life: \url{http://www.oracle.com/technetwork/java/eol-135779.html}}.
+However, be aware that the communicated end of life for Oracle's Java 6 is February 
+2013.\footnote{Java 6 End of Life: \url{http://www.oracle.com/technetwork/java/eol-135779.html}}
 Java 5 is not supported. 
 Running Scout on Java 8 is realistic for the 2014 release train of Eclipse.
-This guess is based on the following press 
-release\footnote{Java SE Roadmap press release: \url{http://www.oracle.com/us/corporate/press/1854982}}.
+This guess is based on the Java SE Roadmap press 
+release.\footnote{Java SE Roadmap press release: \url{http://www.oracle.com/us/corporate/press/1854982}}
 
 \subsection{Windows}
 
-On the Windows platform we recommend to install the Oracle JDK 7 togehter with Scout. 
+On the Windows platform, we recommend to install the Oracle JDK 7 together with Scout. 
 The reason for this recommendation is simple.
 Eclipse Scout is officially tested with the Oracle JDK 7 on Windows.
 
 To successfully install the JDK you need to have at least local admin rights.
-It is also necessary that you determine your hardware architecture to decide on the correct JDK installer to download. 
-The steps to determine if you are using a 32-bit or a 64-bit version of Windows are described at Microsofts support 
-site\footnote{Windows 32/64-bit installation: \url{http://support.microsoft.com/kb/827218}}.
+You also need to know your hardware architecture in order to download the correct JDK installer. 
+The steps necessary to determine your hardware architecture are described on Microsoft's support 
+site.\footnote{Windows 32/64-bit installation: \url{http://support.microsoft.com/kb/827218}}
 
-After these preparation steps open Oracles official download 
+Once you know your hardware architecture, go to Oracle's official download 
 site\footnote{Official JDK 7 download: \url{http://www.oracle.com/technetwork/java/javase/downloads/index.html}}.
-There, you click on the big Java download button and you are shown the various \textit{Java SE Development Kit 7 Downloads}.
-Then, accept the licence agreement by clicking on the appropriate radio button.
-Select the \textit{Windows x64} package when you are running 64-bit Windows as shown in \figref{jdk_download_oracle}.
-If you are running a 32-bit Windows installation, go for the \textit{Windows x86} package.
+There, click on the big Java download button and you will be shown the various \textit{Java SE Development Kit 7 Downloads}.
+Accept the licence agreement by clicking on the appropriate radio button.
+Select the \textit{Windows x64} package if you are running 64-bit Windows as shown in \figref{jdk_download_oracle}.
+If you are running 32-bit Windows, go for the \textit{Windows x86} package.
 It is also recommended to download the \textit{Java SE 7 Documentation}.
 The documentation package is also available from the official download site, located further down under section \textit{Additional Resources}.
 
@@ -88,13 +88,13 @@ needs text
 \seclabel{download_install}
 
 Installing Eclipse Scout 3.9 requires a working JDK 6 or JDK 7 installation.
-If this is missing on your environment, go to the previous section for the necessary installation instructions.
+If this is missing, see the previous section for installation instructions.
 
-As the Eclipse Kepler release is officially shipped on June 26, 2013 we need to download Scout 3.9 from the developer builds download
+As the Eclipse Kepler release is officially shipping on June 26, 2013 we need to download Scout 3.9 from the developer builds download
 page\footnote{Eclipse developer builds download: \url{http://www.eclipse.org/downloads/index-developer.php}}.
 The download page should look as shown in \figref{scout_download}.
-In this screenshot the packages available for \textit{Eclipse Kepler (4.3) M4} are shown and \textit{Windows} is preselected in the dropdown list.
-Should the download page show the wrong platform in the dropdown list, manually fix the selected entry.
+In this screenshot, the packages available for \textit{Eclipse Kepler (4.3) M4} are shown and \textit{Windows} is preselected in the dropdown list.
+Should the download page show the wrong platform in the dropdown list, you will need to choose the correct one manually.
 
 \begin{figure}
 \includegraphics[width=15cm]{scout_download.png}
@@ -107,16 +107,15 @@ The following sections describe the installation steps depending on the operatin
 \subsection{Windows}
 
 For Windows, the Eclipse download page offers two versions for each package.
-In \figref{scout_download} the links for these two versions are called \textit{Windows 32 Bit} and \textit{Windows 64 Bit}.
+In \figref{scout_download}, the links for these two versions are called \textit{Windows 32 Bit} and \textit{Windows 64 Bit}.
 To decide which version to download you first need to know if you have installed a 64-bit JDK or a 32-bit JDK and then download the corresponding Eclipse installation.
-Because this is important we are very explicit here: If you are using a 64-bit JDK you must download the 64-bit version of the Eclipse Scout package.
-If you are using a 32-bit JDK you must download the 32-bit version of the Eclipse Scout package.
+Because this is important, let us be very explicit: \textbf{If you are using a 64-bit JDK you must download the 64-bit version of the Eclipse Scout package. If you are using a 32-bit JDK you must download the 32-bit version of the Eclipse Scout package.}
 Any other combination will simply not work.
 
-If you just have installed the JDK yourself you will remember what you have installed. 
+If you just installed the JDK yourself you will remember what you have installed. 
 In case you have a JDK pre-installed you can find out by typing \texttt{java -version} on your console.
 For 64-bit JDK installations this fact is explicitly mentioned in the text printed by this command.
-The output will then look similar to the text provided below.
+The output will then look similar to the one provided below.
 
 \begin{lstlisting}[
   language=console
@@ -139,13 +138,13 @@ Java(TM) SE Runtime Environment (build 1.6.0_20-b02)
 Java HotSpot(TM) Client VM (build 16.3-b01, mixed mode, sharing)
 \end{lstlisting}
 
-With this information you can now correctly choose the version of the Eclipse Scout package to download.
-In contrast to the JDK the installation of the Scout package does not require any administrative priviledges.
+Now you know which version of the Eclipse Scout package to download.
+Installation of the Scout package does not require any administrative priviledges, unlike the JDK installation.
 As the package is a simple ZIP file, you may unpack its content to a location of your choice as shown in \figref{scout_unzip}. 
 If possible, we recommend a target directory such as 
 \filename{C:\scout\kepler_m4}.
-Such a target directory avoids two problems that we had to deal with in the past.
-Path names including spaces as well as very long path names that may break the functionality of your zip/unzip tool.
+Such a target directory avoids two problems that we had to deal with in the past:
+path names including spaces, and very long path names that may break the functionality of your zip/unzip tool.
 
 \begin{figure}
 \includegraphics[width=15cm]{scout_extract_zip.png}
@@ -154,14 +153,16 @@ Path names including spaces as well as very long path names that may break the f
 \end{figure}
 
 After unzipping the Scout package, navigate into the subfolder \texttt{Eclipse}.
-In case you have installed multiple JDKs coming with their individual Java Runtime Environments (JREs) you might want to explicitly specifiy which JRE to use.
-For this, open the file \texttt{eclipse.ini} in a editor of your choice and insert the following two lines at the top of this file
+In case you have installed multiple JDKs coming with their individual Java Runtime Environments (JREs), you might want to explicitly specifiy which JRE to use.
+Open the file \texttt{eclipse.ini} in a editor of your choice and insert the following two lines at the top of the file:
+
 \begin{lstlisting}[
   language=ini
 ]
 -vm
 C:\java\jre7\bin\javaw.exe
 \end{lstlisting}
+
 where the second line specifies the exact path to the JRE to be used to start your Eclipse Scout installation.
 If you have only installed a single JDK you will not need to change the default \texttt{eclipse.ini} file of your Eclipse installation.
 
