@@ -213,7 +213,7 @@ See the step-by-step installation guide provided in \appref{install_scout}.
 Once you have everything installed, you are ready to create your first Scout project.
 
 % --------------------------------------------------------------------------- %
-\section{Creating a new Project}
+\section{Create a new Project}
 \seclabel{create_project_simple}
 
 Start your Eclipse IDE and select an empty directory for your 
@@ -285,9 +285,18 @@ Ajax\footnote{Asynchronous JavaScript and XML (AJAX): \url{http://en.wikipedia.o
 
 % --------------------------------------------------------------------------- %
 \section{Run the Initial Application}
+\seclabel{run_initial}
 
-Start the Scout server using the product launcher icons provided in the server box of the Scout Object Properties associated with the root node of the application.
-Either click on the icon with the white triangle in the green circle of the right hand side of the box, or, click on the green bug icon right below to start the server in debug mode.
+After the initial project creation we are ready to start the empty Scout application.
+For this, we switch to the Scout Explorer and select the root node \element{org.eclipse.scout.helloworld}.
+This loads the applications properties into the Scout Object Properties inlcuding the product launcher section.
+There, we start the Scout server using the green launcher icons highlighted in \figref{start_server}.
+
+\begin{figure}
+\includegraphics[width=13cm]{sdk_start_server_product.png} 
+\caption{Starting the server application in the Scout SDK.}
+\figlabel{start_server}
+\end{figure}
 
 Once the server is running, you may start the Swing client, the SWT client, and the RAP server in the same way.
 To dispay the Scout client in a web browser, type the address \texttt{http://localhost:8082/web} into the browser's navigation bar.
@@ -542,10 +551,10 @@ This status of the Scout Explorer is also shown in \figref{helloworld_viewhandle
 According to the signature of the \java{load} method, a desktop \java{formData} object is passed into this method that is then handed back to the caller in the return statement.
 To complete the implementation of the \java{load} method it is sufficient to assign the text 'hello world' to the part of the form data that corresponds to the message field in the desktop form.
 As we have learned in the previous section, the Scout SDK takes care of updating the form data when a form is changed.
-This reduces the coding part of the ''Hello World'' appliction to the addition of the following statement:
+This reduces the coding part of the ''Hello World'' application to the addition of the following statement:
 
 \begin{lstlisting}[backgroundcolor=\color{white}]
-  formData.getMessage().setValue("hello world");
+  formData.getMessage().setValue("hello world!");
 \end{lstlisting}
 
 The complete implementation of the load method is provided in \lstref{helloworld.load}.
@@ -563,12 +572,148 @@ This is the place where information provided by the user is sent to webservices,
 {../code/helloworld/org.eclipse.scout.helloworld.server/src/org/eclipse/scout/helloworld/server/services/process/DesktopProcessService.java}
 
 % --------------------------------------------------------------------------- %
-\section{Running the Application}
-needs text
+\section{Add the Rayo Look and Feel}
+
+In this section we will add Rayo to our ''Hello World'' Swing client application.
+Rayo is slick look and feel for Scout desktop applications that is based on Swing.
+As shown in \figref{helloworld_clientapp}, we get a Scout desktop application that looks the same as the corresponding Scout web client.
+
+\begin{figure}
+\includegraphics[width=7cm]{helloworld_message_swing_rayo.png} \hspace{5mm}
+\includegraphics[width=7cm]{helloworld_message_rap_rayo.png}
+\caption{The ''Hello World'' client application with the Rayo look and feel. The desktop client is shown on the left and the web client on the right hand side.}
+\figlabel{helloworld_clientapp}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=6cm]{sdk_rayo_add_checkbox.png} \hspace{5mm}
+\includegraphics[width=7cm]{sdk_rayo_confirm_changes.png}
+\caption{Adding the Rayo Swing look and feel. The Rayo checkbox to activate the look and feel is highlighted on the left hand side. The dialog on the right hand side shows the changes in the Swing plugin that will be made by the Scout SDK.}
+\figlabel{selecting_rayo}
+\end{figure}
+
+To add Rayo in the Scout SDK to our ''Hello World'' project, switch to the Scout Explorer and select the top-level \node{org.eclipse.scout.helloworld}.
+Then, according to \figref{selecting_rayo}, select the checkbox \element{Rayo Swing Look and Feel for Eclipse Scout} under the \element{Technologies} section of the Scout Object Properties.
+This brings up a dialog showing the proposed changes to the Swing plugin of the ''Hello World'' application. 
+These changes need to be confirmed with the \button{OK}.
+The first time the user adds the Rayo feature in the Scout SDK, Eclipse needs to download the package from the Eclipse Marketplace\footnote{
+Eclipse Marketplace: \url{http://marketplace.eclipse.org/}
+}.
+This download and subsequent installation of Rayo will make you to go through the following steps.
+
+\begin{enumerate}
+  \item Accept Licence: GPL with Classpath Exception
+  \item Accept unsigned content
+  \item Restart the Eclipse IDE
+\end{enumerate}
+
+In the last step we start the Swing client using the procedure described in \secref{run_initial}.
+When we also start the web client of the ''Hello World'' application using the RAP product launcher, we can compare the result side by side.
+
+Rayo has orignially been designed in 2009 by BSI for the desktop clients of its CRM\footnote{
+CRM: Customer Relationship Management} 
+and its contact center solutions.
+Desktop and web application working with the same Rayo look and feel
+On the deskop some synth classes needed to be adjusted. for this openjdk implementation was used. 
+as a result, open sourcing of the adjusted synth clases under gpl with classpath exception was required
+as this licence is not compatible with hosting the code at eclipse org, rayo is located on the eclipse marketplace.
+with the classpath exception part of the licence, commercial usage of rayo is explicitly possible.
+the only restriction beeing that modifications to the rayo package will have to be published under the same licence.
+
+At the core of the Rayo Look and Feel lies Java Synth\footnote{
+Java Synth Look and Feel: \url{http://en.wikipedia.org/wiki/Synth_Look_and_Feel}
+}.
+bla
 
 \noindent Existing Documentation
 \begin{itemize}
-  \item wiki tutorial \url{http://wiki.eclipse.org/Scout/Tutorial/3.8/HelloWorld#Run_the_.22hello_world.22_application}
+  \item wiki tutorial \url{http://wiki.eclipse.org/Scout/Tutorial/3.8/Rayo_Look_and_Feel}
+\end{itemize}
+
+
+% --------------------------------------------------------------------------- %
+\section{Deploying to Tomcat}
+
+As the final step of this ''Hello World'' tutorial we will deploy the Scout application to a Tomcat webserver.
+First step: export war file(s)
+Second step: deploy war file(s) to tomcat
+
+Before we deploy the ''Hello World'' WAR files to the webserver you need a working Tomcat installation.
+For this, you may want to read and follow the instructions provided in \appref{install_tomcat}.
+As soon as you have a running Tomcat instance you can verify this in a web browser of your choice by typing \url{http://localhost:8080/} into its address bar.
+You should then see the page shown on the left hand side of \figref{deploy_tomcat}.
+
+\begin{figure}
+\includegraphics[width=7cm]{tomcat_managerapp_login.png} \hspace{5mm}
+\includegraphics[width=7cm]{tomcat_managerapp_selectwar.png}
+\caption{The login box after clicking the highlighted ''Manager App'' button. 
+The WAR files to be deployed can then be selected using button ''Choose File'' highlighted on the right hand side}
+\figlabel{deploy_tomcat}
+\end{figure}
+
+Once the web browser shows the successful running of your Tomcat instance you can switch to its ''Manager App'' by clicking on the button highlighted in \figref{deploy_tomcat}.
+After entering user name and password you will then be shown Tomcat's manager application.
+If you don't know the correct username or password you may look it up in the file \filename{tomcat-users.xml} according to \lstref{tomcat.users} located in subdirectory \filename{conf} of your Tomcat installation.
+You may adapt the file's content to update passwords or add users.
+The changes will then become effective after a restart of Tomcat.
+For a rough overview of the organisation of the Tomcat installation directory also see \figref{tomcat.install.dir}.
+
+\begin{lstlisting}[
+  language=xml,
+  float,
+  label=\lstlabel{tomcat.users},
+  caption=The content of the \texttt{tomcat-users.xml} file]
+  <tomcat-users>
+    <!--
+    NOTE: By default, no user is included in the "manager-gui" role required
+    to operate the "/manager/html" web application. If you wish to use it
+    you must define such a user - the username and password are arbitrary.
+    -->
+	<user name="admin" password="s3cret" roles="manager-gui"/>
+  </tomcat-users>	
+\end{lstlisting}
+
+\begin{figure}
+\begin{verbatim}
+  [Tomcat directory]
+   |
+   +-- conf
+   |   +-- tomcat-users.xml
+   |
+   +-- webapps
+       +-- helloworld
+       |   +-- WEB-INF
+       |   +-- ...
+       +-- helloworld.war
+\end{verbatim}
+\caption{The organization of the Tomcat installation directory}
+\figlabel{tomcat.install.dir}
+\end{figure}
+
+After logging successfully into Tomcats manager application, you can select the WAR file(s) to be deployed using button ''Choose File'' according to the right hand side of \figref{deploy_tomcat}.
+After picking your WAR file and closing the file chooser, click on button ''Deploy'' (located below button ''Choose File'') to deploy the application to the Tomcat webserver.
+This will copy the selected WAR file into Tomcats \filename{webapps} directory and unpack its content into a subdirectory with the same name.
+Deploying the file \filename{helloworld.war} will extract its contents into a subdirectory named \filename{helloworld} as shown in \figref{tomcat.install.dir}.
+
+ipconfig stuff
+
+\begin{figure}
+\includegraphics[width=10cm]{tomcat_helloworld_download.png}
+\caption{The ''Hello World'' home page, providing a link to download the desktop client.}
+\figlabel{helloworld_running_download}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=4.5cm]{helloworld_finished_rayo_swing.png}\hspace{5mm}
+\includegraphics[width=4.5cm]{helloworld_finished_rayo_rap.png}\hspace{5mm}
+\includegraphics[width=4.5cm]{helloworld_finished_rayo_rap_mobile.png}
+\caption{The ''Hello World'' client application running on the desktop, in the browser and on a mobile device.}
+\figlabel{helloworld_running_clients}
+\end{figure}
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item wiki tutorial: \url{http://wiki.eclipse.org/Scout/Tutorial/3.8/Deploy_to_Tomcat}
 \end{itemize}
 
 % --------------------------------------------------------------------------- %

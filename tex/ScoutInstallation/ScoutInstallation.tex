@@ -287,26 +287,58 @@ TODO: Open a bug for this scenario, as a large amount of errors is shown in the 
 After you can start your Eclipse Scout package you need to verify that Scout is working as intended.
 The simplest way to verify your Scout installation is to create a ''Hello World'' Scout project and run the corresponding Scout application as described in \charef{helloworld}.
 
-% --------------------------------------------------------------------------- %
+% =========================================================================== %
 \chapter{Further Installations}
 
 % --------------------------------------------------------------------------- %
 \section{Download and Install Tomcat}
-needs text
+\applabel{install_tomcat}
 
-\noindent Existing Documentation
-\begin{itemize}
-  \item wiki tutorial: \url{http://wiki.eclipse.org/Scout/Tutorial/3.8/Deploy_to_Tomcat}
-\end{itemize}
+Apache Tomcat is an open source web server that works well to run the server part of Scout client server applications.
+This is not so much as step by step download and installation guide. 
+Rather, it points you to the proper places for downloading and installing Tomcat.
+In case you are not familiar with Tomcat, you could start with the Wikipedia article\footnote{
+Apache Tomcat Wikipedia: \url{http://en.wikipedia.org/wiki/Apache_Tomcat}
+}
+before you switch to the Tomcat homepage\footnote{
+Apache Tomcat Homepage: \url{http://tomcat.apache.org/}
+}.
 
-\subsection{Windows}
-needs text
+We recommend to work with Tomcat version 7.0 but in case you already have version 6.0 running that should be good too.
+Start your download from the official download site\footnote{
+Tomcat 7 Downloads: \url{http://tomcat.apache.org/download-70.cgi}
+}.
 
-\subsection{Mac}
-needs text
+\begin{figure}
+\includegraphics[width=13cm]{tomcat_install.png}
+\caption{A successful Tomcat 7 installation.}
+\figlabel{tomcat_install}
+\end{figure}
 
-\subsection{Linux}
-needs text
+Once you have downloaded and installed Tomcat 7 (see the sections below for plattform specific guidelines) you can start the corresponding service or deamon.
+To verify that Tomcat is actually running open a web browser of your choice and type \url{http://localhost:8080} into the address bar.
+You should then see a confirmation of the successful installation according to \figref{tomcat_install}.
+
+According to the Tomcat setup installation for Windows\footnote{
+Tomcat Windows setup: \url{http://tomcat.apache.org/tomcat-7.0-doc/setup.html#Windows}
+}
+download the package ''32-bit/64-bit Windows Service Installer'' from the \href{http://tomcat.apache.org/download-70.cgi}{Tomcat 7 download site}.
+Then, start the installer and accept the proposed default settings.
+
+For installing Tomcat on OS X systems download the ''tar.gz'' package from the \href{http://tomcat.apache.org/download-70.cgi}{Tomcat 7 download site}.
+Then, follow the installation guide\footnote{
+Installing Tomcat on OS X: \url{http://wolfpaulus.com/journal/mac/tomcat7}
+} provided by Wolf Paulus.
+
+For Linux systems download the ''tar.gz'' package from the \href{http://tomcat.apache.org/download-70.cgi}{Tomcat 7 download site}.
+Then, follow the description of the Unix setup\footnote{
+Tomcat Linux setup: \url{http://tomcat.apache.org/tomcat-7.0-doc/setup.html#Unix_daemon}
+}
+to run Tomcat as a deamon.
+If you use Ubuntu, you may want to follow the tutorial\footnote{
+Apache Tomcat Tutorial: \url{http://www.vogella.com/articles/ApacheTomcat/article.html}
+} 
+for downloading and installing Tomcat provided by Lars Vogel.
 
 % --------------------------------------------------------------------------- %
 \section{Download and Install Jenkins}
