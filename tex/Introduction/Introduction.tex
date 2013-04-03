@@ -638,6 +638,29 @@ As the final step of this ''Hello World'' tutorial we will deploy the Scout appl
 First step: export war file(s)
 Second step: deploy war file(s) to tomcat
 
+In the first step we use the \wizard{Export Scout Project} to export the ''Hello World'' client server application from the Scout SDK into two WAR files\footnote{
+Web application ARchive (WAR): \url{http://en.wikipedia.org/wiki/WAR_file_format_(Sun)}
+}.
+To start the export wizard select the top level node for the ''Hello World'' application in the Scout Explorer as shown in \figref{sdk_export_war}.
+In the first wizard step, shown on the right hand side of \figref{sdk_export_war} the target directory for the WAR files needs to be specified.
+After clicking \button{Next} the second wizard step proposes the server product file that specifies the artefacts to be exported including the file name for the WAR file for the ''Hello World'' server application.
+
+\begin{figure}
+\includegraphics[width=7cm]{sdk_export_war_menu.png} \hspace{5mm}
+\includegraphics[width=7cm]{export_wizard_1.png}
+\caption{Starting the \wizard{Export Scout Project} in the Scout SDK over the context menu. 
+In the first wizard step, the target directory for the WAR files and the artefacts to export are specified.}
+\figlabel{sdk_export_war}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=8cm]{export_wizard_3.png} \hspace{5mm}
+\includegraphics[width=6cm]{export_wizard_4.png}
+\caption{To include the Swing client in the \texttt{helloworld\_server.war} file select the corresponding client product (left). 
+In the last step of the export wizard the RAP sever is exported to the specified file name (right).}
+\figlabel{export_wizard}
+\end{figure}
+
 Before we deploy the ''Hello World'' WAR files to the webserver you need a working Tomcat installation.
 For this, you may want to read and follow the instructions provided in \appref{install_tomcat}.
 As soon as you have a running Tomcat instance you can verify this in a web browser of your choice by typing \url{http://localhost:8080/} into its address bar.
@@ -691,25 +714,44 @@ For a rough overview of the organisation of the Tomcat installation directory al
 \end{figure}
 
 After logging successfully into Tomcats manager application, you can select the WAR file(s) to be deployed using button ''Choose File'' according to the right hand side of \figref{deploy_tomcat}.
-After picking your WAR file and closing the file chooser, click on button ''Deploy'' (located below button ''Choose File'') to deploy the application to the Tomcat webserver.
+After picking your \filename{helloworld_server.war} and \filename{helloworld.war} file and closing the file chooser, click on button ''Deploy'' (located below button ''Choose File'') to deploy the application to the Tomcat webserver.
 This will copy the selected WAR file into Tomcats \filename{webapps} directory and unpack its content into a subdirectory with the same name.
 Deploying the file \filename{helloworld.war} will extract its contents into a subdirectory named \filename{helloworld} as shown in \figref{tomcat.install.dir}.
+Accordingly, the file \filename{helloworld_server.war} will be extracted into subdirectory \filename{helloworld_server}.
+You can now connect to the deployed application using the browser of your choice and enter the following address.
 
-ipconfig stuff
+\begin{lstlisting}
+  http://localhost:8080/helloworld_server/
+\end{lstlisting}
 
 \begin{figure}
 \includegraphics[width=10cm]{tomcat_helloworld_download.png}
-\caption{The ''Hello World'' home page, providing a link to download the desktop client.}
+\caption{TODO: Bad Server URL!!! The ''Hello World'' home page, providing a link to download the desktop client.}
 \figlabel{helloworld_running_download}
 \end{figure}
 
+You will then see the home page of the server of your ''Hello World'' application shown in \figref{helloworld_running_download}.
+From here you can download the zipped client application that can be saved in a directory of your choice.
+After unpacking the zip file, you may start the executable file named \filename{helloworld}.
+This will start the ''Hello World'' client application as shown on the left hand side of \figref{helloworld_running_clients}.
+To start the ''Hello World'' web application open a browser and enter the following address.
+
+\begin{lstlisting}
+  http://localhost:8080/helloworld/
+\end{lstlisting}
+
 \begin{figure}
-\includegraphics[width=4.5cm]{helloworld_finished_rayo_swing.png}\hspace{5mm}
-\includegraphics[width=4.5cm]{helloworld_finished_rayo_rap.png}\hspace{5mm}
-\includegraphics[width=4.5cm]{helloworld_finished_rayo_rap_mobile.png}
+\includegraphics[height=2.5cm]{helloworld_finished_rayo_swing.png}\hspace{5mm}
+\includegraphics[height=2.5cm]{helloworld_finished_rayo_rap.png}\hspace{5mm}
+\includegraphics[height=2.5cm]{helloworld_finished_rayo_rap_mobile.png}
 \caption{The ''Hello World'' client application running on the desktop, in the browser and on a mobile device.}
 \figlabel{helloworld_running_clients}
 \end{figure}
+
+Depending on the device your browser is running on you will be redirected to \texttt{helloworld/web} on a desktop or laptop computer, to \texttt{helloworld/mobile} on a mobile device or to \texttt{helloworld/mobile} if you are connecting from a tablet device.
+\figref{helloworld_running_clients} shows screenshots for a desktop browser and a mobile browser.
+As demonstrated in these screenshots \texttt{helloworld/web} and \texttt{helloworld/mobile} lead to a different presentation of the same UI optimized to the target form factors of desktop browsers, tablets, and mobile phones.
+
 
 \noindent Existing Documentation
 \begin{itemize}
