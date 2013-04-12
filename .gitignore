@@ -7,6 +7,9 @@ out/epub/**/*
 code/*/.metadata/**/*
 *.class
 
+# leave makefile alone
+makefile
+
 # latex/htlatex stuff
 *.dvi
 *.aux

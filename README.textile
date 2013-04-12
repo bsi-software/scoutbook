@@ -2,3 +2,10 @@ h1. Scout Book
 
 * "Project page":http://wiki.eclipse.org/Scout/Book/3.9
 * "Distribution folder":http://tools.bsiag.com/scoutbook/
+
+h2. Building the Book with make
+
+# Depending on your local platform copy the file makefile.<platform> to makefile
+# Adjust your makefile according to your local installation
+# Do not push you makefile to the books main repository
+# Do not include your makefile in pull requests on the 
