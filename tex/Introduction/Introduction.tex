@@ -632,27 +632,30 @@ bla
 
 
 % --------------------------------------------------------------------------- %
-\section{Deploying to Tomcat}
+\section{Exporting the Application}
 
-As the final step of this ''Hello World'' tutorial we will deploy the Scout application to a Tomcat webserver.
-First step: export war file(s)
-Second step: deploy war file(s) to tomcat
-
-In the first step we use the \wizard{Export Scout Project} to export the ''Hello World'' client server application from the Scout SDK into two WAR files\footnote{
+In this section we export the finished ''Hello World'' application as WAR files using the Scout SDK.
+In the context of this book WAR files\footnote{
 Web application ARchive (WAR): \url{http://en.wikipedia.org/wiki/WAR_file_format_(Sun)}
-}.
-To start the export wizard select the top level node for the ''Hello World'' application in the Scout Explorer as shown in \figref{sdk_export_war}.
-In the first wizard step, shown in \figref{export_wizard_1} the target directory for the WAR files needs to be specified.
-After clicking \button{Next} the second wizard step proposes the server product file that specifies the artefacts to be exported including the file name for the WAR file for the ''Hello World'' server application.
-Typically, the proposed default values are fine.
-Move to the third dialog with \button{Next}.
+} 
+represent complete Scout applications that can be deployed individually to a web server.
+For the full setup there will be two WAR files.
+The first WAR file contains the Scout server application including a zipped desktop client application ready for downloading.
+The second WAR file contains the RAP Server application needed for the Scout web and mobile client applications.
 
 \begin{figure}
-\includegraphics[width=10cm]{sdk_export_war_menu.png} 
+\includegraphics[width=8cm]{sdk_export_war_menu.png} 
 \caption{Starting the \wizard{Export Scout Project} in the Scout SDK with the context menu. 
 In the first wizard step, the target directory for the WAR files and the artefacts to export are specified.}
 \figlabel{sdk_export_war}
 \end{figure}
+
+To start the export wizard, we need to have the Scout SDK started with the ''Hello World'' Scout project we want to export.
+In the Scout Explorer we then select corresponding context menu on the ''Hello World'' top level application node as shown in \figref{sdk_export_war}.
+In the first wizard dialog, shown in \figref{export_wizard_1} the target directory for the WAR files needs to be specified.
+After clicking \button{Next} the second wizard step proposes the server product file that specifies the artefacts to be exported including the file name for the WAR file for the ''Hello World'' server application.
+Typically, the proposed default values are fine.
+Move to the third dialog with \button{Next}.
 
 \begin{figure}
 \includegraphics[width=13cm]{export_wizard_1.png}
@@ -675,7 +678,7 @@ For this, we need to change the selected product to \element{helloworld-swing-cl
 With \button{Next} we move to the last wizard step.
 
 \begin{figure}
-\includegraphics[width=10cm]{export_wizard_4.png}
+\includegraphics[width=8cm]{export_wizard_4.png}
 \caption{The last dialog of the \wizard{Export Scout Project} defines the export of the RAP server.
 Normally, the proposed field values do not need any adjustments.}
 \figlabel{export_wizard_4}
@@ -686,6 +689,16 @@ Normally, the proposed field values are all we need and we can close the wizard 
 After this last step, the Scout SDK is building all necessary artefacts for the ''Hello World'' application and building the two WAR files according to the settings made in the wizard.
 For deploying the ''Hello World'' application to the Tomcat webserver these two WAR files are the only items needed.
 
+
+% --------------------------------------------------------------------------- %
+\section{Deploying to Tomcat}
+
+As the final step of this ''Hello World'' tutorial we will deploy the WAR files we created in the last section to a Tomcat webserver.
+Before we can deploy any WAR files we need a working Tomcat installation.
+For this, you may want to read and follow the instructions provided in \appref{install_tomcat}.
+To verify a running Tomcat instance type the URL \url{http://localhost:8080/} into the address bar of the web browser of your choice.
+You should then see the page shown in \figref{deploy_tomcat_1}.
+
 \begin{figure}
 \includegraphics[width=13cm]{tomcat_managerapp_login.png} 
 \caption{The Tomcat shown after a successful installation. 
@@ -693,25 +706,6 @@ After clicking on the ''Manager App'' button (highlighted in red) the login box 
 A successful login shows the ''Tomcat Web Application Manager''.}
 \figlabel{deploy_tomcat_1}
 \end{figure}
-
-Before we can deploy the ''Hello World'' WAR files we need a working Tomcat installation.
-For this, you may want to read and follow the instructions provided in \appref{install_tomcat}.
-To verify a running Tomcat instance type the URL \url{http://localhost:8080/} into the address bar of the web browser of your choice.
-You should then see the page shown in \figref{deploy_tomcat_1}.
-
-\begin{figure}
-\includegraphics[width=13cm]{tomcat_managerapp_selectwar.png}
-\caption{The ''Tomcat Web Application Manager''.
-The WAR files to be deployed can then be selected using button ''Choose File'' highlighted in red.}
-\figlabel{deploy_tomcat_2}
-\end{figure}
-
-Once the web browser shows the successful running of your Tomcat instance, switch to its ''Manager App'' by clicking on the button highlighted in \figref{deploy_tomcat_1}.
-After entering user name and password the browser will display the ''Tomcat Web Application Manager'' as shown in \figref{deploy_tomcat_2}.
-If you don't know the correct username or password you may look it up in the file \filename{tomcat-users.xml} according to \lstref{tomcat.users} located in subdirectory \filename{conf} of your Tomcat installation.
-You may adapt the file's content to update passwords or add users.
-The changes will then become effective after a restart of Tomcat.
-For a rough overview of the organisation of the Tomcat installation directory also see \figref{tomcat.install.dir}.
 
 \begin{lstlisting}[
   language=xml,
@@ -730,7 +724,7 @@ For a rough overview of the organisation of the Tomcat installation directory al
 
 \begin{figure}
 \begin{verbatim}
-  [Tomcat directory]
+  [Tomcat installation directory]
    |
    +-- conf
    |   +-- tomcat-users.xml
@@ -745,7 +739,22 @@ For a rough overview of the organisation of the Tomcat installation directory al
 \figlabel{tomcat.install.dir}
 \end{figure}
 
-After logging successfully into Tomcats manager application, you can select the WAR file(s) to be deployed using button ''Choose File'' according to the right hand side of \figref{deploy_tomcat}.
+
+Once the web browser shows the successful running of your Tomcat instance, switch to its ''Manager App'' by clicking on the button highlighted in \figref{deploy_tomcat_1}.
+After entering user name and password the browser will display the ''Tomcat Web Application Manager'' as shown in \figref{deploy_tomcat_2}.
+If you don't know the correct username or password you may look it up in the file \filename{tomcat-users.xml} according to \lstref{tomcat.users}.
+This file is located in subdirectory \filename{conf} of your Tomcat installation.
+For a rough overview of the organisation of the Tomcat installation directory also see \figref{tomcat.install.dir}.
+Note that you will need to restart your Tomcat application after adapting the content of file \filename{tomcat-users.xml} to update passwords or add users.
+
+\begin{figure}
+\includegraphics[width=13cm]{tomcat_managerapp_selectwar.png}
+\caption{The ''Tomcat Web Application Manager''.
+The WAR files to be deployed can then be selected using button ''Choose File'' highlighted in red.}
+\figlabel{deploy_tomcat_2}
+\end{figure}
+
+After logging successfully into Tomcats manager application, you can select the WAR file(s) to be deployed using button ''Choose File'' according to the right hand side of \figref{deploy_tomcat_2}.
 After picking your \filename{helloworld_server.war} and \filename{helloworld.war} file and closing the file chooser, click on button ''Deploy'' (located below button ''Choose File'') to deploy the application to the Tomcat webserver.
 This will copy the selected WAR file into Tomcats \filename{webapps} directory and unpack its content into a subdirectory with the same name.
 Deploying the file \filename{helloworld.war} will extract its contents into a subdirectory named \filename{helloworld} as shown in \figref{tomcat.install.dir}.
@@ -766,7 +775,7 @@ You will then see the home page of the server of your ''Hello World'' applicatio
 From here you can download the zipped client application that can be saved in a directory of your choice.
 After unpacking the zip file, you may start the executable file named \filename{helloworld}.
 This will start the ''Hello World'' client application as shown on the left hand side of \figref{helloworld_running_clients}.
-To start the ''Hello World'' web application open a browser and enter the following address.
+To start the ''Hello World'' web application, open a browser and enter the following address.
 
 \begin{lstlisting}
   http://localhost:8080/helloworld/
@@ -783,7 +792,6 @@ To start the ''Hello World'' web application open a browser and enter the follow
 Depending on the device your browser is running on you will be redirected to \texttt{helloworld/web} on a desktop or laptop computer, to \texttt{helloworld/mobile} on a mobile device or to \texttt{helloworld/mobile} if you are connecting from a tablet device.
 \figref{helloworld_running_clients} shows screenshots for a desktop browser and a mobile browser.
 As demonstrated in these screenshots \texttt{helloworld/web} and \texttt{helloworld/mobile} lead to a different presentation of the same UI optimized to the target form factors of desktop browsers, tablets, and mobile phones.
-
 
 \noindent Existing Documentation
 \begin{itemize}
