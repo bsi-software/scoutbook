@@ -291,7 +291,7 @@ The simplest way to verify your Scout installation is to create a ''Hello World'
 \chapter{Further Installations}
 
 % --------------------------------------------------------------------------- %
-\section{Download and Install Tomcat}
+\section{Apache Tomcat Installation}
 \applabel{install_tomcat}
 
 Apache Tomcat is an open source web server that works well to run the server part of Scout client server applications.
@@ -319,6 +319,9 @@ Once you have downloaded and installed Tomcat 7 (see the sections below for plat
 To verify that Tomcat is actually running open a web browser of your choice and type \url{http://localhost:8080} into the address bar.
 You should then see a confirmation of the successful installation according to \figref{tomcat_install}.
 
+% ........................................................................... %
+\subsection{Platform Specific Installation}
+
 According to the Tomcat setup installation for Windows\footnote{
 Tomcat Windows setup: \url{http://tomcat.apache.org/tomcat-7.0-doc/setup.html#Windows}
 }
@@ -340,8 +343,67 @@ Apache Tomcat Tutorial: \url{http://www.vogella.com/articles/ApacheTomcat/articl
 } 
 for downloading and installing Tomcat provided by Lars Vogel.
 
+
+% ........................................................................... %
+\subsection{Directories and Files}
+\applabel{tomcat_dirs_and_files}
+
+A rough overview of the organisation of the Tomcat installation directory is provided in \figref{tomcat.install.dir}.
+
+\begin{figure}
+{\tiny
+\begin{verbatim}
+  [Tomcat installation directory]
+   |
+   +-- bin
+   |   +-- ... startup, shutdown, ...
+   |
+   +-- logs
+   |   +-- ... tomcat log files
+   |
+   +-- conf
+   |   +-- server.xml 
+   |   +-- tomcat-users.xml
+   |   +-- ...
+   |
+   +-- webapps
+       +-- helloworld_server
+       |   +-- WEB-INF
+       |       +-- eclipse
+       |       |   +-- configuration
+       |       |   |   +-- config.ini
+       |       |   +-- plugins
+       |       |   |   +-- ... web application plugins
+       |       +-- lib
+       |       |   +-- servletbridge.jar
+       |       +-- web.xml
+       |
+       +-- helloworld_server.war
+\end{verbatim}
+}
+\caption{The organization of the Tomcat installation directory. As an example, the ''Hello World'' server application is contained in subdirectory \texttt{webapps}. }
+\figlabel{tomcat.install.dir}
+\end{figure}
+
+Note that you will need to restart your Tomcat application after adapting the content of file \filename{tomcat-users.xml} to update passwords or add users.
+
+\begin{lstlisting}[
+  language=xml,
+  float,
+  label=\lstlabel{tomcat.users},
+  caption=Example content for a \texttt{tomcat-users.xml} file]
+  <tomcat-users>
+    <!--
+    NOTE: By default, no user is included in the "manager-gui" role required
+    to operate the "/manager/html" web application. If you wish to use it
+    you must define such a user - the username and password are arbitrary.
+    -->
+	<user name="admin" password="s3cret" roles="manager-gui"/>
+  </tomcat-users>	
+\end{lstlisting}
+
 % --------------------------------------------------------------------------- %
-\section{Download and Install Jenkins}
+\section{Jenkins Installation}
 needs text
 
 \subsection{Windows}
