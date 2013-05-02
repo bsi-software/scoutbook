@@ -1,0 +1,66 @@
+# --------------------------------------------------------------------------------
+# intro comments
+# --------------------------------------------------------------------------------
+
+# export TEXINPUTS:=.:local
+
+# PDFLATEX = pdflatex -file-line-error
+PDFLATEX = "c:\lyx\MiKTeX 2.9\miktex\bin\pdflatex.exe" -file-line-error
+MAKEINDEX = "c:\lyx\MiKTeX 2.9\miktex\bin\makeindex.exe" -s book_index_style.ist 
+HTLATEX = "c:\lyx\MiKTeX 2.9\miktex\bin\htlatex.exe"
+TEX = "c:\lyx\MiKTeX 2.9\miktex\bin\tex.exe"
+EBOOKCONVERT = "c:\Program Files\Calibre2\ebook-convert.exe" 
+ZIP =zip -R 
+UNZIP = "unzip"
+COPY =copy
+
+HTMLOUTPARAM = "html,2,info" # use "html,3,next" to produce output on section level
+
+# TO-DO: get referenced scout project right
+# TO-DO: properly copy images for html (and epub?)
+# TO-DO: do some meaningful splitting of html into individual files
+
+BOOK=book
+
+# --------------------------------------------------------------------------------
+all: pdf html epub
+
+# NB?: be sure to use texlive and to set the TEXINPUTS variable accordingly
+# See README.txt
+
+pdf: cleanworking
+	-cd tex & ${PDFLATEX} ${BOOK}.tex
+	-cd tex & ${PDFLATEX} ${BOOK}.tex
+	cd tex & ${MAKEINDEX} ${BOOK}
+	-cd tex & ${PDFLATEX} ${BOOK}.tex
+	copy tex\${BOOK}.pdf out\pdf
+
+html: cleanworking
+	-cd tex & ${HTLATEX} ${BOOK}.tex ${HTMLOUTPARAM}
+	-cd tex & ${TEX} "\def\filename{{${BOOK}}{idx}{4dx}{ind}} \input idxmake.4ht"
+	-cd tex & ${MAKEINDEX} -o ${BOOK}.ind ${BOOK}.4dx
+	-cd tex & ${HTLATEX} ${BOOK}.tex ${HTMLOUTPARAM}
+	cd tex & ${ZIP} ${BOOK}.zip *.html ${BOOK}.css *.png
+	copy tex\${BOOK}.zip out\html
+	cd out\html & ${UNZIP} ${BOOK}.zip
+
+epub: cleanworking
+	-cd tex & ${HTLATEX} ${BOOK}.tex html
+	-cd tex & ${TEX} "\def\filename{{${BOOK}}{idx}{4dx}{ind}} \input idxmake.4ht"
+	-cd tex & ${MAKEINDEX} -o ${BOOK}.ind ${BOOK}.4dx
+	-cd tex & ${HTLATEX} ${BOOK}.tex html
+	-cd tex & ${EBOOKCONVERT} ${BOOK}.html ${BOOK}.epub
+	copy tex\${BOOK}.epub out\epub
+
+# --------------------------------------------------------------------------------
+clean: cleanworking
+	rmdir /Q /S out
+	mkdir out\pdf
+	mkdir out\html
+	mkdir out\epub
+
+cleanworking:
+	del /S *.dvi *.aux *.log *.out *.glo *.toc *.ilg *.blg *.idx *.idv *.ind 
+	cd tex & del ${BOOK}.pdf ${BOOK}*.html ${BOOK}*.zip ${BOOK}.css ${BOOK}.epub ${BOOK}.xref ${BOOK}.tmp ${BOOK}.4* ${BOOK}.l*
+
+# --------------------------------------------------------------------------------
