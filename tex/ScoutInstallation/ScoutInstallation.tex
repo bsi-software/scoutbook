@@ -348,60 +348,6 @@ for downloading and installing Tomcat provided by Lars Vogel.
 \subsection{Directories and Files}
 \applabel{tomcat_dirs_and_files}
 
-A rough overview of the organisation of the Tomcat installation directory is provided in \figref{tomcat.install.dir}.
-
-\begin{figure}
-{\tiny
-\begin{verbatim}
-  [Tomcat installation directory]
-   |
-   +-- bin
-   |   +-- ... startup, shutdown, ...
-   |
-   +-- logs
-   |   +-- ... tomcat log files
-   |
-   +-- conf
-   |   +-- server.xml 
-   |   +-- tomcat-users.xml
-   |   +-- ...
-   |
-   +-- webapps
-       +-- helloworld_server
-       |   +-- WEB-INF
-       |       +-- eclipse
-       |       |   +-- configuration
-       |       |   |   +-- config.ini
-       |       |   +-- plugins
-       |       |   |   +-- ... web application plugins
-       |       +-- lib
-       |       |   +-- servletbridge.jar
-       |       +-- web.xml
-       |
-       +-- helloworld_server.war
-\end{verbatim}
-}
-\caption{The organization of the Tomcat installation directory. As an example, the ''Hello World'' server application is contained in subdirectory \texttt{webapps}. }
-\figlabel{tomcat.install.dir}
-\end{figure}
-
-Note that you will need to restart your Tomcat application after adapting the content of file \filename{tomcat-users.xml} to update passwords or add users.
-
-\begin{lstlisting}[
-  language=xml,
-  float,
-  label=\lstlabel{tomcat.users},
-  caption=Example content for a \texttt{tomcat-users.xml} file]
-  <tomcat-users>
-    <!--
-    NOTE: By default, no user is included in the "manager-gui" role required
-    to operate the "/manager/html" web application. If you wish to use it
-    you must define such a user - the username and password are arbitrary.
-    -->
-	<user name="admin" password="s3cret" roles="manager-gui"/>
-  </tomcat-users>	
-\end{lstlisting}
-
 % --------------------------------------------------------------------------- %
 \section{Jenkins Installation}
 needs text
