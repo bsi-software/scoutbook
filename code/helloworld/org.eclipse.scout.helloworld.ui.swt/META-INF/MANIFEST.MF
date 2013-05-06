@@ -7,6 +7,7 @@ Bundle-ClassPath: .
 Bundle-Activator: org.eclipse.scout.helloworld.ui.swt.Activator
 Export-Package: org.eclipse.scout.helloworld.ui.swt;uses:="org.eclipse.scout.rt.ui.swt,org.eclipse.scout.rt.client.session,org.osgi.framework",
  org.eclipse.scout.helloworld.ui.swt.application,
+ org.eclipse.scout.helloworld.ui.swt.application.button,
  org.eclipse.scout.helloworld.ui.swt.application.menu,
  org.eclipse.scout.helloworld.ui.swt.editor,
  org.eclipse.scout.helloworld.ui.swt.perspective,
@@ -19,5 +20,5 @@ Require-Bundle: org.eclipse.scout.helloworld.client;visibility:=reexport,
  org.eclipse.core.runtime,
  org.eclipse.ui,
  org.eclipse.ui.views
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy

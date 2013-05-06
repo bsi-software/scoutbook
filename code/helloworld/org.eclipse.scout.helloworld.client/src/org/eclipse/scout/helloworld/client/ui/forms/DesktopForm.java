@@ -7,8 +7,8 @@ import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.helloworld.client.ui.forms.DesktopForm.MainBox.DesktopBox;
 import org.eclipse.scout.helloworld.client.ui.forms.DesktopForm.MainBox.DesktopBox.MessageField;
 import org.eclipse.scout.helloworld.shared.Icons;
-import org.eclipse.scout.helloworld.shared.services.process.DesktopFormData;
-import org.eclipse.scout.helloworld.shared.services.process.IDesktopProcessService;
+import org.eclipse.scout.helloworld.shared.services.DesktopFormData;
+import org.eclipse.scout.helloworld.shared.services.IDesktopService;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
@@ -76,13 +76,13 @@ public class DesktopForm extends AbstractForm {
 
     @Override
     protected void execLoad() throws ProcessingException {
-      IDesktopProcessService service = SERVICES.getService(IDesktopProcessService.class);
+      IDesktopService service = SERVICES.getService(IDesktopService.class);
       DesktopFormData formData = new DesktopFormData();
       exportFormData(formData);
       formData = service.load(formData);
       importFormData(formData);
-    }
 
+    }
   }
 
   public void startView() throws ProcessingException {

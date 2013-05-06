@@ -22,8 +22,7 @@
       location="org.eclipse.scout.helloworld.ui.swt" />
    <launcher name="helloworld">
       <solaris/>
-      <win useIco="true">
-         <ico path="/org.eclipse.scout.helloworld.ui.swt/icons/bsi.ico"/>
+      <win useIco="false">
          <bmp/>
       </win>
    </launcher>
@@ -61,8 +60,6 @@
       <plugin id="org.eclipse.core.net"/>
       <plugin id="org.eclipse.core.resources"/>
       <plugin id="org.eclipse.core.runtime"/>
-      <plugin id="org.eclipse.core.runtime.compatibility.auth"/>
-      <plugin id="org.eclipse.core.runtime.compatibility.registry" fragment="true"/>
       <plugin id="org.eclipse.e4.core.commands"/>
       <plugin id="org.eclipse.e4.core.contexts"/>
       <plugin id="org.eclipse.e4.core.di"/>
@@ -93,6 +90,7 @@
       <plugin id="org.eclipse.equinox.preferences"/>
       <plugin id="org.eclipse.equinox.registry"/>
       <plugin id="org.eclipse.equinox.security"/>
+      <plugin id="org.eclipse.equinox.security.win32.x86" fragment="true"/>
       <plugin id="org.eclipse.equinox.util"/>
       <plugin id="org.eclipse.help"/>
       <plugin id="org.eclipse.jface"/>
@@ -107,6 +105,7 @@
       <plugin id="org.eclipse.scout.helloworld.ui.swt"/>
       <plugin id="org.eclipse.scout.net"/>
       <plugin id="org.eclipse.scout.rt.client"/>
+      <plugin id="org.eclipse.scout.rt.extension.client"/>
       <plugin id="org.eclipse.scout.rt.shared"/>
       <plugin id="org.eclipse.scout.rt.ui.swt"/>
       <plugin id="org.eclipse.scout.service"/>

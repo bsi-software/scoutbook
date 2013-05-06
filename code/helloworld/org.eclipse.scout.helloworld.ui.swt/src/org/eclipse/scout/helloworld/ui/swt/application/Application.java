@@ -1,27 +1,19 @@
-/*******************************************************************************
- * Copyright (c) 2010 BSI Business Systems Integration AG.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *     BSI Business Systems Integration AG - initial API and implementation
- ******************************************************************************/
 package org.eclipse.scout.helloworld.ui.swt.application;
 
 import java.security.PrivilegedExceptionAction;
+
 import javax.security.auth.Subject;
+
 import org.eclipse.equinox.app.IApplication;
 import org.eclipse.equinox.app.IApplicationContext;
-import org.eclipse.scout.net.NetActivator;
 import org.eclipse.scout.commons.security.SimplePrincipal;
+import org.eclipse.scout.net.NetActivator;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
 
-/** <h3>Activator</h3>
- *  This class controls all aspects of the application's execution
+/**
+ * <h3>Activator</h3> This class controls all aspects of the application's execution
  */
 public class Application implements IApplication {
 
@@ -55,8 +47,8 @@ public class Application implements IApplication {
       @Override
       public void run() {
         if (!display.isDisposed())
-          workbench.close();
-        }
+        workbench.close();
+      }
     });
   }
 }

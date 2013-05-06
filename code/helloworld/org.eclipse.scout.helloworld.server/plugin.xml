@@ -16,12 +16,12 @@
       </service>
       <service
             factory="org.eclipse.scout.rt.server.services.ServerServiceFactory"
-            class="org.eclipse.scout.helloworld.server.services.custom.security.AccessControlService"
+            class="org.eclipse.scout.helloworld.server.services.common.security.AccessControlService"
             session="org.eclipse.scout.helloworld.server.ServerSession">
       </service>
       <service
             factory="org.eclipse.scout.rt.server.services.ServerServiceFactory"
-            class="org.eclipse.scout.helloworld.server.services.process.DesktopProcessService"
+            class="org.eclipse.scout.helloworld.server.services.DesktopService"
             session="org.eclipse.scout.helloworld.server.ServerSession">
       </service>
    </extension>

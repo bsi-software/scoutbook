@@ -1,13 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2010 BSI Business Systems Integration AG.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *     BSI Business Systems Integration AG - initial API and implementation
- ******************************************************************************/
 package org.eclipse.scout.helloworld.client.ui.desktop;
 
 import org.eclipse.scout.commons.annotations.Order;
@@ -20,14 +10,15 @@ import org.eclipse.scout.helloworld.shared.Icons;
 import org.eclipse.scout.rt.client.ClientSyncJob;
 import org.eclipse.scout.rt.client.ui.action.keystroke.AbstractKeyStroke;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
-import org.eclipse.scout.rt.client.ui.desktop.AbstractDesktop;
 import org.eclipse.scout.rt.client.ui.desktop.IDesktop;
 import org.eclipse.scout.rt.client.ui.desktop.bookmark.menu.AbstractBookmarkMenu;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.client.ui.form.ScoutInfoForm;
+import org.eclipse.scout.rt.extension.client.ui.desktop.AbstractExtensibleDesktop;
 import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipse.scout.rt.shared.ui.UserAgentUtility;
 
-public class Desktop extends AbstractDesktop implements IDesktop {
+public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
   private static IScoutLogger logger = ScoutLogManager.getLogger(Desktop.class);
 
   public Desktop() {
@@ -40,6 +31,10 @@ public class Desktop extends AbstractDesktop implements IDesktop {
 
   @Override
   protected void execOpened() throws ProcessingException {
+    //If it is a mobile or tablet device, the DesktopExtension in the mobile plugin takes care of starting the correct forms.
+    if (!UserAgentUtility.isDesktopDevice()) {
+      return;
+    }
     DesktopForm desktopForm = new DesktopForm();
     desktopForm.setIconId(Icons.EclipseScout);
     desktopForm.startView();

@@ -6,12 +6,8 @@
          point="org.eclipse.scout.service.services">
       <proxy
             factory="org.eclipse.scout.rt.client.services.ClientProxyServiceFactory"
-            class="org.eclipse.scout.helloworld.shared.services.process.IDesktopProcessService">
+            class="org.eclipse.scout.helloworld.shared.services.IDesktopService">
       </proxy>
-   </extension>
-   <extension
-         name=""
-         point="org.eclipse.scout.service.services">
    </extension>
 
 </plugin>
