@@ -11,6 +11,5 @@ public class DesktopService extends AbstractService implements IDesktopService {
   public DesktopFormData load(DesktopFormData formData) throws ProcessingException {
     formData.getMessage().setValue("hello world!");
     return formData;
-
   }
 }
