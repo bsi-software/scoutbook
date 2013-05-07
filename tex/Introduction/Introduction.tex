@@ -304,7 +304,8 @@ Having started the Scout server and all client products, the client applications
 % --------------------------------------------------------------------------- %
 \section{The User Interface Part}
 
-In this section we will add a text field widget to the client's empty desktop form of the ''Hello World'' application.
+In this section we will define the user interface (UI) model for the ''Hello World'' application.
+More specifically, we add a text field widget to the client's empty desktop form of the ''Hello World'' application.
 In the steps described below, we use the \wizard{New Form Field} provided by the Scout SDK. 
 Frist, we add a group box field to the desktop form.
 Then, we apply this wizard a second time to add the actual text widget\footnote{
@@ -647,104 +648,31 @@ As we have seen in \secref{helloworld_export}, this project alias is used by the
 In turn, after deploying the WAR files as described in \secref{helloworld_deploy}, the RAP server application becomes available under the URL \java{http://localhost:8080/helloworld}.
 Should you have a catchy naming for you application in mind, \java{com.mycompany.mycatchyname} is therefore a good choice for the \field{Project Name}.
 
-% --------------------------------------------------------------------------- %
-\section{Run the Initial Application}
-\seclabel{run_initial_background}
-
-To run a Scout application the Scout SDK provides launcher boxes in the Scout Object Properties as described in \secref{run_initial}.
-These object properties are associated to the top level product node in the Scout Explorer.
-Using the \icon{Edit} provided in the product launcher section of the Scout Object Properties, the list of launcher boxes can be specified as shown in \figref{select_product_launchers}.
-
-\begin{figure}
-\includegraphics[height=6.5cm]{sdk_edit_product_launcher.png} \hspace{0.5cm}
-\includegraphics[height=6.5cm]{sdk_select_product_launcher.png}
-\caption{Using the \icon{Edit Content...} shown on the left hand side, the product selection dialog shown on the right side is opened.
-Using this product selection dialog, the list of launcher boxes can be specified.
-}
-\figlabel{select_product_launchers}
-\end{figure}
-
-The available products shown on the right side of \figref{select_product_launchers} represent the Eclipse product files created in the initial project creation step.
-Product files are used in Eclipse to specify the configuration and content of an executable application.
-As we can see in the case of the ''Hello World'', four executable applications have been created by the Scout SDK, and each application contains two Eclipse product files.
-The four applications, one for the server application and one for each client technology, have already been discussed in \secref{run_initial}.
-
-\begin{figure}
-\includegraphics[height=10cm]{sdk_server_node_properties.png} \hspace{0.5cm}
-\includegraphics[height=10cm]{sdk_server_plugin_explorer.png}
-\caption{The production and development launcher boxes associated with the ''Hello World'' server application are shown on the left side. 
-In the Package Explorer shown on the right side, the production and development products are located under the \folder{products} in the server plugin project.
-}
-\figlabel{server_plugin}
-\end{figure}
-
-Based on the assumption that we want to run the Scout application in different environments we need to have a separate product file for each target environment.
-Even in the case of the simple ''Hello World'' example, the Scout application is started both within the Scout SDK and also run on a Tomcat web server.
-The development product files describe the content and configuration of the applications applicable in the contex of the Scout SDK.
-To export and run the Scout application outside of the Scout SDK, the production product files are used.
-\figref{server_plugin} illustrates this situation for the ''Hello World'' server application. 
-On the left side, the blue server node is selected in the Scout Explorer.
-This opens the two server launcher boxes for the production and the development environment.
-On the right side of \figref{server_plugin}, the corresponding plugin project \element{org.eclipse.scout.helloworld.server} is expanded to show the file based organisation of the product definition.
-
-\begin{figure}
-\includegraphics[width=14cm]{sdk_server_dev_product.png} 
-\caption{The Eclipse product file editor showing file \filename{helloworld-server-dev.product} of the ''Hello World'' application.
-In the Dependencies tab shown above, the list of Eclipse plugins that are required for the server application are shown.
-}
-\figlabel{server_dev_product}
-\end{figure}
-
-some sentences about the product file. some sentences about the product file. some sentences about the product file. some sentences about the product file. 
-scout helloworld server plugin
-scout helloworld shared plugin
-scout framework plugins
-jetty plugins
-
-\begin{figure}
-\includegraphics[width=14cm]{sdk_server_dev_configini.png} 
-\caption{The Eclipse \filename{config.ini} file of the ''Hello World'' server application. 
-This configuration file specifies the startup paraemters for launching the server application from within the Scout SDK.
-}
-\figlabel{server_dev_ini}
-\end{figure}
-
-some sentences about the config.ini file. some sentences about the config.ini file. some sentences about the config.ini file. some sentences about the config.ini file. 
-More on config.ini
-\url{http://help.eclipse.org/juno/index.jsp?topic=%2Forg.eclipse.pde.doc.user%2Fguide%2Ftools%2Feditors%2Fproduct_editor%2Fconfiguration.htm}
-
-
-More on Swing, SWT, RAP and AJAX
-SWT\footnote{Standard Widget Toolkit (SWT): \url{http://en.wikipedia.org/wiki/Standard_Widget_Toolkit}.} 
-boxes represent rich clients\footnote{Rich client: \url{http://en.wikipedia.org/wiki/Fat_client}} 
-
-RAP\footnote{Remote Application Platform (RAP): \url{http://www.eclipse.org/rap/}} is a framework that allows to use Java for server-side 
-Ajax\footnote{Asynchronous JavaScript and XML (AJAX): \url{http://en.wikipedia.org/wiki/Ajax_\%28programming\%29}}.
-
 
 % --------------------------------------------------------------------------- %
 \section{Walking through the Initial Application}
 \seclabel{initial_helloworld}
 
-In this section, we walk you through the central pieces of the generated initial application. 
-This exercise will introduce you to important elements of the Scout application model.
-A basic understanding of these model elements will help you understand the structure and working of the ''Hello World'' application.
+In this section, we will walk you through the central Scout application model components of the ''Hello World'' example. 
+As each of these components is represented by a Java class in the Scout framework, we can explain the basic concept using the available ''Hello World'' source code.
+Below, we will introduce the following Scout components.
 
 \begin{itemize}
   \item Desktop
   \item Form
   \item Form handler
-  \item Process service
+  \item Service
   \item MainBox
   \item Form data
   \item Form field
 \end{itemize}
 
-Each of the above elements is represented by a Java class in Scout.
-This allows us to explain the basic concept using our ''Hello World'' source code.
-Please note, that all this Java code has been added in the project creation step by the Scout SDK described in \secref{create_project_simple}.
-This implies that you are free to adapt/change this code according to your needs.
+Please note that most of the Java code was initially generated by Scout SDK.
+In many cases this code can be used ''as is'' and does not need to be changed.
+Depending on your requirements, it might very well be that you want to adapt the provided code to fit your specific needs.
+However, a basic understanding of the most important Scout components should help you to better understand the structure and working of Scout applications.
 
+% ........................................................................... %
 \subsection{Desktop}
 
 The desktop is the central container of all visible elements of the Scout client application.
@@ -759,18 +687,19 @@ Of interest is the overwritten callback method \java{execOpend} shown in \lstref
   label=\lstlabel{helloworld.execopend},
   caption=Creating and starting a form in the client's Desktop callback method \java{execOpened}.,
   index={DesktopForm},
-  linerange={42-47},
+  linerange={32-41},
   float
 ]
 {../code/helloworld/org.eclipse.scout.helloworld.client/src/org/eclipse/scout/helloworld/client/ui/desktop/Desktop.java}
 
 Method \java{execOpend} is called by the Scout framework after the desktop frame becomes visible.
 The only thing that happens here is the creation of a \java{desktopForm} object, that gets assigned an icon before it is started via method \java{startView}.
-This desktop form object is will later hold the text widget that is to be displayed to the user\footnote{
+This desktop form object holds the \field{Message} text widget that is displayed to the user\footnote{
 In the Scout application model we can only add UI fields to Scout form elements, not directly to the desktop.
 }.
 More information regarding form elements are provided in the next section.
 
+% ........................................................................... %
 \subsection{Form}
 \seclabel{helloworld.form}
 
@@ -795,10 +724,11 @@ Expand the \element{DesktopForm} to show its children: \element{Variables}, \ele
 The \element{Variables} subfolder contains variables. They are invisible to the application user.
 The ''Hello World'' application is so simple, it does not need variables.
 The subfolder \element{MainBox} contains form fields. These are the visible user interface elements.
-Currently, the main box of our \java{DesktopForm} is empty. We will change this later.
+The main box of our \java{DesktopForm} holds the \java{DesktopBox} containing the \java{MessageField} added with the \wizard{New Form Field}.
 Finally, the \element{Handlers} subfolder contains all available form handlers.
-As shown in \figref{helloworld_viewhandler}, we already have a view handler available for our desktop form.
+The view handler shown in \figref{helloworld_viewhandler} has been added in the initial project creation step.
 
+% ........................................................................... %
 \subsection{Form Handler}
 \seclabel{helloworld.formhandler}
 
@@ -809,7 +739,7 @@ The necessary wiring is provided by the Scout framework, either by the initial p
 
 \lstinputlisting[
   label=\lstlabel{helloworld.viewhandler},
-  caption=Class \java{DesktopForm} with its view handler and \java{startView} method.,
+  caption=Class \java{DesktopForm} with its view handler and \java{startView} method. Other inner classes and methods are omitted here.,
   index={ViewHandler},
   emph={load},
   linerange={20-21,74-91},
@@ -817,16 +747,17 @@ The necessary wiring is provided by the Scout framework, either by the initial p
 ]
 {../code/helloworld/org.eclipse.scout.helloworld.client/src/org/eclipse/scout/helloworld/client/ui/forms/DesktopForm.java}
 
-In the ''Hello World'' application, it is the overwritten \java{execLoad} method in the \java{ViewHandler} (see \lstref{helloworld.viewhandler}) that defines what will happen before the desktop form is shown to the user.
-This is the place where most of the behaviour relevant to the ''Hello World'' application is implemented.
+In the ''Hello World'' application, it is the overwritten \java{execLoad} method in the \java{ViewHandler} that defines what will happen before the desktop form is shown to the user.
+The corresponding source code is provided in \lstref{helloworld.viewhandler}.
+It is this \java{execLoad} method where most of the behaviour relevant to the ''Hello World'' application is implemented.
 Roughly, this implementation is performing the following steps.
 
 \begin{enumerate}
-  \item Get a reference to the process service running on the server.
+  \item Get a reference to the forms server service running on the server.
   \item Create a data transfer object (DTO)\footnote{
 Data Transfer Object (DTO): \url{http://en.wikipedia.org/wiki/Data_transfer_object}.}
   \item Pass the empty DTO to the load service method (ask the server for some data).
-  \item Update the DTO with the content provided by the service method (use the answer provided by the server).
+  \item Update the DTO with the content provided by the service load method.
   \item Copy the updated information from the DTO into the desired form field.
 \end{enumerate}
 
@@ -842,7 +773,7 @@ In method \java{startInternal} a view handler is then created and passed as a pa
 This eventually leads to the call of our \java{execLoad} custom implementation.
 
 We are now ready to dive into the implementation of method \java{execLoad} of the desktop form's view handler.
-First, a reference to a process service identified by \java{IDesktopProcessService} is obtained using \java{SERVICES.getService}.
+First, a reference to a form service identified by \java{IDesktopService} is obtained using \java{SERVICES.getService}.
 Then, a form data object (the DTO) is created and all current form field values are exported into the form data via method \java{exportFormData}.
 Strictly speaking, the \java{exportFormData} is not necessary for the use case of the ''Hello World'' application.
 But, as this is generated code, there is no benefit when we manually delete the \java{exportFormData} command.
@@ -850,67 +781,230 @@ Next, using the \java{load} service method highlighted in \lstref{helloworld.vie
 Finally, these new values are imported from the form data into the form via the \java{importFormData} method.
 Once the desktop form is ready, showing it to the user is handled by the framework.
 
-To add clarity and background to the implementation of the \java{execLoad} above, the next section introduces services and form data objects. 
+To add some background to the implementation of the \java{execLoad} above, the next section introduces services and form data objects. 
 
-\subsection{Process Services and Form Data Objects}
+% ........................................................................... %
+\subsection{Form Services and Form Data Objects}
 
-Process services and form data objects are used in the Scout framework to exchange information between client and server of a Scout application.
+Form services and form data objects are used in the Scout framework to exchange information between the Scout client and server applications.
 When needed, a service implemented on the server side can register a corresponding proxy service on the client.
 This proxy service is invoked by the client as if it were implemented locally.
 In fact, when we get a service reference using \java{SERVICES.getService}, we do not need to know if this service runs locally on the client or remotely on the server.
 
-In the ''Hello World'' example application, the client's desktop form has an associated desktop process service running on the server.
-This correspondence between forms and process services is also reflected in the \element{Links} section of the Scout Object Properties of the desktop form.
-As shown in \figref{helloworld_viewhandler}, links are provided not only for the desktop form, but for its desktop form data, the corresponding desktop process service as well as for the process service interface \java{IDesktopProcessService}. 
-On the client, this interface is used to identify and register the proxy service for the desktop process service.
+In the ''Hello World'' example application, the client's desktop form has an associated desktop service running on the server.
+This correspondence between forms and form services is also reflected in the \element{Links} section of the Scout Object Properties of the desktop form.
+As shown in \figref{helloworld_viewhandler}, links are provided not only for the desktop form, but for its desktop form data, the corresponding desktop form service as well as for the service interface \java{IDesktopService}. 
+On the client, this interface is used to identify and register the proxy service for the desktop service.
 
 To transfer data between the client and the server, the ''Hello World'' application uses a \java{DesktopFormData} object as a DTO.
 This form data object holds all form variables and values for all the form fields contained in the form.
 Taking advantage of this correspondence, the Scout framework provides the convenience methods \java{exportFormData} and \java{importFormData}.
 As a result, the developer does not need to deal with any mapping code between the form data object and the form fields.
 
-The actual implementation of the desktop process service in class \java{DesktopProcessService} is implemented on the server side.
-As the class \java{DesktopProcessService} represents an ordinary Scout service it inherits from \java{AbstractService}.
-It also implements its corresponding \java{IDesktopProcessService} interface used for registering both the actual service as well as the proxy service.
+The actual implementation of the desktop form service in class \java{DesktopService} is implemented on the server side.
+As the class \java{DesktopService} represents an ordinary Scout service it inherits from \java{AbstractService}.
+It also implements its corresponding \java{IDesktopService} interface used for registering both the actual service as well as the proxy service.
 
-In \secref{helloworld.server} we will learn more about the desktop process service.
+% --------------------------------------------------------------------------- %
+\section{Run the Initial Application}
+\seclabel{run_initial_background}
+
+% ........................................................................... %
+\subsection{The Launcher Boxes}
+
+To run a Scout application the Scout SDK provides launcher boxes in the Scout Object Properties as described in \secref{run_initial}.
+These object properties are associated to the top level project node in the Scout Explorer.
+Using the \icon{Edit} provided in the product launcher section of the Scout Object Properties, the list of launcher boxes can be specified as shown in \figref{select_product_launchers}.
+
+\begin{figure}
+\includegraphics[height=6.5cm]{sdk_edit_product_launcher.png} \hspace{0.5cm}
+\includegraphics[height=6.5cm]{sdk_select_product_launcher.png}
+\caption{Using the \icon{Edit Content...} shown on the left hand side, the product selection dialog shown on the right side is opened.
+Using this product selection dialog, the list of launcher boxes can be specified.
+}
+\figlabel{select_product_launchers}
+\end{figure}
+
+% ........................................................................... %
+\subsection{Eclipse Product Files}
+
+The available products shown on the right side of \figref{select_product_launchers} represent the Eclipse product files created in the initial project creation step.
+Product files\footnote{
+Read the following article for an introduction to Eclipse product files: \url{http://www.vogella.com/articles/EclipseProductDeployment/article.html}.
+}
+are used in Eclipse to specify the configuration and content of an executable application.
+In the case of the ''Hello World'' project, four executable applications --- with two Eclipse product files for each application --- have been defined by the Scout SDK.
+The four applications, one for the server application and one for each client technology, have already been discussed in \secref{run_initial}.
+
+\begin{figure}
+\includegraphics[height=10cm]{sdk_server_node_properties.png} \hspace{0.5cm}
+\includegraphics[height=10cm]{sdk_server_plugin_explorer.png}
+\caption{The production and development launcher boxes associated with the ''Hello World'' server application are shown on the left side. 
+In the Package Explorer shown on the right side, the production and development products are located under the \folder{products} in the server plugin project.
+}
+\figlabel{server_plugin}
+\end{figure}
+
+The reason why each executable has two product files associated with it lies in the assumption that we want to run the Scout application in different environments.
+Even in the case of the simple ''Hello World'' example, the Scout application is started in two target evironments.
+The development environment defines the product in the context of the Scout SDK.
+To export and run the Scout application outside of the Scout SDK, the production product files are used to define the application when it is to be started on a Tomcat web server.
+\figref{server_plugin} illustrates this situation for the ''Hello World'' server application. 
+On the left side, the blue server node is selected in the Scout Explorer.
+This opens the two server launcher boxes for the production and the development environment.
+On the right side of \figref{server_plugin}, the corresponding plugin project \element{org.eclipse.scout.helloworld.server} is expanded to show the file based organisation of the two product definitions.
+
+\begin{figure}
+\includegraphics[width=14cm]{sdk_server_dev_product.png} 
+\caption{The Eclipse product file editor showing file \filename{helloworld-server-dev.product} of the ''Hello World'' application.
+In the Dependencies tab shown above, the list of Eclipse plugins that are required for the server application are shown.
+}
+\figlabel{server_dev_product}
+\end{figure}
+
+For the case of the ''Hello World'' example we did not need to edit or chage the product files generated by the Scout SDK. 
+However, if your requirements are not met by the provided product files, you may use the Eclipse product file editor.
+A screenshot of this editor is shown in \figref{server_dev_product} with the tab \element{Dependencies} opened.
+In the tab Dependencies, the complete list of necessary plugins is provided.
+Example plugins visible in \figref{server_dev_product} include the ''Hello World'' server and shared plugins, Scout framework plugins, and Jetty plugins.
+The Jetty\footnote{
+Jetty is web server with a small footprint: \url{http://www.eclipse.org/jetty/}.
+} 
+plugins are only needed to run the ''Hello World'' server application inside the Scout SDK.
+Consequently, Jetty plugins are not listed as a dependency in the Scout server's production product file.
+
+% ........................................................................... %
+\subsection{Eclipse Configuration Files}
+
+\begin{figure}
+\includegraphics[width=14cm]{sdk_server_dev_product_config.png} \\ 
+\includegraphics[height=5mm]{white_pixel.png} \\
+\includegraphics[width=14cm]{sdk_server_dev_configini.png} 
+\caption{Above, the definition of the products \filename{config.ini} in tab \element{Configuration} of the product file editor.
+Below, the content of the configuration file of the ''Hello World'' server application is provided in a normal text editor.
+}
+\figlabel{server_dev_ini}
+\end{figure}
+
+Switching to tab \element{Configuration} in the product file editor, shows the selected radiobutton \element{Use an existing config.ini file} and the link to the configuration file provided in the \field{File} as shown in the upper part of \figref{server_dev_ini}.
+Below, a part of the server's \filename{config.ini} file is shown.
+Both the entry in the product file pointing to the configuratino file, and the content of the \filename{config.ini} file has been generated by the Scout SDK during the initial project creation step.
+As shown in the lower part of \figref{server_dev_ini}, Eclipse configuration files have the format of a standard property file.
+The provided key value pairs are read at startup time if the \filename{config.ini} file can be found in folder \filename{configuration} by the Eclipse runtime.
+
+% ........................................................................... %
+\subsection{Scout Desktop Client Applications}
+
+Having introduced Eclipse product files and configuration files based on the ''Hello World'' server application, we will now look at the different client applications in turn.
+With Swing applications\footnote{
+Swing is the primary Java UI technology: \url{http://en.wikipedia.org/wiki/Swing_\%28Java\%29}.
+}
+and SWT applications\footnote{
+Standard Widget Toolkit (SWT): \url{http://en.wikipedia.org/wiki/Standard_Widget_Toolkit}.
+}, two alternative UI technologies are currently available to build Scout desktop client applications.
+More recently, JavaFX\footnote{
+JavaFX is the most recent Java UI technology: \url{http://en.wikipedia.org/wiki/JavaFX}.
+} 
+is promoted as a successor to Swing and it is therefore likely, that Scout will provide JavaFX client applications in the future.
+
+When we compare the product files for the Swing and the SWT client applications, it is apparent that both client applications share a large number of plugins.
+Most importantly, the complete UI model and the business logic is identical for both client applications.
+In other words, the value created by the Scout developer is contained in the two plugins \element{org.eclipse.scout.helloworld.client} and \element{org.eclipse.scout.helloworld.shared}.
+To create an executable client application, we only need to combine these two plugins with a set of plugins specific to the desired UI technology.
+
+After starting the ''Hello World'' Swing client or the corresponding SWT client application, the client application first reads the startup parameters from its \filename{config.ini} file.
+Among other things, this client configuration file contains the parameter \java{server.url} to specify the URL to the ''Hello World'' server. 
+After the startup of the ''Hello World'' client application, it can then connect to the ''Hello World'' server application using this address.
+
+% ........................................................................... %
+\subsection{Scout Web and Mobile Clients}
+
+For Scout web and mobile clients, the RAP framework\footnote{
+Remote Application Platform (RAP): \url{http://www.eclipse.org/rap/}.
+}
+is used.
+The RAP framework provides an API that is almost identical to the one provided by SWT and allows to use Java for server-side Ajax\footnote{
+Asynchronous JavaScript and XML (AJAX): \url{http://en.wikipedia.org/wiki/Ajax_\%28programming\%29}.
+}.
+
+Comparing the product file of the SWT client applications with the RAP application, we observe that the RAP development product does not include any SWT plugins, but a set of RAP and Jetty plugins.
+In addition, the RAP product also contains the Scout mobile client plugins \element{org.eclipse.scout.rt.client.mobile} and \element{org.eclipse.scout.helloworld.client.mobile}.
+These two plugins are responsible for transforming the UI model defined in the ''Hello World'' client plugin to the different form factors of tablet computers and mobile phones.
+
+If you start the ''Hello World'' RAP application in your Scout SDK, you are launching a second server application in a Jetty instance on a different port than the ''Hello World'' server application.
+As in the case of the desktop client applications, the RAP or Ajax server application knows how to connect to the ''Hello World'' server application after reading the parameter \java{server.url} from its \filename{config.ini} file.
 
 % --------------------------------------------------------------------------- %
 \section{The User Interface Part}
 \seclabel{helloworld.userinterface.background}
 
-More on Scout NLS:
-This Scout SDK mechanism helps the developer to maintain the text keys separately from the actual text entries shown to the user that should never go directly into the applications source code and might get translated into different languages.
-
+Using the UI of the ''Hello World'' application we explain in this section how the Scout UI form model is represented in Java. 
+We also describe how this representation is exploited by the Scout SDK to automatically manage the form data objects used for data transfer between Scout client and Scout server applications.
+Finally, will have a brief look at internationalization\footnote{
+Internationalization and localization, also called NLS support: \url{http://en.wikipedia.org/wiki/Internationalization_and_localization}.
+} 
+support of Scout for texts.
 
 \lstinputlisting[
   label=\lstlabel{helloworld.mainbox},
-  caption=The \java{MainBox} class with its desktop box and message field,
+  caption=The \java{DesktopForm} with its inner class \java{MainBox} containing the desktop box and message field,
   index={MainBox},
-  linerange={58-74},
+  linerange={19-21, 58-74, 90-91},
   float
 ]
 {../code/helloworld/org.eclipse.scout.helloworld.client/src/org/eclipse/scout/helloworld/client/ui/forms/DesktopForm.java}
 
+As discussed in \secref{helloworld.form} Scout forms consist of variables, the main box and a number of form handlers.
+The main box represents the visible part of Scout's form model.
+It may holds any number of form fields.
+Using container fields such as group boxes, it is possible to define complex structures such as hierachical UI models containing multiple levels.
+In the Scout framework the forms structure is represented in the form of inner classes that are located inside of the \java{MainBox} class.
+And the \wizard{New Form Field} of the Scout SDK fully supports this pattern.
+\lstref{helloworld.mainbox} provides the concrete example using the the desktop form of the ''Hello World'' tutorial.
 
-When we drill down to the newly created message field in the Scout Explorer the Scout SDK should look similar to \figref{helloworld_messagefield}.
-As shown in \lstref{helloworld.mainbox}, the message field and the desktop box field added with the \wizard{New Form Field} have been implemented as a structure of inner classes by the Scout SDK.
-Using nested Java classes to model the form's content is a central aspect of the UI part of the Scout application model.
-Among other benefits, it allows the Scout SDK to easily parse the form's Java code on the fly and directly reflect changes in the Scout Explorer and the Scout Property View.
-
-Deriving the form model directly from the nested structure of inner classes also supports another important feature of the Scout SDK:
-it keeps the form data classes in sync with the forms of the application.
+Using inner Java classes to model a form's content is a central aspect of the UI part of the Scout application model.
+It allows the Scout SDK to easily parse the form's Java code on the fly and directly reflect changes to the form model in the Scout Explorer and the Scout Property View.
+However, this is not the only benefit for the Scout SDK.
+As form data objects hold all form variables and the values of all form fields contained in the form, the Scout SDK can keep the form data classes in sync with the forms of the application.
+It is important to note that this mechanism only depends on the Java code of the form field class.
+In consequence, the Scout SDK can update form field classes in the background even when form fields are manually coded into the form's Java class.
 This includes adding all the necessary getter and setter methods to access the values of all the fields defined on a form.
-As a result, Scout developers don't need to update the form data objects after a form is changed.
-The SDK takes care of this time consuming and error prone task.
+As a result, Scout developers don't need to manually update form data objects when the UI model of a form is changed.
+The Scout SDK takes care of this time consuming and error prone task.
+
+\begin{figure}
+\includegraphics[width=14cm]{sdk_nls_editor.png} 
+\caption{The NLS editor provided by the Scout SDK. This editor is opened via the \menu{Open NLS Editor} in the Scout Object Properties of the \node{DefaultTextProviderService}.
+}
+\figlabel{nls_editor}
+\end{figure}
+
+\begin{figure}
+\includegraphics[height=4cm]{sdk_add_language_dialog.png} \hspace{0.5cm}
+\includegraphics[height=4cm]{sdk_shared_plugin_language_file.png}
+\caption{In the dialog \element{Add a Language} shown on the left side the desired language and localization can be specified.
+On the right side, the location of property file \filename{Texts_de_CH.properties} in the shared plugin of the ''Hello World'' application is shown.
+}
+\figlabel{adding_a_language}
+\end{figure}
+
+When we did add the \field{Message} to the desktop form of the ''Hello World'' application we had to add a new translation entry for the label of the message field as shown in \figref{helloworld_stringfield}.
+To access the translated label field entry, the Scout SDK generated the implementation of \java{getConfiguredLabel} using \java{TEXTS.get("Message")} as shown in \lstref{helloworld.mainbox}.
+As translated texts may need to be available for both the Scout client and the Scout server application the complete infrastructure needed for the NLS support is located in the application's shared plugin.
+
+To add support for a new translated language, click on the corresponding icon of the NLS editor as shown in \figref{nls_editor}.
+In the opened language dialog, add the desired language and country localization and the target directory as shown in \figref{adding_a_language}.
+A new language properties file is then added to the shared plugin project as shown in \figref{adding_a_language}.
+The new language is now available as an additional column in the NLS editor and as a separate tab in the dialog to add new translated texts shown in \figref{helloworld_stringfield}.
 
 % --------------------------------------------------------------------------- %
 \section{The Server Part}
 \seclabel{helloworld.server.background}
 
-View handler stuff: 
+In this background section we take a closer look at the connection between form handling and calling server services.
 
-Even though this particular method looks simple and innocent, these process service methods are where the bulk of your server side code will end up.
+
+Even though this particular method looks simple and innocent, these form service methods are where the bulk of your server side code will end up.
 This is the place where information obtained from databases, webservices (or completely different sources) is mapped to the UI elements presented to the user.
 This is the place where information provided by the user is sent to webservices, saved in a database or processed in some way.
 
