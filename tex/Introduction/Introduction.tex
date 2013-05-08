@@ -211,6 +211,7 @@ Once you have everything installed, you are ready to create your first Scout pro
 % --------------------------------------------------------------------------- %
 \section{Create a new Project}
 \seclabel{create_project_simple}
+\index{Project creation}
 
 Start your Eclipse IDE and select an empty directory for your workspace.
 This workspace directory will then hold all the project code for the ''Hello World'' application.
@@ -233,6 +234,7 @@ Now, click the \button{Finish} to let the Scout SDK create the initial project c
 \includegraphics[width=7cm]{sdk_new_project_1.png} \hspace{5mm}
 \includegraphics[width=7cm]{sdk_new_project_2.png}
 \caption{The new project wizard. The dialog on the left side is only shown when using the generic \wizard{New Project} of Eclipse}
+\index{SDK Wizard!New Scout Project}
 \figlabel{sdk_new_project_wizard}
 \end{figure}
 
@@ -267,6 +269,7 @@ As we can see in \figref{start_client}, we have product launchers for four diffe
 \includegraphics[width=14cm]{sdk_start_client_product.png} 
 \caption{Starting the SWT client in the Scout SDK using the provided SWT product launcher. Make sure to start the server before starting any client product.}
 \figlabel{start_client}
+\index{Product launchers}
 \end{figure}
 
 Each product launcher box provides a link to the corresponding Eclipse product file\footnote{
@@ -327,6 +330,7 @@ To start the form field wizard we select the \menu{New Form Field ...} as shown 
 \includegraphics[width=7cm]{sdk_new_field_groupbox_1.png} \hspace{8mm}
 \includegraphics[width=7cm]{sdk_new_field_groupbox_2.png}
 \caption{Adding the \textit{DesktopBox} field with the Scout SDK form field wizard.}
+\index{SDK Wizard!New Form Field}
 \figlabel{helloworld_groupboxfield}
 \end{figure}
 
@@ -341,6 +345,7 @@ The Scout SDK will add the necessary Java code for the \java{DesktopBox} in the 
 \includegraphics[width=6cm]{sdk_new_field_stringfield_1.png} \hspace{8mm}
 \includegraphics[width=7cm]{sdk_new_field_stringfield_2.png}
 \caption{Adding a \textit{StringField} and providing a new translation entry.}
+\index{SDK Wizard!Add Translation Entry}
 \figlabel{helloworld_stringfield}
 \end{figure}
 
@@ -477,6 +482,7 @@ In the second WAR file, the RAP server application that provides both the web cl
 \includegraphics[width=8cm]{sdk_export_war_menu.png} 
 \caption{Starting the \wizard{Export Scout Project} in the Scout SDK with the context menu. 
 In the first wizard step, the target directory for the WAR files and the artefacts to export are specified.}
+\index{SDK Wizard!Export Scout Project}
 \figlabel{sdk_export_war}
 \end{figure}
 
@@ -856,9 +862,10 @@ On the right side of \figref{server_plugin}, the corresponding plugin project \e
 
 \begin{figure}
 \includegraphics[width=14cm]{sdk_server_dev_product.png} 
-\caption{The Eclipse product file editor showing file \filename{helloworld-server-dev.product} of the ''Hello World'' application.
+\caption{The Eclipse product file editor showing file \java{helloworld-server-dev.product} of the ''Hello World'' application.
 In the Dependencies tab shown above, the list of Eclipse plugins that are required for the server application are shown.
 }
+\index{Eclipse product file editor}
 \figlabel{server_dev_product}
 \end{figure}
 
@@ -875,12 +882,13 @@ Consequently, Jetty plugins are not listed as a dependency in the Scout server's
 
 % ........................................................................... %
 \subsection{Eclipse Configuration Files}
+\index{Eclipse \filename{config.ini} file}
 
 \begin{figure}
 \includegraphics[width=14cm]{sdk_server_dev_product_config.png} \\ 
 \includegraphics[height=5mm]{white_pixel.png} \\
 \includegraphics[width=14cm]{sdk_server_dev_configini.png} 
-\caption{Above, the definition of the products \filename{config.ini} in tab \element{Configuration} of the product file editor.
+\caption{Above, the definition of the products \java{config.ini} in tab \element{Configuration} of the product file editor.
 Below, the content of the configuration file of the ''Hello World'' server application is provided in a normal text editor.
 }
 \figlabel{server_dev_ini}
@@ -919,10 +927,11 @@ After the startup of the ''Hello World'' client application, it can then connect
 % ........................................................................... %
 \subsection{Scout Web and Mobile Clients}
 
-For Scout web and mobile clients, the RAP framework\footnote{
+For Scout web and mobile clients, the Eclipse RAP framework\footnote{
 Remote Application Platform (RAP): \url{http://www.eclipse.org/rap/}.
 }
 is used.
+\index{RAP}
 The RAP framework provides an API that is almost identical to the one provided by SWT and allows to use Java for server-side Ajax\footnote{
 Asynchronous JavaScript and XML (AJAX): \url{http://en.wikipedia.org/wiki/Ajax_\%28programming\%29}.
 }.
@@ -949,7 +958,7 @@ support of Scout for texts.
   label=\lstlabel{helloworld.mainbox},
   caption=The \java{DesktopForm} with its inner class \java{MainBox} containing the desktop box and message field,
   index={MainBox},
-  linerange={19-21, 58-74, 90-91},
+  linerange={19-22, 58-74, 90-91},
   float
 ]
 {../code/helloworld/org.eclipse.scout.helloworld.client/src/org/eclipse/scout/helloworld/client/ui/forms/DesktopForm.java}
@@ -972,25 +981,45 @@ This includes adding all the necessary getter and setter methods to access the v
 As a result, Scout developers don't need to manually update form data objects when the UI model of a form is changed.
 The Scout SDK takes care of this time consuming and error prone task.
 
+\lstinputlisting[
+  label=\lstlabel{helloworld.textproviderservice},
+  caption=The \java{DefaultTextProviderService} class. Its getter method provides the path and the base name for the text property files,
+  index={Text Provider Service},
+  linerange={5-10},
+  float
+]
+{../code/helloworld/org.eclipse.scout.helloworld.shared/src/org/eclipse/scout/helloworld/shared/services/common/text/DefaultTextProviderService.java}
+
 \begin{figure}
 \includegraphics[width=14cm]{sdk_nls_editor.png} 
-\caption{The NLS editor provided by the Scout SDK. This editor is opened via the \menu{Open NLS Editor} in the Scout Object Properties of the \node{DefaultTextProviderService}.
+\caption{The NLS editor provided by the Scout SDK. This editor is opened via the \link{Open NLS Editor ...} in the Scout Object Properties of the \node{DefaultTextProviderService}.
 }
+\index{NLS editor}
 \figlabel{nls_editor}
 \end{figure}
+
+When we did add the \field{Message} to the desktop form of the ''Hello World'' application we had to enter a new translation entry for the label of the message field as shown in \figref{helloworld_stringfield}.
+The individual translation entries are then stored in language specific text property files.
+To modify translated texts we can use the NLS editor provided by the Scout SDK.
+To open this editor, select the green \node{shared} in the Scout Explorer and expand its \folder{Text Provider Services}.
+Then, select the contained element \element{DefaultTextProviderService}.
+As shown in \figref{nls_editor}, the NLS editor can then be opened using the \link{Open NLS Editor ...}.
+
+To access the translated label field entry in the application, the Scout SDK generated the implementation of \java{getConfiguredLabel} using \java{TEXTS.get("Message")} as shown in \lstref{helloworld.mainbox}.
+In the default Scout project setup, calling \java{TEXTS.get} uses the \java{DefaultTextProviderService} in the background.
+This text provider service then defines the access path for the text property files to use for the translation.
+To resolve the provided key, the user's locale settings are used to access the correct text property file.
+As translated texts may need to be available in both client and server application, the NLS infrastructure including the text property files are located in the applictions shared plugin.
 
 \begin{figure}
 \includegraphics[height=4cm]{sdk_add_language_dialog.png} \hspace{0.5cm}
 \includegraphics[height=4cm]{sdk_shared_plugin_language_file.png}
 \caption{In the dialog \element{Add a Language} shown on the left side the desired language and localization can be specified.
-On the right side, the location of property file \filename{Texts_de_CH.properties} in the shared plugin of the ''Hello World'' application is shown.
+On the right side, the location of property file \java{Texts_de_CH.properties} in the shared plugin of the ''Hello World'' application is shown.
 }
+\index{SDK Wizard!Add Translation Language}
 \figlabel{adding_a_language}
 \end{figure}
-
-When we did add the \field{Message} to the desktop form of the ''Hello World'' application we had to add a new translation entry for the label of the message field as shown in \figref{helloworld_stringfield}.
-To access the translated label field entry, the Scout SDK generated the implementation of \java{getConfiguredLabel} using \java{TEXTS.get("Message")} as shown in \lstref{helloworld.mainbox}.
-As translated texts may need to be available for both the Scout client and the Scout server application the complete infrastructure needed for the NLS support is located in the application's shared plugin.
 
 To add support for a new translated language, click on the corresponding icon of the NLS editor as shown in \figref{nls_editor}.
 In the opened language dialog, add the desired language and country localization and the target directory as shown in \figref{adding_a_language}.
@@ -1001,7 +1030,10 @@ The new language is now available as an additional column in the NLS editor and 
 \section{The Server Part}
 \seclabel{helloworld.server.background}
 
-In this background section we take a closer look at the connection between form handling and calling server services.
+
+In this background section we take a closer look at Scout's service infrastructure and the client server communication.
+To discuss the setup and usage of the \java{DesktopService} in the ''Hello World'' example.
+
 
 
 Even though this particular method looks simple and innocent, these form service methods are where the bulk of your server side code will end up.
