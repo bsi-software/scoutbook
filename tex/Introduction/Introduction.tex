@@ -1030,35 +1030,117 @@ The new language is now available as an additional column in the NLS editor and 
 \section{The Server Part}
 \seclabel{helloworld.server.background}
 
+In this background section we take a closer look at Scout services and calling service methods remotely.
+We will first discuss the setup of an ordinary Scout service.
+Then, the additional components to call service methods remotely are considered.
+To explain the concepts in a concrete context, we use the setup of the \java{DesktopService} of our ''Hello World'' example.
 
-In this background section we take a closer look at Scout's service infrastructure and the client server communication.
-To discuss the setup and usage of the \java{DesktopService} in the ''Hello World'' example.
+% ........................................................................... %
+\subsection{Scout Services}
 
+Scout services are OSGi services\footnote{
+A good introduction to OSGi services is provided by Lars Vogel's tutorial: \url{http://www.vogella.com/articles/OSGiServices/article.html}.
+}
+which in turn are defined by standard Java classes or interfaces.
+Scout is just adding a convenience layer to cover typical requirements in the context of client server applications. 
+To support Scout developers as much as possible, the Scout SDK offers wizards that generate the necessary classes and interfaces and also take care of service registration.
 
+\lstinputlisting[
+  label=\lstlabel{helloworld.desktop_service},
+  caption=The server service class \java{DesktopService}.,
+  linerange={8-15},
+  float
+]
+{../code/helloworld/org.eclipse.scout.helloworld.server/src/org/eclipse/scout/helloworld/server/services/DesktopService.java}
 
-Even though this particular method looks simple and innocent, these form service methods are where the bulk of your server side code will end up.
-This is the place where information obtained from databases, webservices (or completely different sources) is mapped to the UI elements presented to the user.
-This is the place where information provided by the user is sent to webservices, saved in a database or processed in some way.
+All Scout services need to extend Scout's \java{AbstractService} class and implement their own corresponding interface.
+This also applies to the ''Hello World'' desktop service according to \lstref{helloworld.desktop_service}.
+As shown in \figref{helloworld_load_servicemethod}, this service can be located in the Scout Explorer under the blue server node in the \folder{Services}.
+
+Before Scout services can be accessed and used, they need to be explicitely registered as a service in the correct place.
+For this registration mechanism, Scout is using Eclipse extension points and extensions\footnote{
+A good introduction to Eclipse extensions and extension points is provided in the Eclipse wiki: \url{http://wiki.eclipse.org/FAQ_What_are_extensions_and_extension_points\%3F}.
+}
+which are conceptually similar to electrical outlets and plugs.
+And in order to work, as in the case of outlets and plugs, the plug must fit to the outlet.
+In our ''Hello World'' example, the extension (plug) is represented by class \java{DesktopService} and the service extension point (outlet) is named \java{org.eclipse.scout.service.services}.
+What makes the desktop service fit to the service extension point is the fact that its interface \java{IDesktopService} extends Scout's \java{IService} interface.
+
+\begin{figure}
+\includegraphics[width=14cm]{sdk_plugin_editor_desktopservice.png}
+\caption{The Eclipse plugin editor for \java{plugin.xml} files.
+In the tab \element{Extensions} the ''Hello World'' desktop service is registered under the extension point \java{org.eclipse.scout.service.services}.
+}
+\index{Eclipse plugin editor}
+\figlabel{plugin_editor}
+\end{figure}
+
+\lstinputlisting[
+  label=\lstlabel{helloworld.server_plugin_xml},
+  caption=The registration of the \java{DesktopService} in the server's \java{plugin.xml} configuration file. The remaining content of the file has been omitted.,
+  index={Plugin service registration},
+  linerange={1-6,22-27,105-106},
+  language=xml,
+  float
+]
+{../code/helloworld/org.eclipse.scout.helloworld.server/plugin.xml}
+
+The registration of the desktop service under the service extension point is then defined in the \filename{plugin.xml} file of the ''Hello World'' server plugin.
+As shown in \figref{plugin_editor}, the \filename{plugin.xml} file is located in the root path of plugin \java{org.eclipse.scout.helloworld.server}.
+To modify a \filename{plugin.xml}, you can either use the Eclipse plugin editor or your favorite text editor.
+In \figref{plugin_editor}, the registration of the desktop servicee is shown in the \element{Extensions} tab of the plugin editor.
+For the corresponding XML representation in the \filename{plugin.xml} file, see \lstref{helloworld.server_plugin_xml}.
+
+% ........................................................................... %
+\subsection{Scout Proxy Services}
+
+In the ''Hello World'' application the \java{load} method of the desktop service is called remotely from the client.
+But so far, we have only seen how the desktop service is implemented and registered in the server application.
+To call server service methods remotly from Scout client applications, the Scout framework provides client proxy services and the service tunnel.
+As the name implies, a client proxy service acts as a local proxy service (running in the Scout client application) of a server service (running remotely in the Scout server application).
+
+\lstinputlisting[
+  label=\lstlabel{helloworld.client_plugin_xml},
+  caption=The registration of the \java{IDesktopService} proxy service in the client plugin of the ''Hello World'' application. This is the complete content of the client's \java{plugin.xml} file.,
+  index={Plugin service registration},
+  language=xml,
+  float
+]
+{../code/helloworld/org.eclipse.scout.helloworld.client/plugin.xml}
+
+Client proxy services are defined by a Java interface located in the shared plugin of the Scout application.
+As shown in \lstref{helloworld.desktop_service} of the desktop service, this service interface is also implemented by the desktop service class in the server plugin.
+Corresponding to the registration of the desktop service in the server plugin, client proxy services need to be registered in the client's \filename{plugin.xml} file.
+The content of the ''Hello World'' client plugin configuration file is provided in \lstref{helloworld.client_plugin_xml}.
+To create proxy services in Scout clients, the \java{ClientProxyServiceFactory} is used. 
+This is also reflected in the extension defined in \lstref{helloworld.client_plugin_xml}.
+Internally, this service factory then uses the service tunnel to create the local proxy services.
+
+To call a remote service method from the Scout client application, we first need to obtain a reference to the proxy service.
+Using the \java{SERVICES.getService} method with the interface \java{IDesktopService}, we can obtain such a reference as shown in \lstref{helloworld.viewhandler} for the view handler of the desktop form.
+With this reference to the client's proxy service, calling methods remotely works as if the service would be running locally.
+Connecting to the server, serializing the method call including parameters (and deserializing the return value) is handeled transparently by Scout.
 
 % --------------------------------------------------------------------------- %
 \section{Add the Rayo Look and Feel}
 \seclabel{helloworld.rayo.background}
 
+Rayo has been designed in 2009 by BSI for the desktop clients of its CRM\footnote{
+Customer Relationship Management (CRM): \url{https://en.wikipedia.org/wiki/Customer_relationship_management}} 
+application and its contact center solution.
 
-Rayo has orignially been designed in 2009 by BSI for the desktop clients of its CRM\footnote{
-CRM: Customer Relationship Management} 
-and its contact center solutions.
-Desktop and web application working with the same Rayo look and feel
 On the deskop some synth classes needed to be adjusted. for this openjdk implementation was used. 
 as a result, open sourcing of the adjusted synth clases under gpl with classpath exception was required
 as this licence is not compatible with hosting the code at eclipse org, rayo is located on the eclipse marketplace.
 with the classpath exception part of the licence, commercial usage of rayo is explicitly possible.
 the only restriction beeing that modifications to the rayo package will have to be published under the same licence.
 
-At the core of the Rayo Look and Feel lies Java Synth\footnote{
+At the core of the Rayo lies Java Synth look and feel\footnote{
 Java Synth Look and Feel: \url{http://en.wikipedia.org/wiki/Synth_Look_and_Feel}
 }.
-bla
+
+In 2011, the Scout framework supports web applications, rayo for rap, no need to go to marketplace.
+Desktop and web application working with the same Rayo look and feel
 
 % --------------------------------------------------------------------------- %
 \section{Exporting the Application}
