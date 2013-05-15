@@ -925,15 +925,18 @@ Among other things, this client configuration file contains the parameter \java{
 After the startup of the ''Hello World'' client application, it can then connect to the ''Hello World'' server application using this address.
 
 % ........................................................................... %
-\subsection{Scout Web and Mobile Clients}
+\subsection{Scout Web, Tablet and Mobile Clients}
 
-For Scout web and mobile clients, the Eclipse RAP framework\footnote{
+For Scout web, tablet and  mobile clients, the Eclipse RAP framework\footnote{
 Remote Application Platform (RAP): \url{http://www.eclipse.org/rap/}.
 }
 is used.
 \index{RAP}
 The RAP framework provides an API that is almost identical to the one provided by SWT and allows to use Java for server-side Ajax\footnote{
 Asynchronous JavaScript and XML (AJAX): \url{http://en.wikipedia.org/wiki/Ajax_\%28programming\%29}.
+}.
+This setup implies that Scout tablet and mobile clients are not native clients but browser based\footnote{
+To provide native clients with Scout, the simplest (commercial) option is most likely Tabris: \url{http://developer.eclipsesource.com/tabris/}
 }.
 
 Comparing the product file of the SWT client applications with the RAP application, we observe that the RAP development product does not include any SWT plugins, but a set of RAP and Jetty plugins.
@@ -1125,28 +1128,70 @@ Connecting to the server, serializing the method call including parameters (and 
 \section{Add the Rayo Look and Feel}
 \seclabel{helloworld.rayo.background}
 
-Rayo has been designed in 2009 by BSI for the desktop clients of its CRM\footnote{
+Rayo has been designed in 2009 by BSI for its CRM\footnote{
 Customer Relationship Management (CRM): \url{https://en.wikipedia.org/wiki/Customer_relationship_management}} 
-application and its contact center solution.
+application and contact center solution.
+Since then, Rayo has been copied for Scout web applications and also adapted to work on touch/mobile devices.
 
-On the deskop some synth classes needed to be adjusted. for this openjdk implementation was used. 
-as a result, open sourcing of the adjusted synth clases under gpl with classpath exception was required
-as this licence is not compatible with hosting the code at eclipse org, rayo is located on the eclipse marketplace.
-with the classpath exception part of the licence, commercial usage of rayo is explicitly possible.
-the only restriction beeing that modifications to the rayo package will have to be published under the same licence.
-
-At the core of the Rayo lies Java Synth look and feel\footnote{
+The implementation of Rayo for desktop clients is based on the Java Synth look and feel\footnote{
 Java Synth Look and Feel: \url{http://en.wikipedia.org/wiki/Synth_Look_and_Feel}
 }.
+However, in a few cases it was necessary to adjust some of the synth classes. 
+In order to do this, the adapted classes are copied form the OpenJDK implementation\footnote{
+OpenJDK is an open source implementation of the Java platform: \url{http://openjdk.java.net/}.
+}
+As OpenJDK is licenced under the GNU General Public Licence (GPL) with a linking exception it is not possible to distrbute Rayo under the Eclipse Public Licence.
+That is why Rayo is not initially contained in the Eclipse Scout package but needs to be downloaded from the Eclipse Marketplace.
+Fortunately, there is still no restriction to use Rayo in commercial products.
+The only remaining restriction applies to modifying Rayo for commercial products.
+In this case you will be obliged to redistribute your modified version of Rayo under the same licence (GPL with classpath exception).
 
-In 2011, the Scout framework supports web applications, rayo for rap, no need to go to marketplace.
-Desktop and web application working with the same Rayo look and feel
+With Eclipse Scout 3.8 (Juno), the Scout framework also allows to build web clients based on Eclipse RAP.
+Great care has been taken to ensure, that the look and feel for Scout web applications matches the look and feel of the desktop as closely as possible.
+As RAP is already distributed under the EPL licence the Rayo for web apps is directly contained in the Scout package.
+TODO: Describe what to change to use RAP default look and feel
+
+A similar approach was chosen for Rayo on tablets and mobile devices that are supported with Eclipse Scout 3.9 (Kepler).
+For such devices optimized components are used to take into account the smaller screens and the absence of a mouse (no context menues!)
+But as far as possible, the Rayo look and feel also applies to touch devices.
+TODO: Pointer to more info regarding mobile devices.
 
 % --------------------------------------------------------------------------- %
 \section{Exporting the Application}
 \seclabel{helloworld.export.background}
 
-More on WAR files
+The simplest option to move a Scout application from the development environment into the 'wild' is to use the \wizard{Export Scout Project} provided by the Scout SDK.
+Using standard settings, this wizard allows to create two WAR files that represent a complete application.
+The first WAR file holds the Scout server including a landing page to download the Scout desktop client in a standalone ZIP file.
+In the second WAR file the Ajax server based on Eclipse RAP is contained.
+
+\begin{figure}
+\includegraphics[heigth=5cm]{helloworld_server_war.png} \hspace{5mm}
+\includegraphics[heigth=5cm]{helloworld_server_war_eclipse.png}
+\caption{The organisation of the ''Hello World'' server WAR file.
+The right side reveals the location of the \java{config.ini} file and the application's plugin files} 
+\figlabel{helloworld_server_war}
+\end{figure}
+
+The organisation of the exported WAR files is defined according to server-side Equinox, the typical setup for running Eclipse based applications on the server-side.
+See \appref{osgi_basics}, for further material regarding (server-side) Equinox.
+As a concrete example we will first describe the general organisation of the \filename{helloworld_server.war} Scout server WAR file.
+Then, we can introduce specific artefacts of interest that are contained in this WAR file.
+See \figref{helloworld_server_war} for the directory tree of the \filename{helloworld_server.war} file.
+
+\begin{figure}
+\includegraphics[heigth=9cm]{helloworld_server_war_plugin.png} 
+\caption{The content of the ''Hello World'' server plugin contained in the \java{helloworld_server.war} file.
+The necessary files for the download page including the zipped client application are in the \java{resources/html} directory.} 
+\figlabel{helloworld_server_plugin}
+\end{figure}
+
+\begin{figure}
+\includegraphics[heigth=8cm]{helloworld_server_plugin.png} 
+\caption{The ''Hello World'' server plugin shown in the Eclipse package explorer.
+The files for the download page are located under \java{resources/html}.} 
+\figlabel{helloworld_server_explorer}
+\end{figure}
 
 
 % --------------------------------------------------------------------------- %
