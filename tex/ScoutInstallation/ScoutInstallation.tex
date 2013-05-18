@@ -294,23 +294,27 @@ The simplest way to verify your Scout installation is to create a ''Hello World'
 \section{Apache Tomcat Installation}
 \applabel{install_tomcat}
 
-Apache Tomcat is an open source web server that works well to run the server part of Scout client server applications.
-This is not so much as step by step download and installation guide. 
-Rather, it points you to the proper places for downloading and installing Tomcat.
-In case you are not familiar with Tomcat, you could start with the Wikipedia article\footnote{
-Apache Tomcat Wikipedia: \url{http://en.wikipedia.org/wiki/Apache_Tomcat}
+Apache Tomcat is an open source web server that is a widely used implementation of the Java Servlet Specification.
+Specifically, Tomcat works very well to run the server part of Scout client server applications.
+In case you are interested in getting some general context around Tomcat you could start with the Wikipedia article\footnote{
+Apache Tomcat Wikipedia: \url{http://en.wikipedia.org/wiki/Apache_Tomcat}.
+}.
+Then get introduced to its core component ''Tomcat Catalina''\footnote{
+Mulesoft's introduction to Tomcat Catalina: \url{http://www.mulesoft.com/tomcat-catalina}.
 }
-before you switch to the Tomcat homepage\footnote{
+before you switch to the official Tomcat homepage\footnote{
 Apache Tomcat Homepage: \url{http://tomcat.apache.org/}
 }.
 
+This section is not really a step by step download and installation guide. 
+Rather, it points you to the proper places for downloading and installing Tomcat.
 We recommend to work with Tomcat version 7.0 but in case you already have version 6.0 running that should be good too.
 Start your download from the official download site\footnote{
 Tomcat 7 Downloads: \url{http://tomcat.apache.org/download-70.cgi}
 }.
 
 \begin{figure}
-\includegraphics[width=13cm]{tomcat_install.png}
+\includegraphics[width=14cm]{tomcat_install.png}
 \caption{A successful Tomcat 7 installation.}
 \figlabel{tomcat_install}
 \end{figure}
@@ -347,6 +351,78 @@ for downloading and installing Tomcat provided by Lars Vogel.
 % ........................................................................... %
 \subsection{Directories and Files}
 \applabel{tomcat_dirs_and_files}
+
+Tomcat's installation directory follows the same organisation on all platforms.
+Here, we will only introduce the most important aspects of the Tomcat installation for the purpose of this book.
+
+\begin{figure}
+\includegraphics[width=6cm]{tomcat_install_dir.png}
+\caption{The organisation of a Tomcat installation including specific files of interest.
+As an example, the ''Hello World'' server application is contained in subdirectory \texttt{webapps}.
+}
+\figlabel{tomcat_install_dir}
+\end{figure}
+
+Note that some folders and many files of a Tomcat installation are not represented in \figref{tomcat_install_dir}.
+We just want to provide a basic understanding of the most important parts to operate the web server in the context of this book.
+In the \filename{bin} folder, the executable programs are contained, including scripts to start and stop the Tomcat instance.
+
+The \filename{conf} folder contains a set of XML and property configuration file.
+The file \filename{server.xml} represents Tomcat's main configuration file.
+It is used to configure general web server aspects such as the port number of its connectors for the client server communication.
+For the default setup, port number 8080 is used for the communication between clients applications and the web server.
+The file \filename{tomcat-users.xml} contains a database of users, passwords and associated roles.
+
+Folder \filename{logs} contains various logfiles of Tomcat itself as well as host and web application log files.
+XXX need to provide more on what is where (especially application logs and exact setup to generate log entries from scout apps).
+
+The folder needed for deploying web applications into a Tomcat instance is called \filename{webapps}.
+It can be used as the target for copying WAR files into the web server.
+The installation of the WAR file then extracts its content into the corresponding directory structure as shown in \figref{tomcat_install_dir} in the case of the file \filename{helloworld_server.war}.
+
+Finally, folder \filename{work} contains Tomcat's runtime ''cache'' for the deployed web applications.
+It is organized according to the hierarchy of the engine (Catalina), the host (localhost), and the web application (helloworld_server).
+
+% ........................................................................... %
+\subsection{The Tomcat Manager Application}
+\applabel{tomcat_manager_app}
+
+Tomcat comes with the pre installed ''Manager App''.
+This application is useful to manage web applications and perform tasks such as deploying a web application from a WAR file, or starting and stopping installed web applications.
+A comprehensive documentation for the ''Manager App'' can be found under the Tomcat homepage\footnote{
+The Tomcat Manager Application: \url{http://tomcat.apache.org/tomcat-7.0-doc/manager-howto.html}.
+}.
+Here we only show how to start this application from the hompage of a running Tomcat installation.
+
+To access this application you can switch to the ''Manager App'' with a click on the corresponding button on the right hand side.
+The button can be found on the right hand side of \figref{tomcat_install}.
+Before you are allowed to start this application, you need to provide username and password credentials of a user associated with Tomcats's \java{manager-gui} role.
+
+\begin{lstlisting}[
+  language=xml,
+  float,
+  label=\lstlabel{tomcat.users},
+  caption=Example content for a \texttt{tomcat-users.xml} file]
+  <tomcat-users>
+    <!--
+    NOTE: By default, no user is included in the "manager-gui" role required
+    to operate the "/manager/html" web application. If you wish to use it
+    you must define such a user - the username and password are arbitrary.
+    -->
+	<user name="admin" password="s3cret" roles="manager-gui"/>
+  </tomcat-users>	
+\end{lstlisting}
+
+To get at user names and passwords you can open file \filename{tomcat-users.xml} located in Tomcat's \filename{conf} directory.
+In this file the active users with their passwords and associated roles are stored.
+See \lstref{tomcat.users} for an example.
+From the content of this file, we see that user \java{admin} has password \java{s3cret} and also posesses the necessary role \java{manager-gui} to access the ''Manager App''.
+If file \filename{tomcat-users.xml} does not contain any user with this role, you can simply add new user with this role to the existing users.
+Alternatively, you also can add the necessary role to an existing user.
+Just append a comma to the existing right(s) followed by the string \java{manager-gui}.
+Note that you will need to restart your Tomcat application after adapting the content of file \filename{tomcat-users.xml}.
+
+With working credentials you can now start the ''Manager App'' as described the ''Hello World'' tutorial in \secref{helloworld_deploy}.
 
 % --------------------------------------------------------------------------- %
 \section{Jenkins Installation}
