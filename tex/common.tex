@@ -140,6 +140,18 @@
 \newcommand{\filename}[1]{\path{#1}}
 
 % --------------------------------------------------------------------------- %
+% diagram macros
+% --------------------------------------------------------------------------- %
+
+\newcommand{\includediagram}[2]{
+  \ifpdf
+    \includegraphics[width=#1]{#2.pdf}
+  \else
+    \includegraphics[width=#1]{#2.png}
+  \fi
+}
+
+% --------------------------------------------------------------------------- %
 % cross reference macros
 % --------------------------------------------------------------------------- %
 \newcommand{\prtlabel}[1]{\label{prt:#1}}
@@ -164,6 +176,8 @@
 \graphicspath{
   {figures/}
   {Introduction/figures/}
+  {ScoutRuntime/figures/}
+  {ScoutTooling/figures/}
   {ScoutInstallation/figures/}  
 }
 
