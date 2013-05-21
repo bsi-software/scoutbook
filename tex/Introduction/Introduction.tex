@@ -16,7 +16,7 @@
 \chapter{Introduction}
 
 % --------------------------------------------------------------------------- %
-\section{What is Eclipse Scout?}
+\section{What is Scout?}
 
 \fbox{
   \parbox{12cm}{
@@ -33,8 +33,6 @@
   \item concept wiki \url{http://wiki.eclipse.org/Scout/Overview}
 \end{itemize}
 
-\subsection{Benefits of Scout}
-
 \noindent Existing Documentation
 \begin{itemize}
   \item concept wiki \url{http://wiki.eclipse.org/Scout/Overview/Why_You_Should_Use_Scout}
@@ -46,21 +44,55 @@ service oriented business applications.
 With its multi-frontend support, Scout applications may run as desktop 
 applications, in the web or on a mobile using a single codebase.
 
-Scout substantially boosts developer productivity and is simple to learn.
-
 User friendly applications are straight forward to implement with Scout’s 
 comprehensive set of user interface components.
 
 Completely based on Java/Eclipse, Scout Applications are easy to integrate 
 in most IT environments.
 
-\subsection{A short History}
+% --------------------------------------------------------------------------- %
+\section{Why should I choose Scout?}
+
+Protect your investment
+\begin{itemize}
+  \item Scout is proven in production for more than 10 years
+  \item Scout is based on Java and the Eclipse platform
+  \item Scout is an open source project hosted at the Eclise foundation
+  \item Scout has an active and growing community
+\end{itemize}
+
+Lower your cost for inhouse applications (Money)
+\begin{itemize}
+  \item Increase your development productivity with Scout
+  \item Take advantage of low maintenance costs for Scout applications
+  \item Leverage existing experienc in Java
+\end{itemize}
+
+Get up to speed in days (5' clock)
+\begin{itemize}
+  \item Any Java developer quickly learns Scout
+  \item The Scout SDK provides great tooling
+  \item The Scout tutorials provide step-by-step guidance
+\end{itemize}
+
+Run your app on any device (desktop, tablet, mobile phone)
+\begin{itemize}
+  \item Scout developers implement the application model only
+  \item In Scout, the user interface is modeled independend of any specific UI technology
+  \item At runtime, the user interface is rendered using a specific Scout UI plugin
+  \item For desktop apps, choose SWT or Swing
+  \item For browser or mobile apps, choose RAP
+\end{itemize}
+
+% --------------------------------------------------------------------------- %
+\section{Is Scout production ready?} 
+
 needs text
 
-\subsection{Outlook}
-needs text
-
-\newpage
+* 10 years history of being used in production
+* technology transitions
+* current status: significant number of product installations based on scout, some with large number of users (> 3'000)
+* proven performance in several industries: banking, insurance, transportation, government, retail
 
 % --------------------------------------------------------------------------- %
 \section{What should I read?} 
@@ -558,10 +590,7 @@ The WAR files to be deployed can then be selected using button ''Choose File'' h
 
 Once the web browser displays the successful running of your Tomcat instance, switch to its ''Manager App'' by clicking on the button highlighted in \figref{deploy_tomcat_1}.
 After entering user name and password the browser will display the ''Tomcat Web Application Manager'' as shown in \figref{deploy_tomcat_2}.
-If you don't know the correct username or password you may look it up in the file \filename{tomcat-users.xml}.
-This file is located in subdirectory \filename{conf} of your Tomcat installation\footnote{
-See \appref{tomcat_dirs_and_files} for an overview of the organisation of a Tomcat installation and example content for a \filename{tomcat-users.xml} file.
-}.
+If you don't know the correct username or password you may look it up in the file \filename{tomcat-users.xml} as described in \appref{tomcat_dirs_and_files}.
 
 After logging successfully into Tomcats manager application, you can select the WAR file(s) to be deployed using button ''Choose File'' according to the right hand side of \figref{deploy_tomcat_2}.
 After picking your \filename{helloworld_server.war} and \filename{helloworld.war} file and closing the file chooser, click on button ''Deploy'' (located below button ''Choose File'') to deploy the application to the Tomcat web server.
@@ -1246,27 +1275,29 @@ In case you need to change/brand/amend the download page for the desktop client,
 \section{Deploying to Tomcat}
 \seclabel{helloworld.tomcat.background}
 
-In this section we will just two common pitfalls when working with the Scout IDE and Tomcat simultaneously.
-Both can can prevent a web application from running in Tomcat or properly updating.
+In this section we will discuss two common pitfalls when working with the Scout IDE and Tomcat.
+The symptons linked to these problems are Scour server applications that are not starting or Scout applications that fail to properly update.
 
-In the first case the Jetty web server running inside the Scout SDK and Tomcat can block the 8080 port once they are running.
+In usual culprit behind Scout server applications that fail to start is a blocked port 8080.
+This setting can be created when we try to run both the Jetty web server inside the Scout SDK and the local Tomcat instance.
 In consequence, either Jetty or Tomcat is not able to bind to port 8080 at startup which makes it impossible for a client to connect to the right server.
-To avoid such conflicts make sure that you always stop the Scout server application in the Scout SDK before you restart your Tomcat server.
-Alternatively you can assign two different ports to your Jetty webserver and your Tomcat webserver.
-To modify the port number used in the Scout SDK you have to update the corresponding properties in the \filename{config.ini} files of the development products of your Scout server application and all client applications.
+To avoid such conflicts, make sure that you always stop the Scout server application in the Scout SDK (effectively killing Jetty) before you restart your Tomcat server.
+Alternatively, you can assign two different ports to your Jetty webserver and your Tomcat webserver.
+
+To modify Jetty's port number in the Scout SDK you have to update the corresponding properties in the \filename{config.ini} files of the development products of your Scout server application and all client applications.
 In the Scout server's \filename{config.ini} file the property is named \java{org.eclipse.equinox.http.jetty.http.port}, in the client \filename{config.ini} files the relevant property is called \java{server.url}.
 To change the port number to 8081 for the ''Hello World'' example in the Scout SDK you could use the following lines in the individual \filename{config.ini} files.
 
 \begin{tabular}{ll}
- Scout Server           & org.eclipse.equinox.http.jetty.http.port=8081              \\
- Scout SWT/Swing Client & server.url=http://localhost:8081/helloworld_server/process \\
- Scout RAP Server       & server.url=http://localhost:8081/helloworld_server/ajax
+ Scout Server         & org.eclipse.equinox.http.jetty.http.port=8081              \\
+ Scout Desktop Client & server.url=http://localhost:8081/helloworld\_server/process \\
+ Scout Ajax Server    & server.url=http://localhost:8081/helloworld\_server/ajax
 \end{tabular}
 
-The second pitfall is connected to a web application that seems to refuse to update to a fixed and freshly generated WAR file.
+The second pitfall is connected to a web application that seems to refuse to update to the content of a freshly generated WAR file.
 At times it seems that your changes to a deployed WAR file do not find their way to the application actually running. 
 In many cases this is caused by a cached instance of the previous version of your application located in Tomcat's working directory.
-To save yourself much frustration it often helps just to clear Tomcat's working directory and restart Tomcat.
+To save yourself much frustration, it often helps just to clear Tomcat's working directory and restart Tomcat.
 For this, you may follow the following procedure.
 
 \begin{enumerate}
@@ -1282,7 +1313,7 @@ If you have installed Tomcat on a Windows box according to \appref{install_tomca
 This means that to stop the Tomcat web server you need to stop the corresponding Windows service.
 For starting and stopping Tomcat on Mac/Linux/Unix systems, you can use the command line script files \filename{startup.sh} and \filename{shutdown.sh} located in Tomcat's subdirectory \filename{bin}.
 
-In case you are interested in more advances aspects of Apache Tomcat you may want to have a look at the article of Chua Hock-Chuan\footnote{
+For those interested in more advanced aspects of Apache Tomcat we recommend the article ''More about the Cat'' by Chua Hock-Chuan\footnote{
 More about the Cat: \url{http://www.ntu.edu.sg/home/ehchua/programming/howto/Tomcat_More.html}.
 }.
 
