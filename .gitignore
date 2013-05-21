@@ -3,6 +3,9 @@ out/pdf/**/*
 out/html/**/*
 out/epub/**/*
 
+tex/book.pdf
+out/pdf/book.pdf
+
 # code stuff
 code/*/.metadata/**/*
 *.class
@@ -38,5 +41,4 @@ makefile
 # might be needed in the future?
 *.html
 *.css
-*.pdf
 *.epub
