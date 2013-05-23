@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.eclipse.scout.widgets.shared
+Bundle-SymbolicName: org.eclipse.scout.widgets.shared;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.eclipse.scout.widgets.shared.Activator
+Export-Package: org.eclipse.scout.widgets.shared,
+ org.eclipse.scout.widgets.shared.services,
+ org.eclipse.scout.widgets.shared.services.common.text
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.scout.rt.shared;visibility:=reexport
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-ActivationPolicy: lazy

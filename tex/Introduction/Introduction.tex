@@ -18,15 +18,162 @@
 % --------------------------------------------------------------------------- %
 \section{What is Scout?}
 
-\fbox{
-  \parbox{12cm}{
-    Section waiting for contribution (max 2'000 words)
-	
-    The focus of the first section should be on benefits of Scout.
-	History should point to the 10 years of existence of Scout and previous technology transitions.
-	Outlook should focus on values such as stability, dedication to grow the community and moving with best available technolgies.
-  }
-}
+Scout is a mature framework for building business applications. 
+With its multi-frontend support, a single Scout applications may run as a desktop application, in a web browser or on a mobile phone with touch support. 
+The clean separation of Scout's client model from the user interface technologies allows the developer to concentrate on a single code base. 
+This approach has advantages for end users of Scout applications, Scout developers, and organisations implementing Scout applications.
+In the text below we will explain Scout from the perspective of these three roles.
+
+% ........................................................................... %
+\subsection{End User Perspective}
+
+End users of enterprise applications typically care about friendly user interfaces (UI) and well desinged functionality that support them in doing their job.
+Depending on the role and the current context of an end users, either mobile, web or desktop clients work best.
+In the text below, we use a real world enterprise application to highlight how Scout applications can provide user friendly UIs on the desktop, in the browser and on mobile phones.
+
+\begin{figure}
+\includegraphics[width=14cm]{bsi_crm_desktop.png}
+\caption{The desktop client of a Scout enterprise application.}
+\figlabel{bsi_crm_desktop}
+\end{figure}
+
+If the user is working from a desk and frequently engaged in customer calls, good integration with locally installed sofware such as Lotus Notes or Microsoft Office products can significantly boost productivity.
+So far, such a scenario still requires a desktop client application.
+An example screenshot of a Scout desktop client application from a customer relationship management (CRM) solution is provided in \figref{bsi_crm_desktop}.
+The screenshot provides a good overview of the general layout of the application.
+On the left side a tree for simple navigation through the available entities, such as companies, persons and communications is provided.
+Once an entity is selected, a click on the magnifying glass opens a search form on the right hand side.
+In this search form a number of search fields is provided.
+After entering ''eclipse'' into the company search field -- and clicking the search button at the bottom of the search form -- the list of matching entries is presented to the user.
+With a right mouse click on the desired row, the corresponding company dialog can be opened for editing.
+
+\begin{figure}
+\includegraphics[width=14cm]{bsi_crm_web.png}
+\caption{A Scout enterprise application running in a web browser.}
+\figlabel{bsi_crm_web}
+\end{figure}
+
+When a user needs to work from a computer that does not have a desktop client installed (or lacks the time or the necessary permission to install software) the natural choice is to work with a web application.
+As Scout offers multi-frontend capabilities out of the box, a web frontend can easily be provided for Scout business applications.
+The primary benefits of Scout web applications for end users are a consistent look and feel and behaviour for both the web client and the desktop client.
+In \figref{bsi_crm_web} a screenshot of the web client of the CRM Scout application is shown.
+
+\begin{figure}
+\includegraphics[width=7cm]{bsi_crm_mobile_galaxy.png}
+\caption{The same Scout enterprise application running on a mobile device.}
+\figlabel{bsi_crm_mobile}
+\end{figure}
+
+Often, user find themselves in meetins or on the move where it is not possible to work with desktop or laptop computers.
+In such situations, accessing applications via tablets or mobile phones is the only meaningful approach.
+As shown in \figref{bsi_crm_mobile}, a screenshot of the familiar CRM application is provided.
+The user still benefits from the familiar look and feel and the known functionality of the application.
+
+In contrast to desktop and web applications, most tablets and mobile phones are controlled using touch features instead of mouse clicks.
+In addition, less elements may be presented on a single screen compared to desktop devices.
+These two aspects makes it impractical to directly reuse the desktop user interface on mobile devices.
+Using the Scout mobile extension, the user interface of Scout applications can be transformed on the fly to adapt to touch control and the smaller form factor of mobile devices.
+This transformation can be observed when comparing the company table shown in the background of \figref{bsi_crm_desktop} with the company list presented in \figref{bsi_crm_mobile}.
+The multi-column table of the desktop client has been transformed into a list providing the content of the first few table columns on separate rows.
+In addition, the context menu ''New company'' is now provided as a touch button.
+As the navigation in the application and the offered choices remain the same for Scout desktop and mobile applications, the end user feels immediately comfortable working with Scout mobile applications.
+
+% ........................................................................... %
+\subsection{Developer Perspective}
+
+From the perspective of application developers, Scout offers a Java based framework that covers the complete client server architecture. 
+This implies that -- once familiar with the Scout framework -- the developer can concentrate on a single framework laguage (Java) and a single set of development tools. 
+
+As Scout is completely based on Java and Eclipse, Scout developoers can take full advantage of existing knowledge and experience in these domains. 
+And to make learning Scout as simple as possible, Scout includes a comprehensive software development kit (SDK), the Scout SDK.
+The Scout SDK helps to create a robust initial project setup for client server applications and includes a large set of wizards for repetitive and error prone tasks.
+
+On the client-side Scout's flexible client model allows the developer to create a good user experience without having to care about specific UI technologies. 
+The reason for this can be found in Scout's client architecture that cleanly separates the UI model from the UI technology.
+In Scout (almost) every UI component is implemented four times. 
+Most central of any UI compoment implementations is the UI model component. 
+Then, three rendering components for each UI technology supported by Scout. 
+For desktop clients these are the Swing and the SWT technologies, and for the web and mobile support this is Eclipse RAP which in turn takes care of the necessary JavaScript parts.  
+
+Not having to worry about Swing, SWT or JavaScript can significantly boost the productivity.
+With one exception. 
+If a specific UI widget is missing for the user story to be implemented, the Scout developer first needs to implement such a widget. 
+Initially, this task is slightly more complex than not working with Scout. 
+For custom widgets the Scout developer needs to implement both a model component and a rendering component for a specific UI technology. 
+But as soon as the client application needs to be available on more than a single frontend, the investment alreday pays off.
+The developer already did implement the model component and only needs to provide an additional rendering component for the new UI technology.
+
+In most situations the large set of Scouts UI components provided out-of-the box are sufficient and user friendly applications are straight forward to implement. 
+Even if the application needs to run on different target devices simultaneously.
+
+XXX On the server side bla.
+
+Finally, Scout is an open source framework hosted at the Eclipse foundation. 
+This provides a number of interesting options to developers that are not available for closed source frameworks. 
+First of all, it is simple to get all the source code of Scout and the underlying Eclipse platform. 
+This allows for complete debugging of all problems and errors found in Scout applications. 
+Starting from the application code, including the Scout framework, Eclipse and down to the Java platform. 
+
+Scout developer can also profit from an increasing amount of free and publicly available documentation, such as this book or the Scout Wiki pages. 
+And problems with Scout or questions that are not clearly addressed by existing documentation can be discussed in the Scout forum. 
+The forum is also a great place for Scout developers to help out in tricky situation and learn from others. 
+Ideally, answered questions lead to improved or additional documentation in the Scout Wiki.
+
+At times, framework bugs can be identified from questions asked in the forum. 
+As all other enhancement requests and issues, such bugs can be reported in Bugzilla by the Scout developer. 
+Using Bugzilla, Scout developers can also contribute bug analysis and patch proposals to solve the reported issue.
+With this process, Scout developers can actively contribute to the code base of Eclipse Scout.
+This has the advantage, that workarounds in existing Scout applications can be removed when an upgrade of the Scout framework is made.
+
+Having provided a significant number of high quality patches and a meaningful involvement in the Scout community, the Scout project can nominate a Scout developer as a new Scout committer. 
+Fundamentally, such a nomination is based on the trust of Scout committers in the candidate. 
+To quote the official guidelines\footnote{
+Nominating and electing a new Eclipse Scout committer: \url{http://wiki.eclipse.org/Development_Resources/HOWTO/Nominating_and_Electing_a_New_Committer#Guidelines_for_Nominating_and_Electing_a_New_Committer}.
+} 
+for nominating and electing a new committer:
+
+\begin{quotation}
+A Committer gains voting rights allowing them to affect the future of the Project. 
+Becoming a Committer is a privilege that is earned by contributing and showing discipline and good judgment. 
+It is a responsibility that should be neither given nor taken lightly, nor is it a right based on employment by an Eclipse Member company or any company employing existing committers.
+\end{quotation}
+
+\noindent After a successful election process (existing committers voting for and not against the candidate) the Scout developer effectively becomes a Scout committer. 
+With this new status, the Scout developer then gets write access to the Eclipse Scout repositories and gains voting rights and the possiblity to shape the future of Scout. 
+
+% ........................................................................... %
+\subsection{Management Perspective}
+
+multi-frontend support:
+java/eclipse based: profit from large pool of java developers, low trainnig costs to get to know scout, ramping up new developers is easy
+open source: community backup, no vendor lock-in, 
+scout hosted at eclipse foundation keeps down risks 
+Completely based on Java/Eclipse, Scout Applications are easy to integrate in most IT environments.
+
+Scout excels for implementing enterprise applications.
+Specifically if they have to provide a good user experience, need to integrate well with existing infrastructure, and have to be cost effective during implementation and maintenance.
+
+This section conentrates on the user experience and the integration with existing infrastructure.
+How scout helps to drive down cost and risks is discussed in section \secref{why_scout}.
+
+scout apps in the enterprise:
+
+\begin{figure}
+\includediagram{14cm}{scout_with_other_apps}
+\caption{An enterprise application landscape including a Scout application.}
+\figlabel{scout_with_other_apps}
+\end{figure}
+
+enterprise applications
+
+\begin{figure}
+\includediagram{14cm}{scout_integration}
+\caption{The integration of a Scout application in a typical enterprise setup.}
+\figlabel{scout_integration}
+\end{figure}
+
+
+
 
 \noindent Existing Documentation
 \begin{itemize}
@@ -38,20 +185,9 @@
   \item concept wiki \url{http://wiki.eclipse.org/Scout/Overview/Why_You_Should_Use_Scout}
 \end{itemize}
 
-Eclipse Scout is a mature and open framework for modern, 
-service oriented business applications.
-
-With its multi-frontend support, Scout applications may run as desktop 
-applications, in the web or on a mobile using a single codebase.
-
-User friendly applications are straight forward to implement with Scout’s 
-comprehensive set of user interface components.
-
-Completely based on Java/Eclipse, Scout Applications are easy to integrate 
-in most IT environments.
-
 % --------------------------------------------------------------------------- %
 \section{Why should I choose Scout?}
+\seclabel{why_scout}
 
 Protect your investment
 \begin{itemize}
@@ -59,6 +195,8 @@ Protect your investment
   \item Scout is based on Java and the Eclipse platform
   \item Scout is an open source project hosted at the Eclise foundation
   \item Scout has an active and growing community
+  \item Scout is moving with the best available technolgies.
+
 \end{itemize}
 
 Lower your cost for inhouse applications (Money)
@@ -66,13 +204,6 @@ Lower your cost for inhouse applications (Money)
   \item Increase your development productivity with Scout
   \item Take advantage of low maintenance costs for Scout applications
   \item Leverage existing experienc in Java
-\end{itemize}
-
-Get up to speed in days (5' clock)
-\begin{itemize}
-  \item Any Java developer quickly learns Scout
-  \item The Scout SDK provides great tooling
-  \item The Scout tutorials provide step-by-step guidance
 \end{itemize}
 
 Run your app on any device (desktop, tablet, mobile phone)
@@ -83,6 +214,14 @@ Run your app on any device (desktop, tablet, mobile phone)
   \item For desktop apps, choose SWT or Swing
   \item For browser or mobile apps, choose RAP
 \end{itemize}
+
+Get up to speed in days (5' clock)
+\begin{itemize}
+  \item Any Java developer quickly learns Scout
+  \item The Scout SDK provides great tooling
+  \item The Scout tutorials provide step-by-step guidance
+\end{itemize}
+
 
 % --------------------------------------------------------------------------- %
 \section{Is Scout production ready?} 

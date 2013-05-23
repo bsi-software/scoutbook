@@ -37,6 +37,7 @@ makefile
 *.tmp
 *.xref
 *.zip
+*~
 
 # might be needed in the future?
 *.html
