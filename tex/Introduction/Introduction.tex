@@ -79,6 +79,74 @@ In addition, the context menu ''New company'' is now provided as a touch button.
 As the navigation in the application and the offered choices remain the same for Scout desktop and mobile applications, the end user feels immediately comfortable working with Scout mobile applications.
 
 % ........................................................................... %
+\subsection{Management Perspective}
+
+For the management, Scout is best explained in terms of benefits it brings to the organisation in question. 
+This is why we are going to concentrate on a (typical) application migration scenario here. 
+Let us assume that to support the company's business, a fairly large landscape of multi-tier applications has to be maintained and developed. 
+Including host systems, client server applications including desktop clients, as well as newer web based applications. 
+
+\begin{figure}
+\includediagram{14cm}{scout_with_other_apps}
+\caption{A typical application landscape including a service bus and a Scout application.}
+\figlabel{scout_with_other_apps}
+\end{figure}
+
+Usually, these applications interact with each other through a service bus as shown in \figref{scout_with_other_apps}. 
+Often, some of the applications that are vital to the organisation's core business have grown historically and are based on legacy technologies. 
+And for technologies that are no longer under active development it can get difficult to find staff having the necessary expertise or motivation. 
+Sometimes, the organisation is no longer willing to accept the costs and technology risks of such mission critical applications. 
+
+\begin{figure}
+\includediagram{14cm}{scout_integration}
+\caption{The integration of a Scout application in a typical enterprise setup.}
+\figlabel{scout_integration}
+\end{figure}
+
+In this situation, the company needs to evaluate if it should buy a new standard product or if the old application has to be migrated to a new technology stack. 
+Now let us assume, that available products do not fit the companys requriements well enough and we have to settle for the migration scenario.
+In the target architecture, a clean layering similar to the one shown in \figref{scout_integration} is often desirable.
+
+While a number of modern and established technologies exist that address the backend side (data bases, data access and business services), the situation is different for the UI layer and the application layer. 
+The number of frameworks to develop web applications with Java is exessively large\footnote{
+Web application framework comparison: \url{http://en.wikipedia.org/wiki/Comparison_of_web_application_frameworks#Java}.
+},
+but the choice between desktop application technologies in the Java domain is restricted to three options only. 
+Swing, SWT and JavaFX.
+Both Eclipse SWT and Java Swing are mature and well established but Swing is moving into 'maintenance only' mode and will be replaced by JavaFX.
+However, the maturity of the new JavaFX technology in large complex enterprise applicataions is not yet established. 
+Obviously, deciding for the right UI technology is a challange and needs to be made very carefully. 
+Reverting this decision late in a project or after going into production can get very expensive and time consuming. 
+
+Once the organisation has decided for a specific UI technology, additional components and frameworks need to be evaluated to cover client server communication, requirements for the application layer, and integration into the existing application landscape. 
+To avoid drowning in the integration effort for all the elements necessary to cover the UI and the application layer a 'lightweight' framework is frequently developed. 
+When available, this framework initially leads to desirable gains in productivity. 
+Unfortunately, such frameworks often become legacy by themselves. 
+Setting up a dedicated team to actively maintain the framework and adapt to new technologies can reduce this risk. 
+But then again, such a strategy is expensive and developing business application frameworks is usually not the core business of a company. 
+
+Can we do better? 
+To implement a business application that covers the UI and the application layer as shown in \figref{scout_integration}, Eclipse Scout substantially reduces both risk and costs compared to the inhouse development presented above.
+First or all, Scout is completely based on Java and Eclipse. 
+Chances are, that developers are already familiar with some of these technologies.
+This helps in getting developers up to speed and keeping training costs low. 
+
+On the UI side, Scout's multi-frontend support almost allows to skip the decision for a specific UI technology. 
+Should a particular web framework become the de-facto standard in the next years, it will be the responsibility of the Scout framework to provide the necessary support. 
+Existing Scout applications can then switch to this new technology with only minimal effort. 
+This is possible because the Scout developers are designing and building the UI of an application using Scout's client model.
+And this client model is not linked to any specific UI technology. 
+Rather, specific UI renderers provided by the Scout framework are responsible to draw the UI at runtime. 
+
+As Scout is an open source project, no licence fees are collected. 
+Taking advantage of the growing popularity of Scout, free community support is available via a dedicated forum. 
+At the same time, professional support is available if the organisation decides for it.
+
+As the migration of aging applications to current technology is always a challange, it surely helps to have Scout in the technology portfolio. 
+Not only is it a low risk choice, but also boosts developer productivity and helps to motivate the development team. 
+Additional reasons on why Scout helps to drive down cost and risks are discussed in \secref{why_scout}.
+
+% ........................................................................... %
 \subsection{Developer Perspective}
 
 From the perspective of application developers, Scout offers a Java based framework that covers the complete client server architecture. 
@@ -91,8 +159,7 @@ The Scout SDK helps to create a robust initial project setup for client server a
 On the client-side Scout's flexible client model allows the developer to create a good user experience without having to care about specific UI technologies. 
 The reason for this can be found in Scout's client architecture that cleanly separates the UI model from the UI technology.
 In Scout (almost) every UI component is implemented four times. 
-Most central of any UI compoment implementations is the UI model component. 
-Then, three rendering components for each UI technology supported by Scout. 
+First the implementation of the UI model component and then, three rendering components for each UI technology supported by Scout. 
 For desktop clients these are the Swing and the SWT technologies, and for the web and mobile support this is Eclipse RAP which in turn takes care of the necessary JavaScript parts.  
 
 Not having to worry about Swing, SWT or JavaScript can significantly boost the productivity.
@@ -102,11 +169,23 @@ Initially, this task is slightly more complex than not working with Scout.
 For custom widgets the Scout developer needs to implement both a model component and a rendering component for a specific UI technology. 
 But as soon as the client application needs to be available on more than a single frontend, the investment alreday pays off.
 The developer already did implement the model component and only needs to provide an additional rendering component for the new UI technology.
-
 In most situations the large set of Scouts UI components provided out-of-the box are sufficient and user friendly applications are straight forward to implement. 
 Even if the application needs to run on different target devices simultaneously.
 
-XXX On the server side bla.
+Client-server communication is an additional aspect where the developers is supported by Scout.
+Calling remote services in the client application that are provided by the Scout server looks identical to the invocation of local services. 
+The complete communication including the transfer of parameter objects is handled fully transparent by the Scout framework.
+In addition, the Scout SDK can completely manage the necessary transfer objects to fetch data from the Scout server that is to be shown in dialog forms on the Scout client.
+The binding of the transferred data to the form fields is done by the framework.
+
+Although the Scout SDK wizards can generate a significant amount of code, there is no one-way code generation and no meta data in a Scout application.
+Just the Java code\footnote{
+With the exception of the \filename{plugin.xml} and \filename{MANIFEST.MF} files required for Eclipse plugins.
+}. 
+Developers preferring to write the necessary code manually, may do so. 
+The Scout SDK parses the application's Java code in the background to present the updated Scout application model to the developers preferring to work with the Scout SDK. 
+
+TODO What should we focus on the server side? transaction handling, services, ...? 
 
 Finally, Scout is an open source framework hosted at the Eclipse foundation. 
 This provides a number of interesting options to developers that are not available for closed source frameworks. 
@@ -133,57 +212,15 @@ Nominating and electing a new Eclipse Scout committer: \url{http://wiki.eclipse.
 for nominating and electing a new committer:
 
 \begin{quotation}
+\begin{em}
 A Committer gains voting rights allowing them to affect the future of the Project. 
 Becoming a Committer is a privilege that is earned by contributing and showing discipline and good judgment. 
 It is a responsibility that should be neither given nor taken lightly, nor is it a right based on employment by an Eclipse Member company or any company employing existing committers.
+\end{em}
 \end{quotation}
 
 \noindent After a successful election process (existing committers voting for and not against the candidate) the Scout developer effectively becomes a Scout committer. 
 With this new status, the Scout developer then gets write access to the Eclipse Scout repositories and gains voting rights and the possiblity to shape the future of Scout. 
-
-% ........................................................................... %
-\subsection{Management Perspective}
-
-multi-frontend support:
-java/eclipse based: profit from large pool of java developers, low trainnig costs to get to know scout, ramping up new developers is easy
-open source: community backup, no vendor lock-in, 
-scout hosted at eclipse foundation keeps down risks 
-Completely based on Java/Eclipse, Scout Applications are easy to integrate in most IT environments.
-
-Scout excels for implementing enterprise applications.
-Specifically if they have to provide a good user experience, need to integrate well with existing infrastructure, and have to be cost effective during implementation and maintenance.
-
-This section conentrates on the user experience and the integration with existing infrastructure.
-How scout helps to drive down cost and risks is discussed in section \secref{why_scout}.
-
-scout apps in the enterprise:
-
-\begin{figure}
-\includediagram{14cm}{scout_with_other_apps}
-\caption{An enterprise application landscape including a Scout application.}
-\figlabel{scout_with_other_apps}
-\end{figure}
-
-enterprise applications
-
-\begin{figure}
-\includediagram{14cm}{scout_integration}
-\caption{The integration of a Scout application in a typical enterprise setup.}
-\figlabel{scout_integration}
-\end{figure}
-
-
-
-
-\noindent Existing Documentation
-\begin{itemize}
-  \item concept wiki \url{http://wiki.eclipse.org/Scout/Overview}
-\end{itemize}
-
-\noindent Existing Documentation
-\begin{itemize}
-  \item concept wiki \url{http://wiki.eclipse.org/Scout/Overview/Why_You_Should_Use_Scout}
-\end{itemize}
 
 % --------------------------------------------------------------------------- %
 \section{Why should I choose Scout?}
@@ -312,9 +349,10 @@ The list below suggests a sequence of sections to digest including a brief motiv
   \item \prtref{getting_started} ``Getting Started'' 
       Provides you with the big picture. Skip the larger example in \charef{large_example}
   \item \charef{client_overview} ``Overview'' and \charef{client_modeling} ``Client Modeling''
-      Get familiar with the Scout frontend architecture and client modeling makes Scout applications independent of any particular user interface technology
+      Get familiar with the Scout frontend architecture. 
+	  The client modeling makes Scout applications independent of any particular UI technology
   \item \charef{fields} ``Form Fields'' and \charef{custom_fields} ``Custom Fields''
-      Browse through the screensthos in \charef{fields} to get an impression over the form fields that are available out of the box. 
+      Browse through the screenshots in \charef{fields} to get an impression over the form fields that are available out of the box. 
 	  Look at the diagrams in \charef{custom_fields} to get an idea of how to extend the Scout framework with missing field types.
   \charef{server_overview} ``Overview'', \charef{services} Scout server
   % \item read overview and transaction management in backend
