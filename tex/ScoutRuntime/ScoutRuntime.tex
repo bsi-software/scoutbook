@@ -16,31 +16,37 @@
 \chapter{Scout Runtime}
 \chalabel{runtime}
 
+One of the primary goals of the Scout runtime framework is to let the application developer focus on implementing business requirements. 
+To support this goal, Scout covers most recurring aspects of business applications from the user interface to the integration of backend services. 
+To clearly state the boundary of the scope of the framework, the integration of Scout application in a typical enterprise setup is discussed in the following section.
+
+\secref{application_architecture} describes the architecture of typical Scout applications including both the server and clients. 
+
+
 % --------------------------------------------------------------------------- %
 \section{Enterprise Integration}
-needs text
-
-\begin{figure}
-\includediagram{14cm}{scout_with_other_apps}
-\caption{An enterprise application landscape including a Scout application.}
-\figlabel{scout_with_other_apps}
-\end{figure}
 
 \begin{figure}
 \includediagram{14cm}{scout_integration}
-\caption{The integration of a Scout application in a typical enterprise setup.}
-\figlabel{scout_integration}
+\caption{The recommended usage of the Scout framework for enterprise applications.}
+\figlabel{scout_integration_enterprise}
 \end{figure}
 
+The scope of the Scout framework is best explained in the context of an enterprise setup as shown in \figref{scout_integration_enterprise}. 
+From
+
+not persistence, not business entity modeling, not ?
+but user interaction handling, business rules, accessing existing services offered through enterprise service bus, transparent client server communication
+
 % --------------------------------------------------------------------------- %
-\section{The Scout Application Architecture}
+\section{Application Architecture}
+\seclabel{application_architecture}
 needs text
 
 \noindent Existing Documentation
 \begin{itemize}
   \item wiki \url{http://wiki.eclipse.org/Scout/Concepts}
 \end{itemize}
-
 
 \begin{figure}
 \includediagram{14cm}{scout_app_architecture_desktop}
@@ -49,20 +55,45 @@ On the left side, a Scout desktop client is depicted.}
 \figlabel{scout_app_architecture_desktop}
 \end{figure}
 
+Architecture including desktop clients.
+
 \begin{figure}
 \includediagram{14cm}{scout_app_architecture_web}
 \caption{A typical Scout client server setup including web and mobile clients.}
 \figlabel{scout_app_architecture_web}
 \end{figure}
 
+Architecture when wordking with Ajax server for web applications
 
-\subsection{The Scout Client}
+% --------------------------------------------------------------------------- %
+\section{Multi-Frontend Support}
+
+two important aspects: 1) same app running on many devices 2) effective risk reduction strategy: no mixing of business logic an ui tech code, deciding for the 'wrong' framwork not so bad any more
+
+% --------------------------------------------------------------------------- %
+\section{The Scout Client}
 needs text
 
-\subsection{The Scout Server}
-needs text
+ large collection of mature UI components.
+ Scout supports various UI technologies out of the box. 
+ Depending on your needs, you decide to build applications for
+mobile devices, the browser or the desktop. Mobile and
+web applications are based on Eclipse RAP. Desktop clients
+are based on either Swing or SWT.
 
-\subsection{Client Server Communication}
+internationalization, link to packaging with client, shared, ui tech, framwork + other bundles. 
+
+% --------------------------------------------------------------------------- %
+\section{The Scout Server}
+
+For seamless integration into a service-oriented IT architecture, Scout offers direct support for Web services based on
+JAX-WS. To access relational databases other than Apache
+Derby, connectors are also available for non-EPL compatible databases such as Oracle, MySql, PostgreSQL or DB2
+
+link to packaging with server, shared, framwork + other bundles
+
+% --------------------------------------------------------------------------- %
+\section{Client Server Communication}
 needs text
 
 service tunnel
@@ -74,11 +105,6 @@ service tunnel
 \end{itemize}
 
 same pointer in onedaytutorial and server
-
-% --------------------------------------------------------------------------- %
-\section{Multi-Frontend Support}
-needs text
-
 
 
 \ifx\wholebook\relax\else
