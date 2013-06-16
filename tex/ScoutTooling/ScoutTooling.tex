@@ -17,7 +17,7 @@
 
 In addition to the Scout runtime framework presented in the previous chapter, Eclipse Scout also includes a comprehensive tooling, the Scout SDK. 
 Thanks to this tooling, developing Scout applications is made simpler, more productive and also more robust. 
-Initially, a solid understanding of the Java language is sufficient to start developing Scout applications and only a rough understanding of the underlying Eclipse/OSGi/J2EE technologies is required. 
+Initially, a solid understanding of the Java language is sufficient to start developing Scout applications and only a rough understanding of the underlying Eclipse/OSGi/JEE technologies is required. 
 
 The Scout SDK consists of navigation support for the application model defined by the Scout runtime and provides many intuitive component wizards. 
 This creates an ideal environment to beginners for building complete, high-quality Scout applications. 
@@ -32,50 +32,212 @@ Finally, the application code created by the Scout SDK wizards helps to ensure t
 % --------------------------------------------------------------------------- %
 \section{The Scout SDK}
 
-The Scout SDK contains the Scout Explorer, the Scout Objects Properties view, and a wide range of wizards. The
-user navigates through the application model in the Scout
-Explorer. The Scout Objects Properties view provides direct access to the available Scout properties for the selected element in the Scout Explorer. 
-The wizards support the creation of application components, such as dialogues
-on the client side or services on the server side by generating the necessary Java code.
+The Scout SDK is added to the Eclipse IDE in the form of the Scout perspective\footnote{
+See \appref{eclipse_perspective} for additional information regarding Eclipse IDE perspectives. 
+}.
+With the Scout Explorer and Scout Objects Properties, two view parts are contained in the Scout perspective. 
+Additionally, the Scout SDK contains a comprehensive set of wizards that support the developer in creating Scout application components. 
 
-The Scout SDK provides round-trip-engineering for the application model and the Java source files. Each developer
-in a team is free to decide individually whether to work in the Scout perspective, the Java perspective or to switch
-back and forth between the two.
+The Scout Explorer view allows the developer to navigate the complete Scout application model. 
+Once an element in the Scout Explorer is selected, the Scout Object properties view allows to view and change selected properties of the selected element. 
+Depending on the selected element in the Scout Explorer, the Scout SDK offers appropriate context menues to start the related wizards.
 
-\noindent Existing Documentation
-\begin{itemize}
-  \item concept wiki \url{http://wiki.eclipse.org/Scout/SDK}
-\end{itemize}
+\begin{figure}
+\includegraphics[width=14cm]{scout_sdk_perspective.png} 
+\caption{The Scout SDK perspective. On the left hand side the Eclipse Scout Explorer and the Scout Object Properties view are visible.}
+\figlabel{scout_sdk_perspective}
+\end{figure}
 
-% --------------------------------------------------------------------------- %
-\section{The Scout Perspective}
-needs text
+\figref{scout_sdk_perspective} provides a screenshot of the Scout SDK perspective. 
+In the Eclipse Scout Explorer shown in the upper left part of the screenshot, the message field in the desktop form of the ''Hello World'' application is selected. 
+In the Scout Object Properties located below, the message field's appearance, layout and behaviour properties are displayed. 
+On the right side, the corresponding source code is loaded in a Java editor. 
 
-\noindent Existing Documentation
-\begin{itemize}
-  \item concept wiki \url{http://wiki.eclipse.org/Scout/SDK/Perspective}
-\end{itemize}
+When the developer changes a property of the selected element, the Java code is updated accordingly. 
+For example, clicking the \property{Mandatory} in the Scout Object Properties of the message field will insert the method \java{getConfiguredLabel} to the message field's class. 
+This demonstrates how the Scout SDK directly works on the Java source code. 
+In fact, the Java source code is the only artefact relevant for the Scout SDK to 'understand' the Scout application model. 
+Taking advantage of this setup, the Scout SDK implements a full round-trip-engineering from creating the Java code for Scout application components, parsing code changes in the background, and displaying the current implementation of the Scout application in the Scout Explorer and the Scout Object Properties.
 
-\subsection{Other Userful IDE Perspectives}
-needs text
+Thanks to the round-trip-engineering provided by the Scout SDK, the information presented in the Scout Explorer and the Scout Object Properties always stay in sync with the Java code of the Scout application.
+To illustrate this, we will re-use the ''Hello World'' Scout project from \charef{helloworld}. 
+Start the Eclipse IDE with the workspace containing the ''Hello World'' application.
+Then, navigate to method \java{getConfiguredLabel} as shown in \figref{scout_sdk_perspective}, and add the java snippet shown below to the class \java{MessageField}. 
 
-- java perspective
-- debug perspective
+\begin{lstlisting}[backgroundcolor=\color{white}]
+    @Override
+    protected boolean getConfiguredMandatory() {
+        return true;
+    }
+\end{lstlisting}
 
-links to java ide stuff
+After having saved the code change, you can observe that the \property{Mandatory} in the section Behaviour of the message field's Scout Object properties has changed its state. 
+The font of its label is now presented in bold face and underlined, the checkbox is ticked and a red minus icon is shown on the right side of the property. 
+Obviously, the Scout SDK is directly operating on the project's source code and does not rely or need any external meta data. 
+This provides the flexibility to develop Scout applications with or without the support of the Scout SDK. 
+And this choice offered to the Scout developer is one of the most important features provided by the Scout SDK. 
+The Scout developer may take advantage of the development support provided by the Scout SDK without being restricted by the Scout tooling in any way.
+
+Technically, the Scout SDK is a set of Eclipse plugins that operate on top of the Eclipse JDT and the Eclipse PDE projects.
+The Java Development Tools (JDT)\footnote{
+See the Eclipse JDT project page for details: \url{http://www.eclipse.org/jdt/}.
+} 
+contain a Java IDE supporting the development of any Java application, 
+and the Plugin Development Environment (PDE)\footnote{
+See the Eclipse PDE project page for details: \url{http://www.eclipse.org/pde/}.
+}
+provides tools to create, develop, test, debug, build and deploy Eclipse plugins, and additional artefacts relevant for Eclipse based applications. 
+As in the case of the Scout Runtime, the plugins representing the Scout SDK, the JDT and the PDE are all located in the \filename{plugins} directory your Eclipse installation and named \filename{org.eclipse.scout.sdk.*}, \filename{org.eclipse.jdt.*} and \filename{org.eclipse.pde.*} . 
 
 % --------------------------------------------------------------------------- %
 \section{The Scout Explorer}
-needs text
 
-\noindent Existing Documentation
-\begin{itemize}
-  \item concept wiki: \url{http://wiki.eclipse.org/Scout/SDK/Explorer_View}
-\end{itemize}
+The Scout Explorer view is responsible for the navigation support within the Scout application model. 
+This navigation support is presented in the form of a tree view and includes the client with its UI components, the server and the shared part of a Scout application. 
+It also includes all Scout application modules of modular Scout applications\footnote{
+See \secref{multi_module_apps} for more information regarding multi module Scout applications.
+}.
+For the actual navigation in the tree representing the Scout application both the mouse or the keyborad can be used. 
+
+To expand or collapse a selected node in the Scout Explorer, you may click on the tiny \icon{plus} or the \icon{minus} presented to the left of the node.
+Alternatively, you can also use the \key{Right} or the \key{Left}.
+
+Once a node in the tree is selected, the Scout Object Properties view presents the associated configuration of the selected element. 
+If the selected element represents a specific application model component, the corresponding Java source code can be accessed through a double click on the node, or hitting the \key{Enter}. 
+
+The navigation tree provided in the Scout Explorer view also allows the developer to add elements to your application.
+Depending on the selected node in the tree, the Scout SDK allows to start the applicable Scout wizards using corresponding context menus. 
+The wizards support the creation of application components, such as dialogues on the client side or services on the server side by generating the necessary Java code.
+
+\begin{figure}
+\includegraphics[width=6.5cm]{explorer_client.png} 
+\caption{The Scout Explorer view. The white nodes below the expanded client node represent the supported UI technologies.}
+\figlabel{explorer_client}
+\end{figure}
+
+In \figref{explorer_client} the top level organisation of the client application model is shown as it is represented in the Scout Explorer.
+All client specific elements are located under the selected orange client node \element{org.eclipsescout.helloworld.client}. 
+Right below, the three white UI plugins are located that represent the support for the corresponding UI technolgies for Swing, SWT and Eclipse RAP. 
+The orange \node{org.eclipsescout.helloworld.client.mobile} contains all elements that are specific to mobile devices such as the \java{MobileHomeForm}
+
+Specific nodes for the client session and the desktop of the Scout client allow access to the corresponding Scout application model components. 
+While the client session is the main entry point for client-server communication, the desktop represents the root component of the visible part of a Scout client applications. 
+Below, a set of folders group additional client model components according to their type. 
+The forms folder for example holds all available forms, such as the desktop form that we have seen in the ''Hello World!'' tutorial\footnote{
+See \secref{initial_helloworld} for a description of many of these elements.
+}. 
+
+\begin{figure}
+\includegraphics[width=7cm]{explorer_shared.png} 
+\caption{The Scout Explorer view with the expanded shared node.}
+\figlabel{explorer_shared}
+\end{figure}
+
+A screenshot of the expanded green shared node \element{org.eclipsescout.helloworld.} is provided in \figref{explorer_shared}. 
+As the name ''shared'' suggests, the corresponding plugin holds all application components that are required for both the Scout client and the Scout server application. 
+This includes texts, icons, enumeration or codes, permissions, lookup calls. 
+As shown in \figref{explorer_shared}, a separate folder for each resource type is provided under the shared node.
+ 
+\begin{figure}
+\includegraphics[height=6.8cm]{explorer_server.png} \hspace{5mm} 
+\includegraphics[height=6.8cm]{explorer_server_servicewizard.png}
+\caption{The Scout Explorer view with the expanded server node (left). On the individual nodes, access to the relevant Scout wizards is provided via context menues (right).}
+\figlabel{explorer_server}
+\end{figure}
+
+In \figref{explorer_server}, the blue server node is expanded in the Scout Explorer view. 
+As the primary responsibility of the Scout server application is dealing with requests, its components are mostly related to different types of services. 
+Below the server session node, the \folder{Services} holds services related to the processing logic of the application such as retrieving and updating data. 
+The remaining folder group differnt more specific types of server services. 
+Under the \folder{Webservices} the Scout SDK support to provide and consume web services is located. 
+
+The right side of \figref{explorer_server} illustrates the access to the Scout SDK wizards via corresponding context menus. 
+The \menu{New Service...} shown in the screenshot will start the wizard to add a new Scout server service. 
+ 
+The different colored tree nodes discussed above are all represented by their individual Eclipse plugins. 
+This includes the orange client node, the white UI nodes, the orange mobile client node, the green shared node and the blue server node. 
+A Scout Swing client for example contains the plugins \element{org.eclipsescout.helloworld.client}, \element{org.eclipsescout.helloworld.shared} and \element{org.eclipsescout.helloworld.client.ui.swing} but not the other UI technology plugins. 
+The Scout server contains the \element{org.eclipsescout.helloworld.server} plugin and the \element{org.eclipsescout.helloworld.shared} plugin. 
 
 % --------------------------------------------------------------------------- %
-\section{Scout Object Properties}
-needs text
+\section{The Scout Object Properties}
+
+The Scout Object Properties view provides direct access to configurable properties and operations for the element selected in the Scout Explorer.
+Before we discuss the typical layout of an object property view we describe the special case of the property view for a complete Scout application. 
+This property view is displayed when the application's top level node is selected in the Scout Explorer as shown in \figref{sdk_initial_helloworld_project}. 
+
+\begin{figure}
+\includegraphics[width=7cm]{properties_technologies.png}
+\caption{The Scout Object Properties showing the expanded Technologies section.}
+\figlabel{properties_technologies}
+\end{figure}
+
+The main elements of the top-level application proprties are the sections \element{Product Launchers} and the \element{Technologies}. 
+As the product launcher section with its launcher boxes has alredy been covered in \secref{run_initial} and \secref{run_initial_background} we focus on the technologies section here.
+The technologies section allows to add Scout runtime features and functionalities to the Scout application or remove such elements from the application. 
+
+When the selection of a technology checkbox is changed, a message box is shown to the user. 
+This box lists all project resources that are changed when the user confirms the action. 
+Once the dialog is confirmed, the selected resources are modified by the Scout SDK to add or remove the feature. 
+
+For features containing licences not compatible to the Eclipse Public Licence (EPL) or features in incubation status, the necessary artefacts is not provided as part of the Eclipse Scout installation package. 
+Instead, the associated artefacts need to be installed from a remote updated site first. 
+Before any non-EPL content is downloaded from the internet, the user needs to review and confirm the associated licence. 
+For this, a license confirmation dialog is shown upfront. 
+After confirmation, the required files are downloaded and automatically installed in the local Eclipse instance of the developer. 
+Usually, the Eclipse IDE needs to restart after a feature is downloaded and installed for the first time. 
+Currently, the procedure described above is used for the following technolgies. 
+
+\begin{itemize}
+  \item MySQL JDBC Driver for Eclipse Scout
+  \item Oracle 11g2 JDBC Driver for Eclipse Scout
+  \item PostgresSQL 9 JDBC Driver for Eclipse Scout
+  \item Docx4j Support
+  \item Rayo Swing Look and Feel for Eclipse Scout
+  \item RAP FileChooser Support (Incubation)
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=7cm]{properties_form.png} \hspace{5mm}
+\includegraphics[width=7cm]{properties_stringfield.png}
+\caption{The Scout Object Properties for a complete form (left) and a string form field (right).}
+\figlabel{properties_technologies}
+\end{figure}
+
+For the description of the Scout Object Properties of typical Scout components we use the examples provided in \figref{properties_technologies}. 
+Both example screens of the Scout Object Properties for the desktop form and the message field are take from the ''Hello World!'' application described in \charef{helloworld}. 
+As in the case of the top-level node representing the complete Scout application, the typical layout of the Scout Object Properties view is divided into several sections. 
+The content and ordering of the list of property sections always follows the same scheme.
+
+\begin{itemize}
+  \item Links
+  \item Properties
+  \item Operations
+  \item Advanced Properties
+  \item Advanced Operations
+\end{itemize}
+
+Furthermore the JavaDocs for operations and properties are displayed (where available) when hovered with the mouse. This helps to understand what an operation or property is used for. 
+
+If a folder is selected in the Scout Explorer, the Scout Object Properties only shows a filter field. 
+The content in this filter field is used to restrict the number of elements below the folder icon according to the entered search string. 
+Filtering the content shown in the Scout Explorer is useful for the development of larger applications that contain dozens of forms or services to quickly navigate to the desired element. 
+
+Structure of Object properties for the \java{execDoThis} and \java{getConfiguredThisOrThat} 
+
+The properties and operations are divided into two sections:
+
+    The normal section (e.g. Properties) with the most common used ones.
+    The advanced section (e.g. Advanced Properties) with further methods that are used less often. 
+
+For some Properties or Operations it may not be clear what they do and how/when to use them. 
+To support the developer we improved the help texts that are shown when you hover with the mouse over an Operation or Property.
+
+    First of all the help texts themselves have been added and improved at various places. It is not complete yet and we will continue to improve this type of help and documentation.
+    Second the hover window showing the help is now capable to follow the links provided in the help. 
+
+Technically implemented in plugin \filename{org.eclipse.scout.sdk.ui_3.9.0.20130529-1904.jar}
+File \filename{sdkPropertyViewConfig.xml}
 
 \noindent Existing Documentation
 \begin{itemize}
