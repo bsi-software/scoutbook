@@ -286,34 +286,46 @@ In the text below, we will described the different steps of the creation wizard 
 \begin{figure}
 \includegraphics[width=7cm]{wizard_new_project_1.png} \hspace{5mm}
 \includegraphics[width=7cm]{wizard_new_project_2.png}
-\caption{The Scout wizard to create a new Scout application.
+\caption{The Scout SDK wizard to create a new Scout application.
 The first wizard dialog (left) is used to specify the needed application plugins. 
 In the next wizard step (right) the application template is selected.}
 \figlabel{wizard_new_project}
 \end{figure}
 
-In the first wizard step shown on the left side of \figref{wizard_new_project}, it is possible to choose:
-    The project name: Base name of the project and the plugins that belong to the project.
-    The project postfix: An optional postfix to add to the plugin names.
-    The project alias: The short name to use for the application. The client executables and server servlet names will use this shortname.
-    The JDT preferences: If checked the Scout default Java development settings are copied. Otherwise you start with no settings and can apply your own template. 
+In the first wizard step shown on the left side of \figref{wizard_new_project}, it is possible to choose the project name and and the application plugins to create.
+The \field{Project Name} is used as base name of the application's plugins and as the Java package base names inside of the plugins. 
+If the project name is written as parts separated by periods, the last part is copied into the \field{Project Alias}.
 
-The plug-ins (UI Plug-Ins, Client, Shared, Server) are named using the pattern:
- <project name>.<plug in>.<project postfix>
+When building multi module applications, the optional \field{Project Postfix} can be specified to apply a common naming schemes for the different modules.
+The resulting application plugins (UI, client, shared, server) are then named following the scheme \java{$<$Project Name$>$.$<$plugin$>$.$<$Project Postfix$>$}. 
 
-In the checkbox list you can choose which plugin-ins need to be created. A Scout application must not always be a client/server application.
-You can also create client only or server only applications. But in any case you must include the shared plug-in in the project.
-Because of the separation of the UI and GUI it is possible to choose the UI Plug-ins that will render the application. 
+In the box below the postfix field the list of application plugins that may be created by this wizard is provided. 
+Initially, all possible plugins are checked which is useful to quickly demonstrate a ''Hello World'' application.
+However, for a typical setup only a one or two UI plugins will be needed. 
+To develop a mobile/web applications only the RAP UI plugin is necessary. 
+For a desktop only client, either the Swing or the the SWT UI plugin will be needed.
+And in cases where the the client needs to run both on the desktop and as a web/mobile application, the RAP and a desktop UI plugin can be choosen. 
+A Scout application must not necessarily be a client-server application. 
+It is also possible to create a client only or a server only applications. 
+But make sure to include the shared plugin in all possible use cases. 
 
-The second wizard step shown on the right side of \figref{wizard_new_project} allows to choose the type of application that should be created. 
-Empty Application, This type of application correspond to the minimal application. No additional code is generated. 
+The content of the \field{Alias} is used for the client's executable file, the name of the servlet representing the Scout server application and to build the product launcher names. 
+And if the \field{Use default Scout JDT preferences} is checked, the Scout default Java development settings are used. 
+Otherwise, you start with no settings and can apply your own template. 
 
-Single Form Application, see helloworld tutorial, In this type of application, the main window displays a form. In this example (Swing, Nimbus look and feel, Windows), the menu bar is displayed in this main window on top of the main form.
-The SDK creates a form, called DesktopForm. This form comes with a process service (DesktopProcessService) and a form handler (DisplayFormHandler).
-With this type of application, there is no default support for outlines and pages. 
+As we have seen in the ''Hello World'' tutorial, it is sufficient to provide a project name in the first wizard step and click on the \button{Finish} to create a form based client server application. 
+But we can also click on the \button{Next} to choose an application template.
 
-Outline based application. Outline based application is the most complete type of application. It is suitable if you want to represent outlines and their pages in the main window. 
-In this example (Swing, Nimbus look and feel, Windows) the main window provides: the menu bar, a way to switch between the Outlines attached to the desktop, and a representation of the active outline: on the left hand side the page tree and on the right the selected page. 
+The second wizard step shown on the right side of \figref{wizard_new_project} allows to choose a Scout application template for the Scout project. 
+When choosing the template \textit{Empty Application}, you exactely know what you do and only a minimal code base is created. 
+The other two application templates represent different application types. 
+The template \textit{Application with a single Form} is the default choice used for the ''Hello World'' tutorial.
+Finally, the template \textit{Outline Tree and Table Form} can be used to build explorer like applications. 
+The outline tree is typically used to navigate between related buiness entities. 
+And the tables are used to list a number of business entities with their attributes. 
+We will use this template for the creation of a larger Scout application in \charef{large_example}. 
+As in the case of the first wizard step, you may click \button{Finish} to start the creation of an initial Scout application. 
+Or, click on \button{Next} and manually step through the third and last wizard step. 
 
 \begin{figure}
 \includegraphics[width=9cm]{wizard_new_project_3.png}
@@ -321,39 +333,29 @@ In this example (Swing, Nimbus look and feel, Windows) the main window provides:
 \figlabel{wizard_new_project_rap_target}
 \end{figure}
 
-The third wizard step shown in \figref{wizard_new_project_rap_target} is only available if the RAP UI has been checked in Step 1.
-Because the RAP runtime cannot be installed into the running Eclipse instance, a separate target platform must be created. 
-This target platform must contain all plugins to run the Scout RAP UI. 
-There are several possibilities to create such a target platform:
+The third wizard step shown in \figref{wizard_new_project_rap_target} is only available if the RAP UI plugin has been checked in Step 1.
+Because the RAP runtime must not be installed into the running Eclipse instance\footnote{
+Why?
+}, 
+a separate target platform is created and/or used by the Scout SDK. 
+This target platform then contains all necessary plugins to run the Scout RAP UI. 
+The different options provided by this wizard step are the following.
 
-    Create new RAP Target
-    This option is only available on an Eclipse with the Scout RAP Target Feature installed in the running Eclipse instance.
-    When choosing this option a new RAP target platform will be created at the location specified. This target platform is then defined by all plugins available to the running Eclipse and the RAP target platform extracted to the given directory.
-    Download RAP Target
-    When choosing this option the target platform will be downloaded into the running workspace. This download will then only be available to the active workspace! There are two download types:
-        Only download the RAP plugins (checkbox not ticked, default)
-        The target platform will be defined by the plugins available to the running Eclipse instance and the downloaded RAP plugins. This download is smaller.
-        Download a new Kepler Eclipse platform as well (checkox ticked)
-        A complete, new Kepler target platform will be downloaded and used. This option can be used when you want to ensure that no plugins of the running Eclipse should be in the target platform or if you are not running Eclipse Kepler but want to use Kepler features in your project.
-        Be aware that the developer tools in your runnig Eclipse must be compatible with the Kepler platform that will be used then! 
-    Existing RAP Target
-    An existing RAP target location can be specified. The wizard then tries to detect whether the given location contains a complete target platform or only the RAP target plugins. If a complete platform is detected, only the directory specified will be part of the target platform. Otherwise the given directory together with the plugins available to the running Eclipse will define the target platform.
-    I'll do it later
-    When choosing this option the Scout SDK does not create a RAP target platform for you. The platform must be created manually after the Scout project has been created. The created project will not compile before a complete target platform has been created! 
-	
-\noindent Existing Documentation
-\begin{itemize}
-  \item how-to wiki \url{http://wiki.eclipse.org/Scout/HowTo/3.8/Create_a_new_project}
-\end{itemize}
+When choosing the option \textit{Create new RAP Target}, a new RAP target platform will be created at the location specified. 
+This target platform is then created by the Scout SDK in the given directory and used by all application plugins.
 
-What is a Scout Project?
-needs text
+Option \textit{Download RAP Target} will downloaded the target platform into the running workspace. 
+This download will then only be available to the active workspace.
+The two download types are only download the RAP plugins (checkbox not ticked) and download a new Kepler Eclipse platform as well (checkox ticked). 
+    
+With the option \textit{Existing RAP Target} an existing RAP target location can be specified. 
+The wizard then detects whether the provided location contains a complete target platform or only the RAP target plugins. 
+If a complete platform is detected, only the directory specified is used as the target platform. 
+Otherwise, the plugins available to the running Eclipse and the content of the provided directory jointly define the target platform.
 
-\noindent Existing Documentation
-\begin{itemize}
-  \item forum \url{http://www.eclipse.org/forums/index.php/t/395379/}
-  \item wiki concept \url{http://wiki.eclipse.org/Scout/Concepts#Scout_Project}
-\end{itemize}
+To manually define a RAP target platform choose option \textit{I'll do it later}. 
+With this option, the Scout SDK does not create a RAP target platform for you. 
+But note that the created project will not compile before a complete target platform has been created for the Scout application.  
 
 % --------------------------------------------------------------------------- %
 \subsection{Exporting a Scout Project}
@@ -367,7 +369,7 @@ In the Scout Explorer, the \contextmenu{Export Scout Project...} is provided on 
 \end{itemize}
 
 % --------------------------------------------------------------------------- %
-\subsection{Creating a Form}
+\subsection{Creating new Forms}
 
 The \wizard{New Form} allows to create a new form including the necessary form data, permissions and server services. 
 In the Scout Explorer, the \contextmenu{New Form...} is provided on the \folder{Forms} under the orange client node. 
@@ -375,7 +377,7 @@ In the Scout Explorer, the \contextmenu{New Form...} is provided on the \folder{
 New Form Field Wizard
 
 % --------------------------------------------------------------------------- %
-\subsection{Creating a Form Field}
+\subsection{Creating new Form Fields}
 
 The \wizard{New Form Field} allows to create a new Scout client server application. 
 In the Scout Explorer, the \contextmenu{New Form Field...} is provided on the \node{MainBox} under every form node or nodes representing form field containers, such as group boxes. 
@@ -383,15 +385,21 @@ In the Scout Explorer, the \contextmenu{New Form Field...} is provided on the \n
 New Form Field Wizard
 
 % --------------------------------------------------------------------------- %
-\subsection{Creating a Search Form}
+\subsection{Creating new Search Forms}
 
 The \wizard{New Search Form} allows to create a new Scout form to search for elements displayed in pages.  
 In the Scout Explorer, the \contextmenu{Create Search Form...} is provided on the \folder{Search Forms} under the orange client node. 
 
+\begin{figure}
+\includegraphics[width=9cm]{wizard_search_form_contextmenu.png}
+\caption{Start the Scout SDK search form wizard for an existing table page.}
+\figlabel{wizard_search_form_contextmenu}
+\end{figure}
+
 New Form Field Wizard
 
 % --------------------------------------------------------------------------- %
-\subsection{Creating an Outline}
+\subsection{Creating new Outlines}
 
 The \wizard{New Outline} allows to create a new Scout form to search for elements displayed in pages.  
 In the Scout Explorer, the \contextmenu{New Outline...} is provided on the \folder{All Outlines} under the orange client node. 
@@ -400,13 +408,35 @@ Alternatively, the context menu is also available on the \folder{Outlines} of th
 New Form Field Wizard
 
 % --------------------------------------------------------------------------- %
-\subsection{Creating a Page}
+\subsection{Creating new Pages}
 needs text
 
-New Form Field Wizard
+\begin{figure}
+\includegraphics[width=7cm]{wizard_page_1.png} \hspace{5mm}
+\includegraphics[width=7cm]{wizard_page_2.png}
+\caption{The Scout SDK wizard to create a new page.}
+\figlabel{wizard_page}
+\end{figure}
 
 % --------------------------------------------------------------------------- %
-\subsection{Creating a Server Service and Service Operations}
+\subsection{Creating new Table Column}
+needs text
+
+\begin{figure}
+\includegraphics[width=7cm]{wizard_column_1.png} \hspace{5mm}
+\includegraphics[width=7cm]{wizard_column_2.png}
+\caption{The Scout SDK wizard to create a new table column.}
+\figlabel{wizard_column}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=8cm]{wizard_column_explorer_properties.png}
+\caption{Column Property.}
+\figlabel{wizard_column_explorer_properties}
+\end{figure}
+
+% --------------------------------------------------------------------------- %
+\subsection{Creating new Server Services and Service Operations}
 
 The \wizard{New Service} allows to create a new Scout form to search for elements displayed in pages.  
 In the Scout Explorer, the \contextmenu{New Service...} is provided on the \folder{Services} under the orange client node and the blue server node. 
@@ -415,19 +445,30 @@ This reflects the fact that services may be defined on both the client and the s
 New code type and new code wizards
 
 % --------------------------------------------------------------------------- %
-\subsection{Creating Code Types and Codes}
+\subsection{Creating new Code Types and Codes}
 needs text
 
 New code type and new code wizards
 
 % --------------------------------------------------------------------------- %
-\subsection{Creating a Permission}
+\subsection{Creating new Permissions}
 needs text
 
 New permission wizard
 
 % --------------------------------------------------------------------------- %
-\subsection{Creating a Library Bundle}
+\subsection{Creating new Application Modules}
+needs text
+
+\begin{figure}
+\includegraphics[width=7cm]{wizard_new_bundles_1.png} \hspace{5mm}
+\includegraphics[width=7cm]{wizard_new_bundles_2.png}
+\caption{The Scout SDK wizard to create a new application module.}
+\figlabel{wizard_module}
+\end{figure}
+
+% --------------------------------------------------------------------------- %
+\subsection{Creating new Library Bundles}
 needs text
 
 New library bundle wizard
