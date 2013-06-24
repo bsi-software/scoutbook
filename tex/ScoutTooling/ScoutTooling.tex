@@ -31,6 +31,7 @@ Finally, the application code created by the Scout SDK wizards helps to ensure t
 
 % --------------------------------------------------------------------------- %
 \section{The Scout SDK}
+\index{Scout SDK}
 
 The Scout SDK is added to the Eclipse IDE in the form of the Scout perspective\footnote{
 See \appref{eclipse_perspective} for additional information regarding Eclipse IDE perspectives. 
@@ -91,6 +92,7 @@ As in the case of the Scout Runtime, the plugins representing the Scout SDK, the
 
 % --------------------------------------------------------------------------- %
 \section{The Scout Explorer}
+\index{Scout Explorer}
 
 The Scout Explorer view is responsible for the navigation support within the Scout application model. 
 This navigation support is presented in the form of a tree view and includes the client with its UI components, the server and the shared part of a Scout application. 
@@ -161,6 +163,7 @@ The Scout server contains the \element{org.eclipsescout.helloworld.server} plugi
 
 % --------------------------------------------------------------------------- %
 \section{The Scout Object Properties}
+\index{Scout Object Properties}
 
 The Scout Object Properties view provides direct access to configurable properties and operations for the element selected in the Scout Explorer.
 Before we discuss the typical layout of an object property view we describe the special case of the property view for a complete Scout application. 
@@ -260,6 +263,7 @@ This will remove the overridden method from the object's Java code.
 
 % --------------------------------------------------------------------------- %
 \section{Scout SDK Wizards}
+\index{SDK Wizard}
 
 The Scout SDK wizards allow the developer to create Scout application model components with just a few clicks. 
 Creation wizards are provided for all major model components such as forms on the client side and services on the server side. 
@@ -276,6 +280,7 @@ Then, the wizards to create Scout application model components are introduced.
 
 % --------------------------------------------------------------------------- %
 \subsection{Creating a new Scout Project}
+\index{SDK Wizard!New Scout Project}
 
 The \wizard{New Scout Project} allows to create a new Scout client server application. 
 In the Scout Explorer, the \contextmenu{New Scout Project...} is provided on the top-level \folder{Scout Projects}. 
@@ -359,14 +364,69 @@ But note that the created project will not compile before a complete target plat
 
 % --------------------------------------------------------------------------- %
 \subsection{Exporting a Scout Project}
+\index{SDK Wizard!Export Scout Project}
 
 The \wizard{Export a Scout Project} allows to export a complete Scout client server application as WAR files. 
 In the Scout Explorer, the \contextmenu{Export Scout Project...} is provided on the main application node just below the top-level \folder{Scout Projects}. 
 
-\noindent Existing Documentation
-\begin{itemize}
-  \item forum: access to logs \url{http://www.eclipse.org/forums/index.php/t/367447/}
-\end{itemize}
+\begin{figure}
+\includegraphics[width=7cm]{wizard_export_1.png} \hspace{5mm}
+\includegraphics[width=7cm]{wizard_export_2.png}
+\caption{The Scout SDK wizard to a new Scout application into WAR files.
+The first wizard step (left) is used to select the artefact to be exported. 
+In the next wizard step (right) is used to define the server WAR file name and to select the server product file to be used for the export.}
+\figlabel{wizard_export}
+\end{figure}
+
+As a simple use case, the usage of the export wizard is described in \secref{helloworld_export} of the ''Hello World'' tutorial. 
+And the corresponding background section \secref{helloworld_export_background} provides information regarding the content and the organisation of the WAR files produced by this wizard. 
+
+In the first export wizard step shown on the left hand side of \figref{wizard_export} the target directory and the type of content to be exported is defined. 
+The \field{Target Directory} is used to define the directory where the generated WAR files will be exported to. 
+Checking the \field{Export as Enterprise Archive (EAR)} the WAR file(s) will be packed into a EAR file using the file name provided in the \field{EAR File Name}. 
+
+In the artefact selector box the content to be included in the export can be specified. 
+The blue \node{Server Web Application} represents the Scout server application. 
+If ticked, the corresponding WAR file will also include a zipped desktop client if such a client is defined in the current Scout project. 
+Selecting the orange \node{Client Application (ZIP)} node will put a zipped client into the target directory. 
+Finally, when working with web/mobile applications the necessary RAP server is represented by the white \node{RAP Web Application}. 
+
+The default scenario assumes that you work with a Scout client server application inlcuding a SWT desktop client and corresponding web/mobile clients. 
+For this setup you just need to provide a target directory before you can click the \button{Finish} to start the export. 
+To verify/update what the export wizard will create you may click the \button{Next} to move to the second wizsard step.
+
+The second wizard step shown on the right side of \figref{wizard_export}. 
+The server WAR file name proposed in the \field{WAR File} uses the naming scheme \filename{<Project Alias>\_server.war}. 
+In order for this WAR file to work out-of-the-box it it is recommended to use the proposed value. 
+In the \field{Product File} the server product file to be used for the creation of the WAR file can be specified. 
+Clicking the \button{Next} will move to the next wizard step to select define the client product to be exported.
+
+\begin{figure}
+\includegraphics[width=9cm]{wizard_export_client_application.png}
+\caption{The third export wizard step is used to specify the desktop client product file to be used for the export and the download location for the resulting zipped client.}
+\figlabel{wizard_export_client}
+\end{figure}
+
+In the third wizard step shown in \figref{wizard_export_client} the client product file can be selected. 
+If the current Scout project defines both a Swing and a SWT client, the default will use the SWT client. 
+Clicking on the dropdown button next to the \field{Client Product to include} will open a \element{Select Product} dialog to choose the right product from all available client products. 
+In the \field{Client Download Location} the path to the zipped client inside the server WAR file defined. 
+In order for this WAR file to work out-of-the-box it it is recommended to use the proposed value. 
+With the \button{Next} the last export wizard step is shown.
+
+\begin{figure}
+\includegraphics[width=9cm]{wizard_export_rap_server.png}
+\caption{The last export wizard step is used to specify the define the name of the server WAR for the RAP web/mobile application and the corresponding product file to be used for the export.}
+\figlabel{wizard_export_rap_server}
+\end{figure}
+
+The last export wizard step is shown in \figref{wizard_export_rap_server}. 
+A RAP server WAR file name is proposed in the \field{WAR File} based on the naming scheme \filename{<Project Alias>.war}. 
+In order for this WAR file to work out-of-the-box it it is recommended to use the proposed value. 
+In the \field{Product File} the RAP server product file to be used for the creation of the WAR file can be specified. 
+The \button{Finish} will then start the export wizard with the settings verified and/or updated in all export wizard steps. 
+
+After the wizard has completed the export, all resulting artefacts will be located in the target directory specified in the first wizard step. 
 
 % --------------------------------------------------------------------------- %
 \subsection{Creating new Forms}
@@ -374,18 +434,76 @@ In the Scout Explorer, the \contextmenu{Export Scout Project...} is provided on 
 The \wizard{New Form} allows to create a new form including the necessary form data, permissions and server services. 
 In the Scout Explorer, the \contextmenu{New Form...} is provided on the \folder{Forms} under the orange client node. 
 
-New Form Field Wizard
+\begin{figure}
+\includegraphics[width=7cm]{wizard_form_1.png} \hspace{5mm}
+\includegraphics[width=7cm]{wizard_form_2.png}
+\caption{The Scout SDK wizard to create a new form.}
+\figlabel{wizard_service}
+\end{figure}
+
 
 % --------------------------------------------------------------------------- %
 \subsection{Creating new Form Fields}
+\index{SDK Wizard!New Form Field}
 
 The \wizard{New Form Field} allows to create a new Scout client server application. 
-In the Scout Explorer, the \contextmenu{New Form Field...} is provided on the \node{MainBox} under every form node or nodes representing form field containers, such as group boxes. 
+In the Scout Explorer, the \contextmenu{New Form Field...} is provided on Scout Explorer nodes representing composite form fields, such as the \node{MainBox}. 
 
-New Form Field Wizard
+\begin{figure}
+\includegraphics[width=7cm]{wizard_field_contextmenu.png} \hspace{5mm}
+\includegraphics[width=6cm]{wizard_field_1.png}
+\caption{Starting the new form field wizard with the context menu on a composite field (left). The first wizard step (right) is used to select the field type.}
+\figlabel{wizard_field_start}
+\end{figure}
+
+\figref{wizard_field_start} provides screenshots for starting the form field wizard with the context menu and the first wizard page. 
+In the first wizard step, the list of all available Scout form field types is presented. 
+To quickly find the desired form field type, a part of the type name can be entered in the search field above the field type list. 
+In the screenshot on the right hand side of \figref{wizard_field_start} this search field contains the value 's' which filters the field type list accordingly. 
+Once the type of the new form field is selected, the next wizard step can be loaded by clicking on the \button{Next}.
+
+\begin{figure}
+\includegraphics[width=11cm]{wizard_field_2.png}
+\caption{The second form field wizard step is also used to assign a field label. 
+By typing a word or a part of a word into the \field{Name} a list of existing and matching text entries is provided.}
+\figlabel{wizard_field_name}
+\end{figure}
+
+In the second wizard step shown in \figref{wizard_field_name} the remaining creation parameters for the new form field can be specified. 
+The \field{Name} is used to define the content of the field label. 
+For this, a translated text entry has to be defined. 
+By typing a string into the name field, all potentially matching existing translation entries are shown in a dropdown list. 
+As shown in \figref{wizard_field_name} not only the text key is used to find matching entries but also translated text entries. 
+When assigning the label for a preferences string field, the substring ''pref'' lists a set of text keys that have a matching translated text entry. 
+
+\begin{figure}
+\includegraphics[width=7.5cm]{wizard_field_translation.png} \hspace{5mm}
+\includegraphics[width=6.5cm]{wizard_field_3.png}
+\caption{Adding a text translation for a field label (left) and specifying the ordering of the fields (right).}
+\figlabel{wizard_field_translation}
+\end{figure}
+
+One of the presented options in the list of text entries is the \element{New translated text...} entry. 
+A double click on this entry starts the wizard to create a new text entry as shown on the left hand side of \figref{wizard_field_translation}. 
+The \field{Key Name} holds the text key that is used to access translated text\footnote{
+The access to the translated texts using \java{TEXTS.get} is described in the ''Hello World'' UI background chapter in \secref{helloworld.userinterface.background}. 
+}.
+In the tabs below the key name field, the text translations for the registered languages can be provided. 
+Make sure to at least provide a text in the \element{default} tab. 
+This text will be used in the Scout application if no translation is available that better matches the logged in user's locale. 
+
+Once the name field is filled in, the entered text key is also used to create a proposal for the \field{Class Name} using the pattern \java{<Field Name>Field}. 
+In contrast to the label field, the class name field is mandatory. 
+If the field does not need a label the name field can remain empty. 
+In that case, a class name still needs to be provided as described in \secref{helloworld_ui} for the \java{DesktopBox} class in the ''Hello World'' application. 
+
+The \field{Sibling} is used to define the ordering of the form fields in the parent container. 
+As shown on the right hand side of \figref{wizard_field_translation}, the new \java{PreferencesField} is to be placed before the message field. 
+
 
 % --------------------------------------------------------------------------- %
 \subsection{Creating new Search Forms}
+\index{SDK Wizard!New Form Field}
 
 The \wizard{New Search Form} allows to create a new Scout form to search for elements displayed in pages.  
 In the Scout Explorer, the \contextmenu{Create Search Form...} is provided on the \folder{Search Forms} under the orange client node. 
@@ -400,6 +518,7 @@ New Form Field Wizard
 
 % --------------------------------------------------------------------------- %
 \subsection{Creating new Outlines}
+\index{SDK Wizard!New Outline}
 
 The \wizard{New Outline} allows to create a new Scout form to search for elements displayed in pages.  
 In the Scout Explorer, the \contextmenu{New Outline...} is provided on the \folder{All Outlines} under the orange client node. 
@@ -409,7 +528,7 @@ New Form Field Wizard
 
 % --------------------------------------------------------------------------- %
 \subsection{Creating new Pages}
-needs text
+\index{SDK Wizard!New Page}
 
 \begin{figure}
 \includegraphics[width=7cm]{wizard_page_1.png} \hspace{5mm}
@@ -420,7 +539,7 @@ needs text
 
 % --------------------------------------------------------------------------- %
 \subsection{Creating new Table Column}
-needs text
+\index{SDK Wizard!New Table Column}
 
 \begin{figure}
 \includegraphics[width=7cm]{wizard_column_1.png} \hspace{5mm}
@@ -430,19 +549,43 @@ needs text
 \end{figure}
 
 \begin{figure}
-\includegraphics[width=8cm]{wizard_column_explorer_properties.png}
+\includegraphics[width=6.5cm]{wizard_column_explorer_properties.png}
 \caption{Column Property.}
 \figlabel{wizard_column_explorer_properties}
 \end{figure}
 
 % --------------------------------------------------------------------------- %
-\subsection{Creating new Server Services and Service Operations}
+\subsection{Creating new Services and Operations}
 
 The \wizard{New Service} allows to create a new Scout form to search for elements displayed in pages.  
 In the Scout Explorer, the \contextmenu{New Service...} is provided on the \folder{Services} under the orange client node and the blue server node. 
 This reflects the fact that services may be defined on both the client and the server side. 
 
-New code type and new code wizards
+\begin{figure}
+\includegraphics[width=7cm]{wizard_service_contextmenu.png}
+\caption{Starting the service creation wizard to add a new server service.}
+\figlabel{wizard_service_contextmenu}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=7cm]{wizard_service_1.png} \hspace{5mm}
+\includegraphics[width=7cm]{wizard_service_2.png}
+\caption{The Scout SDK wizard to create a new service.}
+\figlabel{wizard_service}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=7cm]{wizard_service_operation.png}
+\caption{The Scout SDK wizard to add a new service operation.}
+\figlabel{wizard_service_operation}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=7cm]{wizard_service_sql_1.png} \hspace{5mm}
+\includegraphics[width=7cm]{wizard_service_sql_2.png}
+\caption{The Scout SDK wizard to create a new SQL service.}
+\figlabel{wizard_service_sql}
+\end{figure}
 
 % --------------------------------------------------------------------------- %
 \subsection{Creating new Code Types and Codes}
@@ -456,9 +599,23 @@ needs text
 
 New permission wizard
 
+
+% --------------------------------------------------------------------------- %
+\subsection{Creating new Library Bundles}
+
+The \wizard{New Library Bundle} allows to add functionality provided in standard JAR files to a Scout application. 
+In the Scout Explorer, the \contextmenu{New Libaray Bundle...} is provided on the top-level \folder{Libraries} and individually under the orange client node, the green shared node and the blue server node. 
+
+\begin{figure}
+\includegraphics[width=7cm]{wizard_library_bundle_1.png} \hspace{5mm}
+\includegraphics[width=7cm]{wizard_library_bundle_2.png}
+\caption{The Scout SDK wizard to add external JAR files in the form of a library bundle to a Scout project.}
+\figlabel{wizard_library_bundle}
+\end{figure}
+
 % --------------------------------------------------------------------------- %
 \subsection{Creating new Application Modules}
-needs text
+\index{SDK Wizard!Create new Scout Bundles}
 
 \begin{figure}
 \includegraphics[width=7cm]{wizard_new_bundles_1.png} \hspace{5mm}
@@ -466,12 +623,6 @@ needs text
 \caption{The Scout SDK wizard to create a new application module.}
 \figlabel{wizard_module}
 \end{figure}
-
-% --------------------------------------------------------------------------- %
-\subsection{Creating new Library Bundles}
-needs text
-
-New library bundle wizard
 
 
 \ifx\wholebook\relax\else
