@@ -1,7 +1,6 @@
 package org.eclipsescout.contacts.ui.swing;
 
-import org.eclipse.scout.rt.ui.swing.DefaultSwingEnvironment;
 
-public class SwingEnvironment extends DefaultSwingEnvironment {
+public class SwingEnvironment extends com.bsiag.scout.rt.ui.swing.rayo.RayoSwingEnvironment {
 
 }

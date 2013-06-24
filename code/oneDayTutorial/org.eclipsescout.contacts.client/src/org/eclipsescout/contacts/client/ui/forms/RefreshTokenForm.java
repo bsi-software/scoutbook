@@ -98,7 +98,6 @@ public class RefreshTokenForm extends AbstractForm {
         setSecret(auth[1]);
 
         SERVICES.getService(IShellService.class).shellOpen(auth[2]);
-
         getSecurityCodeField().setEnabled(true);
       }
     }

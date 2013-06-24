@@ -134,13 +134,13 @@ public class PersonForm extends AbstractForm {
       public class PictureField extends AbstractImageField {
 
         @Override
-        protected int getConfiguredGridH() {
-          return 5;
+        protected String getConfiguredLabel() {
+          return TEXTS.get("Picture");
         }
 
         @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Picture");
+        protected int getConfiguredGridH() {
+          return 5;
         }
 
         @Override

@@ -25,6 +25,9 @@ import org.eclipsescout.contacts.client.ui.desktop.outlines.StandardOutline;
 import org.eclipsescout.contacts.client.ui.forms.RefreshTokenForm;
 import org.eclipsescout.contacts.shared.Icons;
 import org.eclipsescout.contacts.shared.services.ILinkedInService;
+import java.io.File;
+import org.eclipse.scout.rt.shared.services.common.shell.IShellService;
+import org.eclipse.scout.rt.docx4j.client.ScoutXlsxSpreadsheetAdapter;
 
 public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
   private static IScoutLogger logger = ScoutLogManager.getLogger(Desktop.class);
@@ -45,7 +48,7 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
 
   @Override
   protected void execOpened() throws ProcessingException {
-    //If it is a mobile or tablet device, the DesktopExtension in the mobile plugin takes care of starting the correct forms.
+    //a mobile home form (in client.mobile plugin) is used instead. 
     if (!UserAgentUtility.isDesktopDevice()) {
       return;
     }
@@ -136,6 +139,24 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
         Desktop.this.setStatusText(TEXTS.get("ImportingLinkedIn"));
         SERVICES.getService(ILinkedInService.class).updateContacts();
         Desktop.this.setStatusText(null);
+      }
+    }
+
+    @Order(20.0)
+    public class ExportToExcelMenu extends AbstractExtensibleMenu {
+
+      @Override
+      protected String getConfiguredText() {
+        return TEXTS.get("ExportToExcelMenu");
+      }
+
+      @Override
+      protected void execAction() throws ProcessingException {
+        if (getOutline() != null && getOutline().getActivePage() != null) {
+          ScoutXlsxSpreadsheetAdapter s = new ScoutXlsxSpreadsheetAdapter();
+          File xlsx = s.exportPage(null, 0, 0, getOutline().getActivePage());
+          SERVICES.getService(IShellService.class).shellOpen(xlsx.getAbsolutePath());
+        }
       }
     }
   }

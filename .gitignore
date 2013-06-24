@@ -3,6 +3,8 @@ out/pdf/**/*
 out/html/**/*
 out/epub/**/*
 
+code/DB*
+
 tex/book.pdf
 out/pdf/book.pdf
 

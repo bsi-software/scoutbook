@@ -32,14 +32,14 @@ public class ServerApplication implements IApplication {
 
   @Override
   public Object start(IApplicationContext context) throws Exception {
-    ServerSession serverSession = SERVICES.getService(IServerSessionRegistryService.class).
-        newServerSession(ServerSession.class, Activator.getDefault().getBackendSubject());
+    ServerSession serverSession = SERVICES.getService(IServerSessionRegistryService.class).newServerSession(ServerSession.class, Activator.getDefault().getBackendSubject());
 
     ServerJob installJob = new ServerJob("Install the contacts DB schema)", serverSession) {
       @Override
       protected IStatus runTransaction(IProgressMonitor monitor) {
         try {
           SERVICES.getService(IDBInstallService.class).installStorage();
+          logger.info("Contacts DB schema successfully created");
         }
         catch (Throwable t) {
           return new Status(IStatus.ERROR, Activator.PLUGIN_ID, "Error while installing the contacts DB schema", t);
@@ -51,9 +51,7 @@ public class ServerApplication implements IApplication {
     installJob.schedule();
     installJob.join(20000);
 
-    logger.info("Contacts DB schema successfully created");
-    logger.info("Server application started");
-
+    logger.info("Contacts server application started");
     return EXIT_OK;
   }
 

@@ -10,6 +10,8 @@ Export-Package: org.eclipsescout.contacts.shared,
  org.eclipsescout.contacts.shared.services.lookup,
  org.eclipsescout.contacts.shared.ui.forms
 Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.scout.rt.shared;visibility:=reexport
+ org.eclipse.scout.rt.shared;visibility:=reexport,
+ com.bsiag.org.docx4j,
+ org.eclipse.scout.docx4j
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
