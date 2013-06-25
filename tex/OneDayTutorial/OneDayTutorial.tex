@@ -169,7 +169,7 @@ In the second wizard step select the application template \element{Outline Tree 
 \begin{figure}
 \includegraphics[width=7cm]{project_contacts_explorer.png} \hspace{5mm}
 \includegraphics[width=7cm]{project_contacts_properties.png}
-\caption{The setting of the \element{Technology} section in the Scout Object Properties of the ''My Contacts'' application.}
+\caption{The setting of the \textit{Technology} section in the Scout Object Properties of the ''My Contacts'' application.}
 \figlabel{project_contacts_properties}
 \end{figure}
 
@@ -181,7 +181,7 @@ See \secref{scout_sdk_object_properties} for additional information regarding th
 \begin{figure}
 \includegraphics[width=7cm]{desktop_explorer.png} \hspace{5mm}
 \includegraphics[width=7cm]{desktop_properties.png}
-\caption{Configure the application name in the \field{Title} of the Desktop's properties. }
+\caption{Configure the application name in the title field of the Desktop's properties. }
 \figlabel{desktop_properties}
 \end{figure}
 
@@ -216,18 +216,24 @@ Finally, the currently active outline is set to the \java{StandardOutline}, as t
 \figlabel{new_page_person}
 \end{figure}
 
+The first UI component we add to the application is the person page. 
+For the desktop clients, this page is represented as a table that will list all available persons in the database of the ''My Contacts'' application. 
+To start the \wizard{New Page} use the \contextmenu{New Page...} on the \folder{Child Pages} as shown in \figref{new_page_person}.
+On the first wizard step select the template \element{AbstractPageWithTable} and click the \button{Next}. 
+On the second wizard step, provide the page name ''Person'' to create a new translated text entry at the same time. 
+Make sure the other fields are filled in as shown in \figref{new_page_person} and click the \button{Finish} to close the wizard.
+
 \lstinputlisting[
   label=\lstlabel{mycontacts.desktop.outline.personpage},
   caption=The \java{execCreateChildPages} method of the standard outline. At the current implementation step the company table page is not (yet) added.,
-  index={The execCreateChildPages method of the application's standard outline.},
+  index={execCreateChildPages, StandardOutline},
   linerange={19-25},
   float
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outlines/StandardOutline.java}
 
-Lorem ipsum will build an outline based Scout application featuring a navigation tree and pages to present information in tabular form. 
-In addition, the application also shows how to work with menus and context menus, search forms, and forms to enter and/or update data. 
-On the server side we show how to work with databases, how to use logging in Scout applications and how to lorem ipsum. 
+\lstref{mycontacts.desktop.outline.personpage} shows the created method \java{execCreateChildPages} that links the newly created person page to the standard outline. 
+Note that your code will only look the same once you have added the company page in a later step of the implementation of this application.
 
 \begin{figure}
 \includegraphics[width=5cm]{new_column_personid_contextmenu.png} \hspace{2mm}
@@ -237,9 +243,19 @@ On the server side we show how to work with databases, how to use logging in Sco
 \figlabel{new_column_personid}
 \end{figure}
 
-Lorem ipsum will build an outline based Scout application featuring a navigation tree and pages to present information in tabular form. 
-In addition, the application also shows how to work with menus and context menus, search forms, and forms to enter and/or update data. 
-On the server side we show how to work with databases, how to use logging in Scout applications and how to lorem ipsum. 
+Now, drill down to the \folder{Columns} under the \node{PersonTablePage} as shown in \figref{new_column_personid}. 
+Here we can add the desired table columns to the person page. 
+Start with the column that will hold the person id. 
+For this, start the column wizard as shown on the left side of \figref{new_column_personid} and select the string column template. 
+In the second wizard step, enter ''PersonId'' into the \field{Class Name},select the radio button \element{Create one more column} and click on the \button{Finish}. 
+This will restart the column wizard to enter the next columns. 
+Create the remaining string columns with the following names.
+
+\begin{itemize}
+  \item{First Name}
+  \item{Last Name}
+  \item{Headline}
+\end{itemize}
 
 \begin{figure}
 \includegraphics[height=7cm]{person_id_column.png} \hspace{5mm}
@@ -257,9 +273,11 @@ On the server side we show how to work with databases, how to use logging in Sco
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outlines/pages/PersonTablePage.java}
 
-Lorem ipsum will build an outline based Scout application featuring a navigation tree and pages to present information in tabular form. 
-In addition, the application also shows how to work with menus and context menus, search forms, and forms to enter and/or update data. 
-On the server side we show how to work with databases, how to use logging in Scout applications and how to lorem ipsum. 
+Once you have created all these columns we will mark the person id column as the primary key column for the person page. 
+In the Scout Explorer select the \node{PersonIdColumn} to open the corresponding Scout Object Properties. 
+In this form, deselect the \property{Displayable} to always hide this technical column from the end user. 
+In the properties \element{Advanced Properties} section check the \property{Primary Key}. 
+The resulting Java code for the primary key column and the first name column is provided in \lstref{mycontacts.desktop.outline.personpage.columns}. 
 
 \begin{figure}
 \includegraphics[height=5cm]{new_bean_companyid_contextmenu.png} \hspace{5mm}
@@ -272,14 +290,13 @@ On the server side we show how to work with databases, how to use logging in Sco
   label=\lstlabel{mycontacts.desktop.outline.personpage.columns},
   caption=The company id variable of the \java{PersonTablePage} class. ,
   index={A table page property bean.},
-  linerange={18-20,162-172},
+  linerange={18-21,162-172},
   float
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outlines/pages/PersonTablePage.java}
 
-Lorem ipsum will build an outline based Scout application featuring a navigation tree and pages to present information in tabular form. 
-In addition, the application also shows how to work with menus and context menus, search forms, and forms to enter and/or update data. 
-On the server side we show how to work with databases, how to use logging in Scout applications and how to lorem ipsum. 
+As we will later add and link the person page with a company page, we add a company id variable to the person page as shown in \figref{new_bean_companyid}. 
+For the Java representation of such variables the standard bean pattern is used as shown in \lstref{mycontacts.desktop.outline.personpage.columns}.
 
 % --------------------------------------------------------------------------- %
 \section{Adding the Company Page}
@@ -300,13 +317,54 @@ On the server side we show how to work with databases, how to use logging in Sco
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outlines/pages/CompanyTablePage.java}
 
-Lorem ipsum will build an outline based Scout application featuring a navigation tree and pages to present information in tabular form. 
-In addition, the application also shows how to work with menus and context menus, search forms, and forms to enter and/or update data. 
-On the server side we show how to work with databases, how to use logging in Scout applications and how to lorem ipsum. 
+After adding the person page, we add a company page to the standard outline. 
+To add the company page we use the same wizards as described in the previous section for the person page. 
+For the \field{Name} we enter the new translated text ''Company'' and the columns to add are the following.
 
+\begin{itemize}
+  \item{Company Id}
+  \item{Name}
+  \item{Location}
+\end{itemize}
+
+As in the case of the person table page, the company id column is used as a primary key column. 
+The \property{Displayable} needs to be set to false and the \property{Primary Key} to true. 
+Now we can link the person page to the company page using the \contextmenu{Add Existing Page...} as shown on the left side of \figref{add_existing_page}. 
+In the \wizard{Link Page}, the person page can then be selected according to the right side of \figref{add_existing_page}. 
+In the Java code generated by the Scout SDK the setting of the company id attribute is automatically inserted in method \java{execCreateChildPage}. 
+Please note that this convenience added by the Scout SDK wizard only works if the child page defines variables with a naming that matches the defined primary key columns of the parent table. 
 
 % --------------------------------------------------------------------------- %
-\section{Adding the Database in the Server Application}
+\section{Installing the Database}
+
+\begin{figure}
+\includegraphics[width=7cm]{new_service_derby_contextmenu.png} \hspace{5mm}
+\includegraphics[width=7cm]{new_service_derby.png} 
+\caption{Add the service to access the Derby database under folder \element{SQL Services}. }
+\figlabel{new_service_derby}
+\end{figure}
+
+To access a database we first need to install a database service. 
+For the ''My Contacts'' application, this is done using the \wizard{New SQL Service} on the Scout server under the \folder{SQL Services} as shown in \figref{new_service_derby}.
+In the first wizard step shown on the right side of the figure, use ''DerbySqlService'' for the \field{Class Name}.
+From the drop-down list in the \field{Super Class} choose the \java{AbstractDerbySqlService} and click on the \button{Finish}.
+
+\lstinputlisting[
+  label=\lstlabel{mycontacts.server.configini.derby},
+  caption=Setting up the database parameters in the Scout server's \texttt{config.ini} file.,
+  index={database setup, config.ini},
+  linerange={42-48},
+  float
+]
+{../code/oneDayTutorial/org.eclipsescout.contacts.server/products/development/config.ini}
+
+To setup the database connection the necessary parameters need to be added to the server's \filename{config.ini} file as shown in \lstref{mycontacts.server.configini.derby}.
+Comparing the parameter names in this config file with the package name of the created \java{DerbySqlService} service class reveals an interesting framework feature. 
+All Scout services can be parameterized using the \filename{config.ini} file with the pattern \java{<package>.<class name>\#<parameter>=<value>}. 
+The Scout runtime then sets the service parameters using matching setter methods such as \java{setPassword} for the password parameter.  
+
+According to the parameter \java{jdbcMappingName=jdbc:derby:\$\{workspace\_loc\}/...} a new Derby database will be created in the same parent directory as the ''My Contacts'' workspace directory if no database named \java{DB\_CONTACT} is found there.
+This setup is handy for development purposes but you may want to set the database parameter to \java{create=false} in the \filename{config.ini} of the production product file. 
 
 \begin{figure}
 \includegraphics[width=7cm]{new_service_dbinstall_1.png} \hspace{5mm}
@@ -315,10 +373,6 @@ On the server side we show how to work with databases, how to use logging in Sco
 \figlabel{new_service_dbinstall}
 \end{figure}
 
-Lorem ipsum will build an outline based Scout application featuring a navigation tree and pages to present information in tabular form. 
-In addition, the application also shows how to work with menus and context menus, search forms, and forms to enter and/or update data. 
-On the server side we show how to work with databases, how to use logging in Scout applications and how to lorem ipsum. 
-
 \begin{figure}
 \includegraphics[height=5.5cm]{new_operation_installstorage_contextmenu.png} \hspace{5mm}
 \includegraphics[height=5.5cm]{new_operation_installstorage.png} 
@@ -326,19 +380,26 @@ On the server side we show how to work with databases, how to use logging in Sco
 \figlabel{new_operation_installstorage}
 \end{figure}
 
+
 \lstinputlisting[
   label=\lstlabel{mycontacts.server.services.installdb},
   caption=The \java{installStorage} service operation to create the database schema for the ''My Contacts'' application.
   New tables are created if they are not found by \java{getExistingTables} in the existing schema.,
   index={A service operation to install a database schema.},
-  linerange={14-17,26-36,94-105},
+  linerange={14-15,26-36,94-105},
   float
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/DBInstallService.java}
 
-Lorem ipsum will build an outline based Scout application featuring a navigation tree and pages to present information in tabular form. 
-In addition, the application also shows how to work with menus and context menus, search forms, and forms to enter and/or update data. 
-On the server side we show how to work with databases, how to use logging in Scout applications and how to lorem ipsum. 
+% ........................................................................... %
+\subsection{Setting up the Database Schema}
+
+Having a working database service and a new (empty) Derby database now allows to create the necessary database schema and populate it with some initial data.
+For this we add a new \java{DBInstallService} service as shown in \figref{new_service_dbinstall}.
+To this install service we then add the \java{installStorage} operation according to \figref{new_operation_installstorage}.
+The implementation of this method is provided in \lstref{mycontacts.server.services.installdb}.
+The method first checks if a setup is requried. 
+For this, the member variable \java{m\_doSetup} is used that might also be set by the \java{setDoSetup} setter method via the server's the \filename{config.ini} file.
 
 \lstinputlisting[
   label=\lstlabel{mycontacts.server.services.installdb.company},
@@ -364,17 +425,69 @@ On the server side we show how to work with databases, how to use logging in Sco
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/DBInstallService.java}
 
+Setting up the schema to contain the indiviudal tables for the ''My Contacts'' application is implemented in a separate method per table. 
+The table definition for the company table is provided in \lstref{mycontacts.server.services.installdb.company}. 
+In this method two Scout aspects are of interest. 
+
+The first Scout feature used is the absence of a \java{COMMIT} statement after the two \java{INSERT INTO} statements. 
+This is possible, as all Scout service calls run in a transaction context that is transparent to the Scout developer. 
+If a service method exits without errors, the enclosing transaction is committed. 
+And if any runtime exception occurs in a service call the Scout runtime framework performs a rollback.
+
+The second feature is the parameter binding used in the \java{INSERT INTO} statements. 
+When SQL statements are executed using any of the static \java{SQL} methods, an internal statement processor replaces all bind variables found in the provided statement string. 
+In Scout, SQL bind variables need to use the pattern \java{:<variable name>}. 
+The values for the bind variables can then be provided in the form of additional arguments. 
+In the concrete example of \lstref{mycontacts.server.services.installdb.company}, the content for the bind variable \java{:company\_id} is provided as a \java{NVPair} object. 
+\element{NVPairs} are the simplest possible form to represent bind variables. 
+The first constructor argument is the variable name of the bind variable, in this case \java{company\_id}. 
+The actual content of the bind variable is provided in the form of an object. 
+Here, the Java runtime class \java{UUID.randomUUID().toString()} is used to create a new company key. 
+
+Setting up the person table and the user parameter table is defined according to \lstref{mycontacts.server.services.installdb.person} and \lstref{mycontacts.server.services.installdb.users_param}. 
+To create a data object for the persons day of birth, the Scout utility class \java{DateUtility} is used.
+
 \lstinputlisting[
   label=\lstlabel{mycontacts.server.serverapplication},
   caption=Scheduling the database installation in the \java{start} method of the \java{ServerApplication} class during the server application startup.,
-  index={Scheduling a server job during the startup of the Scout server application., ServerApplication},
+  index={ServerApplication, ServerSession},
   linerange={30-57,62-63},
   float
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/ServerApplication.java}
 
+The only piece missing to setup the database is calling the \java{installStorage} operation during the startup of the ''My Contacts'' server application.
+The proper way to implement such a scenario is to schedule an installation job in the \java{ServerApplication} class of the Scout server. 
+In the ''My Contacts'' application this is implemented according to \lstref{mycontacts.server.serverapplication}. 
+To create a server job, a new server session object needs to be obtained first. 
+However, during the startup time of the server we do not have any logged in users yet. 
+That is why the session is created for the backend subject representing the server application. 
+Using this \java{serverSession} object, the \java{installJob} can be created. 
+In it's \java{runTransaction} method we can then call the \java{installStorage} operation to setup the ''My Contacts'' database.
+
+% ........................................................................... %
+\subsection{Scout Logging}
+
+\lstinputlisting[
+  label=\lstlabel{mycontacts.server.configini.logging},
+  caption=The logging configuration in the Scout server's \texttt{config.ini} file.,
+  index={config.ini, logging setup},
+  linerange={14-17},
+  float
+]
+{../code/oneDayTutorial/org.eclipsescout.contacts.server/products/development/config.ini}
+
+An additional Scout topic that is touched in this \java{ServerApplication} class is the Scout logging. 
+As shown in \lstref{mycontacts.server.serverapplication}, a static \java{logger} object is created using Scout's \java{ScoutLogManager} class. 
+Events can then be logged with the \java{logger.info} method where \java{info} refers to the log level attached to this message. 
+Similar to the database setup described above, the logging setup can be defined in \filename{config.ini} file. 
+The default setup defined for the development product is provided in \lstref{mycontacts.server.configini.logging}.
+Further information regarding logging in Eclipse Scout is available in the Scout wiki\footnote{
+Logging in Eclipse Scout: \url{http://wiki.eclipse.org/Scout/Concepts/Logging}.
+}.
+
 % --------------------------------------------------------------------------- %
-\section{Fetching Person and Company Table Data from the Database}
+\section{Fetching Data from the Database}
 
 \begin{figure}
 \includegraphics[height=5cm]{new_service_persontabledata_contextmenu.png} \hspace{5mm}
@@ -383,19 +496,50 @@ On the server side we show how to work with databases, how to use logging in Sco
 \figlabel{new_service_persontabledata}
 \end{figure}
 
-Lorem ipsum will build an outline based Scout application featuring a navigation tree and pages to present information in tabular form. 
-In addition, the application also shows how to work with menus and context menus, search forms, and forms to enter and/or update data. 
-On the server side we show how to work with databases, how to use logging in Scout applications and how to lorem ipsum. 
+In the section before, we have implemented the access to the Derby database for the Scout server. 
+And during the server startup, the application's database schema can now be created and populated with some initial data. 
+
+Here, this schema and the implemented database access is used to fetch the data for the client application's person page and the company page. 
+The best place to implement these data provider methods is in the server's \java{StandardOutlineService} class. 
+This class has been created by the Scout SDK during the initial project creation step.
+It is meant to hold the operations that fetch the data for populating the elements visible in the outline tree and outline pages. 
+
+For the ''My Contacts'' application, we first create the \java{getPersonTableData} operation as shown in \figref{new_service_persontabledata}. 
+In the wizard dialog enter ''getPersonTableData'' into the \field{Operation Name}. 
+For the return type we simply use a two dimensional object array. 
+As the person page is also displayed under the company page, we need to have a way to only return the persons working for a specific company. 
+To allow for this use case, we add the parameter ''companyId'' as the first argument to the \java{getPersonTableData} operation before we close the wizard with \button{Finish}. 
+
+The next operation we need is the \java{getCompanyTableData} method. 
+You may use the same creation steps as described above for the person table page data. 
+But for fetching company table data we do not need an additional argument.
+The company page in the ''My Contacts'' application will always show all available companies. 
 
 \lstinputlisting[
   label=\lstlabel{mycontacts.server.services.standardoutline},
   caption=Fetching the table data for the person and the company page of the ''My Contacts'' application.
   The list of persons is restricted to employees of a specific company if a company id parameter is provided.,
-  index={Server operations to fetch table data from a database., StandardOutlineService},
+  index={SQL, StringUtility, bind variables, NVPair, StandardOutlineService},
   linerange={10-29},
   float
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/StandardOutlineService.java}
+
+For the actual implementation of the two data fetching operations the code provided in \lstref{mycontacts.server.services.standardoutline} is used. 
+The implementation is straight forward and almost trivial. 
+However, we can use the \java{getPersonTableData} example to introduce one of the many Scout utility classes. 
+
+\begin{figure}
+\includegraphics[width=8cm]{scout_utility_classes.png}
+\caption{Accessing the Scout utility classes with the pattern \java{org.eclipse.scout.*Utility}.}
+\figlabel{scout_utility_classes}
+\end{figure}
+
+The class \java{StringUtility} is one of the many utility classes provided by the Scout framework. 
+Here, it is used for the typical null or empty check. 
+To get a quick overview, hit the \key{Ctrl}\key{Shift}\key{T} key combination. 
+In the type dialog that appears enter \java{org.eclipse.scout.*Utility} into the pattern field. 
+This will display the complete list of the Scout utility classes as shown in \figref{scout_utility_classes}.
 
 % --------------------------------------------------------------------------- %
 \section{Creating the Person Form}
@@ -407,9 +551,14 @@ On the server side we show how to work with databases, how to use logging in Sco
 \figlabel{new_form_person}
 \end{figure}
 
-Lorem ipsum will build an outline based Scout application featuring a navigation tree and pages to present information in tabular form. 
-In addition, the application also shows how to work with menus and context menus, search forms, and forms to enter and/or update data. 
-On the server side we show how to work with databases, how to use logging in Scout applications and how to lorem ipsum. 
+In this section we will create the person form that is used to display and edit the persons stored in the ''My Contacts'' application. 
+To add the person form use the Scout SDK \wizard{New Form} as shown in \figref{new_form_person}. 
+In the first wizard step you just need to enter ''Person'' as a new translated text into the \field{Name} and add ''ui.forms'' as the sub-package name in the corresponding wizard field. 
+Then click the \button{Finish}.
+
+The wizard will create the necssary artefacts in the application's client, the shared and the server plugin projects. 
+On the client side the \java{PersonForm} class with the necessary form handlers is created, in the shared part, the \java{PersonFormData} transfer object is added. 
+On the server side, a \java{PersonProcessService} with all necessary service operations referenced by the form handlers is implemented. 
 
 \begin{figure}
 \includegraphics[height=4.5cm]{new_bean_personid_contextmenu.png} \hspace{5mm}
@@ -418,9 +567,10 @@ On the server side we show how to work with databases, how to use logging in Sco
 \figlabel{new_bean_personid}
 \end{figure}
 
-Lorem ipsum will build an outline based Scout application featuring a navigation tree and pages to present information in tabular form. 
-In addition, the application also shows how to work with menus and context menus, search forms, and forms to enter and/or update data. 
-On the server side we show how to work with databases, how to use logging in Scout applications and how to lorem ipsum. 
+To hold the persons primary key in the person form we also need to add a corresponding variable. 
+For this, use the \wizard{New Property Bean} as shown in \figref{new_bean_personid}. 
+In the wizard dialog, enter ''PersonId'' into the \field{Name} and pick \java{String} from the dropdown list provided in the \field{Bean type}. 
+Then, click the \button{Finish} to close the wizard. 
 
 \begin{figure}
 \includegraphics[width=7cm]{new_field_personbox.png} \hspace{5mm}
