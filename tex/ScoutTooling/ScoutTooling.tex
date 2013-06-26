@@ -41,7 +41,7 @@ Additionally, the Scout SDK contains a comprehensive set of wizards that support
 
 The Scout Explorer view allows the developer to navigate the complete Scout application model. 
 Once an element in the Scout Explorer is selected, the Scout Object properties view allows to view and change selected properties of the selected element. 
-Depending on the selected element in the Scout Explorer, the Scout SDK offers appropriate context menues to start the related wizards.
+Depending on the selected element in the Scout Explorer, the Scout SDK offers appropriate context menus to start the related wizards.
 
 \begin{figure}
 \includegraphics[width=14cm]{scout_sdk_perspective.png} 
@@ -99,7 +99,7 @@ This navigation support is presented in the form of a tree view and includes the
 It also includes all Scout application modules of modular Scout applications\footnote{
 See \secref{multi_module_apps} for more information regarding multi module Scout applications.
 }.
-For the actual navigation in the tree representing the Scout application both the mouse or the keyborad can be used. 
+For the actual navigation in the tree representing the Scout application both the mouse or the keyboard can be used. 
 
 To expand or collapse a selected node in the Scout Explorer, you may click on the tiny \icon{plus} or the \icon{minus} presented to the left of the node.
 Alternatively, you can also use the \key{Right} or the \key{Left}.
@@ -119,7 +119,7 @@ The wizards support the creation of application components, such as dialogues on
 
 In \figref{explorer_client} the top level organisation of the client application model is shown as it is represented in the Scout Explorer.
 All client specific elements are located under the selected orange client node \element{org.eclipsescout.helloworld.client}. 
-Right below, the three white UI plugins are located that represent the support for the corresponding UI technolgies for Swing, SWT and Eclipse RAP. 
+Right below, the three white UI plugins are located that represent the support for the corresponding UI technologies for Swing, SWT and Eclipse RAP. 
 The orange \node{org.eclipsescout.helloworld.client.mobile} contains all elements that are specific to mobile devices such as the \java{MobileHomeForm}
 
 Specific nodes for the client session and the desktop of the Scout client allow access to the corresponding Scout application model components. 
@@ -143,14 +143,14 @@ As shown in \figref{explorer_shared}, a separate folder for each resource type i
 \begin{figure}
 \includegraphics[height=6.8cm]{explorer_server.png} \hspace{5mm} 
 \includegraphics[height=6.8cm]{explorer_server_servicewizard.png}
-\caption{The Scout Explorer view with the expanded server node (left). On the individual nodes, access to the relevant Scout SDK wizards is provided via context menues (right).}
+\caption{The Scout Explorer view with the expanded server node (left). On the individual nodes, access to the relevant Scout SDK wizards is provided via context menus (right).}
 \figlabel{explorer_server}
 \end{figure}
 
 In \figref{explorer_server}, the blue server node is expanded in the Scout Explorer view. 
 As the primary responsibility of the Scout server application is dealing with requests, its components are mostly related to different types of services. 
 Below the server session node, the \folder{Services} holds services related to the processing logic of the application such as retrieving and updating data. 
-The remaining folder group differnt more specific types of server services. 
+The remaining folder group different more specific types of server services. 
 Under the \folder{Webservices} the Scout SDK support to provide and consume web services is located. 
 
 The right side of \figref{explorer_server} illustrates the access to the Scout SDK wizards via corresponding context menus. 
@@ -176,8 +176,8 @@ This property view is displayed when the application's top level node is selecte
 \figlabel{properties_technologies}
 \end{figure}
 
-The main elements of the top-level application proprties are the sections \element{Product Launchers} and the \element{Technologies}. 
-As the product launcher section with its launcher boxes has alredy been covered in \secref{run_initial} and \secref{run_initial_background} we focus on the technologies section here.
+The main elements of the top-level application properties are the sections \element{Product Launchers} and the \element{Technologies}. 
+As the product launcher section with its launcher boxes has already been covered in \secref{run_initial} and \secref{run_initial_background} we focus on the technologies section here.
 The technologies section allows to add Scout runtime features and functionalities to the Scout application or remove such elements from the application. 
 
 When the selection of a technology checkbox is changed, a message box is shown to the user. 
@@ -190,7 +190,7 @@ Before any non-EPL content is downloaded from the internet, the user needs to re
 For this, a license confirmation dialog is shown upfront. 
 After confirmation, the required files are downloaded and automatically installed in the local Eclipse instance of the developer. 
 Usually, the Eclipse IDE needs to restart after a feature is downloaded and installed for the first time. 
-Currently, the procedure described above is used for the following technolgies. 
+Currently, the procedure described above is used for the following technologies. 
 
 \begin{itemize}
   \item MySQL JDBC Driver for Eclipse Scout
@@ -232,7 +232,7 @@ The provided links all refer to Java classes and interfaces that related to the 
 The available properties of a Scout component are listed in sections \element{Properties} and \element{Advanced Properties}. 
 Basically, all available Java \java{getConfigured} methods of a Scout component are listed in one of the two sections depending on the frequency of their usage. 
 Section \element{Properties} shows the often used properties, while the less frequently used properties are provided in section \element{Advanced Properties}. 
-The examples in \figref{properties_view_examples} show the thematical organization of the sections into \element{Appearance}, \element{Layout}, \element{Behaviour} and other groups.
+The examples in \figref{properties_view_examples} show the thematic organization of the sections into \element{Appearance}, \element{Layout}, \element{Behaviour} and other groups.
 
 Access to object operations implemented with Java \java{exec} methods is provided in sections \element{Operations} and \element{Advanced Operations}. 
 Again, the more and less frequently used operations are assigned to individual sections. 
@@ -311,7 +311,7 @@ Initially, all possible plugins are checked which is useful to quickly demonstra
 However, for a typical setup only a one or two UI plugins will be needed. 
 To develop a mobile/web applications only the RAP UI plugin is necessary. 
 For a desktop only client, either the Swing or the the SWT UI plugin will be needed.
-And in cases where the the client needs to run both on the desktop and as a web/mobile application, the RAP and a desktop UI plugin can be choosen. 
+And in cases where the the client needs to run both on the desktop and as a web/mobile application, the RAP and a desktop UI plugin can be chosen. 
 A Scout application must not necessarily be a client-server application. 
 It is also possible to create a client only or a server only applications. 
 But make sure to include the shared plugin in all possible use cases. 
@@ -324,11 +324,11 @@ As we have seen in the ''Hello World'' tutorial, it is sufficient to provide a p
 But we can also click on the \button{Next} to choose an application template.
 
 The second wizard step shown on the right side of \figref{wizard_new_project} allows to choose a Scout application template for the Scout project. 
-When choosing the template \textit{Empty Application}, you exactely know what you do and only a minimal code base is created. 
+When choosing the template \textit{Empty Application}, you exactly know what you do and only a minimal code base is created. 
 The other two application templates represent different application types. 
 The template \textit{Application with a single Form} is the default choice used for the ''Hello World'' tutorial.
 Finally, the template \textit{Outline Tree and Table Form} can be used to build explorer like applications. 
-The outline tree is typically used to navigate between related buiness entities. 
+The outline tree is typically used to navigate between related business entities. 
 And the tables are used to list a number of business entities with their attributes. 
 We will use this template for the creation of a larger Scout application in \charef{large_example}. 
 As in the case of the first wizard step, you may click \button{Finish} to start the creation of an initial Scout application. 
@@ -353,7 +353,7 @@ This target platform is then created by the Scout SDK in the given directory and
 
 Option \textit{Download RAP Target} will downloaded the target platform into the running workspace. 
 This download will then only be available to the active workspace.
-The two download types are only download the RAP plugins (checkbox not ticked) and download a new Kepler Eclipse platform as well (checkox ticked). 
+The two download types are only download the RAP plugins (checkbox not ticked) and download a new Kepler Eclipse platform as well (checkbox ticked). 
     
 With the option \textit{Existing RAP Target} an existing RAP target location can be specified. 
 The wizard then detects whether the provided location contains a complete target platform or only the RAP target plugins. 
@@ -393,9 +393,9 @@ If ticked, the corresponding WAR file will also include a zipped desktop client 
 Selecting the orange \node{Client Application (ZIP)} node will put a zipped client into the target directory. 
 Finally, when working with web/mobile applications the necessary RAP server is represented by the white \node{RAP Web Application}. 
 
-The default scenario assumes that you work with a Scout client server application inlcuding a SWT desktop client and corresponding web/mobile clients. 
+The default scenario assumes that you work with a Scout client server application including a SWT desktop client and corresponding web/mobile clients. 
 For this setup you just need to provide a target directory before you can click the \button{Finish} to start the export. 
-To verify/update what the export wizard will create you may click the \button{Next} to move to the second wizsard step.
+To verify/update what the export wizard will create you may click the \button{Next} to move to the second wizard step.
 
 The second wizard step shown on the right side of \figref{wizard_export}. 
 The server WAR file name proposed in the \field{WAR File} uses the naming scheme \filename{<Project Alias>\_server.war}. 
@@ -606,7 +606,7 @@ New permission wizard
 \subsection{Creating new Library Bundles}
 
 The \wizard{New Library Bundle} allows to add functionality provided in standard JAR files to a Scout application. 
-In the Scout Explorer, the \contextmenu{New Libaray Bundle...} is provided on the top-level \folder{Libraries} and individually under the orange client node, the green shared node and the blue server node. 
+In the Scout Explorer, the \contextmenu{New Library Bundle...} is provided on the top-level \folder{Libraries} and individually under the orange client node, the green shared node and the blue server node. 
 
 \begin{figure}
 \includegraphics[width=7cm]{wizard_library_bundle_1.png} \hspace{5mm}

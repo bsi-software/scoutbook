@@ -27,7 +27,7 @@ In the text below we will explain Scout from the perspective of these three role
 % ........................................................................... %
 \subsection{End User Perspective}
 
-End users of enterprise applications typically care about friendly user interfaces (UI) and well desinged functionality that support them in doing their job.
+End users of enterprise applications typically care about friendly user interfaces (UI) and well designed functionality that support them in doing their job.
 Depending on the role and the current context of an end users, either mobile, web or desktop clients work best.
 In the text below, we use a real world enterprise application to highlight how Scout applications can provide user friendly UIs on the desktop, in the browser and on mobile phones.
 
@@ -37,7 +37,7 @@ In the text below, we use a real world enterprise application to highlight how S
 \figlabel{bsi_crm_desktop}
 \end{figure}
 
-If the user is working from a desk and frequently engaged in customer calls, good integration with locally installed sofware such as Lotus Notes or Microsoft Office products can significantly boost productivity.
+If the user is working from a desk and frequently engaged in customer calls, good integration with locally installed software such as Lotus Notes or Microsoft Office products can significantly boost productivity.
 So far, such a scenario still requires a desktop client application.
 An example screenshot of a Scout desktop client application from a customer relationship management (CRM) solution is provided in \figref{bsi_crm_desktop}.
 The screenshot provides a good overview of the general layout of the application.
@@ -64,7 +64,7 @@ In \figref{bsi_crm_web} a screenshot of the web client of the CRM Scout applicat
 \figlabel{bsi_crm_mobile}
 \end{figure}
 
-Often, user find themselves in meetins or on the move where it is not possible to work with desktop or laptop computers.
+Often, user find themselves in meetings or on the move where it is not possible to work with desktop or laptop computers.
 In such situations, accessing applications via tablets or mobile phones is the only meaningful approach.
 As shown in \figref{bsi_crm_mobile}, a screenshot of the familiar CRM application is provided.
 The user still benefits from the familiar look and feel and the known functionality of the application.
@@ -104,18 +104,18 @@ Sometimes, the organisation is no longer willing to accept the costs and technol
 \end{figure}
 
 In this situation, the company needs to evaluate if it should buy a new standard product or if the old application has to be migrated to a new technology stack. 
-Now let us assume, that available products do not fit the companys requriements well enough and we have to settle for the migration scenario.
+Now let us assume, that available products do not fit the company's requirements well enough and we have to settle for the migration scenario.
 In the target architecture, a clean layering similar to the one shown in \figref{scout_integration} is often desirable.
 
 While a number of modern and established technologies exist that address the backend side (data bases, data access and business services), the situation is different for the UI layer and the application layer. 
-The number of frameworks to develop web applications with Java is exessively large\footnote{
+The number of frameworks to develop web applications with Java is excessively large\footnote{
 Web application framework comparison: \url{http://en.wikipedia.org/wiki/Comparison_of_web_application_frameworks#Java}.
 },
 but the choice between desktop application technologies in the Java domain is restricted to three options only. 
 Swing, SWT and JavaFX.
 Both Eclipse SWT and Java Swing are mature and well established but Swing is moving into 'maintenance only' mode and will be replaced by JavaFX.
-However, the maturity of the new JavaFX technology in large complex enterprise applicataions is not yet established. 
-Obviously, deciding for the right UI technology is a challange and needs to be made very carefully. 
+However, the maturity of the new JavaFX technology in large complex enterprise applications is not yet established. 
+Obviously, deciding for the right UI technology is a challenge and needs to be made very carefully. 
 Reverting this decision late in a project or after going into production can get very expensive and time consuming. 
 
 Once the organisation has decided for a specific UI technology, additional components and frameworks need to be evaluated to cover client server communication, requirements for the application layer, and integration into the existing application landscape. 
@@ -142,7 +142,7 @@ As Scout is an open source project, no licence fees are collected.
 Taking advantage of the growing popularity of Scout, free community support is available via a dedicated forum. 
 At the same time, professional support is available if the organisation decides for it.
 
-As the migration of aging applications to current technology is always a challange, it surely helps to have Scout in the technology portfolio. 
+As the migration of aging applications to current technology is always a challenge, it surely helps to have Scout in the technology portfolio. 
 Not only is it a low risk choice, but also boosts developer productivity and helps to motivate the development team. 
 Additional reasons on why Scout helps to drive down cost and risks are discussed in \secref{why_scout}.
 
@@ -150,9 +150,9 @@ Additional reasons on why Scout helps to drive down cost and risks are discussed
 \subsection{Developer Perspective}
 
 From the perspective of application developers, Scout offers a Java based framework that covers the complete client server architecture. 
-This implies that -- once familiar with the Scout framework -- the developer can concentrate on a single framework laguage (Java) and a single set of development tools. 
+This implies that -- once familiar with the Scout framework -- the developer can concentrate on a single framework language (Java) and a single set of development tools. 
 
-As Scout is completely based on Java and Eclipse, Scout developoers can take full advantage of existing knowledge and experience in these domains. 
+As Scout is completely based on Java and Eclipse, Scout developers can take full advantage of existing knowledge and experience in these domains. 
 And to make learning Scout as simple as possible, Scout includes a comprehensive software development kit (SDK), the Scout SDK.
 The Scout SDK helps to create a robust initial project setup for client server applications and includes a large set of wizards for repetitive and error prone tasks.
 
@@ -167,7 +167,7 @@ With one exception.
 If a specific UI widget is missing for the user story to be implemented, the Scout developer first needs to implement such a widget. 
 Initially, this task is slightly more complex than not working with Scout. 
 For custom widgets the Scout developer needs to implement both a model component and a rendering component for a specific UI technology. 
-But as soon as the client application needs to be available on more than a single frontend, the investment alreday pays off.
+But as soon as the client application needs to be available on more than a single frontend, the investment already pays off.
 The developer already did implement the model component and only needs to provide an additional rendering component for the new UI technology.
 In most situations the large set of Scouts UI components provided out-of-the box are sufficient and user friendly applications are straight forward to implement. 
 Even if the application needs to run on different target devices simultaneously.
@@ -220,7 +220,7 @@ It is a responsibility that should be neither given nor taken lightly, nor is it
 \end{quotation}
 
 \noindent After a successful election process (existing committers voting for and not against the candidate) the Scout developer effectively becomes a Scout committer. 
-With this new status, the Scout developer then gets write access to the Eclipse Scout repositories and gains voting rights and the possiblity to shape the future of Scout. 
+With this new status, the Scout developer then gets write access to the Eclipse Scout repositories and gains voting rights and the possibility to shape the future of Scout. 
 
 % --------------------------------------------------------------------------- %
 \section{Why should I choose Scout?}
@@ -230,9 +230,9 @@ Protect your investment
 \begin{itemize}
   \item Scout is proven in production for more than 10 years
   \item Scout is based on Java and the Eclipse platform
-  \item Scout is an open source project hosted at the Eclise foundation
+  \item Scout is an open source project hosted at the Eclipse foundation
   \item Scout has an active and growing community
-  \item Scout is moving with the best available technolgies.
+  \item Scout is moving with the best available technologies.
 
 \end{itemize}
 
@@ -240,13 +240,13 @@ Lower your cost for inhouse applications (Money)
 \begin{itemize}
   \item Increase your development productivity with Scout
   \item Take advantage of low maintenance costs for Scout applications
-  \item Leverage existing experienc in Java
+  \item Leverage existing experience in Java
 \end{itemize}
 
 Run your app on any device (desktop, tablet, mobile phone)
 \begin{itemize}
   \item Scout developers implement the application model only
-  \item In Scout, the user interface is modeled independend of any specific UI technology
+  \item In Scout, the user interface is modeled independently of any specific UI technology
   \item At runtime, the user interface is rendered using a specific Scout UI plugin
   \item For desktop apps, choose SWT or Swing
   \item For browser or mobile apps, choose RAP
@@ -274,7 +274,7 @@ Scout is production ready
 The text below provides guidelines on what to read (or what to skip) depending on your existing background.
 
 We first address the needs of junior Java developers that like to learn more about developing enterprise applications.
-Then, we suggest a list of sections relevant for software wizards that already have a solid understanding of the Eclipse platform, Java enterprise technolgies, and real world applications.
+Then, we suggest a list of sections relevant for software wizards that already have a solid understanding of the Eclipse platform, Java enterprise technologies, and real world applications.
 Finally, the information needs of IT managers are considered.
 
 % ........................................................................... %
@@ -292,7 +292,7 @@ However, prior knowledge of Java EE and the Eclipse platform is not required for
 
 The ``bad'' news is, that writing Scout applications requires a solid understanding of Java.
 To properly benefit from this book, we assume that you have been developing software for a year or more.
-And you should have masterd the Java Standard Edition 
+And you should have mastered the Java Standard Edition 
 (Java SE)\footnote{Java Standard Edition: \url{http://en.wikipedia.org/wiki/Java_SE}} to a significant extent. 
 To be more explicit, you are expected to be comfortable with all material required for the Java Programmer Level I 
 Exam\footnote{Level I Exam: \url{docs.oracle.com/javase/tutorial/extra/certification/javase-7-programmer1.html}}
@@ -303,7 +303,7 @@ As the focus of this book is on writing Scout applications and not on learning J
 To get a more precise picture which parts of Java and Eclipse are important to Scout applications, consult the appendices listed below.
 
 \begin{itemize}
-  \item \appref{java_basics} highlighs relevant advanced Java SE concepts and necessary Java EE topics. 
+  \item \appref{java_basics} highlights relevant advanced Java SE concepts and necessary Java EE topics. 
         In addition, the appendix contains recommendations for introductory material as well as pointers to further reading regarding Java EE technology.
   \item \appref{eclipse_basics} provides a brief introduction for Eclipse concepts used in Scout. 
         This includes the OSGi/Equinox foundation as well as additional elements such as Eclipse plugins, feature and product files.
@@ -318,7 +318,7 @@ This exercise will provide you with a broad overview of Eclipse Scout and enough
 
 How you continue after ``Getting Started'' will depend on your current interests or your specific project. 
 ``The Frontend'' and ``The Backend'' walk you through the Scout application model covering the client, the server, and the necessary communication in the context of a typical business application.
-``Developing Applications'' contains additional Scout features, relevant aspects for integrating Scout applications in an enterprise envrionment, and typical topics important to professional software development.
+``Developing Applications'' contains additional Scout features, relevant aspects for integrating Scout applications in an enterprise environment, and typical topics important to professional software development.
 
 Once you work with the Scout framework on a regular basis, you might want to ask questions in the Scout 
 forum\footnote{Eclipse Scout forum: \url{http://www.eclipse.org/forums/eclipse.scout}}.
@@ -327,7 +327,7 @@ In that case, you might want to help the Scout community by fixing or amending t
 Or this book. 
 If you find a bug in Eclipse Scout that makes your life miserable you can report it. 
 When your bug is fixed, you can test the fix.
-To help speed up the bugfixing process you can contribute patches.
+To help speed up the bug fixing process you can contribute patches.
 All of these actions will add to the healthy grow of the Scout community.
 And this is exactly the topic of ``Contributing'', the last part of this book.
 
@@ -355,9 +355,9 @@ The list below suggests a sequence of sections to digest including a brief motiv
   % \item read overview and transaction management in backend
   % \item read application extensions to learn how scout applications can be properly modularized 
   % \item maybe check how to use your favorite logging framework with scout
-  % \item glance at web and mobile application to learn how scout can use a single codebase to run an application on the desktop in the web, and on mobile devices
-  % \item glance over the shocase sections in "integrating 3rd party" to see how scout applications integrate with other frameworks
-  % \item flip though testing/profiling to convince yourself that developing scout applications is not different from developing other java/eclise applications	
+  % \item glance at web and mobile application to learn how scout can use a single code base to run an application on the desktop in the web, and on mobile devices
+  % \item glance over the showcase sections in "integrating 3rd party" to see how scout applications integrate with other frameworks
+  % \item flip though testing/profiling to convince yourself that developing scout applications is not different from developing other java/Eclipse applications	
 \end{itemize}
 
 % \begin{itemize}
@@ -368,15 +368,15 @@ The list below suggests a sequence of sections to digest including a brief motiv
   % \item read overview and transaction management in backend
   % \item read application extensions to learn how scout applications can be properly modularized 
   % \item maybe check how to use your favorite logging framework with scout
-  % \item glance at web and mobile application to learn how scout can use a single codebase to run an application on the desktop in the web, and on mobile devices
-  % \item glance over the shocase sections in "integrating 3rd party" to see how scout applications integrate with other frameworks
-  % \item flip though testing/profiling to convince yourself that developing scout applications is not different from developing other java/eclise applications	
+  % \item glance at web and mobile application to learn how scout can use a single code base to run an application on the desktop in the web, and on mobile devices
+  % \item glance over the showcase sections in "integrating 3rd party" to see how scout applications integrate with other frameworks
+  % \item flip though testing/profiling to convince yourself that developing scout applications is not different from developing other java/eclipse applications	
 % \end{itemize}
 
 % ........................................................................... %
 \subsection{I am a manager}
 
-Beeing a manager and actually reading this book may indicate one of the following situations:
+Being a manager and actually reading this book may indicate one of the following situations:
 
 \begin{itemize}
   \item Your developer tried to convince you that Eclipse Scout can help you with implementing business applications in a shorter time and for less money.
@@ -393,7 +393,7 @@ When the user starts the client part of this application, the client connects to
 The Scout server part of the ''Hello World'' application will be running on a web server.
 } 
 and asks for some text content that is to be displayed to the user.
-Next, the server retrives the desired information and sends it back to the client.
+Next, the server retrieves the desired information and sends it back to the client.
 The client then copies the content obtained from the server into a text field widget.
 Finally, the client displays the message obtained from the server in a text field widget.
 
@@ -495,7 +495,7 @@ Client products may also be stopped by closing the client's main window or using
 Before any of the client products is started, we need to start the server product using the green circle or the bug launcher icon.
 During startup of the Scout server you should see console output similar to the one shown on the right hand side of \figref{start_client}.
 Once the server is running, you may start the SWT client as shown in \figref{start_client}, the Swing client, and the RAP server in the same way.
-With a running RAP product, you may also dispay the Scout client in a web browser.
+With a running RAP product, you may also display the Scout client in a web browser.
 Just type the address \texttt{http://localhost:8082/web} into the browser's navigation bar.
 
 \begin{figure}
@@ -517,7 +517,7 @@ Having started the Scout server and all client products, the client applications
 In this section we will define the user interface (UI) model for the ''Hello World'' application.
 More specifically, we add a text field widget to the client's empty desktop form of the ''Hello World'' application.
 In the steps described below, we use the \wizard{New Form Field} provided by the Scout SDK. 
-Frist, we add a group box field to the desktop form.
+First, we add a group box field to the desktop form.
 Then, we apply this wizard a second time to add the actual text widget\footnote{
 Adding top level group boxes to a form helps in structuring the form layout, especially when a form contains a large number of form fields.
 }.
@@ -530,7 +530,7 @@ Adding top level group boxes to a form helps in structuring the form layout, esp
 
 To add any widgets to the desktop form we first need to navigate to the \element{DesktopForm} in the Scout Explorer.
 By clicking on the small plus icon on the left hand side of the \element{DesktopForm} this element is expanded and the \element{MainBox} element becomes visible below.
-With a click of the right mouse button over the \element{MainBox}, the available context menues are displayed.
+With a click of the right mouse button over the \element{MainBox}, the available context menus are displayed.
 To start the form field wizard we select the \menu{New Form Field ...} as shown in \figref{new_field_context_menu}.
 
 \begin{figure}
@@ -542,7 +542,7 @@ To start the form field wizard we select the \menu{New Form Field ...} as shown 
 \end{figure}
 
 In the first dialog of the form field wizard shown on the left side of \figref{helloworld_groupboxfield}, we choose the form field type.
-To select the desired field type, we either select the desired type with the mouse or use the serach field to filter the list of available field types.
+To select the desired field type, we either select the desired type with the mouse or use the search field to filter the list of available field types.
 In the second wizard dialog, we do not provide a label for the group box in the \field{Name}.
 As we have only a single group box in the ''Hello World'' desktop form we omit the name and enter 'Desktop' into the \field{Class Name} before we close the wizard with the \button{Finish}.
 This step is shown on the right side of \figref{helloworld_groupboxfield}.
@@ -574,7 +574,7 @@ Finally, we close the form field wizard using the \button{Finish}.
 
 By expanding the \element{DesktopBox} element in the Scout Explorer, the new message field becomes visible. 
 A double click on the message field element then loads the corresponding Java code into an Editor as shown in \figref{helloworld_messagefield}.
-If you are following this tutorial with your own Eclipse Scout installation compare your status with this screenhot.
+If you are following this tutorial with your own Eclipse Scout installation compare your status with this screenshot.
 Make sure that the project structure in the Scout Explorer looks as shown in \figref{helloworld_messagefield} and a double click to the \element{MessageField} both loads the corresponding Java code and displays the message field's properties in the Scout Object Properties.
 
 Having verified your status of the ''Hello World'' application you can start the application as described in \secref{run_initial}.
@@ -743,7 +743,7 @@ These two WAR files are the only items needed for deploying the ''Hello World'' 
 \seclabel{helloworld_deploy}
 
 As the final step of this tutorial, we deploy the two WAR files representing our ''Hello World'' application to a Tomcat web server.
-For this, we frist need a working Tomcat installation.
+For this, we first need a working Tomcat installation.
 If you do not yet have such an installation you may want to read and follow the instructions provided in \appref{install_tomcat}.
 To verify a running Tomcat instance, type \url{http://localhost:8080/} into the address bar of the web browser of your choice.
 You should then see the page shown in \figref{deploy_tomcat_1}.
@@ -815,7 +815,7 @@ In this chapter, we will take a deeper look at the ''Hello World'' and provide b
 The goal is to explain many of the used concepts in the context of a concrete Scout application to allow for a well rounded first impression of the Eclipse Scout framework and the tooling provided by the Scout SDK.
 
 The structure of this chapter is closely related to the ''Hello World'' tutorial.
-As you will notice, the order of the material presented here exactely follows the previous tutorial and identical section titles are used where applicable.
+As you will notice, the order of the material presented here exactly follows the previous tutorial and identical section titles are used where applicable.
 In addition to \charef{helloworld}, we include \secref{initial_helloworld} to discuss the initial application generated by the Scout SDK.
 
 % --------------------------------------------------------------------------- %
@@ -850,8 +850,8 @@ First, the number and names of the Eclipse plugin projects is identical in both 
 However, the Scout Explorer recognizes the Scout project structure and explicitly renders the relation between the different Eclipse plugins.
 In addition, individual node colors are used to indicate the role of each plugin project.
 Second, the focus of the Scout Explorer lies on the business functionality of the complete client server application.
-Artefacts only necessary to the underlying Eclipse platform are not even accessable.
-Third, on the individual elements rendered in the Scout Explorer, the Scout SDK provides menues to start wizards useful to the selected context.
+Artefacts only necessary to the underlying Eclipse platform are not even accessible.
+Third, on the individual elements rendered in the Scout Explorer, the Scout SDK provides menus to start wizards useful to the selected context.
 In the case of the ''Hello World'' tutorial we could create the complete application (except for a single line of Java code) using these wizards .
 
 When we revisit the \wizard{New Scout Project} in \figref{sdk_new_project_wizard}, it now becomes trivial to explain how the \field{Project Name} \java{org.eclipse.scout.helloworld} was used as the common prefix for plugin project names and Java package names.
@@ -893,10 +893,10 @@ In the ''Hello World'' application, it is the Desktop that is first opened when 
 
 To find the desktop class in the Scout Explorer, we first navigate to the orange \node{client} and double click the \node{Desktop} just below.
 This will open the associated Java file \texttt{Desktop.java} in the editor view of the Scout SDK.
-Of interest is the overwritten callback method \java{execOpend} shown in \lstref{helloworld.execopend}.
+Of interest is the overwritten callback method \java{execOpened} shown in \lstref{helloworld.execopened}.
 
 \lstinputlisting[
-  label=\lstlabel{helloworld.execopend},
+  label=\lstlabel{helloworld.execopened},
   caption=Creating and starting a form in the client's Desktop callback method \java{execOpened}.,
   index={DesktopForm},
   linerange={32-41},
@@ -904,7 +904,7 @@ Of interest is the overwritten callback method \java{execOpend} shown in \lstref
 ]
 {../code/helloworld/org.eclipse.scout.helloworld.client/src/org/eclipse/scout/helloworld/client/ui/desktop/Desktop.java}
 
-Method \java{execOpend} is called by the Scout framework after the desktop frame becomes visible.
+Method \java{execOpened} is called by the Scout framework after the desktop frame becomes visible.
 The only thing that happens here is the creation of a \java{desktopForm} object, that gets assigned an icon before it is started via method \java{startView}.
 This desktop form object holds the \field{Message} text widget that is displayed to the user\footnote{
 In the Scout application model we can only add UI fields to Scout form elements, not directly to the desktop.
@@ -933,11 +933,11 @@ Its value is set to 'View' to display the desktop form as a view and not as a di
 \end{figure}
 
 Expand the \element{DesktopForm} to show its children: \element{Variables}, \element{MainBox} and \element{Handlers}.
-The \element{Variables} subfolder contains variables. They are invisible to the application user.
+The \element{Variables} sub folder contains variables. They are invisible to the application user.
 The ''Hello World'' application is so simple, it does not need variables.
-The subfolder \element{MainBox} contains form fields. These are the visible user interface elements.
+The sub folder \element{MainBox} contains form fields. These are the visible user interface elements.
 The main box of our \java{DesktopForm} holds the \java{DesktopBox} containing the \java{MessageField} added with the \wizard{New Form Field}.
-Finally, the \element{Handlers} subfolder contains all available form handlers.
+Finally, the \element{Handlers} sub folder contains all available form handlers.
 The view handler shown in \figref{helloworld_viewhandler} has been added in the initial project creation step.
 
 % ........................................................................... %
@@ -945,7 +945,7 @@ The view handler shown in \figref{helloworld_viewhandler} has been added in the 
 \seclabel{helloworld.formhandler}
 
 Form handlers are used to manage the form's life cycle.
-Scout form handlers inherit from \java{AbstractFormHandler} and allow the implementation of desired behaviour before a form is opend, or after it is closed.
+Scout form handlers inherit from \java{AbstractFormHandler} and allow the implementation of desired behaviour before a form is opened, or after it is closed.
 This is achieved by overwriting callback methods defined in \java{AbstractFormHandler}.
 The necessary wiring is provided by the Scout framework, either by the initial project creation step or when using one of the provided Scout SDK wizards.
 
@@ -979,7 +979,7 @@ In the lower part of \lstref{helloworld.viewhandler} we can see the wiring betwe
 Further up, we find method \java{execLoad} of the view handler class.
 
 Before we discuss this method's implementation, let us examine when and how \java{execLoad} is actually called.
-As we have seen in the \java{Desktop} class (see \lstref{helloworld.execopend}), the form's method \java{startView} is executed after the desktop form is created.
+As we have seen in the \java{Desktop} class (see \lstref{helloworld.execopened}), the form's method \java{startView} is executed after the desktop form is created.
 Inside method \java{startView} (see \lstref{helloworld.viewhandler}), the desktop form is started/opened using \java{startInternal}.
 In method \java{startInternal} a view handler is then created and passed as a parameter.
 This eventually leads to the call of our \java{execLoad} custom implementation.
@@ -1058,7 +1058,7 @@ In the Package Explorer shown on the right side, the production and development 
 \end{figure}
 
 The reason why each executable has two product files associated with it lies in the assumption that we want to run the Scout application in different environments.
-Even in the case of the simple ''Hello World'' example, the Scout application is started in two target evironments.
+Even in the case of the simple ''Hello World'' example, the Scout application is started in two target environments.
 The development environment defines the product in the context of the Scout SDK.
 To export and run the Scout application outside of the Scout SDK, the production product files are used to define the application when it is to be started on a Tomcat web server.
 \figref{server_plugin} illustrates this situation for the ''Hello World'' server application. 
@@ -1075,7 +1075,7 @@ In the Dependencies tab shown above, the list of Eclipse plugins that are requir
 \figlabel{server_dev_product}
 \end{figure}
 
-For the case of the ''Hello World'' example we did not need to edit or chage the product files generated by the Scout SDK. 
+For the case of the ''Hello World'' example we did not need to edit or change the product files generated by the Scout SDK. 
 However, if your requirements are not met by the provided product files, you may use the Eclipse product file editor.
 A screenshot of this editor is shown in \figref{server_dev_product} with the tab \element{Dependencies} opened.
 In the tab Dependencies, the complete list of necessary plugins is provided.
@@ -1101,9 +1101,9 @@ Below, the content of the configuration file of the ''Hello World'' server appli
 \figlabel{server_dev_ini}
 \end{figure}
 
-Switching to tab \element{Configuration} in the product file editor, shows the selected radiobutton \element{Use an existing config.ini file} and the link to the configuration file provided in the \field{File} as shown in the upper part of \figref{server_dev_ini}.
+Switching to tab \element{Configuration} in the product file editor, shows the selected radio button \element{Use an existing config.ini file} and the link to the configuration file provided in the \field{File} as shown in the upper part of \figref{server_dev_ini}.
 Below, a part of the server's \filename{config.ini} file is shown.
-Both the entry in the product file pointing to the configuratino file, and the content of the \filename{config.ini} file has been generated by the Scout SDK during the initial project creation step.
+Both the entry in the product file pointing to the configuration file, and the content of the \filename{config.ini} file has been generated by the Scout SDK during the initial project creation step.
 As shown in the lower part of \figref{server_dev_ini}, Eclipse configuration files have the format of a standard property file.
 The provided key value pairs are read at startup time if the \filename{config.ini} file can be found in folder \filename{configuration} by the Eclipse runtime.
 
@@ -1176,7 +1176,7 @@ support of Scout for texts.
 As discussed in \secref{helloworld.form} Scout forms consist of variables, the main box and a number of form handlers.
 The main box represents the visible part of Scout's form model.
 It may holds any number of form fields.
-Using container fields such as group boxes, it is possible to define complex structures such as hierachical UI models containing multiple levels.
+Using container fields such as group boxes, it is possible to define complex structures such as hierarchical UI models containing multiple levels.
 In the Scout framework the forms structure is represented in the form of inner classes that are located inside of the \java{MainBox} class.
 And the \wizard{New Form Field} of the Scout SDK fully supports this pattern.
 \lstref{helloworld.mainbox} provides the concrete example using the the desktop form of the ''Hello World'' tutorial.
@@ -1219,7 +1219,7 @@ To access the translated label field entry in the application, the Scout SDK gen
 In the default Scout project setup, calling \java{TEXTS.get} uses the \java{DefaultTextProviderService} in the background.
 This text provider service then defines the access path for the text property files to use for the translation.
 To resolve the provided key, the user's locale settings are used to access the correct text property file.
-As translated texts may need to be available in both client and server application, the NLS infrastructure including the text property files are located in the applictions shared plugin.
+As translated texts may need to be available in both client and server application, the NLS infrastructure including the text property files are located in the application's shared plugin.
 
 \begin{figure}
 \includegraphics[height=4cm]{sdk_add_language_dialog.png} \hspace{0.5cm}
@@ -1267,7 +1267,7 @@ All Scout services need to extend Scout's \java{AbstractService} class and imple
 This also applies to the ''Hello World'' desktop service according to \lstref{helloworld.desktop_service}.
 As shown in \figref{helloworld_load_servicemethod}, this service can be located in the Scout Explorer under the blue server node in the \folder{Services}.
 
-Before Scout services can be accessed and used, they need to be explicitely registered as a service in the correct place.
+Before Scout services can be accessed and used, they need to be explicitly registered as a service in the correct place.
 For this registration mechanism, Scout is using Eclipse extension points and extensions\footnote{
 A good introduction to Eclipse extensions and extension points is provided in the Eclipse wiki: \url{http://wiki.eclipse.org/FAQ_What_are_extensions_and_extension_points\%3F}.
 }
@@ -1298,7 +1298,7 @@ In the tab \element{Extensions} the ''Hello World'' desktop service is registere
 The registration of the desktop service under the service extension point is then defined in the \filename{plugin.xml} file of the ''Hello World'' server plugin.
 As shown in \figref{plugin_editor}, the \filename{plugin.xml} file is located in the root path of plugin \java{org.eclipse.scout.helloworld.server}.
 To modify a \filename{plugin.xml}, you can either use the Eclipse plugin editor or your favorite text editor.
-In \figref{plugin_editor}, the registration of the desktop servicee is shown in the \element{Extensions} tab of the plugin editor.
+In \figref{plugin_editor}, the registration of the desktop service is shown in the \element{Extensions} tab of the plugin editor.
 For the corresponding XML representation in the \filename{plugin.xml} file, see \lstref{helloworld.server_plugin_xml}.
 
 % ........................................................................... %
@@ -1306,7 +1306,7 @@ For the corresponding XML representation in the \filename{plugin.xml} file, see 
 
 In the ''Hello World'' application the \java{load} method of the desktop service is called remotely from the client.
 But so far, we have only seen how the desktop service is implemented and registered in the server application.
-To call server service methods remotly from Scout client applications, the Scout framework provides client proxy services and the service tunnel.
+To call server service methods remotely from Scout client applications, the Scout framework provides client proxy services and the service tunnel.
 As the name implies, a client proxy service acts as a local proxy service (running in the Scout client application) of a server service (running remotely in the Scout server application).
 
 \lstinputlisting[
@@ -1329,7 +1329,7 @@ Internally, this service factory then uses the service tunnel to create the loca
 To call a remote service method from the Scout client application, we first need to obtain a reference to the proxy service.
 Using the \java{SERVICES.getService} method with the interface \java{IDesktopService}, we can obtain such a reference as shown in \lstref{helloworld.viewhandler} for the view handler of the desktop form.
 With this reference to the client's proxy service, calling methods remotely works as if the service would be running locally.
-Connecting to the server, serializing the method call including parameters (and deserializing the return value) is handeled transparently by Scout.
+Connecting to the server, serializing the method call including parameters (and de serializing the return value) is handled transparently by Scout.
 
 % --------------------------------------------------------------------------- %
 \section{Add the Rayo Look and Feel}
@@ -1347,7 +1347,7 @@ However, in a few cases it was necessary to adjust some of the synth classes.
 In order to do this, the adapted classes are copied form the OpenJDK implementation\footnote{
 OpenJDK is an open source implementation of the Java platform: \url{http://openjdk.java.net/}.
 }
-As OpenJDK is licenced under the GNU General Public Licence (GPL) with a linking exception it is not possible to distrbute Rayo under the Eclipse Public Licence.
+As OpenJDK is licenced under the GNU General Public Licence (GPL) with a linking exception it is not possible to distribute Rayo under the Eclipse Public Licence.
 That is why Rayo is not initially contained in the Eclipse Scout package but needs to be downloaded from the Eclipse Marketplace.
 Fortunately, there is still no restriction to use Rayo in commercial products.
 The only remaining restriction applies to modifying Rayo for commercial products.
@@ -1359,7 +1359,7 @@ As RAP is already distributed under the EPL licence the Rayo for web apps is dir
 TODO: Describe what to change to use RAP default look and feel
 
 A similar approach was chosen for Rayo on tablets and mobile devices that are supported with Eclipse Scout 3.9 (Kepler).
-For such devices optimized components are used to take into account the smaller screens and the absence of a mouse (no context menues!)
+For such devices optimized components are used to take into account the smaller screens and the absence of a mouse (no context menus!)
 But as far as possible, the Rayo look and feel also applies to touch devices.
 TODO: Pointer to more info regarding mobile devices.
 
@@ -1402,12 +1402,12 @@ See \appref{osgi_basics} for more information regarding server-side Eclipse appl
 Such as Eclipse Scout server applications.
 
 On the right hand side of \figref{helloworld_server_war} the eclipse specific content of the WAR file is shown.
-From top to bottom we finde the configration file \filename{config.ini} introduced in \secref{config_ini}.
+From top to bottom we find the configuration file \filename{config.ini} introduced in \secref{config_ini}.
 In folder \filename{plugins} the necessary plugins that constitute the eclipse application are located where the plugins are available in the form of JAR files\footnote{
 JAR files contain a set of Java classes and associated resources. \url{http://en.wikipedia.org/wiki/JAR_\%28file_format\%29}.
 }.
-This includes plugins for servlet management, the eclipse platform including the servlet bridge, the scout framwork parts and of course our ''Hello World'' server and shared plugin.
-These ''Hello World'' jar files exactely match with the plugin projects discussed in \secref{create_project_simple_background}.
+This includes plugins for servlet management, the eclipse platform including the servlet bridge, the scout framework parts and of course our ''Hello World'' server and shared plugin.
+These ''Hello World'' jar files exactly match with the plugin projects discussed in \secref{create_project_simple_background}.
 
 \begin{figure}
 \includegraphics[height=9cm]{helloworld_server_war_plugin.png} 
@@ -1451,7 +1451,7 @@ In case you need to change/brand/amend the download page for the desktop client,
 \seclabel{helloworld.tomcat.background}
 
 In this section we will discuss two common pitfalls when working with the Scout IDE and Tomcat.
-The symptons linked to these problems are Scour server applications that are not starting or Scout applications that fail to properly update.
+The symptoms linked to these problems are Scour server applications that are not starting or Scout applications that fail to properly update.
 
 In usual culprit behind Scout server applications that fail to start is a blocked port 8080.
 This setting can be created when we try to run both the Jetty web server inside the Scout SDK and the local Tomcat instance.

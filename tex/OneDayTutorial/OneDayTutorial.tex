@@ -38,7 +38,7 @@ To follow the description of the implementation the reader is assumed to be fami
 \section{The ''My Contacts'' Application}
 
 The ''My Contacts'' application is a client server application to manage personal contacts. 
-Persistece of entered data is achieved through a database backend. 
+Persistence of entered data is achieved through a database backend. 
 
 As social networking services\footnote{
 Social networking services in Wikipedia: \url{http://en.wikipedia.org/wiki/Social_network_service}
@@ -46,12 +46,12 @@ Social networking services in Wikipedia: \url{http://en.wikipedia.org/wiki/Socia
 such as Facebook, LinkedIn or Xing are widely used, the application also provides an example integration with the LinkedIn\footnote{
 \url{http://www.linkedin.com/}
 } 
-plattform. 
+platform. 
 The implemented integration allows to download the personal contacts into the local database. 
 In the local database it is possible to mix persons entered manually with contact data downloaded from LinkedIn. 
 
 \begin{figure}
-\includegraphics[width=14cm]{my_contacts_swt.png} 
+\includegraphics[width=15cm]{my_contacts_swt.png} 
 \caption{The SWT client of the ''My Contacts'' application. }
 \figlabel{my_contacts_swt}
 \end{figure}
@@ -60,14 +60,14 @@ After starting the Scout server application a client application may be started 
 In \figref{my_contacts_swt} the SWT desktop client is shown. 
 In the background, the main application window is visible showing a navigation tree on the left hand side. 
 On the right side, a table holds the elements corresponding to the selected tree node. 
-Using an edit context menu on the selected table row, a form to edit the releant data may be opened as shown in the example screenshot for 'Alice'. 
+Using an edit context menu on the selected table row, a form to edit the relevant data may be opened as shown in the example screen shot for 'Alice'. 
 Clicking on the link 'Show Map ...' in the person form opens the person's location information in a map form using the data provided by Google Maps Image API\footnote{
 The Google Maps Image APIs: \url{https://developers.google.com/maps/documentation/imageapis/}.
 }.
 
 \begin{figure}
 \includegraphics[width=9cm]{my_contacts_rayo_refresh.png} 
-\caption{To refresh/generate an access token for reading LinkedIn contacts data select the menu shown in the screenshot. }
+\caption{To refresh/generate an access token for reading LinkedIn contacts data select the menu shown in the screen shot. }
 \figlabel{my_contacts_rayo_refresh}
 \end{figure}
 
@@ -81,7 +81,7 @@ Then, the security code field is enabled and the user can fill in the security c
 
 Before any LinkedIn data can be accessed from the ''My Contacts'' application an access token needs to be retrieved from LinkedIn. 
 To obtain such a token use the \menu{Refresh LinkedIn Token ...} as shown in \figref{my_contacts_rayo_refresh}. 
-This opens the refesh token form shown on the left side of \figref{my_contacts_rayo_openauthurl}. 
+This opens the refresh token form shown on the left side of \figref{my_contacts_rayo_openauthurl}. 
 
 \begin{figure}
 \includegraphics[width=7cm]{oauth_grant_access.png} \hspace{5mm}
@@ -94,7 +94,7 @@ In the first step (right) confirm the access request, then the security code to 
 
 Clicking on the 'Open Auth URL' link then opens the granting page provided by LinkedIn shown on the left hand side of \figref{oauth_security_code}. 
 After logging into your LinkedIn account\footnote{
-Yes, for this use case you need a LinkedIn accout. But at least it's free and you will not need to provide very sensitive information such as a mobile phone number, a credit card number or a social security number. 
+Yes, for this use case you need a LinkedIn account. But at least it's free and you will not need to provide very sensitive information such as a mobile phone number, a credit card number or a social security number. 
 }
 you can specify the desired access duration and confirm the ''OAuth test for Scribe'' access\footnote{
 This is the name of the example code provided with the Scribe library that is used with the ''My Contacts'' application. 
@@ -102,7 +102,7 @@ This is the name of the example code provided with the Scribe library that is us
 to your LinkedIn data.
 If the authorization is successful, a security code as shown on the right side of \figref{oauth_security_code} is presented by LinkedIn. 
 This code needs then to be entered into the \field{Security Code} as shown on the right side of \figref{my_contacts_rayo_openauthurl}. 
-Then, click the \button{OK} to refersh the access token. 
+Then, click the \button{OK} to refresh the access token. 
 
 \begin{figure}
 \includegraphics[width=9cm]{my_contacts_rayo_updatecontacts.png} \hspace{5mm}
@@ -113,7 +113,7 @@ Then, click the \button{OK} to refersh the access token.
 To import/update your LinkedIn contacts into your ''My Contacts'' application select the \menu{Update LinkedIn Contacts} as shown in \figref{my_contacts_rayo_updatecontacts}.
 Once you have downloaded or entered a number of persons in your ''My Contacts'' application, try to get yourself familiar with the application's person table. 
 This is one of the very powerful Scout widgets. 
-Columns may be filtered, moved, hidden or sorted (including multi level sort) using the table header context menues \menu{Organize Columns...}  and \menu{Column Filter...}.
+Columns may be filtered, moved, hidden or sorted (including multi level sort) using the table header context menus \menu{Organize Columns...}  and \menu{Column Filter...}.
 
 Editing and viewing of person data is available by the \contextmenu{Edit Person...} on a selected row.
 To manually add a person use the context \contextmenu{New Person...} available on the table header or in the white area outside the displayed columns. 
@@ -121,7 +121,7 @@ To manually add a person use the context \contextmenu{New Person...} available o
 \begin{figure}
 \includegraphics[width=14cm]{my_contacts_rayo_filteredcontacts.png} 
 \caption{After importing the contacts from LinkedIn the data is shown in the person page. 
-The filter applied on the headline column is indicated by the filter icon. In the front, the filter form shows the filter criterial 'Eclipse'.}
+The filter applied on the headline column is indicated by the filter icon. In the front, the filter form shows the filter criteria 'Eclipse'.}
 \figlabel{my_contacts_rayo_filteredcontacts}
 \end{figure}
 
@@ -141,7 +141,7 @@ On the left hand side, the person page is shown. The person form is shown on the
 \end{figure}
 
 In \figref{my_contacts_rapweb_excelexport} the ''My Contacts'' application is running in a web browser. 
-In this example, the \menu{Tools|Export to to Excel} is used to export the selectd row into an Excel sheet. 
+In this example, the \menu{Tools|Export to to Excel} is used to export the selected row into an Excel sheet. 
 Finally, the ''My Contacts'' application is also running on iPhone and Android mobile devices out of the box. 
 Two example screens are provided in \figref{my_contacts_rapmobile}.
 
@@ -149,8 +149,8 @@ Once you no longer feel confident about having the ''My Contacts'' application a
 In the lower part of the settings page switch to tab ''Groups, Companies and Applications'' and click on the link ''View your applications''. 
 There, you will find again the partner name ''OAuth test for Scribe''. 
 To revoke the access, select the associated checkbox and click the ''Remove'' button. 
-The next time you try to referesh your LinkedIn data from the ''My Contacts'' application will result in an Error message. 
-Before you can again access data from your LinkedIn accout you just need to refresh the access token as described above.
+The next time you try to refresh your LinkedIn data from the ''My Contacts'' application will result in an Error message. 
+Before you can again access data from your LinkedIn account you just need to refresh the access token as described above.
 
 % --------------------------------------------------------------------------- %
 \section{Setting up the new Scout project}
@@ -162,7 +162,7 @@ Before you can again access data from your LinkedIn accout you just need to refr
 \figlabel{new_project_contacts}
 \end{figure}
 
-The initial code for the ''My Contacts'' application is generated using the \wizard{New Scout Project} as decribed in \secref{wizard_new_project}. 
+The initial code for the ''My Contacts'' application is generated using the \wizard{New Scout Project} as described in \secref{wizard_new_project}. 
 For the \field{Project Name} use the name \java{org.eclipsescout.contacts} as shown on the left side of \figref{new_project_contacts} and click on the \button{Next}. 
 In the second wizard step select the application template \element{Outline Tree and Table Form} as shown on the right side of \figref{new_project_contacts}.
 
@@ -311,7 +311,7 @@ For the Java representation of such variables the standard bean pattern is used 
 \lstinputlisting[
   label=\lstlabel{mycontacts.desktop.outline.companypage.linking},
   caption=Linking the \java{PersonTablePage} with the parent \java{CompanyTablePage}.,
-  index={Linking pages hierachically.},
+  index={Linking pages hierarchically.},
   linerange={30-36},
   float
 ]
@@ -331,7 +331,7 @@ As in the case of the person table page, the company id column is used as a prim
 The \property{Displayable} needs to be set to false and the \property{Primary Key} to true. 
 Now we can link the person page to the company page using the \contextmenu{Add Existing Page...} as shown on the left side of \figref{add_existing_page}. 
 In the \wizard{Link Page}, the person page can then be selected according to the right side of \figref{add_existing_page}. 
-In the Java code generated by the Scout SDK the setting of the company id attribute is automatically inserted in method \java{execCreateChildPage}. 
+In the Java code generated by the Scout SDK the setting of the company id attribute is automatically inserted in method \java{execCreateChildPages}. 
 Please note that this convenience added by the Scout SDK wizard only works if the child page defines variables with a naming that matches the defined primary key columns of the parent table. 
 
 % --------------------------------------------------------------------------- %
@@ -398,7 +398,7 @@ Having a working database service and a new (empty) Derby database now allows to
 For this we add a new \java{DBInstallService} service as shown in \figref{new_service_dbinstall}.
 To this install service we then add the \java{installStorage} operation according to \figref{new_operation_installstorage}.
 The implementation of this method is provided in \lstref{mycontacts.server.services.installdb}.
-The method first checks if a setup is requried. 
+The method first checks if a setup is required. 
 For this, the member variable \java{m\_doSetup} is used that might also be set by the \java{setDoSetup} setter method via the server's the \filename{config.ini} file.
 
 \lstinputlisting[
@@ -425,7 +425,7 @@ For this, the member variable \java{m\_doSetup} is used that might also be set b
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/DBInstallService.java}
 
-Setting up the schema to contain the indiviudal tables for the ''My Contacts'' application is implemented in a separate method per table. 
+Setting up the schema to contain the individual tables for the ''My Contacts'' application is implemented in a separate method per table. 
 The table definition for the company table is provided in \lstref{mycontacts.server.services.installdb.company}. 
 In this method two Scout aspects are of interest. 
 
@@ -439,7 +439,7 @@ When SQL statements are executed using any of the static \java{SQL} methods, an 
 In Scout, SQL bind variables need to use the pattern \java{:<variable name>}. 
 The values for the bind variables can then be provided in the form of additional arguments. 
 In the concrete example of \lstref{mycontacts.server.services.installdb.company}, the content for the bind variable \java{:company\_id} is provided as a \java{NVPair} object. 
-\element{NVPairs} are the simplest possible form to represent bind variables. 
+\element{NVPair}s are the simplest possible form to represent bind variables. 
 The first constructor argument is the variable name of the bind variable, in this case \java{company\_id}. 
 The actual content of the bind variable is provided in the form of an object. 
 Here, the Java runtime class \java{UUID.randomUUID().toString()} is used to create a new company key. 
@@ -556,7 +556,7 @@ To add the person form use the Scout SDK \wizard{New Form} as shown in \figref{n
 In the first wizard step you just need to enter ''Person'' as a new translated text into the \field{Name} and add ''ui.forms'' as the sub-package name in the corresponding wizard field. 
 Then click the \button{Finish}.
 
-The wizard will create the necssary artefacts in the application's client, the shared and the server plugin projects. 
+The wizard will create the necessary artefacts in the application's client, the shared and the server plugin projects. 
 On the client side the \java{PersonForm} class with the necessary form handlers is created, in the shared part, the \java{PersonFormData} transfer object is added. 
 On the server side, a \java{PersonProcessService} with all necessary service operations referenced by the form handlers is implemented. 
 
@@ -572,6 +572,9 @@ For this, use the \wizard{New Property Bean} as shown in \figref{new_bean_person
 In the wizard dialog, enter ''PersonId'' into the \field{Name} and pick \java{String} from the dropdown list provided in the \field{Bean type}. 
 Then, click the \button{Finish} to close the wizard. 
 
+% ........................................................................... %
+\subsection{Creating the Form Layout with From Fields}
+
 \begin{figure}
 \includegraphics[width=7cm]{new_field_personbox.png} \hspace{5mm}
 \includegraphics[width=7cm]{new_field_personbox_name.png}
@@ -579,9 +582,33 @@ Then, click the \button{Finish} to close the wizard.
 \figlabel{new_field_personbox}
 \end{figure}
 
-Lorem ipsum will build an outline based Scout application featuring a navigation tree and pages to present information in tabular form. 
-In addition, the application also shows how to work with menus and context menus, search forms, and forms to enter and/or update data. 
-On the server side we show how to work with databases, how to use logging in Scout applications and how to lorem ipsum. 
+As a next step we create the main layout structure of the person form. 
+According to the screenshot of the person form shown in \figref{my_contacts_swt} the form is organized into an upper box including the frist name, the last name and a picture field. 
+In the ''Details'' box in the lower half of the form some additional fields are found, such as the date of birth field. 
+The bottom of the form holds a ''Show Map ...'' link.
+We start with the general layout by adding the \java{PersonBox} according to \figref{new_field_personbox}. 
+And again on the person's from \node{MainBox} we add a second group box field using the label ''Detail''. 
+The link is added with the \wizard{New Form Field} too. 
+In the first wizard step select the type \java{LinkButton} and use a new translated text ''Show Map ...'' for the \field{Name}
+
+We now add the form fields listed below using the the \wizard{New Form Field} multiple times. 
+Most fields are of type \java{StringField} and different field types are separately indicated. 
+
+\begin{itemize}
+  \item{PersonBox}
+  \begin{itemize}
+    \item ''Frist Name'' 
+    \item ''Last Name''
+    \item PictureUrlField
+    \item PictureField (ImageField)
+  \end{itemize} 
+  \item{''Detail'' DetailBox}
+  \begin{itemize}
+    \item ''Headline'' 
+    \item ''Location''
+    \item ''Date of Birth'' (DateField)
+  \end{itemize} 
+\end{itemize} 
 
 \begin{figure}
 \includegraphics[width=7cm]{new_field_picture_contextmenu.png} \hspace{5mm}
@@ -589,6 +616,25 @@ On the server side we show how to work with databases, how to use logging in Sco
 \caption{Add the picture field to the first group box of the person form.}
 \figlabel{new_field_picture}
 \end{figure}
+
+As an example for adding the form fields, the process is illustrated in \figref{new_field_picture} for the creation of the picture field. 
+In the field list we need to set non default properties for the \field{PictureUrlField} and the \field{PictureField}. 
+The picture URL field will hold an URL pointing to the picture of the person to be displayed. 
+As in the person form only the picture is to be displayed but not the picture URL, we need to make this field invisible. 
+For this, select the \node{PictureUrlField} in the Scout Explorer and then untick the \field{Visible} in the Scout Object Properties. 
+Note that to access the visibility property you need to open the section \element{Advanced Properties} first. 
+
+\begin{figure}
+\includegraphics[width=7cm]{picture_field_properties_1.png} \hspace{5mm}
+\includegraphics[width=7cm]{picture_field_properties_2.png}
+\caption{Set the properties for the picture field of the person form.}
+\figlabel{picture_field_properties}
+\end{figure}
+
+As the configuration of the picture field is more complex than the other fields, the changed properties are shown in the screenshots provided in \figref{picture_field_properties}. 
+First, no label is shown for the picture field as shown in the unticked \field{Label Visible} of the Scout Object Properties. 
+Then, property \element{Grid H} is set to 5. 
+This results in the picture to cover the vertical space of 5 form fields. 
 
 \lstinputlisting[
   label=\lstlabel{mycontacts.client.forms.person.picturefield},
@@ -599,29 +645,12 @@ On the server side we show how to work with databases, how to use logging in Sco
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PersonForm.java}
 
-Lorem ipsum will build an outline based Scout application featuring a navigation tree and pages to present information in tabular form. 
-In addition, the application also shows how to work with menus and context menus, search forms, and forms to enter and/or update data. 
-On the server side we show how to work with databases, how to use logging in Scout applications and how to lorem ipsum. 
-
-\begin{figure}
-\includegraphics[width=7cm]{picture_field_properties_1.png} \hspace{5mm}
-\includegraphics[width=7cm]{picture_field_properties_2.png}
-\caption{Set the properties for the picture field of the person form.}
-\figlabel{picture_field_properties}
-\end{figure}
-
-\lstinputlisting[
-  label=\lstlabel{mycontacts.client.forms.person.picturefield.properties},
-  caption=The Java code for the selected Scout Object Properties of the \java{PictureField}.,
-  index={getConfiguredMasterField, execChangedMasterValue, IOUtility},
-  linerange={133-150,186-187},
-  float
-]
-{../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PersonForm.java}
-
-Lorem ipsum will build an outline based Scout application featuring a navigation tree and pages to present information in tabular form. 
-In addition, the application also shows how to work with menus and context menus, search forms, and forms to enter and/or update data. 
-On the server side we show how to work with databases, how to use logging in Scout applications and how to lorem ipsum. 
+Finally, we want the picture to be refreshed whenever the content of the picture URL is changed. 
+For this, the property \element{Master Field} is set to the \java{PictureUrlField}. 
+The implementation of the corresponding method \java{execChangedMasterValue} is provided in \lstref{mycontacts.client.forms.person.picturefield}. 
+As we can see, the Scout helper class \java{IOUtility} is used to read the image content from the provided URL. 
+This content is then used to assign the image content with the image field's method \java{setImage}. 
+Method \java{setAutoFit} is called to adapt the picture to the dimensions available to the image field. 
 
 \begin{figure}
 \includegraphics[width=7cm]{new_form_url_1.png} \hspace{5mm}
@@ -630,17 +659,23 @@ On the server side we show how to work with databases, how to use logging in Sco
 \figlabel{new_form_url}
 \end{figure}
 
+% ........................................................................... %
+\subsection{A simple Form to edit the Picture URL}
+
+To edit a person's picture link, we create a simple URL editor form as shown in \figref{new_form_url}. 
+As we only need this form to update the URL information of a person's picture field, we do not need any connectivity to the backend of the ''My Contacts'' application. 
+That is why almost all form and service artefacts are deselected in the second wizard step shown on the right side of \figref{new_form_url}. 
+
 \lstinputlisting[
   label=\lstlabel{mycontacts.client.forms.pictureurl},
   caption=The UI structure of the \java{PictureURLForm} used to update the URL of the picture field in the person form.,
-  linerange={17-18,52-67,79-80},
+  linerange={17-18,52-67,78-80},
   float
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PictureURLForm.java}
 
-Lorem ipsum will build an outline based Scout application featuring a navigation tree and pages to present information in tabular form. 
-In addition, the application also shows how to work with menus and context menus, search forms, and forms to enter and/or update data. 
-On the server side we show how to work with databases, how to use logging in Scout applications and how to lorem ipsum. 
+As this form only holds a single URL field, we omit the description of the creation of the URL edior form's content and provide the resulting Java code instead. 
+In \lstref{mycontacts.client.forms.pictureurl} just the form's \java{MainBox} code is shown. 
 
 \begin{figure}
 \includegraphics[width=7cm]{new_menu_editurl_contextmenu.png} \hspace{5mm}
@@ -648,6 +683,10 @@ On the server side we show how to work with databases, how to use logging in Sco
 \caption{Add the URL edit menu to the picture field.}
 \figlabel{new_menu_editurl}
 \end{figure}
+
+This form is then started via an ''Edit URL ...'' contextmenu on the image field.
+The creation of this contextmenu is shown in \figref{new_menu_editurl}. 
+See \lstref{mycontacts.client.forms.person.picturefield.editmenu} for the actual implementation of the \java{execAction} for this contextmenu.
 
 \lstinputlisting[
   label=\lstlabel{mycontacts.client.forms.person.picturefield.editmenu},
@@ -659,12 +698,12 @@ On the server side we show how to work with databases, how to use logging in Sco
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PersonForm.java}
 
-Lorem ipsum will build an outline based Scout application featuring a navigation tree and pages to present information in tabular form. 
-In addition, the application also shows how to work with menus and context menus, search forms, and forms to enter and/or update data. 
-On the server side we show how to work with databases, how to use logging in Scout applications and how to lorem ipsum. 
+Once the edit URL form is started with \java{form.startModify()} the client waits in method \java{form.waitFor} until the form is closed by the user. 
+If the user has changed any field content (the picture URL in our case) and closed the form with the \button{OK}, the method \java{form.isFormStored} returns true, and we can copy the new URL from the editor form field into the picture URL field of the person form. 
+Such a change will then trigger method \java{execChangedMasterValue} of the \java{PictureField} which in turn updates the image shown in the person form. 
 
-% --------------------------------------------------------------------------- %
-\section{Integrating the Person Form into the Application}
+% ........................................................................... %
+\subsection{Linking the Person Form to the Person Page}
 
 \begin{figure}
 \includegraphics[width=7cm]{new_menu_editperson_contextmenu.png} \hspace{5mm}
@@ -683,9 +722,16 @@ On the server side we show how to work with databases, how to use logging in Sco
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outlines/pages/PersonTablePage.java}
 
-Lorem ipsum will build an outline based Scout application featuring a navigation tree and pages to present information in tabular form. 
-In addition, the application also shows how to work with menus and context menus, search forms, and forms to enter and/or update data. 
-On the server side we show how to work with databases, how to use logging in Scout applications and how to lorem ipsum. 
+The user of the ''My Contacts'' application wants to use the person form to show/edit attributes of a specific person.
+To support this use case, we need to link this form with the ''My Contacts'' application. 
+As we already have person pages that show some of the person's attribute, we can now add context menus to this list to open/edit existing persons in the person form and to create new persons as well. 
+This is achieved by using the \wizard{New Menu} on the \node{Menus} of the table of the person page according to \figref{new_menu_editperson}. 
+In the \field{Name} enter the new translated text ''Edit Person ...''. 
+The form to start is the \java{PersonForm} and the \java{ModifyHandler} is the form handler to be used to start the form. 
+As we have defined a meaningful primary key column on the person page and a matching variable is available for the person form, the Scout SDK wizard is generating the necessary code automatically. 
+The implementation of the \java{execAction} method provided in \lstref{mycontacts.desktop.outline.personpage.editmenu} works out of the box and should not need any manual tuning.
+Now, you may also add the ''New Person ...'' menu in the same way. 
+Except that you pick the \java{NewHander} in the \wizard{New Menu} instead of the modify handler. 
 
 \begin{figure}
 \includegraphics[height=5cm]{person_table_explorer.png} \hspace{5mm}
@@ -696,16 +742,70 @@ On the server side we show how to work with databases, how to use logging in Sco
 
 \lstinputlisting[
   label=\lstlabel{mycontacts.desktop.outline.personpage.execrowaction},
-  caption=The \java{execRowAction} method on table pages is used to trigger an action when a row is selcted with a double click or \textsc{<Enter>}.,
+  caption=The \java{execRowAction} method on table pages is used to trigger an action when a row is selected with a double click or \textsc{<Enter>}.,
   index={execRowAction},
   linerange={58-62},
   float
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outlines/pages/PersonTablePage.java}
 
-Lorem ipsum will build an outline based Scout application featuring a navigation tree and pages to present information in tabular form. 
-In addition, the application also shows how to work with menus and context menus, search forms, and forms to enter and/or update data. 
-On the server side we show how to work with databases, how to use logging in Scout applications and how to lorem ipsum. 
+To open the person form with a double click on a person row or by hitting the \key{Enter} key, you may add a corresponding \java{execRowAction} on the person page. 
+This method can be added to the person table by clicking on the green plus icon next to the operation \element{Exec Row Action} as shown in \figref{person_table_properties}. 
+For the implementation of this method you may reuse the functionality implemented for the context menu according to \lstref{mycontacts.desktop.outline.personpage.execrowaction}. 
+
+% --------------------------------------------------------------------------- %
+\section{Managing Person Data on the Server Side}
+
+\lstinputlisting[
+  label=\lstlabel{mycontacts.client.personform.modifyhandler},
+  caption=The \java{execLoad} and the  \java{execStore} methods of the person form's modify handler.,
+  index={ModifyHandler,AbstractFormHandler},
+  linerange={292-312},
+  float
+]
+{../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PersonForm.java}
+
+In the ''My Contacts'' client application the person form is started via two separate form handlers called by the person page context menus. 
+The new handler is used to start the form in the mode to create new persons while the modify handler is implemented to start the form for updating existing persons. 
+When we look at the implementation of the modify handler provided in \lstref{mycontacts.client.personform.modifyhandler}, we see the two methods \java{execLoad} and \java{execStore}. 
+
+As already described in \secref{helloworld.formhandler} of the ''Hello World'' tutorial, \java{execLoad} is called by the Scout framework the the form is started. 
+Similarly, method \java{execStore} is called by the Scout framework after the user has clicked the \button{OK} of a form. 
+In both methods, a corresponding service operation of the \java{PersonService} is called. 
+From the form handler's \java{execLoad} method the method \java{load} of the person service is called. 
+And the form handler's \java{execStore} method calls the person service's method \java{store} as shown in \lstref{mycontacts.server.services.personservice.load}. 
+
+\lstinputlisting[
+  label=\lstlabel{mycontacts.server.services.personservice.load},
+  caption=The \java{load} and the \java{store} methods of the server's \java{PersonService}.,
+  index={PersonService},
+  linerange={18-19,48-96},
+  float
+]
+{../code/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/ui/forms/PersonService.java}
+
+For the \java{load} method in \lstref{mycontacts.server.services.personservice.load} it is assumed that the in the provided parameter \java{formData} the person's id is available as a seach criteria. 
+It might be interesting to note that for the SQL \java{SELECT} and \java{UPDATE} statements we can provide the complete form data to use Scout's support for bind variables. 
+
+The implementation of the person form's new handler is implemented similar to it's modify handler. 
+Instead of calling the service operations \java{load} and \java{store}, the methods  \java{prepareCreate} and \java{create} are used. 
+In prinicple, method \java{prepareCreate} is not needed for the ''My Contacts'' application. 
+As its implementation has been created by the Scout SDK wizard, it does not any harm when the method is left as it is. 
+
+\lstinputlisting[
+  label=\lstlabel{mycontacts.server.services.personservice.create},
+  caption=The \java{create} method of the server's \java{PersonService}.,
+  index={PersonService},
+  linerange={18-19,28-47,95-96},
+  float
+]
+{../code/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/ui/forms/PersonService.java}
+
+In \lstref{mycontacts.server.services.personservice.create} the implementation of the \java{PersonService}'s \java{create} method is provided. 
+First, the implementation checks if the provided form data contains a person id. 
+If the person has been entered manually a value for this id is missing and a new id is provided using \java{formData.setPersonId(UUID.randomUUID().toString())}.
+The only responsibility of the \java{INSERT} statement following the person id check is to make sure we will have a row in the \java{PERSON} table for the person to be created. 
+To save all other form data parameters, we just need to call the previously implemented \java{store} method. 
 
 % --------------------------------------------------------------------------- %
 \section{Extending the Person Form with a Company Smartfield}
@@ -735,7 +835,7 @@ On the server side we show how to work with databases, how to use logging in Sco
 \lstinputlisting[
   label=\lstlabel{mycontacts.server.lookup.companylookupservice},
   caption=The company lookup service in the application's server plugin.
-  The \java{key} and the \java{text} criterias are used to search for values by key or by the provided name substring.
+  The \java{key} and the \java{text} criteria are used to search for values by key or by the provided name substring.
   index={AbstractSqlLookupService, getConfiguredSqlSelect},
   linerange={6-20},
   float
@@ -776,15 +876,30 @@ On the server side we show how to work with databases, how to use logging in Sco
 % --------------------------------------------------------------------------- %
 \section{Adding the Scribe Library to the Application}
 
+To access data from sites such as LinkedIn, Xing, Google+ or Facebook, most social networks provide an API that requires user authentication. 
+The current defacto standard for such authentication is the Open Authentication Protocol (OAuth)\footnote{
+For more information regarding the OAuth standard, see: \url{http://oauth.net/}.
+} 
+
+The big advantage of the OAuth standard is the access token based authentication. 
+If an application such as the ''My Contacts'' example is in possession of an access token, it can fetch data from the hosting site or even act on the users behalf. 
+It is important to note that the access token is just constructed of two values, the token and the secret.
+And both values are completely separate from the user's username and password credentials. 
+This means that an access token may be safely stored in other applications. 
+Should such an application's data get compromised, the username and password are still save.
+The user then has the option to remove the compromised access token.  
+
+For the ''My Contacts'' application we use the Scribe Java library\footnote{
+The Scribe OAuth Java library: \url{https://github.com/fernandezpablo85/scribe-java}.
+}
+This library makes accessing social services very simple.
+At the same time the Scribe library is used here to demonstrate the integration of external Java libraries in Scout applications. 
+
 \begin{figure}
 \includegraphics[width=7cm]{new_library_scribe_contextmenu.png} \hspace{5mm}
 \caption{Add a new bundle to hold the Scribe JARs.}
 \figlabel{new_library_scribe_contextmenu}
 \end{figure}
-
-Lorem ipsum will build an outline based Scout application featuring a navigation tree and pages to present information in tabular form. 
-In addition, the application also shows how to work with menus and context menus, search forms, and forms to enter and/or update data. 
-On the server side we show how to work with databases, how to use logging in Scout applications and how to lorem ipsum. 
 
 \begin{figure}
 \includegraphics[width=7cm]{new_library_scribe_1.png} \hspace{5mm}
@@ -793,19 +908,20 @@ On the server side we show how to work with databases, how to use logging in Sco
 \figlabel{new_library_scribe}
 \end{figure}
 
-Lorem ipsum will build an outline based Scout application featuring a navigation tree and pages to present information in tabular form. 
-In addition, the application also shows how to work with menus and context menus, search forms, and forms to enter and/or update data. 
-On the server side we show how to work with databases, how to use logging in Scout applications and how to lorem ipsum. 
+As we will use the Scribe library only on the Scout server side start the Scout SDK \wizard{New Library Bundle} below the blue server node as shown in \figref{new_library_scribe_contextmenu}. 
+In the first wizard step shown on the left side of \figref{new_library_scribe} add the files \filename{scribe-1.3.0.jar} and \filename{commons-codec-1.8.jar}\footnote{
+See the getting started page for more information regarding the two necessary JAR file: \url{https://github.com/fernandezpablo85/scribe-java/wiki/getting-started}.
+} 
+using the \button{Add}. 
+Once the two JAR files are listed in the library list of the wizard click the \button{Next}.
+On the second wizard step, enter ''org.scribe'' into the \field{Bundle Name} as shown on the right side of \figref{new_library_scribe}. 
+Then, close the wizard with the \button{Finish}.
+
+The Scout SDK wizard then creates the corresponding library plugin and updates the server product files and the plugin dependencies of the applications server plugin accordingly. 
+Once the wizard has completed the classes defined in the two JAR files can directly be accessed from the ''My Contact'' application's server plugin.
 
 % --------------------------------------------------------------------------- %
 \section{Integrating LinkedIn Access with Scribe}
-
-\begin{figure}
-\includegraphics[height=5.5cm]{new_operation_authurl_contextmenu.png} \hspace{5mm}
-\includegraphics[height=5.5cm]{new_operation_authurl.png}
-\caption{Add the operation to retrieve an authentication URL.}
-\figlabel{new_operation_authurl}
-\end{figure}
 
 \lstinputlisting[
   label=\lstlabel{mycontacts.server.linkedin.initialize},
@@ -816,6 +932,20 @@ On the server side we show how to work with databases, how to use logging in Sco
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/LinkedInService.java}
 
+To access the LinkedIn data with Scribe a separate service \java{LinkedInService} is created in the \folder{Services} under the blue server node. 
+Before we add any service operations to the LinkedIn service, the service initialization method is implemented according to \lstref{mycontacts.server.linkedin.initialize}. 
+This initialization is not discussed further here.
+Instead, the interested reader is referred to the corresponding \java{LinkedInExample} on the Scribe web pages\footnote{
+For the Scribe \filename{LinkedInExample.java} example class see: \url{https://github.com/fernandezpablo85/scribe-java/blob/master/src/test/java/org/scribe/examples/LinkedInExample.java}.
+}.
+
+\begin{figure}
+\includegraphics[height=5.5cm]{new_operation_authurl_contextmenu.png} \hspace{5mm}
+\includegraphics[height=5.5cm]{new_operation_authurl.png}
+\caption{Add the operation to retrieve an authentication URL.}
+\figlabel{new_operation_authurl}
+\end{figure}
+
 \lstinputlisting[
   label=\lstlabel{mycontacts.server.linkedin.authurl},
   caption=The \java{getAuthUrl} method of the LinkedIn service.,
@@ -825,9 +955,9 @@ On the server side we show how to work with databases, how to use logging in Sco
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/LinkedInService.java}
 
-Lorem ipsum will build an outline based Scout application featuring a navigation tree and pages to present information in tabular form. 
-In addition, the application also shows how to work with menus and context menus, search forms, and forms to enter and/or update data. 
-On the server side we show how to work with databases, how to use logging in Scout applications and how to lorem ipsum. 
+The first service operation \java{getAuthUrl} is added according to \figref{new_operation_authurl}. 
+This operation will return the necessary information to create a request token and provides a link to open in a web browser to start the authentication against the LinkedIn account. 
+For its implementation see \lstref{mycontacts.server.linkedin.authurl}.
 
 \begin{figure}
 \includegraphics[height=5.5cm]{new_operation_refreshtoken.png} \hspace{5mm}
@@ -844,6 +974,38 @@ On the server side we show how to work with databases, how to use logging in Sco
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/LinkedInService.java}
 
+The next operations we add are used to refresh the users access token stored in the ''My Contacts'' application and to refresh or download the users contacts stored in the user's LinkedIn account. 
+See \figref{new_operation_refresh_update} for the necessary details for the creation of the two methods. 
+
+Method \java{refreshToken} is implemented according to \lstref{mycontacts.server.linkedin.refreshtoken}. 
+Using the provided token parameters and the security code, the access token is created using \java{m\_service.getAccessToken(...)}. 
+Then, the user id of the currently logged in user is obtained with \java{ServerSession.get().getUserId()}. 
+Once we have both the access token and the user id available in method {refreshToken}, we can store the token and the secret values for the current user in table \java{USERS\_PARAM} according to \lstref{mycontacts.server.linkedin.refreshtoken}.
+
+In the current implementation of the ''My Contacts'' application this id will always be set to \java{anonymous}. 
+The reason for this is the \java{AnonymousSecurityFilter} security filter that is activated during the initial project creation step. 
+As for logging, and database access, the configuration of the security filters of the server application is defined in the server's \filename{config.ini} file.
+
+\begin{lstlisting}[backgroundcolor=\color{white},language=ini]
+org.eclipse.scout.http.servletfilter.security.AnonymousSecurityFilter#active=true
+\end{lstlisting}
+
+\lstinputlisting[
+  label=\lstlabel{mycontacts.server.configini.securityfilter},
+  caption=The default configuration of the basic security filter in the Scout server's \texttt{config.ini} file.,
+  index={BasicSecurityFilter, config.ini},
+  linerange={35-39},
+  float
+]
+{../code/oneDayTutorial/org.eclipsescout.contacts.server/products/development/config.ini}
+
+If you would like to change the ''My Contacts'' application to a multi-user setup, the next simpler option is to deactivate the anonymous security filter and use the basic security filter instead. 
+In the server's \filename{config.ini} file the necessary config lines are already prepared as shown in \lstref{mycontacts.server.configini.securityfilter}. 
+Just set \java{BasicSecurityFilter\#active=true} and ''My Contacts'' the client application will prompt you with a login dialog. 
+In this dialog you may enter one of the login credentials specified in in the \java{BasicSecurityFilter\#users} parameter of the \filename{config.ini} file. 
+To log in as user admin, enter password ''manager''. 
+To add new users, just amend the \java{BasicSecurityFilter\#users} parameter with additional comma separated entries of the form \java{username\\\=password}.
+
 \lstinputlisting[
   label=\lstlabel{mycontacts.server.linkedin.updatecontacts},
   caption=The \java{updateContacts} method is used to enter/update existing contacts based on new data fetched from LinkedIn.,
@@ -852,24 +1014,22 @@ On the server side we show how to work with databases, how to use logging in Sco
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/LinkedInService.java}
 
-\lstinputlisting[
-  label=\lstlabel{mycontacts.server.linkedin.readcontacts},
-  caption=The \java{readContacts} method to fetch the users connection using the LinkedIn API.
-  The necessary access token is created in method \java{getToken} based on the information stored in the database for the logged in user.,
-  linerange={123-159},
+The implementation of service method \java{updateContacts} of the LinkedIn service is provided in \lstref{mycontacts.server.linkedin.updatecontacts}.
+First, a service reference is obtained to the person process service. 
+Then, the LinkedIn contacts obtained by method \java{readContacts} are stored in a \java{persons} list object. 
+For each person, a form data is created and its person id parameter is set to \java{DomUtility.getValue(person, "id")}. 
+Using the \java{load} method of the person process service all attributes of the person are loaded from the server's database. 
+The new attribute values obtained from the corresponding LinkedIn contact are then used to update the corresponding form data parameters. 
+The newly updated person form data is then stored in the database with \java{service.create(formData)}.
+Before we go through the \java{readContacts} method, we have a look at the explicit format of the contact data provided by the LinkedIn API. 
+
+\begin{lstlisting}[
+  label=\lstlabel{linkedin.samplexmlcontact},
+  caption=A sample contact represented in the XML format provided by the LinkedIn API.,
+  backgroundcolor=\color{white},
+  language=xml,
   float
 ]
-{../code/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/LinkedInService.java}
-
-\lstinputlisting[
-  label=\lstlabel{mycontacts.server.linkedin.domutil},
-  caption=The \java{DomUtility} class provides functions to parse the XML data structure provided by the LinkedIn API.,
-  linerange={13-45},
-  float
-]
-{../code/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/DomUtility.java}
-
-\begin{lstlisting}[backgroundcolor=\color{white},language=xml]
 <?xml version="1.0" encoding="UTF-16"?>
 <person>
     <id>f7R6wGcblj</id>
@@ -890,9 +1050,44 @@ On the server side we show how to work with databases, how to use logging in Sco
   </person>
 \end{lstlisting}
 
-Lorem ipsum will build an outline based Scout application featuring a navigation tree and pages to present information in tabular form. 
-In addition, the application also shows how to work with menus and context menus, search forms, and forms to enter and/or update data. 
-On the server side we show how to work with databases, how to use logging in Scout applications and how to lorem ipsum. 
+\lstinputlisting[
+  label=\lstlabel{mycontacts.server.linkedin.domutil},
+  caption=The \java{DomUtility} class provides functions to parse the XML data structure provided by the LinkedIn API.,
+  linerange={13-45},
+  float
+]
+{../code/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/DomUtility.java}
+
+From the sample XML extract provided in \lstref{linkedin.samplexmlcontact}, we can readily identify the person id \java{f7R6wGcblj}, the first name \java{Mike} and some other attribute names with associated attribute values. 
+A closer look reveals the identity of the person to be Mike Milinkovich, a well known character in the Eclipse community. 
+For each LinkedIn contact this format is parsed in method \java{readContacts} into a DOM tree\footnote{
+DOM stands for Document Object Model. See \url{http://www.w3.org/DOM/} for more information.
+}. 
+Using the \java{DomUtility} helper class provided in \lstref{mycontacts.server.linkedin.domutil}, these attribute values are then extracted from this DOM tree and used to update the existing person attributes. 
+
+\lstinputlisting[
+  label=\lstlabel{mycontacts.server.linkedin.readcontacts},
+  caption=The \java{readContacts} method to fetch the users connection using the LinkedIn API.
+  The necessary access token is created in method \java{getToken} based on the information stored in the database for the logged in user.,
+  linerange={123-159},
+  float
+]
+{../code/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/LinkedInService.java}
+
+Accessing the user's LinkedIn contact list is implemented in method \java{readContacts} according to \lstref{mycontacts.server.linkedin.readcontacts}.
+In this method, a signed OAuth request is first created using the access token provided by method \java{getToken}. 
+The request specified by constant \java{LINKEDIN\_CONNECTIONS} is defined as \java{http://api.linkedin.com/v1/people/\textasciitilde/connections}. 
+According to the API specification\footnote{
+See the LinkedIn API documented for more specific information: \url{https://developer.linkedin.com/documents/linkedin-api-resource-map}.
+} 
+this returns all connections of the user.
+To sign the request, the access token is retrieved from the database of the ''My Contact'' application using method \java{getToken}. 
+According to the implementation provided in \lstref{mycontacts.server.linkedin.readcontacts} the user id is first obtained from the user's server session. 
+The necessary parameters to create the access token are then retrieved from the \java{USERS\_PARAM} table. 
+We have now implemented all necessary server services and operations to access the LinkedIn API, to create/refresh access tokens and to retrieve the users contacts. 
+
+% --------------------------------------------------------------------------- %
+\section{Fetching Contacts from LinkedIn}
 
 \begin{figure}
 \includegraphics[width=7cm]{new_form_token_1.png} \hspace{5mm}
@@ -901,9 +1096,13 @@ On the server side we show how to work with databases, how to use logging in Sco
 \figlabel{new_form_token}
 \end{figure}
 
-Lorem ipsum will build an outline based Scout application featuring a navigation tree and pages to present information in tabular form. 
-In addition, the application also shows how to work with menus and context menus, search forms, and forms to enter and/or update data. 
-On the server side we show how to work with databases, how to use logging in Scout applications and how to lorem ipsum. 
+The last piece that is missing to complete the ''My Contacts'' application is the user interaction for the LinkedIn integration implemented in the previous section. 
+To allow the user to create/refresh an access token, we need to implement the refresh token form shown in \figref{my_contacts_rayo_refresh} at the beginning of this chapter. 
+To create the form code, we use the \wizard{New Form} of the Scout SDK as shown in \figref{new_form_token}. 
+For the \field{Name} enter a new translated text ''Refresh LinkedIn Token'' and fill \java{ui.forms} into the \field{Sub Package} field. 
+Then, click the \button{Next} to switch to the second wizard step. 
+Here, deselect the elements that will not be needed for the implementation of the refresh form according to the right hand side of \figref{new_form_token}. 
+Once the form has been created by the wizard, add the a \java{Token} and a \java{Secret} form variable of type string under the form's \folder{Variables}. 
 
 \begin{figure}
 \includegraphics[width=7cm]{tokenform_securitycode_explorer.png} \hspace{5mm}
@@ -912,18 +1111,29 @@ On the server side we show how to work with databases, how to use logging in Sco
 \figlabel{tokenform_securitycode}
 \end{figure}
 
+The next step is to add the desired layout and the necessary form fields. 
+First, use the \wizard{New Form Field} to add a new group box \java{TokenBox} to the \node{MainBox}. 
+And into the \java{TokenBox} add a ''Security Code'' string field as shown on the left hand side of \figref{tokenform_securitycode}. 
+To provide a click-able link that opens a web browser with the LinkedIn authentication link, add a ''Open Auth URL'' link of type \java{LinkButton} to the main box. 
+To make the user to first click the authentication link button before he tries to fill any content into the security code field we initially disable this field. 
+For this, first click on the security code field in the Scout Explorer and then open the \element{Advanced Properties} section of the fields Scout Object Properties. 
+As shown on the right side of \figref{tokenform_securitycode}, deselect the \property{Enabled}.
+
 \lstinputlisting[
   label=\lstlabel{mycontacts.client.forms.refreshtoken},
-  caption=The structure of the refersh token form. The security code field gets enabled in method \java{execClickAction} after the authentication link button is pressed.,
+  caption=The structure of the refresh token form. The security code field gets enabled in method \java{execClickAction} after the authentication link button is pressed.,
   index={AbstractLinkButton,execClickAction},
   linerange={23-25,65-104},
   float
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/RefreshTokenForm.java}
 
-Lorem ipsum will build an outline based Scout application featuring a navigation tree and pages to present information in tabular form. 
-In addition, the application also shows how to work with menus and context menus, search forms, and forms to enter and/or update data. 
-On the server side we show how to work with databases, how to use logging in Scout applications and how to lorem ipsum. 
+The implementation of the forms' structure is provided in \lstref{mycontacts.client.forms.refreshtoken}.
+In the \java{execClickAction} method of the link button \java{OpenAuthURLButton} the necessary information for the auth link is obtained from the server. 
+For this, we are using the \java{getAuthUrl} operation implemented in the previous section. 
+The parameters to create the request token are saved in the form's token and secret variables. 
+Then, the auth link is opened in a web browser with the \java{shellOpen}  method of the client's shell service. 
+Finally, after opening the web browser we can enable the security field with \java{getSecurityCodeField().setEnabled(true)}.
 
 \begin{figure}
 \includegraphics[width=7cm]{new_menu_refreshtoken_contextmenu.png} \hspace{5mm}
@@ -931,6 +1141,12 @@ On the server side we show how to work with databases, how to use logging in Sco
 \caption{Add the menu to open the LinkedIn token form.}
 \figlabel{new_menu_refreshtoken}
 \end{figure}
+
+We can now integrate the form to refresh the LinkedIn access token under the applications ''File'' menu. 
+This is done using the \wizard{New Menu} as shown in \figref{new_menu_refreshtoken}. 
+Enter the translated text ''Refresh LinkedIn Token ...'' into the wizard's \field{Name} and pick the element \element{Exit Menu [before]} from the dropdown box of the \field{Sibling}. 
+In the \field{Form to start} select the newly created refresh token form and use the \element{NewHandler} entry in the \field{Form Handler}. 
+To close the wizard, click the \button{Finish}.
 
 \lstinputlisting[
   label=\lstlabel{mycontacts.client.desktop.refreshtokenmenu},
@@ -940,12 +1156,10 @@ On the server side we show how to work with databases, how to use logging in Sco
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/Desktop.java}
 
-Lorem ipsum will build an outline based Scout application featuring a navigation tree and pages to present information in tabular form. 
-In addition, the application also shows how to work with menus and context menus, search forms, and forms to enter and/or update data. 
-On the server side we show how to work with databases, how to use logging in Scout applications and how to lorem ipsum. 
-
-% --------------------------------------------------------------------------- %
-\section{Fetching Contacts from LinkedIn}
+The implementation of the refresh menu is shown in \lstref{mycontacts.client.desktop.refreshtokenmenu}. 
+In method \java{execAction()}, we need to amend the part after starting the refresh token form. 
+If the method \java{form.isFormStored()} returns \java{true}, the user has modified the secure code field and it is fair to assume that the user wants to create/refresh his LinkedIn access token. 
+For this, we first retrieve the necessary parameters to call the backend service operation \java{refreshToken} implemented in the previous chapter. 
 
 \begin{figure}
 \includegraphics[width=7cm]{new_menu_updatecontacts_contextmenu.png} \hspace{5mm}
@@ -962,12 +1176,11 @@ On the server side we show how to work with databases, how to use logging in Sco
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/Desktop.java}
 
-server first, db setup service
-server, derby sql service
-
-server application
-
-config.ini
+As the last missing component of the ''My Contacts'' application, we add the menu to fetch the LinkedIn contacts and update the database accordingly. 
+The menu entry is created as a sub menu of the ''Tools'' menu.
+For this, use the new menu wizard on the \node{ToolsMenu} as shown in \figref{new_menu_updatecontacts}. 
+The implementation of the menu's \java{execAction} method shown in \lstref{mycontacts.client.desktop.refreshtokenmenu} is trivial. 
+We only need to call the operation of the \java{LinkedInService} implemented in the server part of the ''My Contacts'' application. 
 
 \ifx\wholebook\relax\else
    \input{../bibliography}
