@@ -80,17 +80,18 @@ public class MapForm extends AbstractForm {
 
       @Override
       protected void execInitField() throws ProcessingException {
-        String link = null;
         String address = StringUtility.nvl(getAddress(), "");
         String size = "" + getConfiguredHeightInPixel() + "x" + getConfiguredWidthInPixel();
+        String url = null;
+
         try {
-          link = "http://maps.googleapis.com/maps/api/staticmap?center=" +
+          url = "http://maps.googleapis.com/maps/api/staticmap?center=" +
               URLEncoder.encode(address, "ISO-8859-1") +
               "&zoom=13&size=" + size + "&maptype=roadmap&sensor=false";
-          setImage(IOUtility.getContent((new URL(link)).openStream()));
+          setImage(IOUtility.getContent((new URL(url)).openStream()));
         }
         catch (Exception e) {
-          setErrorStatus(new ProcessingStatus("Bad Link: '" + link + "', please check",
+          setErrorStatus(new ProcessingStatus("Bad Link: '" + url + "', please check",
               ProcessingStatus.ERROR));
           setImage(null);
           e.printStackTrace();
