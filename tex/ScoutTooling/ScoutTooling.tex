@@ -30,6 +30,33 @@ This starts with the initial creation of a Scout client server application, cont
 Finally, the application code created by the Scout SDK wizards helps to ensure that the resulting Scout application has a consistent and robust code base and is well aligned with the application model defined by the Scout runtime framework.
 
 % --------------------------------------------------------------------------- %
+\section{The Eclipse IDE}
+\index{Eclipse IDE}
+
+To get a good introduction into working with Eclipse as an IDE, we highly recommend the excellent tutorial by L. Vogel\footnote{
+Eclipse IDE Tutorial by Lars Vogel: \url{http://www.vogella.com/articles/Eclipse/article.html}
+}.
+
+Whatever we will be working with in the Eclipse IDE, we are always working in the context of an Eclipse IDE perspective. 
+An Eclipse IDE perspective contains the visual elements and the arrangement of those elements to support a specific development task within the Eclipse IDE. 
+Perspectives relevant to the development of Scout applications are the Scout perspective, the Java perspective, the Debug perspective, and many others. 
+To open a perspective available in the Eclipse IDE, the \button{Open Perspective} or the \menu{Window $\rightarrow$ Open Perspective $\rightarrow$ Other...} can be used. 
+
+\begin{figure}
+\includegraphics[width=14cm]{eclipse_ide_parts.png} 
+\caption{The Eclipse IDE with the Scout perspective. The colors indicate the different elements. View parts (blue), editor parts (green) and perspective buttons (purple). }
+\figlabel{eclipse_ide_parts}
+\end{figure}
+
+\figref{eclipse_ide_parts} provides a screenshot of the Eclipse Scout perspective indicating the corresponding perspective button and the main view parts and editor parts involved. 
+Using drag and drop, views and editors can be freely moved around in the Eclipse IDE to suit the developer's needs.
+Perspectives can be further individualized using the \menu{Window $\rightarrow$ Customize Perspective...}. 
+Here, the visibility of the toolbar items and menu entries can be defined. 
+Once a suitable layout of all desired elements has been defined, this organisation may be saved as a personal perspective using the Eclipse IDE \menu{Window $\rightarrow$ Save Perspective As...}.
+
+In case a customizing step does not turn out as intended, with the \menu{Window $\rightarrow$ Reset Perspective...} is always possible to go back to the last saved state of the current perspective.
+
+% --------------------------------------------------------------------------- %
 \section{The Scout SDK}
 \index{Scout SDK}
 
@@ -431,20 +458,6 @@ The \button{Finish} will then start the export wizard with the settings verified
 After the wizard has completed the export, all resulting artefacts will be located in the target directory specified in the first wizard step. 
 
 % --------------------------------------------------------------------------- %
-\subsection{Creating new Forms}
-
-The \wizard{New Form} allows to create a new form including the necessary form data, permissions and server services. 
-In the Scout Explorer, the \contextmenu{New Form...} is provided on the \folder{Forms} under the orange client node. 
-
-\begin{figure}
-\includegraphics[width=7cm]{wizard_form_1.png} \hspace{5mm}
-\includegraphics[width=7cm]{wizard_form_2.png}
-\caption{The Scout SDK wizard to create a new form.}
-\figlabel{wizard_service}
-\end{figure}
-
-
-% --------------------------------------------------------------------------- %
 \subsection{Creating new Form Fields}
 \index{SDK Wizard!New Form Field}
 
@@ -501,131 +514,6 @@ In that case, a class name still needs to be provided as described in \secref{he
 
 The \field{Sibling} is used to define the ordering of the form fields in the parent container. 
 As shown on the right hand side of \figref{wizard_field_translation}, the new \java{PreferencesField} is to be placed before the message field. 
-
-
-% --------------------------------------------------------------------------- %
-\subsection{Creating new Search Forms}
-\index{SDK Wizard!New Form Field}
-
-The \wizard{New Search Form} allows to create a new Scout form to search for elements displayed in pages.  
-In the Scout Explorer, the \contextmenu{Create Search Form...} is provided on the \folder{Search Forms} under the orange client node. 
-
-\begin{figure}
-\includegraphics[width=9cm]{wizard_search_form_contextmenu.png}
-\caption{Start the Scout SDK search form wizard for an existing table page.}
-\figlabel{wizard_search_form_contextmenu}
-\end{figure}
-
-New Form Field Wizard
-
-% --------------------------------------------------------------------------- %
-\subsection{Creating new Outlines}
-\index{SDK Wizard!New Outline}
-
-The \wizard{New Outline} allows to create a new Scout form to search for elements displayed in pages.  
-In the Scout Explorer, the \contextmenu{New Outline...} is provided on the \folder{All Outlines} under the orange client node. 
-Alternatively, the context menu is also available on the \folder{Outlines} of the \node{Desktop} under the applications client node. 
-
-New Form Field Wizard
-
-% --------------------------------------------------------------------------- %
-\subsection{Creating new Pages}
-\index{SDK Wizard!New Page}
-
-\begin{figure}
-\includegraphics[width=7cm]{wizard_page_1.png} \hspace{5mm}
-\includegraphics[width=7cm]{wizard_page_2.png}
-\caption{The Scout SDK wizard to create a new page.}
-\figlabel{wizard_page}
-\end{figure}
-
-% --------------------------------------------------------------------------- %
-\subsection{Creating new Table Column}
-\index{SDK Wizard!New Table Column}
-
-\begin{figure}
-\includegraphics[width=7cm]{wizard_column_1.png} \hspace{5mm}
-\includegraphics[width=7cm]{wizard_column_2.png}
-\caption{The Scout SDK wizard to create a new table column.}
-\figlabel{wizard_column}
-\end{figure}
-
-\begin{figure}
-\includegraphics[width=6.5cm]{wizard_column_explorer_properties.png}
-\caption{Column Property.}
-\figlabel{wizard_column_explorer_properties}
-\end{figure}
-
-% --------------------------------------------------------------------------- %
-\subsection{Creating new Services and Operations}
-
-The \wizard{New Service} allows to create a new Scout form to search for elements displayed in pages.  
-In the Scout Explorer, the \contextmenu{New Service...} is provided on the \folder{Services} under the orange client node and the blue server node. 
-This reflects the fact that services may be defined on both the client and the server side. 
-
-\begin{figure}
-\includegraphics[width=7cm]{wizard_service_contextmenu.png}
-\caption{Starting the service creation wizard to add a new server service.}
-\figlabel{wizard_service_contextmenu}
-\end{figure}
-
-\begin{figure}
-\includegraphics[width=7cm]{wizard_service_1.png} \hspace{5mm}
-\includegraphics[width=7cm]{wizard_service_2.png}
-\caption{The Scout SDK wizard to create a new service.}
-\figlabel{wizard_service}
-\end{figure}
-
-\begin{figure}
-\includegraphics[width=7cm]{wizard_service_operation.png}
-\caption{The Scout SDK wizard to add a new service operation.}
-\figlabel{wizard_service_operation}
-\end{figure}
-
-\begin{figure}
-\includegraphics[width=7cm]{wizard_service_sql_1.png} \hspace{5mm}
-\includegraphics[width=7cm]{wizard_service_sql_2.png}
-\caption{The Scout SDK wizard to create a new SQL service.}
-\figlabel{wizard_service_sql}
-\end{figure}
-
-% --------------------------------------------------------------------------- %
-\subsection{Creating new Code Types and Codes}
-needs text
-
-New code type and new code wizards
-
-% --------------------------------------------------------------------------- %
-\subsection{Creating new Permissions}
-needs text
-
-New permission wizard
-
-
-% --------------------------------------------------------------------------- %
-\subsection{Creating new Library Bundles}
-
-The \wizard{New Library Bundle} allows to add functionality provided in standard JAR files to a Scout application. 
-In the Scout Explorer, the \contextmenu{New Library Bundle...} is provided on the top-level \folder{Libraries} and individually under the orange client node, the green shared node and the blue server node. 
-
-\begin{figure}
-\includegraphics[width=7cm]{wizard_library_bundle_1.png} \hspace{5mm}
-\includegraphics[width=7cm]{wizard_library_bundle_2.png}
-\caption{The Scout SDK wizard to add external JAR files in the form of a library bundle to a Scout project.}
-\figlabel{wizard_library_bundle}
-\end{figure}
-
-% --------------------------------------------------------------------------- %
-\subsection{Creating new Application Modules}
-\index{SDK Wizard!Create new Scout Bundles}
-
-\begin{figure}
-\includegraphics[width=7cm]{wizard_new_bundles_1.png} \hspace{5mm}
-\includegraphics[width=7cm]{wizard_new_bundles_2.png}
-\caption{The Scout SDK wizard to create a new application module.}
-\figlabel{wizard_module}
-\end{figure}
-
 
 \ifx\wholebook\relax\else
    \input{../bibliography}

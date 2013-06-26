@@ -61,7 +61,7 @@
 \prtlabel{getting_started}
 % --------------------------------------------------------------------------- %
 \include{Introduction/Introduction}
-% \include{ScoutRuntime/ScoutRuntime} not ready yet
+% \include{ScoutRuntime/ScoutRuntime}
 \include{ScoutTooling/ScoutTooling}
 \include{OneDayTutorial/OneDayTutorial}
 
@@ -118,8 +118,8 @@
 \clearpage
 \include{ScoutInstallation/ScoutInstallation}
 % \include{UsefulUtilities/UsefulUtilities}
-\include{JavaBasics/JavaBasics}
-\include{EclipseBasics/EclipseBasics}
+% \include{JavaBasics/JavaBasics}
+% \include{EclipseBasics/EclipseBasics}
 
 % --------------------------------------------------------------------------- %
 % Lists of various things
@@ -129,16 +129,16 @@
 
 % lstlistoflistings seems to be broken for tex4ht
 % skip complete reference section for html output
-\ifpdf
-  \listoffigures
-  \addcontentsline{toc}{chapter}{Figures}
+% \ifpdf
+  % \listoffigures
+  % \addcontentsline{toc}{chapter}{Figures}
 
-%  \listoftables
-%  \addcontentsline{toc}{chapter}{Tables}
+ % \listoftables
+ % \addcontentsline{toc}{chapter}{Tables}
   
-  \lstlistoflistings
-  \addcontentsline{toc}{chapter}{Listings}
-\fi
+  % \lstlistoflistings
+  % \addcontentsline{toc}{chapter}{Listings}
+% \fi
 
 % --------------------------------------------------------------------------- %
 % Bibliography

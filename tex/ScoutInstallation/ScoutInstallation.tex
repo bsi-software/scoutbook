@@ -77,11 +77,11 @@ guide\footnote{Install the JDK: \url{http://docs.oracle.com/javase/7/docs/webnot
 To verify the installation you might want to go through this Java ''Hello World!'' 
 tutorial\footnote{Windows Java ''Hello World!'': \url{http://docs.oracle.com/javase/tutorial/getStarted/cupojava/win32.html}}.
 
-\subsection{Mac}
-needs text
+% \subsection{Mac}
+% needs text
 
-\subsection{Linux}
-needs text
+% \subsection{Linux}
+% needs text
 
 % --------------------------------------------------------------------------- %
 \section{Download and Install Scout}
@@ -90,14 +90,12 @@ needs text
 Installing Eclipse Scout 3.9 requires a working JDK 6 or JDK 7 installation.
 If this is missing, see the previous section for installation instructions.
 
-As the Eclipse Kepler release is officially shipping on June 26, 2013 we need to download Scout 3.9 from the developer builds download
-page\footnote{Eclipse developer builds download: \url{http://www.eclipse.org/downloads/index-developer.php}}.
 The download page should look as shown in \figref{scout_download}.
 In this screenshot, the packages available for \textit{Eclipse Kepler (4.3) M4} are shown and \textit{Windows} is preselected in the dropdown list.
 Should the download page show the wrong platform in the dropdown list, you will need to choose the correct one manually.
 
 \begin{figure}
-\includegraphics[width=15cm]{scout_download.png}
+\includegraphics[height=20cm]{scout_download.png}
 \caption{Eclipse Kepler developer builds download page. The Scout package is highlighted}
 \figlabel{scout_download}
 \end{figure}
@@ -216,20 +214,12 @@ sun.java.command=... vm C:\java\jre7\bin\javaw.exe -vmargs ...
 You have now successfully completed the Eclipse Scout installation on your Windows environment.
 With this running Scout installation you may skip the following section on how to add Scout to an existing Eclipse installation.
 
-\subsection{Mac}
-needs text
+% \subsection{Mac}
+% needs text
 
-\subsection{Linux}
-needs text
+% \subsection{Linux}
+% needs text
 
-\fbox{
-  \parbox{12cm}{
-    \noindent Existing Documentation
-    \begin{itemize}
-      \item wiki howto \url{http://wiki.eclipse.org/Scout/HowTo/3.8/Install_Scout_SDK}
-    \end{itemize}
-  }
-}
 % --------------------------------------------------------------------------- %
 \section{Add Scout to your Eclipse Installation}
 
@@ -270,16 +260,7 @@ Currently, there is still unsigned content included in the features.
 So please click away the corresponding warning and accept the request for a restart of Eclipse.
 Finally, you may add the Scout perspective to end up at a state very similar to \figref{scout_perspective}.
 
-TODO: Open a bug for this scenario, as a large amount of errors is shown in the \tab{Error Log} of Eclipse.
-
-\fbox{
-  \parbox{12cm}{
-\noindent Existing Documentation
-\begin{itemize}
-  \item wiki howto \url{http://wiki.eclipse.org/Scout/HowTo/3.8/Install_Scout_SDK\#Add_the_Scout_SDK_to_your_Eclipse_installation}
-\end{itemize}
-  }
-}
+% TODO: Open a bug for this scenario, as a large amount of errors is shown in the \tab{Error Log} of Eclipse.
 
 % --------------------------------------------------------------------------- %
 \section{Verifying the Installation}
@@ -288,10 +269,7 @@ After you can start your Eclipse Scout package you need to verify that Scout is 
 The simplest way to verify your Scout installation is to create a ''Hello World'' Scout project and run the corresponding Scout application as described in \charef{helloworld}.
 
 % =========================================================================== %
-\chapter{Further Installations}
-
-% --------------------------------------------------------------------------- %
-\section{Apache Tomcat Installation}
+\chapter{Apache Tomcat Installation}
 \applabel{install_tomcat}
 
 Apache Tomcat is an open source web server that is a widely used implementation of the Java Servlet Specification.
@@ -323,8 +301,8 @@ Once you have downloaded and installed Tomcat 7 (see the sections below for plat
 To verify that Tomcat is actually running open a web browser of your choice and type \url{http://localhost:8080} into the address bar.
 You should then see a confirmation of the successful installation according to \figref{tomcat_install}.
 
-% ........................................................................... %
-\subsection{Platform Specific Installation}
+% --------------------------------------------------------------------------- %
+\section{Windows Installation}
 
 According to the Tomcat setup installation for Windows\footnote{
 Tomcat Windows setup: \url{http://tomcat.apache.org/tomcat-7.0-doc/setup.html#Windows}
@@ -348,8 +326,8 @@ Apache Tomcat Tutorial: \url{http://www.vogella.com/articles/ApacheTomcat/articl
 for downloading and installing Tomcat provided by Lars Vogel.
 
 
-% ........................................................................... %
-\subsection{Directories and Files}
+% --------------------------------------------------------------------------- %
+\section{Directories and Files}
 \applabel{tomcat_dirs_and_files}
 
 Tomcat's installation directory follows the same organisation on all platforms.
@@ -372,9 +350,8 @@ The file \filename{server.xml} represents Tomcat's main configuration file.
 It is used to configure general web server aspects such as the port number of its connectors for the client server communication.
 For the default setup, port number 8080 is used for the communication between clients applications and the web server.
 The file \filename{tomcat-users.xml} contains a database of users, passwords and associated roles.
-
 Folder \filename{logs} contains various logfiles of Tomcat itself as well as host and web application log files.
-XXX need to provide more on what is where (especially application logs and exact setup to generate log entries from scout apps).
+% XXX need to provide more on what is where (especially application logs and exact setup to generate log entries from scout apps).
 
 The folder needed for deploying web applications into a Tomcat instance is called \filename{webapps}.
 It can be used as the target for copying WAR files into the web server.
@@ -383,8 +360,8 @@ The installation of the WAR file then extracts its content into the correspondin
 Finally, folder \filename{work} contains Tomcat's runtime ''cache'' for the deployed web applications.
 It is organized according to the hierarchy of the engine (Catalina), the host (localhost), and the web application (helloworld_server).
 
-% ........................................................................... %
-\subsection{The Tomcat Manager Application}
+% --------------------------------------------------------------------------- %
+\section{The Tomcat Manager Application}
 \applabel{tomcat_manager_app}
 
 Tomcat comes with the pre installed ''Manager App''.
@@ -425,43 +402,43 @@ Note that you will need to restart your Tomcat application after adapting the co
 With working credentials you can now start the ''Manager App'' as described the ''Hello World'' tutorial in \secref{helloworld_deploy}.
 
 % --------------------------------------------------------------------------- %
-\section{Jenkins Installation}
-needs text
+% \section{Jenkins Installation}
+% needs text
 
-\subsection{Windows}
-needs text
+% \subsection{Windows}
+% needs text
 
-\subsection{Mac}
-needs text
+% \subsection{Mac}
+% needs text
 
-\subsection{Linux}
-needs text
-
-% --------------------------------------------------------------------------- %
-\section{Download and Install Maven/Tycho}
-needs text
-
-\subsection{Windows}
-needs text
-
-\subsection{Mac}
-needs text
-
-\subsection{Linux}
-needs text
+% \subsection{Linux}
+% needs text
 
 % --------------------------------------------------------------------------- %
-\section{Download a Git Client}
-needs text
+% \section{Download and Install Maven/Tycho}
+% needs text
 
-\subsection{Windows}
-needs text
+% \subsection{Windows}
+% needs text
 
-\subsection{Mac}
-needs text
+% \subsection{Mac}
+% needs text
 
-\subsection{Linux}
-needs text
+% \subsection{Linux}
+% needs text
+
+% --------------------------------------------------------------------------- %
+% \section{Download a Git Client}
+% needs text
+
+% \subsection{Windows}
+% needs text
+
+% \subsection{Mac}
+% needs text
+
+% \subsection{Linux}
+% needs text
 
 % --------------------------------------------------------------------------- %
 
