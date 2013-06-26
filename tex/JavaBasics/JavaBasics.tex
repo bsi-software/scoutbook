@@ -17,21 +17,7 @@
 \applabel{java_basics}
 
 % --------------------------------------------------------------------------- %
-\section{Java SE Basics}
-\applabel{javase_basics}
-
-\fbox{
-  \parbox{12cm}{
-    Section waiting for contribution (2'000-3'000 words)
-	
-    The goal of this section is to provide the reader with a solid overview of the non-trivial
-    Java concepts relevant for scout applications and central aspects of the framework itself.
-    The focus of this section is on the Java Standard Edition (Java SE).
-    Where appropriate, provide links to high quality online material, that is likely to exist for at least the next year or two.
-  }
-}
-
-\subsection{Learning Java}
+\section{Learning Java}
 
 To progam Scout applications you need to have a solid understanding of the Java language.
 Scout will only work for you if you have achieved a certain proficiency level in Java. 
@@ -49,82 +35,15 @@ To solve really tricky Java problems there is often no way around the Java
 specification\footnote{The Java Language Specification \url{http://docs.oracle.com/javase/specs/}} itself.
 Just make sure to pick the right Java version for your context.
 
-\subsection{Advanced Java SE Concepts}
-
-  * say which non-trivial things are vital to good understanding
-  * threading
-  * generics
-  * annotations
-  
-\subsection{JAR Files}
-
-  * purpose
-  * directory structure
-  * example
 
 % --------------------------------------------------------------------------- %
-\section{Java EE Basics}
+\section{Servlets}
 \applabel{javaee_basics}
 
-\fbox{
-  \parbox{12cm}{
-    Section waiting for contribution (2'000-5'000 words)
-    
-    The goal of this section is to provide the reader with a solid overview of the non-trivial
-    Java enterprise concepts relevant for scout applications and central aspects of the framework itself. 
-	The focus of this section is on the Java Enterprise Edition (Java EE)
-    Where appropriate, provide links to high quality online material, that is likely to exist for at least the next year or two.
-  }
-}
-
-needs text
-
-  * maybe the same as for java foundation, maybe not
-  * jaas
-  * http comm
-  * servlet
-  * servlet filters
-
-\subsection{Servlets}
-
+Understanding Java Servlets is important to understand Scout server applications.
 A very comprehensive and detailed step to step description has been written by Chua Hock-Chuan\footnote{
 Get Start with Java Servlet Programming: \url{http://www.ntu.edu.sg/home/ehchua/programming/howto/Tomcat_HowTo.html}.
 }.
-
-may be found online do servlet stuff with annotations (JEE6) not JEE5?
-
-\lstinputlisting[
-  label=\lstlabel{tinyservlet.web_xml},
-  caption=The \java{index.html} start page for the tiny servlet application.,
-  language=html,
-  float
-]
-{../code/tinyservlet/index.html}
-
-\lstinputlisting[
-  label=\lstlabel{tinyservlet.web_xml},
-  caption=The \java{web.xml} file of the tiny servlet application.,
-  language=xml,
-  float
-]
-{../code/tinyservlet/WEB-INF/web.xml}
-
-\lstinputlisting[
-  label=\lstlabel{tinyservlet.TinyServlet},
-  caption=The complete \java{TinyServlet} source code.,
-  float
-]
-{../code/tinyservlet/WEB-INF/sources/TinyServlet.java}
-
-DONT include servlet jar inside of war file (tomcat doesn't like it)
-
-\subsection{Servlet Filters}
-
-hello world example (JEE6)
-
-\subsection{WAR Files}
-
-war file organisation: \url{http://documentation.progress.com/output/Iona/orbix/6.1/tutorials/fnb/dev_intro/j2ee_overview8.html}
 
 % --------------------------------------------------------------------------- %
 
