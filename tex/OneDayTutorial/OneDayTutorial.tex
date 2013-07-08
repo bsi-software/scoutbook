@@ -697,7 +697,7 @@ That is why almost all form and service artefacts are deselected in the second w
 
 \lstinputlisting[
   label=\lstlabel{mycontacts.client.forms.pictureurl},
-  caption=The UI structure of the \java{PictureURLForm} used to update the URL of the picture field in the person form.,
+  caption=The UI structure of the \java{PictureURLForm} used to update the URL of the picture field in the person form. The rest of the class created by the Scout SDK has been omitted.,
   linerange={17-18,52-67,78-80},
   float
 ]
@@ -888,10 +888,11 @@ This also implies that only addresses that can correctly be parsed by the Maps I
 
 To create the maps form we start the \wizard{New Form} and enter the new translated text ''Map'' into the \field{Name} of the first wizard step. 
 Then, we click the \button{Next} to configure the artefacts to be created by the wizard. 
-For the map form we can use the configuration as shown on the right hand side of \figref{new_form_url} with the difference that we do not need the cancel button.
+For the map form we can use the configuration as shown on the right hand side of \figref{new_form_url} with the difference that we do not need the Ok button.
 Having deselected most artefacts, the wizard can be closed with the \button{Finish}.
 
-After the form creation wizard has been closed, we can add an ''Address'' variable to the form by starting the \wizard{New Property Bean} on the \node{Variables} of the newly created map form.
+After the form creation wizard has been closed, update the label of the cancel button to ''Close'' in the button's Scout Object Properties. 
+Then, we can add an ''Address'' variable to the form by starting the \wizard{New Property Bean} on the \node{Variables} of the newly created map form.
 In the property bean wizard, enter ''Name'' into the \field{Name} and set the \field{Bean type} to \element{String}. 
 
 As the next step, the map image field is added to the from. 
@@ -901,7 +902,8 @@ Before you can close the second wizard step with the \button{Finish}, enter ''Ma
 To set the properties of the new map field, select the \node{MapField} below the main box node of the map form. 
 In the \java{MapField}'s Scout Object Properties untick the \property{Label Visible} and add an \java{execInitField} method by clicking on the green plus icon next to this operation. 
 The configuration of the map field can then be completed in section \element{Advanced Properties}. 
-Here, we set the \property{Grid H} to 6 and update the \property{Width in Pixel} and the \property{Height in Pixel} to a value of 400 each.
+Here, we set the \property{Grid H} to 6 and update the \property{Width in Pixel} and the \property{Height in Pixel} to a value of 400 each. 
+
 
 \lstinputlisting[
   label=\lstlabel{mycontacts.client.forms.map},
@@ -914,7 +916,7 @@ Here, we set the \property{Grid H} to 6 and update the \property{Width in Pixel}
 
 To add the Java code to display the map in the image field, click on the \link{execInitField} in the Scout Object Properties of the map field. 
 According to the implementation provided in \lstref{mycontacts.client.forms.map}, an URL for the Maps Image API is first constructed. 
-This url also contains the content of the map form's address variable and the configured dimension of the map field. 
+This URL also contains the content of the map form's address variable and the configured dimension of the map field. 
 The map picture returned by the Google API is then read using \java{IOUtility.getContent} and directly fed into the image fields \java{setImage} method. 
 
 The last step involving the implementation of the map form feature is its integration into the person form. 

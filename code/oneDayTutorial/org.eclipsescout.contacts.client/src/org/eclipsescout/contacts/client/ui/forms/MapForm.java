@@ -11,12 +11,12 @@ import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.exception.ProcessingStatus;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
-import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
+import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCancelButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.imagebox.AbstractImageField;
 import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipsescout.contacts.client.ui.forms.MapForm.MainBox.CancelButton;
 import org.eclipsescout.contacts.client.ui.forms.MapForm.MainBox.MapField;
-import org.eclipsescout.contacts.client.ui.forms.MapForm.MainBox.OkButton;
 
 public class MapForm extends AbstractForm {
 
@@ -40,6 +40,10 @@ public class MapForm extends AbstractForm {
     startInternal(new ModifyHandler());
   }
 
+  public CancelButton getCancelButton() {
+    return getFieldByClass(CancelButton.class);
+  }
+
   public MainBox getMainBox() {
     return getFieldByClass(MainBox.class);
   }
@@ -48,14 +52,10 @@ public class MapForm extends AbstractForm {
     return getFieldByClass(MapField.class);
   }
 
-  public OkButton getOkButton() {
-    return getFieldByClass(OkButton.class);
-  }
-
   @Order(10.0)
   public class MainBox extends AbstractGroupBox {
 
-    @Order(20.0)
+    @Order(10.0)
     public class MapField extends AbstractImageField {
 
       @Override
@@ -99,8 +99,13 @@ public class MapForm extends AbstractForm {
       }
     }
 
-    @Order(30.0)
-    public class OkButton extends AbstractOkButton {
+    @Order(20.0)
+    public class CancelButton extends AbstractCancelButton {
+
+      @Override
+      protected String getConfiguredLabel() {
+        return TEXTS.get("Close");
+      }
     }
   }
 
