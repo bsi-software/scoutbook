@@ -1210,31 +1210,15 @@ The Scout SDK takes care of this time consuming and error prone task.
 
 When we did add the \field{Message} to the desktop form of the ''Hello World'' application we had to enter a new translation entry for the label of the message field as shown in \figref{helloworld_stringfield}.
 The individual translation entries are then stored in language specific text property files.
-To modify translated texts we can use the NLS editor provided by the Scout SDK.
-To open this editor, select the green \node{shared} in the Scout Explorer and expand its \folder{Text Provider Services}.
-Then, select the contained element \element{DefaultTextProviderService}.
-As shown in \figref{nls_editor}, the NLS editor can then be opened using the \link{Open NLS Editor ...}.
+To modify translated texts we can use the NLS editor\footnote{
+See \secref{nls_editor} for a detailed description of the NLS editor.
+} 
+provided by the Scout SDK as shown in \figref{nls_editor}.
 
 To access the translated label field entry in the application, the Scout SDK generated the implementation of \java{getConfiguredLabel} using \java{TEXTS.get("Message")} as shown in \lstref{helloworld.mainbox}.
 In the default Scout project setup, calling \java{TEXTS.get} uses the \java{DefaultTextProviderService} in the background.
 This text provider service then defines the access path for the text property files to use for the translation.
 To resolve the provided key, the user's locale settings are used to access the correct text property file.
-As translated texts may need to be available in both client and server application, the NLS infrastructure including the text property files are located in the application's shared plugin.
-
-\begin{figure}
-\includegraphics[height=4cm]{sdk_add_language_dialog.png} \hspace{0.5cm}
-\includegraphics[height=4cm]{sdk_shared_plugin_language_file.png}
-\caption{In the dialog \element{Add a Language} shown on the left side the desired language and localization can be specified.
-On the right side, the location of property file \java{Texts\_de\_CH.properties} in the shared plugin of the ''Hello World'' application is shown.
-}
-\index{SDK Wizard!Add Translation Language}
-\figlabel{adding_a_language}
-\end{figure}
-
-To add support for a new translated language, click on the corresponding icon of the NLS editor as shown in \figref{nls_editor}.
-In the opened language dialog, add the desired language and country localization and the target directory as shown in \figref{adding_a_language}.
-A new language properties file is then added to the shared plugin project as shown in \figref{adding_a_language}.
-The new language is now available as an additional column in the NLS editor and as a separate tab in the dialog to add new translated texts shown in \figref{helloworld_stringfield}.
 
 % --------------------------------------------------------------------------- %
 \section{The Server Part}
