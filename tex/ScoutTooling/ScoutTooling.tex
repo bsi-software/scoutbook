@@ -515,6 +515,52 @@ In that case, a class name still needs to be provided as described in \secref{he
 The \field{Sibling} is used to define the ordering of the form fields in the parent container. 
 As shown on the right hand side of \figref{wizard_field_translation}, the new \java{PreferencesField} is to be placed before the message field. 
 
+% --------------------------------------------------------------------------- %
+\subsection{The NLS Editor}
+\seclabel{nls_editor}
+\index{Managing translated application texts}
+\index{Adding application languages}
+
+\begin{figure}
+\includegraphics[width=14cm]{sdk_nls_editor.png} 
+\caption{The NLS editor provided by the Scout SDK. This editor is opened via the \link{Open NLS Editor ...} in the Scout Object Properties of the \node{DefaultTextProviderService}.
+}
+\index{NLS editor}
+\figlabel{nls_editor}
+\end{figure}
+
+Access to translated texts in Scout applications is proviced through text provider services located in the application's shared plugin. 
+This setup makes translated texts available in the client and the server application as the shared plugin is available in both the client and the server product. 
+Consequently, the Scout SDK provides access to the NLS Editor to manage translated texts and applications languages under the green shared node in the Scout Explorer view as shown in \figref{nls_editor}.
+
+To open the NLS editor, select the green \node{shared} in the Scout Explorer and expand its \folder{Text Provider Services}.
+Then, select the contained element \element{DefaultTextProviderService}.
+As shown in \figref{nls_editor}, the NLS editor can be opened using the \link{Open NLS Editor ...}.
+In the NLS editor translations can be edited individually by double-clicking into a translated text cell.
+This opens the editor to change the text to the desired value.
+To add a new translated text, the corresponding dialog can be opened by clicking on the button with the 'T' icon next to the 'New lanaguage' button (shown in \figref{nls_editor}).
+
+In Scout applications, translated texts are obtained with method \java{TEXTS.get("key")} is used where "key" represents the language independent text key.
+In a default Scout project setup, calling \java{TEXTS.get} uses the \java{DefaultTextProviderService} in the background.
+And this text provider service defines the access path for the text property files that are located in the applications shared plugin.
+Typically, these property files are collected in the plugin's \filename{<youraplication>.shared/resources/texts} directory according to the right hand side of \figref{adding_a_language}. 
+To resolve the provided text key at runtime, the user's locale settings is used to access the correct text property file.
+
+\begin{figure}
+\includegraphics[height=4cm]{sdk_add_language_dialog.png} \hspace{0.5cm}
+\includegraphics[height=4cm]{sdk_shared_plugin_language_file.png}
+\caption{In the dialog \element{Add a Language} shown on the left side the desired language and localization can be specified.
+On the right side, the location of property file \java{Texts\_de\_CH.properties} in the shared plugin of the ''Hello World'' application is shown.
+}
+\figlabel{adding_a_language}
+\end{figure}
+
+Adding support for a new language to a Scout project is also directly supported by the Scout SDK. 
+To add support for a new translated language, click on the corresponding icon of the NLS editor as shown in \figref{nls_editor}.
+In the opened language dialog, add the desired language and country localization and the target directory as shown in \figref{adding_a_language}.
+A new language properties file is then added to the shared plugin project as shown in \figref{adding_a_language}.
+The new language is now available as an additional column in the NLS editor and as a separate tab in the dialog to add new translated texts for Scout UI components such as form field labels.
+
 \ifx\wholebook\relax\else
    \input{../bibliography}
    \end{document}
