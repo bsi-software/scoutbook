@@ -335,12 +335,12 @@ The resulting application plugins (UI, client, shared, server) are then named fo
 
 In the box below the postfix field the list of application plugins that may be created by this wizard is provided. 
 Initially, all possible plugins are checked which is useful to quickly demonstrate a ''Hello World'' application.
-However, for a typical setup only a one or two UI plugins will be needed. 
-To develop a mobile/web applications only the RAP UI plugin is necessary. 
-For a desktop only client, either the Swing or the the SWT UI plugin will be needed.
-And in cases where the the client needs to run both on the desktop and as a web/mobile application, the RAP and a desktop UI plugin can be chosen. 
+However, for a typical setup only one or two UI plugins will be needed. 
+To develop a mobile/web application only the RAP UI plugin is necessary. 
+For a desktop only client, either the Swing or the SWT UI plugin will be needed.
+And in cases where the client needs to run both on the desktop and as a web/mobile application, the RAP and a desktop UI plugin can be chosen. 
 A Scout application must not necessarily be a client-server application. 
-It is also possible to create a client only or a server only applications. 
+It is also possible to create a client only or a server only application. 
 But make sure to include the shared plugin in all possible use cases. 
 
 The content of the \field{Alias} is used for the client's executable file, the name of the servlet representing the Scout server application and to build the product launcher names. 
@@ -408,7 +408,7 @@ In the next wizard step (right) is used to define the server WAR file name and t
 \end{figure}
 
 As a simple use case, the usage of the export wizard is described in \secref{helloworld_export} of the ''Hello World'' tutorial. 
-And the corresponding background section \secref{helloworld_export_background} provides information regarding the content and the organisation of the WAR files produced by this wizard. 
+And the corresponding background \secref{helloworld_export_background} provides information regarding the content and the organisation of the WAR files produced by this wizard. 
 
 In the first export wizard step shown on the left hand side of \figref{wizard_export} the target directory and the type of content to be exported is defined. 
 The \field{Target Directory} is used to define the directory where the generated WAR files will be exported to. 
@@ -424,11 +424,11 @@ The default scenario assumes that you work with a Scout client server applicatio
 For this setup you just need to provide a target directory before you can click the \button{Finish} to start the export. 
 To verify/update what the export wizard will create you may click the \button{Next} to move to the second wizard step.
 
-The second wizard step shown on the right side of \figref{wizard_export}. 
-The server WAR file name proposed in the \field{WAR File} uses the naming scheme \filename{<Project Alias>\_server.war}. 
+The second wizard step is shown on the right side of \figref{wizard_export}. 
+The server WAR file name proposed in the \field{WAR File} uses the naming scheme \filename{<Project Alias>_server.war}. 
 In order for this WAR file to work out-of-the-box it it is recommended to use the proposed value. 
 In the \field{Product File} the server product file to be used for the creation of the WAR file can be specified. 
-Clicking the \button{Next} will move to the next wizard step to select define the client product to be exported.
+Clicking the \button{Next} will move to the next wizard step to select the client product to be exported.
 
 \begin{figure}
 \includegraphics[width=9cm]{wizard_export_client_application.png}
@@ -439,8 +439,8 @@ Clicking the \button{Next} will move to the next wizard step to select define th
 In the third wizard step shown in \figref{wizard_export_client} the client product file can be selected. 
 If the current Scout project defines both a Swing and a SWT client, the default will use the SWT client. 
 Clicking on the dropdown button next to the \field{Client Product to include} will open a \element{Select Product} dialog to choose the right product from all available client products. 
-In the \field{Client Download Location} the path to the zipped client inside the server WAR file defined. 
-In order for this WAR file to work out-of-the-box it it is recommended to use the proposed value. 
+In the \field{Client Download Location} the path to the zipped client inside the server WAR file is defined. 
+In order for this WAR file to work out-of-the-box it is recommended to use the proposed value. 
 With the \button{Next} the last export wizard step is shown.
 
 \begin{figure}
@@ -451,7 +451,7 @@ With the \button{Next} the last export wizard step is shown.
 
 The last export wizard step is shown in \figref{wizard_export_rap_server}. 
 A RAP server WAR file name is proposed in the \field{WAR File} based on the naming scheme \filename{<Project Alias>.war}. 
-In order for this WAR file to work out-of-the-box it it is recommended to use the proposed value. 
+In order for this WAR file to work out-of-the-box it is recommended to use the proposed value. 
 In the \field{Product File} the RAP server product file to be used for the creation of the WAR file can be specified. 
 The \button{Finish} will then start the export wizard with the settings verified and/or updated in all export wizard steps. 
 
@@ -461,7 +461,7 @@ After the wizard has completed the export, all resulting artefacts will be locat
 \subsection{Creating new Form Fields}
 \index{SDK Wizard!New Form Field}
 
-The \wizard{New Form Field} allows to create a new Scout client server application. 
+The \wizard{New Form Field} allows to create a new form field. 
 In the Scout Explorer, the \contextmenu{New Form Field...} is provided on Scout Explorer nodes representing composite form fields, such as the \node{MainBox}. 
 
 \begin{figure}
@@ -531,7 +531,7 @@ As shown on the right hand side of \figref{wizard_field_translation}, the new \j
 
 Access to translated texts in Scout applications is provided through text provider services located in the application's shared plugin. 
 This setup makes translated texts available in the client and the server application as the shared plugin is available in both the client and the server product. 
-Consequently, the Scout SDK provides access to the NLS Editor to manage translated texts and applications languages under the green shared node in the Scout Explorer view as shown in \figref{nls_editor}.
+Consequently, the Scout SDK provides access to the NLS Editor to manage translated texts and application languages under the green shared node in the Scout Explorer view as shown in \figref{nls_editor}.
 
 To open the NLS editor, select the green \node{shared} in the Scout Explorer and expand its \folder{Text Provider Services}.
 Then, select the contained element \element{DefaultTextProviderService}.
@@ -540,7 +540,7 @@ In the NLS editor translations can be edited individually by double-clicking int
 This opens the editor to change the text to the desired value.
 To add a new translated text, the corresponding dialog can be opened by clicking on the button with the 'T' icon next to the 'New lanaguage' button (shown in \figref{nls_editor}).
 
-In Scout applications, translated texts are obtained with method \java{TEXTS.get("key")} is used where "key" represents the language independent text key.
+In Scout applications, translated texts are obtained with the method \java{TEXTS.get("key")} where "key" represents the language independent text key.
 In a default Scout project setup, calling \java{TEXTS.get} uses the \java{DefaultTextProviderService} in the background.
 And this text provider service defines the access path for the text property files that are located in the applications shared plugin.
 Typically, these property files are collected in the plugin's \filename{<youraplication>.shared/resources/texts} directory according to the right hand side of \figref{adding_a_language}. 
