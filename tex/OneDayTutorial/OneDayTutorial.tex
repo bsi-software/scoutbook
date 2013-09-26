@@ -19,7 +19,7 @@ In this chapter we will create the ''My Contacts'' Scout application.
 This small\footnote{
 Small in comparison with real world application. But significantly larger and complexer than the ''Hello World'' application of \charef{helloworld}.
 } application covers additional aspects of the Eclipse Scout framework. 
-The presented demo application borrows heavily from a Scout tutorial published in 2012 the German \textit{Java Magazin}\footnote{
+The presented demo application borrows heavily from a Scout tutorial published 2012 in the German \textit{Java Magazin}\footnote{
 Java Magazin 7.12: \url{https://jaxenter.de/magazines/JavaMagazin72012}.
 } 
 for the Scout release 3.8 (Juno).
@@ -116,7 +116,7 @@ This is one of the very powerful Scout widgets.
 Columns may be filtered, moved, hidden or sorted (including multi level sort) using the table header context menus \menu{Organize Columns...}  and \menu{Column Filter...}.
 
 Editing and viewing of person data is available by the \contextmenu{Edit Person...} on a selected row.
-To manually add a person use the context \contextmenu{New Person...} available on the table header or in the white area outside the displayed columns. 
+To manually add a person use the \contextmenu{New Person...} available on the table header or in the white area outside the displayed columns. 
 
 \begin{figure}
 \includegraphics[width=14cm]{my_contacts_rayo_filteredcontacts.png} 
@@ -141,12 +141,12 @@ On the left hand side, the person page is shown. The person form is shown on the
 \end{figure}
 
 In \figref{my_contacts_rapweb_excelexport} the ''My Contacts'' application is running in a web browser. 
-In this example, the \menu{Tools|Export to to Excel} is used to export the selected row into an Excel sheet. 
+In this example, the \menu{Tools|Export to Excel} is used to export the selected row into an Excel sheet. 
 Finally, the ''My Contacts'' application is also running on iPhone and Android mobile devices out of the box. 
 Two example screens are provided in \figref{my_contacts_rapmobile}.
 
 Once you no longer feel confident about having the ''My Contacts'' application accessing you data you can revoke this access permission in the LinkedIn menu ''Privacy and Settings''. 
-In the lower part of the settings page switch to tab ''Groups, Companies and Applications'' and click on the link ''View your applications''. 
+In the lower part of the settings page switch to the tab ''Groups, Companies and Applications'' and click on the link ''View your applications''. 
 There, you will find again the partner name ''OAuth test for Scribe''. 
 To revoke the access, select the associated checkbox and click the ''Remove'' button. 
 The next time you try to refresh your LinkedIn data from the ''My Contacts'' application will result in an Error message. 
@@ -214,8 +214,7 @@ Then the file is opened on the client using the \java{shellOpen} method.
 \end{figure}
 
 To set the applications name select the \node{Desktop} in the Scout Explorer to access it's Scout Object Properties as shown in \figref{desktop_properties}.
-In the \field{Title} enter the string ''My Contacts'' create a new translated text entry. 
-Then click on the \link{Exec Opened} in the Scout Object Properties to access the Java code of this method. 
+In the \field{Title} enter the string ''My Contacts'' and create a new translated text entry.  
 
 \lstinputlisting[
   label=\lstlabel{mycontacts.desktop.execopened},
@@ -227,8 +226,9 @@ Then click on the \link{Exec Opened} in the Scout Object Properties to access th
 {../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/Desktop.java}
 
 As shown in \lstref{mycontacts.desktop.execopened} the application's organisation into a tree and a table form is explicitly defined in method \java{execOpened}. 
+Click on the \link{Exec Opened} in the Scout Object Properties to access the Java code of this method.
 First, using the \java{UserAgentUtility} class, the method checks if the client is working with a desktop or a web client. 
-If not, the method returns and not tree and table setup is used. 
+If not, the method returns and the tree and table setup is not used. 
 Instead, the \java{MobileHomeForm} defined in plugin \element{org.eclipsescout.contacts.client.mobile} is used. 
 In case the user is working with a web client or a desktop client, default tree and table forms are created and started. 
 Finally, the currently active outline is set to the \java{StandardOutline}, as this is the only outline defined in this application.
@@ -427,7 +427,7 @@ For this we add a new \java{DBInstallService} service as shown in \figref{new_se
 To this install service we then add the \java{installStorage} operation according to \figref{new_operation_installstorage}.
 The implementation of this method is provided in \lstref{mycontacts.server.services.installdb}.
 The method first checks if a setup is required. 
-For this, the member variable \java{m\_doSetup} is used that might also be set by the \java{setDoSetup} setter method via the server's the \filename{config.ini} file.
+For this, the member variable \java{m\_doSetup} is used that might also be set by the \java{setDoSetup} setter method via the server's \filename{config.ini} file.
 
 \lstinputlisting[
   label=\lstlabel{mycontacts.server.services.installdb.company},

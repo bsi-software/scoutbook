@@ -34,7 +34,7 @@ public class ServerApplication implements IApplication {
   public Object start(IApplicationContext context) throws Exception {
     ServerSession serverSession = SERVICES.getService(IServerSessionRegistryService.class).newServerSession(ServerSession.class, Activator.getDefault().getBackendSubject());
 
-    ServerJob installJob = new ServerJob("Install the contacts DB schema)", serverSession) {
+    ServerJob installJob = new ServerJob("Install the contacts DB schema", serverSession) {
       @Override
       protected IStatus runTransaction(IProgressMonitor monitor) {
         try {
