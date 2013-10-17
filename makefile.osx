@@ -11,7 +11,7 @@
 
 # Root Paths
 BIN=c:\latex
-LATEXROOT=${BIN}\MiKTeX 2.9\miktex\bin\x64
+LATEXROOT=/usr/local/texlive/2013/bin/universal-darwin
 
 # PDFLATEX = pdflatex -file-line-error
 PDFLATEX = "${LATEXROOT}\pdflatex.exe" -file-line-error
