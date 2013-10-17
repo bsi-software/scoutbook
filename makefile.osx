@@ -11,7 +11,7 @@
 
 # Root Paths
 BIN=c:\latex
-LATEXROOT=/usr/local/texlive/2012/bin/universal-darwin
+LATEXROOT=/usr/local/texlive/2013/bin/universal-darwin
 
 # PDFLATEX = pdflatex -file-line-error
 PDFLATEX = "${LATEXROOT}/pdflatex" -file-line-error
