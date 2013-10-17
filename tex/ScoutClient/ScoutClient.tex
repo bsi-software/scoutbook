@@ -529,6 +529,24 @@ needs text
   \item forum: \url{http://www.eclipse.org/forums/index.php/t/369542/}
 \end{itemize}
 
+\subsection{Menus}
+Each smart field can have menus attached. The menus will be shown when the user clicks on the \emph{arrow} symbol next to the smart field. Figure \ref{fig:smartfield_menu} shows an example of a smart field along with a set of menus.
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.8\textwidth]{smartfieldmenu.png}
+\caption{Menus attached to a smart field.}
+\label{fig:smartfield_menu}
+\end{figure}
+
+By default, the menus will only be shown if a value of the smart field has been selected. To show the menus even if the smart field is empty, one has to override the menu's \lstinline$getConfiguredEmptySpaceAction$ method:
+
+\begin{lstlisting}[backgroundcolor=\color{white}]
+@Override
+protected boolean getConfiguredEmptySpaceAction() {
+ return true;
+}
+\end{lstlisting}
+
 % --------------------------------------------------------------------------- %
 \section{List Box}
 needs text
