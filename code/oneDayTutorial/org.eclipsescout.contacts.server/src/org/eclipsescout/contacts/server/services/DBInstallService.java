@@ -44,7 +44,7 @@ public class DBInstallService extends AbstractService implements IDBInstallServi
 
       if (addInitialData) {
         SQL.insert("INSERT INTO COMPANY (company_id, name, location, url) "
-            + "VALUES (:company_id, 'Alice''s Adverntures in Wonderland', 'London, England', 'http://en.wikipedia.org/wiki/Alice%27s_Adventures_in_Wonderland')",
+            + "VALUES (:company_id, 'Alice''s Adventures in Wonderland', 'London, England', 'http://en.wikipedia.org/wiki/Alice%27s_Adventures_in_Wonderland')",
             new NVPair("company_id", UUID.randomUUID().toString()));
 
         SQL.insert("INSERT INTO COMPANY (company_id, name, location, url) "
@@ -70,7 +70,7 @@ public class DBInstallService extends AbstractService implements IDBInstallServi
       if (addInitialData) {
         SQL.insert("INSERT INTO PERSON (person_id, first_name, headline, location, company_id, picture_url, date_of_birth)"
             + "VALUES (:person_id, 'Alice', 'The curious girl', 'Daresbury, Cheshire, England', "
-            + "(SELECT company_id FROM COMPANY WHERE name = 'Alice''s Adverntures in Wonderland'), 'http://www.uergsel.de/uploads/Alice.png', :dob)",
+            + "(SELECT company_id FROM COMPANY WHERE name = 'Alice''s Adventures in Wonderland'), 'http://www.uergsel.de/uploads/Alice.png', :dob)",
             new NVPair("person_id", UUID.randomUUID().toString()),
             new NVPair("dob", DateUtility.parse("26.11.1865", "dd.mm.yyyy")));
       }
