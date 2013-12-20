@@ -10,9 +10,11 @@ import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.extension.client.ui.desktop.outline.AbstractExtensibleOutline;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.widget.client.ui.desktop.pages.FormPage;
+import org.eclipse.scout.widget.client.ui.forms.DateTimeFieldsForm;
 import org.eclipse.scout.widget.client.ui.forms.DecimalFieldsForm;
 import org.eclipse.scout.widget.client.ui.forms.LabelFieldForm;
 import org.eclipse.scout.widget.client.ui.forms.NumberFieldsForm;
+import org.eclipse.scout.widget.client.ui.forms.SmartFieldForm;
 import org.eclipse.scout.widget.client.ui.forms.StringFieldForm;
 
 /**
@@ -39,5 +41,11 @@ public class SimpleWidgetsOutline extends AbstractExtensibleOutline {
 
     FormPage decimalFieldPage = new FormPage(DecimalFieldsForm.class);
     pageList.add(decimalFieldPage);
+
+    FormPage dateTimeFieldPage = new FormPage(DateTimeFieldsForm.class);
+    pageList.add(dateTimeFieldPage);
+
+    FormPage smartFieldPage = new FormPage(SmartFieldForm.class);
+    pageList.add(smartFieldPage);
   }
 }

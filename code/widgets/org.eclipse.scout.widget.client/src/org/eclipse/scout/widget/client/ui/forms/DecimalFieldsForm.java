@@ -36,6 +36,7 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.widget.client.ui.forms.DecimalFieldsForm.MainBox.CloseButton;
 import org.eclipse.scout.widget.client.ui.forms.DecimalFieldsForm.MainBox.ConfigurationBox;
 import org.eclipse.scout.widget.client.ui.forms.DecimalFieldsForm.MainBox.ConfigurationBox.BigDecimalInputField;
+import org.eclipse.scout.widget.client.ui.forms.DecimalFieldsForm.MainBox.ConfigurationBox.FormatField;
 import org.eclipse.scout.widget.client.ui.forms.DecimalFieldsForm.MainBox.ConfigurationBox.FractionDigitsField;
 import org.eclipse.scout.widget.client.ui.forms.DecimalFieldsForm.MainBox.ConfigurationBox.GetValue0Field;
 import org.eclipse.scout.widget.client.ui.forms.DecimalFieldsForm.MainBox.ConfigurationBox.GroupingField;
@@ -63,6 +64,7 @@ import org.eclipse.scout.widget.client.ui.forms.DecimalFieldsForm.MainBox.Exampl
 import org.eclipse.scout.widget.client.ui.forms.DecimalFieldsForm.MainBox.ExamplesBox.StyledField;
 import org.eclipse.scout.widget.client.ui.forms.DecimalFieldsForm.MainBox.HighestValueButton;
 import org.eclipse.scout.widget.client.ui.forms.DecimalFieldsForm.MainBox.PiButton;
+import org.eclipse.scout.widget.client.ui.forms.DecimalFieldsForm.MainBox.SampleFormatButton;
 import org.eclipse.scout.widget.client.ui.forms.DecimalFieldsForm.MainBox.SmallestValueButton;
 import org.eclipse.scout.widget.client.ui.forms.NumberFieldsForm.MainBox.ExamplesBox.BigIntegerColumnField;
 import org.eclipse.scout.widget.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.PlaceholderField;
@@ -104,6 +106,13 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
 
   public DoubleField getDoubleField() {
     return getFieldByClass(DoubleField.class);
+  }
+
+  /**
+   * @return the FormatField
+   */
+  public FormatField getFormatField() {
+    return getFieldByClass(FormatField.class);
   }
 
   public FractionDigitsField getFractionDigitsField() {
@@ -216,6 +225,13 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
 
   public PlaceholderField getPlaceholderField() {
     return getFieldByClass(PlaceholderField.class);
+  }
+
+  /**
+   * @return the SampleFormatButton
+   */
+  public SampleFormatButton getSampleFormatButton() {
+    return getFieldByClass(SampleFormatButton.class);
   }
 
   public SmallestValueButton getSmallestValueButton() {
@@ -663,6 +679,26 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
       }
 
       @Order(110.0)
+      public class FormatField extends AbstractStringField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("Format");
+        }
+
+        @Override
+        protected String getConfiguredLabelFont() {
+          return "ITALIC";
+        }
+
+        @Override
+        protected void execChangedValue() throws ProcessingException {
+          getInputField().setFormat(getValue());
+          getBigDecimalInputField().setFormat(getValue());
+        }
+      }
+
+      @Order(120.0)
       public class BigDecimalInputField extends AbstractBigDecimalField {
 
         @Override
@@ -706,7 +742,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(120.0)
+      @Order(130.0)
       public class GetValue1Field extends AbstractStringField {
 
         @Override
@@ -735,32 +771,36 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(122.0)
+      @Order(140.0)
       public class Place1Field extends AbstractPlaceholderField {
       }
 
-      @Order(123.0)
+      @Order(150.0)
       public class Place2Field extends AbstractPlaceholderField {
       }
 
-      @Order(124.0)
+      @Order(160.0)
       public class Place3Field extends AbstractPlaceholderField {
       }
 
-      @Order(125.0)
+      @Order(170.0)
       public class Place4Field extends AbstractPlaceholderField {
       }
 
-      @Order(130.0)
+      @Order(180.0)
       public class Place5Field extends AbstractPlaceholderField {
       }
 
-      @Order(140.0)
+      @Order(190.0)
       public class Place6Field extends AbstractPlaceholderField {
       }
 
-      @Order(150.0)
+      @Order(200.0)
       public class Place7Field extends AbstractPlaceholderField {
+      }
+
+      @Order(210.0)
+      public class Place8Field extends AbstractPlaceholderField {
       }
     }
 
@@ -851,6 +891,20 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
 
     @Order(60.0)
     public class CloseButton extends AbstractCloseButton {
+    }
+
+    @Order(70.0)
+    public class SampleFormatButton extends AbstractButton {
+
+      @Override
+      protected String getConfiguredLabel() {
+        return TEXTS.get("SampleFormat");
+      }
+
+      @Override
+      protected void execClickAction() throws ProcessingException {
+        getFormatField().setValue("'Prod-Nr.' 00,0000");
+      }
     }
   }
 

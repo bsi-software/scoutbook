@@ -6,6 +6,7 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.eclipse.scout.widget.client.Activator
 Export-Package: org.eclipse.scout.widget.client,
  org.eclipse.scout.widget.client.services,
+ org.eclipse.scout.widget.client.services.lookup,
  org.eclipse.scout.widget.client.ui.desktop,
  org.eclipse.scout.widget.client.ui.desktop.outlines
 Require-Bundle: org.eclipse.core.runtime,

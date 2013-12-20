@@ -20,6 +20,7 @@ import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
 import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
+import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
 import org.eclipse.scout.rt.client.ui.form.fields.bigintegerfield.AbstractBigIntegerField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
@@ -29,13 +30,14 @@ import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerFi
 import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
 import org.eclipse.scout.rt.client.ui.form.fields.longfield.AbstractLongField;
 import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholderField;
+import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.shared.ScoutTexts;
 import org.eclipse.scout.rt.shared.TEXTS;
-import org.eclipse.scout.widget.client.ui.forms.DecimalFieldsForm.MainBox.ExamplesBox.BigDecimalField;
-import org.eclipse.scout.widget.client.ui.forms.DecimalFieldsForm.MainBox.ExamplesBox.DoubleField;
 import org.eclipse.scout.widget.client.ui.forms.NumberFieldsForm.MainBox.CloseButton;
 import org.eclipse.scout.widget.client.ui.forms.NumberFieldsForm.MainBox.ConfigurationBox;
 import org.eclipse.scout.widget.client.ui.forms.NumberFieldsForm.MainBox.ConfigurationBox.BigIntegerInputField;
+import org.eclipse.scout.widget.client.ui.forms.NumberFieldsForm.MainBox.ConfigurationBox.FormatField;
+import org.eclipse.scout.widget.client.ui.forms.NumberFieldsForm.MainBox.ConfigurationBox.GetValue0Field;
 import org.eclipse.scout.widget.client.ui.forms.NumberFieldsForm.MainBox.ConfigurationBox.GroupingField;
 import org.eclipse.scout.widget.client.ui.forms.NumberFieldsForm.MainBox.ConfigurationBox.InputField;
 import org.eclipse.scout.widget.client.ui.forms.NumberFieldsForm.MainBox.ConfigurationBox.LongInputField;
@@ -85,8 +87,8 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
     startInternal(new PageFormHandler());
   }
 
-  public BigDecimalField getBigDecimalField() {
-    return getFieldByClass(BigDecimalField.class);
+  public FormatField getFormatField() {
+    return getFieldByClass(FormatField.class);
   }
 
   @Override
@@ -98,8 +100,8 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
     return getFieldByClass(DisabledField.class);
   }
 
-  public DoubleField getDoubleField() {
-    return getFieldByClass(DoubleField.class);
+  public GetValue0Field getGetValue0Field() {
+    return getFieldByClass(GetValue0Field.class);
   }
 
   public GroupingField getGroupingField() {
@@ -643,6 +645,36 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
       }
 
       @Order(20.0)
+      public class GetValue0Field extends AbstractStringField {
+
+        @Override
+        protected boolean getConfiguredEnabled() {
+          return false;
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("GetValue");
+        }
+
+        @Override
+        protected Class<? extends IValueField> getConfiguredMasterField() {
+          return NumberFieldsForm.MainBox.ConfigurationBox.InputField.class;
+        }
+
+        @Override
+        protected void execChangedMasterValue(Object newMasterValue) throws ProcessingException {
+          if (newMasterValue != null) {
+            setValue(((Integer) newMasterValue).toString());
+          }
+          else {
+            setValue(null);
+          }
+        }
+
+      }
+
+      @Order(30.0)
       public class MinimumValueField extends AbstractLongField {
 
         @Override
@@ -679,7 +711,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(30.0)
+      @Order(40.0)
       public class MaximumValueField extends AbstractLongField {
 
         @Override
@@ -716,7 +748,7 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(40.0)
+      @Order(50.0)
       public class GroupingField extends AbstractCheckBox {
 
         @Override
@@ -747,7 +779,28 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(50.0)
+      @Order(60.0)
+      public class FormatField extends AbstractStringField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("Format");
+        }
+
+        @Override
+        protected String getConfiguredLabelFont() {
+          return "ITALIC";
+        }
+
+        @Override
+        protected void execChangedValue() throws ProcessingException {
+          getInputField().setFormat(getValue());
+          getLongInputField().setFormat(getValue());
+          getBigIntegerInputField().setFormat(getValue());
+        }
+      }
+
+      @Order(70.0)
       public class LongInputField extends AbstractLongField {
 
         @Override
@@ -770,19 +823,48 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(60.0)
-      public class Place1Field extends AbstractPlaceholderField {
-      }
-
-      @Order(70.0)
-      public class Place2Field extends AbstractPlaceholderField {
-      }
-
       @Order(80.0)
-      public class Place3Field extends AbstractPlaceholderField {
+      public class GetValue1Field extends AbstractStringField {
+
+        @Override
+        protected boolean getConfiguredEnabled() {
+          return false;
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("GetValue");
+        }
+
+        @Override
+        protected Class<? extends IValueField> getConfiguredMasterField() {
+          return NumberFieldsForm.MainBox.ConfigurationBox.LongInputField.class;
+        }
+
+        @Override
+        protected void execChangedMasterValue(Object newMasterValue) throws ProcessingException {
+          if (newMasterValue != null) {
+            setValue(((Long) newMasterValue).toString());
+          }
+          else {
+            setValue(null);
+          }
+        }
       }
 
       @Order(90.0)
+      public class Place1Field extends AbstractPlaceholderField {
+      }
+
+      @Order(100.0)
+      public class Place2Field extends AbstractPlaceholderField {
+      }
+
+      @Order(110.0)
+      public class Place3Field extends AbstractPlaceholderField {
+      }
+
+      @Order(120.0)
       public class BigIntegerInputField extends AbstractBigIntegerField {
 
         @Override
@@ -805,15 +887,44 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(100.0)
+      @Order(130.0)
+      public class GetValue2Field extends AbstractStringField {
+
+        @Override
+        protected boolean getConfiguredEnabled() {
+          return false;
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("GetValue");
+        }
+
+        @Override
+        protected Class<? extends IValueField> getConfiguredMasterField() {
+          return NumberFieldsForm.MainBox.ConfigurationBox.BigIntegerInputField.class;
+        }
+
+        @Override
+        protected void execChangedMasterValue(Object newMasterValue) throws ProcessingException {
+          if (newMasterValue != null) {
+            setValue(((BigInteger) newMasterValue).toString());
+          }
+          else {
+            setValue(null);
+          }
+        }
+      }
+
+      @Order(140.0)
       public class Place4Field extends AbstractPlaceholderField {
       }
 
-      @Order(110.0)
+      @Order(150.0)
       public class Place5Field extends AbstractPlaceholderField {
       }
 
-      @Order(120.0)
+      @Order(160.0)
       public class Place6Field extends AbstractPlaceholderField {
       }
     }
@@ -851,6 +962,20 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
     }
 
     @Order(60.0)
+    public class SampleFormatButton extends AbstractButton {
+
+      @Override
+      protected String getConfiguredLabel() {
+        return TEXTS.get("SampleFormat");
+      }
+
+      @Override
+      protected void execClickAction() throws ProcessingException {
+        getFormatField().setValue("'Prod-No.' 000,0000");
+      }
+    }
+
+    @Order(70.0)
     public class CloseButton extends AbstractCloseButton {
     }
   }

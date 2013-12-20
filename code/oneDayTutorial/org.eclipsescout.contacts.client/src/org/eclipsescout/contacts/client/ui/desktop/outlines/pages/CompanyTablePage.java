@@ -3,6 +3,7 @@ package org.eclipsescout.contacts.client.ui.desktop.outlines.pages;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
+import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractDoubleColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithTable;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
@@ -55,6 +56,10 @@ public class CompanyTablePage extends AbstractPageWithTable<CompanyTablePage.Tab
       return AbstractIcons.ComposerFieldEntity;
     }
 
+    public ScoreColumn getScoreColumn() {
+      return getColumnSet().getColumnByClass(ScoreColumn.class);
+    }
+
     public CompanyIdColumn getCompanyIdColumn() {
       return getColumnSet().getColumnByClass(CompanyIdColumn.class);
     }
@@ -98,6 +103,15 @@ public class CompanyTablePage extends AbstractPageWithTable<CompanyTablePage.Tab
       @Override
       protected int getConfiguredWidth() {
         return 144;
+      }
+    }
+
+    @Order(40.0)
+    public class ScoreColumn extends AbstractDoubleColumn {
+
+      @Override
+      protected String getConfiguredHeaderText() {
+        return TEXTS.get("Score");
       }
     }
 

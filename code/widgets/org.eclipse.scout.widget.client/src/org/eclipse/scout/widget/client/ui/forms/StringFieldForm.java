@@ -207,6 +207,21 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
+        protected String getConfiguredFont() {
+          return "BOLD";
+        }
+
+        @Override
+        protected String getConfiguredForegroundColor() {
+          return "0080C0";
+        }
+
+        @Override
+        protected String getConfiguredFormat() {
+          return "j";
+        }
+
+        @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("Styled");
         }
@@ -251,6 +266,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         @Override
         protected void execInitField() throws ProcessingException {
           setValue(5);
+          getStringInputField().setMaxLength(5);
         }
       }
 
