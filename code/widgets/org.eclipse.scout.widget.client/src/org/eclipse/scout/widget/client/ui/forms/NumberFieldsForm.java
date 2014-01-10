@@ -4,18 +4,15 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
 package org.eclipse.scout.widget.client.ui.forms;
 
-import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.DecimalFormat;
-import java.text.ParsePosition;
 
-import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
@@ -31,7 +28,6 @@ import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
 import org.eclipse.scout.rt.client.ui.form.fields.longfield.AbstractLongField;
 import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholderField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
-import org.eclipse.scout.rt.shared.ScoutTexts;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.widget.client.ui.forms.NumberFieldsForm.MainBox.CloseButton;
 import org.eclipse.scout.widget.client.ui.forms.NumberFieldsForm.MainBox.ConfigurationBox;
@@ -271,37 +267,6 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
           return TEXTS.get("Default");
         }
 
-        /**
-         * Parses the provided text and returns its integer representation.
-         * If the provided text does not syntactically represent an integer number,
-         * or does not fit into the range [Integer.MIN_VALUE .. Integer.MAX_VALUE],
-         * an exception is thrown.
-         */
-        @Override
-        protected Integer execParseValue(String text) throws ProcessingException {
-          Integer retVal = null;
-          text = StringUtility.nvl(text, "").trim();
-          if (text.length() > 0) {
-            DecimalFormat df = (DecimalFormat) createNumberFormat();
-            df.setParseBigDecimal(true);
-            df.setParseIntegerOnly(true);
-            ParsePosition p = new ParsePosition(0);
-            BigDecimal val = (BigDecimal) df.parse(text, p);
-            // check for bad syntax
-            if (p.getErrorIndex() >= 0 || p.getIndex() != text.length()) {
-              throw new ProcessingException(ScoutTexts.get("InvalidNumberMessageX", text));
-            }
-            // check for bad range
-            if (val.compareTo(BigDecimal.valueOf(Integer.MIN_VALUE)) < 0) {
-              throw new ProcessingException(ScoutTexts.get("NumberTooSmallMessageXY", String.valueOf(Integer.MIN_VALUE), String.valueOf(Integer.MAX_VALUE)));
-            }
-            if (val.compareTo(BigDecimal.valueOf(Integer.MAX_VALUE)) > 0) {
-              throw new ProcessingException(ScoutTexts.get("NumberTooLargeMessageXY", String.valueOf(Integer.MIN_VALUE), String.valueOf(Integer.MAX_VALUE)));
-            }
-            retVal = val.intValueExact();
-          }
-          return retVal;
-        }
       }
 
       @Order(30.0)
@@ -351,14 +316,14 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
             setForegroundColor("FF0000");
           }
           else {
-            setForegroundColor(null);
+            setForegroundColor("0000FF");
           }
         }
 
         @Override
         protected void execInitField() throws ProcessingException {
           setValue(-3);
-          setForegroundColor("FF0000");
+          execChangedValue();
         }
       }
 
@@ -382,39 +347,6 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("Default");
-        }
-
-        @Override
-        protected Long execParseValue(String text) throws ProcessingException {
-          Long retVal = null;
-
-          text = StringUtility.nvl(text, "");
-          text = text.trim();
-
-          if (text.length() > 0) {
-            DecimalFormat df = (DecimalFormat) createNumberFormat();
-            df.setParseBigDecimal(true);
-            df.setParseIntegerOnly(true);
-            ParsePosition p = new ParsePosition(0);
-            BigDecimal val = (BigDecimal) df.parse(text, p);
-
-            // check for bad syntax
-            if (p.getErrorIndex() >= 0 || p.getIndex() != text.length()) {
-              throw new ProcessingException(ScoutTexts.get("InvalidNumberMessageX", text));
-            }
-
-            // check for bad range
-            if (val.compareTo(BigDecimal.valueOf(Long.MIN_VALUE)) < 0) {
-              throw new ProcessingException(ScoutTexts.get("NumberTooSmallMessageXY", text));
-            }
-            if (val.compareTo(BigDecimal.valueOf(Long.MAX_VALUE)) > 0) {
-              throw new ProcessingException(ScoutTexts.get("NumberTooLargeMessageXY", text));
-            }
-
-            retVal = val.longValueExact();
-          }
-
-          return retVal;
         }
       }
 
@@ -465,14 +397,14 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
             setForegroundColor("FF0000");
           }
           else {
-            setForegroundColor(null);
+            setForegroundColor("0000FF");
           }
         }
 
         @Override
         protected void execInitField() throws ProcessingException {
           setValue(-3L);
-          setForegroundColor("FF0000");
+          execChangedValue();
         }
       }
 
@@ -497,56 +429,6 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         protected String getConfiguredLabel() {
           return TEXTS.get("BigIntegerField");
         }
-
-        /**
-         * Parses the provided text and returns its BigInteger representation.
-         * If the provided text does not syntactically represent an integer number,
-         * an exception is thrown.
-         */
-        @Override
-        protected BigInteger execParseValue(String text) throws ProcessingException {
-          BigInteger retVal = null;
-          text = StringUtility.nvl(text, "").trim();
-          if (text.length() > 0) {
-            DecimalFormat df = (DecimalFormat) createNumberFormat();
-            df.setParseBigDecimal(true);
-            df.setParseIntegerOnly(true);
-            ParsePosition p = new ParsePosition(0);
-            BigDecimal val = (BigDecimal) df.parse(text, p);
-            // check for bad syntax
-            if (p.getErrorIndex() >= 0 || p.getIndex() != text.length()) {
-              throw new ProcessingException(ScoutTexts.get("InvalidNumberMessageX", text));
-            }
-            retVal = ((BigDecimal) val).toBigInteger();
-          }
-          return retVal;
-        }
-
-        //        @Override
-        //        protected BigInteger execParseValue(String text) throws ProcessingException {
-        //          BigInteger retVal = null;
-        //          if (text == null) {
-        //            text = "";
-        //          }
-        //          else {
-        //            text = text.trim();
-        //          }
-        //          if (text.length() > 0) {
-        //            ParsePosition p = new ParsePosition(0);
-        //            DecimalFormat df = (DecimalFormat) createNumberFormat();
-        //            df.setParseBigDecimal(true);
-        //            df.setParseIntegerOnly(true);
-        //            Number n = df.parse(text, p);
-        //
-        //            if (p.getErrorIndex() >= 0 || p.getIndex() != text.length()) {
-        //              throw new ProcessingException(ScoutTexts.get("InvalidNumberMessageX", text));
-        //            }
-        //
-        //            retVal = ((BigDecimal) n).toBigInteger();
-        //          }
-        //
-        //          return retVal;
-        //        }
       }
 
       @Order(130.0)
@@ -596,14 +478,14 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
             setForegroundColor("FF0000");
           }
           else {
-            setForegroundColor(null);
+            setForegroundColor("0000FF");
           }
         }
 
         @Override
         protected void execInitField() throws ProcessingException {
           setValue(BigInteger.valueOf(-3));
-          setForegroundColor("FF0000");
+          execChangedValue();
         }
       }
     }
@@ -630,12 +512,12 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected Integer getConfiguredMinimumValue() {
+        protected Integer getConfiguredMinValue() {
           return (int) MIN_VALUE;
         }
 
         @Override
-        protected Integer getConfiguredMaximumValue() {
+        protected Integer getConfiguredMaxValue() {
           return (int) MAX_VALUE;
         }
 
@@ -794,9 +676,15 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execChangedValue() throws ProcessingException {
-          getInputField().setFormat(getValue());
-          getLongInputField().setFormat(getValue());
-          getBigIntegerInputField().setFormat(getValue());
+          DecimalFormat format = new DecimalFormat();
+
+          if (getValue() != null) {
+            format = new DecimalFormat(getValue());
+          }
+
+          getInputField().setFormat(format);
+          getLongInputField().setFormat(format);
+          getBigIntegerInputField().setFormat(format);
         }
       }
 
@@ -809,12 +697,12 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected Long getConfiguredMaximumValue() {
+        protected Long getConfiguredMaxValue() {
           return MAX_VALUE;
         }
 
         @Override
-        protected Long getConfiguredMinimumValue() {
+        protected Long getConfiguredMinValue() {
           return MIN_VALUE;
         }
 
@@ -873,13 +761,13 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected Long getConfiguredMaxValue() {
-          return MAX_VALUE;
+        protected BigInteger getConfiguredMaxValue() {
+          return BigInteger.valueOf(MAX_VALUE);
         }
 
         @Override
-        protected Long getConfiguredMinValue() {
-          return MIN_VALUE;
+        protected BigInteger getConfiguredMinValue() {
+          return BigInteger.valueOf(MIN_VALUE);
         }
 
         public void setGrouping(boolean grouping) {

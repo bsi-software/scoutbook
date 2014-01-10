@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
@@ -693,8 +693,14 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execChangedValue() throws ProcessingException {
-          getInputField().setFormat(getValue());
-          getBigDecimalInputField().setFormat(getValue());
+          DecimalFormat format = new DecimalFormat();
+
+          if (getValue() != null) {
+            format = new DecimalFormat(getValue());
+          }
+
+          getInputField().setFormat(format);
+          getBigDecimalInputField().setFormat(format);
         }
       }
 
@@ -720,7 +726,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
           BigDecimal retVal = null;
           text = StringUtility.nvl(text, "").trim();
           if (text.length() > 0) {
-            DecimalFormat df = (DecimalFormat) createNumberFormat();
+            DecimalFormat df = (DecimalFormat) getFormat();
             df.setParseBigDecimal(true);
             ParsePosition p = new ParsePosition(0);
 
@@ -903,7 +909,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
 
       @Override
       protected void execClickAction() throws ProcessingException {
-        getFormatField().setValue("'Prod-Nr.' 00,0000");
+        getFormatField().setValue("#,###.0 °C;#,###.0 °C BELOW ZERO");
       }
     }
   }

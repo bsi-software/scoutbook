@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
@@ -34,7 +34,6 @@ import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.LookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 import org.eclipse.scout.rt.shared.ui.UserAgentUtility;
-import org.eclipse.scout.widget.client.services.lookup.FormFieldClassesLookupCall;
 import org.eclipse.scout.widget.client.services.lookup.LocaleLookupCall;
 import org.eclipse.scout.widget.client.services.lookup.UserContentListLookupCall;
 import org.eclipse.scout.widget.client.services.lookup.UserContentTreeLookupCall;
@@ -319,28 +318,18 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
       public class DefaultSmartField extends AbstractSmartField<Object> {
 
         @Override
-        protected boolean getConfiguredBrowseHierarchy() {
-          return true;
+        protected Class<? extends ICodeType<?>> getConfiguredCodeType() {
+          return IndustryICBCodeType.class;
         }
 
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("Default");
         }
-
-        @Override
-        protected Class<? extends LookupCall> getConfiguredLookupCall() {
-          return FormFieldClassesLookupCall.class;
-        }
       }
 
       @Order(70.0)
       public class MandatorySmartfieldField extends AbstractSmartField<Long> {
-
-        @Override
-        protected boolean getConfiguredBrowseAutoExpandAll() {
-          return false;
-        }
 
         @Override
         protected String getConfiguredLabel() {
@@ -360,11 +349,6 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
 
       @Order(80.0)
       public class DisabledSmartFieldField extends AbstractSmartField<Long> {
-
-        @Override
-        protected boolean getConfiguredBrowseHierarchy() {
-          return true;
-        }
 
         @Override
         protected boolean getConfiguredEnabled() {
