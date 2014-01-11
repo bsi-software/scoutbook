@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.eclipse.scout.widget.client.ui.desktop.outlines;
 
@@ -12,6 +12,7 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.widget.client.ui.desktop.pages.FormPage;
 import org.eclipse.scout.widget.client.ui.forms.DateTimeFieldsForm;
 import org.eclipse.scout.widget.client.ui.forms.DecimalFieldsForm;
+import org.eclipse.scout.widget.client.ui.forms.ImageFieldForm;
 import org.eclipse.scout.widget.client.ui.forms.LabelFieldForm;
 import org.eclipse.scout.widget.client.ui.forms.NumberFieldsForm;
 import org.eclipse.scout.widget.client.ui.forms.SmartFieldForm;
@@ -47,5 +48,8 @@ public class SimpleWidgetsOutline extends AbstractExtensibleOutline {
 
     FormPage smartFieldPage = new FormPage(SmartFieldForm.class);
     pageList.add(smartFieldPage);
+
+    FormPage imageFieldPage = new FormPage(ImageFieldForm.class);
+    pageList.add(imageFieldPage);
   }
 }

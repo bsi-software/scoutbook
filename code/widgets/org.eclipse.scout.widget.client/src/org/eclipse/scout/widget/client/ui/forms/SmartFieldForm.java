@@ -14,6 +14,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import org.eclipse.scout.commons.NumberUtility;
 import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
@@ -24,6 +25,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.checkbox.AbstractCheckBox;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
+import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
 import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
 import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholderField;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
@@ -41,6 +43,7 @@ import org.eclipse.scout.widget.client.ui.forms.SmartFieldForm.MainBox.CloseButt
 import org.eclipse.scout.widget.client.ui.forms.SmartFieldForm.MainBox.ConfigurationBox;
 import org.eclipse.scout.widget.client.ui.forms.SmartFieldForm.MainBox.ConfigurationBox.BrowseAutoExpandAllField;
 import org.eclipse.scout.widget.client.ui.forms.SmartFieldForm.MainBox.ConfigurationBox.BrowseHierarchyField;
+import org.eclipse.scout.widget.client.ui.forms.SmartFieldForm.MainBox.ConfigurationBox.BrowseMaxRowCountField;
 import org.eclipse.scout.widget.client.ui.forms.SmartFieldForm.MainBox.ConfigurationBox.GetValueField;
 import org.eclipse.scout.widget.client.ui.forms.SmartFieldForm.MainBox.ConfigurationBox.ListEntriesField;
 import org.eclipse.scout.widget.client.ui.forms.SmartFieldForm.MainBox.ConfigurationBox.ListSmartField;
@@ -94,6 +97,13 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
    */
   public BrowseHierarchyField getBrowseHierarchyField() {
     return getFieldByClass(BrowseHierarchyField.class);
+  }
+
+  /**
+   * @return the BrowseMaxRowCountField
+   */
+  public BrowseMaxRowCountField getBrowseMaxRowCountField() {
+    return getFieldByClass(BrowseMaxRowCountField.class);
   }
 
   @Override
@@ -380,7 +390,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         return TEXTS.get("Configure");
       }
 
-      private LookupRow createLookupRow(String key, String parent, String text, String icon, String tooltip, String font, String enabled) {
+      private LookupRow createLookupRow(String key, String parent, String text, String icon, String tooltip, String font, String enabled, String active) {
         LookupRow row = new LookupRow(key, text, icon);
 
         // parent
@@ -410,12 +420,21 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         if (enabled.equals("false")) {
           row.setEnabled(false);
         }
+        // active
+        if (!StringUtility.isNullOrEmpty(active) && active.equals("false")) {
+          row.setActive(false);
+        }
 
         return row;
       }
 
       @Order(10.0)
       public class ListSmartField extends AbstractSmartField<String> {
+
+        @Override
+        protected boolean getConfiguredActiveFilterEnabled() {
+          return true;
+        }
 
         @Override
         protected String getConfiguredLabel() {
@@ -491,28 +510,54 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
             if (line.length() > 0 && !line.startsWith("#")) {
               String[] t = line.split(";");
 
-              if (t.length == 6) {
-                rows.add(createLookupRow(t[0], null, t[1], t[2], t[3], t[4], t[5]));
+              if (t.length >= 6) {
+                String active = "true";
+
+                if (t.length == 7) {
+                  active = t[6];
+                }
+
+                rows.add(createLookupRow(t[0], null, t[1], t[2], t[3], t[4], t[5], active));
               }
               else {
                 setErrorStatus(TEXTS.get("LookupRowParseException" + ": '" + line + "'"));
               }
             }
           }
-
           ((UserContentListLookupCall) getListSmartField().getLookupCall()).setLookupRows(rows);
         }
       }
 
       @Order(40.0)
-      public class Placeholder1Field extends AbstractPlaceholderField {
-      }
+      public class BrowseMaxRowCountField extends AbstractIntegerField {
 
-      @Order(45.0)
-      public class Placeholder2Field extends AbstractPlaceholderField {
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("BrowseMaxRowCount");
+        }
+
+        @Override
+        protected String getConfiguredLabelFont() {
+          return "ITALIC";
+        }
+
+        @Override
+        protected Integer getConfiguredMinValue() {
+          return 0;
+        }
+
+        @Override
+        protected void execChangedValue() throws ProcessingException {
+          getListSmartField().setBrowseMaxRowCount(NumberUtility.nvl(getValue(), 100));
+          getTreeSmartField().setBrowseMaxRowCount(NumberUtility.nvl(getValue(), 100));
+        }
       }
 
       @Order(50.0)
+      public class Placeholder1Field extends AbstractPlaceholderField {
+      }
+
+      @Order(70.0)
       public class TreeSmartField extends AbstractSmartField<String> {
 
         @Override
@@ -536,7 +581,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(60.0)
+      @Order(80.0)
       public class GetValueTreeSmartFieldField extends AbstractStringField {
 
         @Override
@@ -560,7 +605,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(70.0)
+      @Order(90.0)
       public class TreeEntriesField extends AbstractStringField {
 
         @Override
@@ -599,8 +644,13 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
             if (line.length() > 0 && !line.startsWith("#")) {
               String[] t = line.split(";");
 
-              if (t.length == 7) {
-                rows.add(createLookupRow(t[0], t[1], t[2], t[3], t[4], t[5], t[6]));
+              if (t.length >= 7) {
+                String active = "true";
+
+                if (t.length == 8) {
+                  active = t[6];
+                }
+                rows.add(createLookupRow(t[0], t[1], t[2], t[3], t[4], t[5], t[6], active));
               }
               else {
                 setErrorStatus(TEXTS.get("LookupRowParseException" + ": '" + line + "'"));
@@ -612,7 +662,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(80.0)
+      @Order(100.0)
       public class BrowseHierarchyField extends AbstractCheckBox {
 
         @Override
@@ -636,7 +686,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(90.0)
+      @Order(110.0)
       public class BrowseAutoExpandAllField extends AbstractCheckBox {
 
         @Override
