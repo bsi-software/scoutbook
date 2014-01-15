@@ -62,12 +62,11 @@ import org.eclipse.scout.widget.client.ui.forms.NumberFieldsForm.MainBox.Example
 import org.eclipse.scout.widget.client.ui.forms.NumberFieldsForm.MainBox.ExamplesBox.StyledField;
 import org.eclipse.scout.widget.client.ui.forms.NumberFieldsForm.MainBox.HighestValueButton;
 import org.eclipse.scout.widget.client.ui.forms.NumberFieldsForm.MainBox.SmallestValueButton;
-import org.eclipse.scout.widget.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.PlaceholderField;
 
 public class NumberFieldsForm extends AbstractForm implements IPageForm {
 
   private static final long MIN_VALUE = 0;
-  private static final long MAX_VALUE = 1000;
+  private static final long MAX_VALUE = 100000;
 
   public NumberFieldsForm() throws ProcessingException {
     super();
@@ -208,10 +207,6 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
     return getFieldByClass(Place5Field.class);
   }
 
-  public PlaceholderField getPlaceholderField() {
-    return getFieldByClass(PlaceholderField.class);
-  }
-
   public SmallestValueButton getSmallestValueButton() {
     return getFieldByClass(SmallestValueButton.class);
   }
@@ -247,15 +242,21 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
 
       @Order(10.0)
       public class IntegerColumnField extends AbstractLabelField {
+        // TODO: check for option to display the header label in the content area instead of the label area
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("IntegerField");
+          return TEXTS.get("EmptyString");
         }
 
         @Override
-        protected String getConfiguredLabelFont() {
+        protected String getConfiguredFont() {
           return "BOLD";
+        }
+
+        @Override
+        protected void execInitField() throws ProcessingException {
+          setValue(TEXTS.get("IntegerField"));
         }
       }
 
@@ -329,15 +330,19 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
 
       @Order(60.0)
       public class LongColumnField extends AbstractLabelField {
-
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("LongField");
+          return TEXTS.get("EmptyString");
         }
 
         @Override
-        protected String getConfiguredLabelFont() {
+        protected String getConfiguredFont() {
           return "BOLD";
+        }
+
+        @Override
+        protected void execInitField() throws ProcessingException {
+          setValue(TEXTS.get("LongField"));
         }
       }
 
@@ -410,15 +415,19 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
 
       @Order(110.0)
       public class BigIntegerColumnField extends AbstractLabelField {
-
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("BigIntegerField");
+          return TEXTS.get("EmptyString");
         }
 
         @Override
-        protected String getConfiguredLabelFont() {
+        protected String getConfiguredFont() {
           return "BOLD";
+        }
+
+        @Override
+        protected void execInitField() throws ProcessingException {
+          setValue(TEXTS.get("BigIntegerField"));
         }
       }
 

@@ -67,7 +67,6 @@ import org.eclipse.scout.widget.client.ui.forms.DecimalFieldsForm.MainBox.PiButt
 import org.eclipse.scout.widget.client.ui.forms.DecimalFieldsForm.MainBox.SampleFormatButton;
 import org.eclipse.scout.widget.client.ui.forms.DecimalFieldsForm.MainBox.SmallestValueButton;
 import org.eclipse.scout.widget.client.ui.forms.NumberFieldsForm.MainBox.ExamplesBox.BigIntegerColumnField;
-import org.eclipse.scout.widget.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.PlaceholderField;
 
 public class DecimalFieldsForm extends AbstractForm implements IPageForm {
 
@@ -223,10 +222,6 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
     return getFieldByClass(Place5Field.class);
   }
 
-  public PlaceholderField getPlaceholderField() {
-    return getFieldByClass(PlaceholderField.class);
-  }
-
   /**
    * @return the SampleFormatButton
    */
@@ -264,15 +259,19 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
 
       @Order(10.0)
       public class DoubleColumnField extends AbstractLabelField {
-
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("DoubleField");
+          return TEXTS.get("EmptyString");
         }
 
         @Override
-        protected String getConfiguredLabelFont() {
+        protected String getConfiguredFont() {
           return "BOLD";
+        }
+
+        @Override
+        protected void execInitField() throws ProcessingException {
+          setValue(TEXTS.get("DoubleField"));
         }
       }
 
@@ -348,12 +347,17 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("BigDecimalField");
+          return TEXTS.get("EmptyString");
         }
 
         @Override
-        protected String getConfiguredLabelFont() {
+        protected String getConfiguredFont() {
           return "BOLD";
+        }
+
+        @Override
+        protected void execInitField() throws ProcessingException {
+          setValue(TEXTS.get("BigDecimalField"));
         }
       }
 

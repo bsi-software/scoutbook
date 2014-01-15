@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
@@ -23,10 +23,19 @@ import org.eclipse.scout.rt.client.ui.form.fields.checkbox.AbstractCheckBox;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
 import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholderField;
+import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipse.scout.rt.shared.data.basic.FontSpec;
+import org.eclipse.scout.rt.shared.services.lookup.LookupCall;
+import org.eclipse.scout.widget.client.services.lookup.FontStyleLookupCall;
 import org.eclipse.scout.widget.client.ui.forms.StringFieldForm.MainBox.CloseButton;
 import org.eclipse.scout.widget.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox;
+import org.eclipse.scout.widget.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.BackgroundColorField;
+import org.eclipse.scout.widget.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.FontNameField;
+import org.eclipse.scout.widget.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.FontSizeField;
+import org.eclipse.scout.widget.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.FontStyleField;
+import org.eclipse.scout.widget.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.ForegroundColorField;
 import org.eclipse.scout.widget.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.InputMaskedField;
 import org.eclipse.scout.widget.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.MaxLengthField;
 import org.eclipse.scout.widget.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.PlaceholderField;
@@ -40,6 +49,7 @@ import org.eclipse.scout.widget.client.ui.forms.StringFieldForm.MainBox.Examples
 import org.eclipse.scout.widget.client.ui.forms.StringFieldForm.MainBox.ExamplesBox.MandatoryField;
 import org.eclipse.scout.widget.client.ui.forms.StringFieldForm.MainBox.ExamplesBox.StyledField;
 import org.eclipse.scout.widget.client.ui.forms.StringFieldForm.MainBox.LoremIpsumButton;
+import org.eclipse.scout.widget.client.ui.forms.StringFieldForm.MainBox.SampleFormatButton;
 
 public class StringFieldForm extends AbstractForm implements IPageForm {
 
@@ -62,6 +72,14 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
     startInternal(new PageFormHandler());
   }
 
+  public BackgroundColorField getBackgroundColorField() {
+    return getFieldByClass(BackgroundColorField.class);
+  }
+
+  public WrapTextField getWrapTextField() {
+    return getFieldByClass(WrapTextField.class);
+  }
+
   @Override
   public CloseButton getCloseButton() {
     return getFieldByClass(CloseButton.class);
@@ -79,16 +97,36 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(DisabledField.class);
   }
 
-  public MaxLengthField getMaxLengthField() {
-    return getFieldByClass(MaxLengthField.class);
-  }
-
-  public PlaceholderField getPlaceholderField() {
-    return getFieldByClass(PlaceholderField.class);
-  }
-
   public ConfigurationBox getConfigurationBox() {
     return getFieldByClass(ConfigurationBox.class);
+  }
+
+  /**
+   * @return the FontField
+   */
+  public FontNameField getFontNameField() {
+    return getFieldByClass(FontNameField.class);
+  }
+
+  /**
+   * @return the FontSizeField
+   */
+  public FontSizeField getFontSizeField() {
+    return getFieldByClass(FontSizeField.class);
+  }
+
+  /**
+   * @return the FontStyleField
+   */
+  public FontStyleField getFontStyleField() {
+    return getFieldByClass(FontStyleField.class);
+  }
+
+  /**
+   * @return the ForegroundColorField
+   */
+  public ForegroundColorField getForegroundColorField() {
+    return getFieldByClass(ForegroundColorField.class);
   }
 
   public InputMaskedField getInputMaskedField() {
@@ -107,6 +145,27 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(MandatoryField.class);
   }
 
+  /**
+   * @return the MaxLengthField
+   */
+  public MaxLengthField getMaxLengthField() {
+    return getFieldByClass(MaxLengthField.class);
+  }
+
+  /**
+   * @return the PlaceholderField
+   */
+  public PlaceholderField getPlaceholderField() {
+    return getFieldByClass(PlaceholderField.class);
+  }
+
+  /**
+   * @return the SampleFormatButton
+   */
+  public SampleFormatButton getSampleFormatButton() {
+    return getFieldByClass(SampleFormatButton.class);
+  }
+
   public StringInputField getStringInputField() {
     return getFieldByClass(StringInputField.class);
   }
@@ -123,17 +182,8 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(UpperCaseField.class);
   }
 
-  public WrapTextField getWrapTextField() {
-    return getFieldByClass(WrapTextField.class);
-  }
-
   @Order(10.0)
   public class MainBox extends AbstractGroupBox {
-
-    @Override
-    protected int getConfiguredGridColumnCount() {
-      return 1;
-    }
 
     @Order(10.0)
     public class ExamplesBox extends AbstractGroupBox {
@@ -161,6 +211,11 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
       public class MandatoryField extends AbstractStringField {
 
         @Override
+        protected int getConfiguredGridW() {
+          return 2;
+        }
+
+        @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("Mandatory");
         }
@@ -185,6 +240,11 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         @Override
         protected boolean getConfiguredEnabled() {
           return false;
+        }
+
+        @Override
+        protected int getConfiguredGridW() {
+          return 2;
         }
 
         @Override
@@ -222,6 +282,11 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
+        protected int getConfiguredGridW() {
+          return 2;
+        }
+
+        @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("Styled");
         }
@@ -236,78 +301,12 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         return TEXTS.get("Configure");
       }
 
-      @Order(10.0)
-      public class StringInputField extends AbstractStringField {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("StringInput");
-        }
-      }
-
-      @Order(20.0)
-      public class MaxLengthField extends AbstractIntegerField {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("MaxLength");
-        }
-
-        @Override
-        protected String getConfiguredLabelFont() {
-          return "ITALIC";
-        }
-
-        @Override
-        protected void execChangedValue() throws ProcessingException {
-          getStringInputField().setMaxLength(NumberUtility.nvl(getValue(), 4000));
-        }
-
-        @Override
-        protected void execInitField() throws ProcessingException {
-          setValue(5);
-          getStringInputField().setMaxLength(5);
-        }
-      }
-
-      @Order(30.0)
-      public class PlaceholderField extends AbstractPlaceholderField {
-      }
-
-      @Order(40.0)
-      public class UpperCaseField extends AbstractStringField {
-
-        @Override
-        protected boolean getConfiguredFormatUpper() {
-          return true;
-        }
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("UpperCase");
-        }
-      }
-
-      @Order(50.0)
-      public class InputMaskedField extends AbstractStringField {
-
-        @Override
-        protected boolean getConfiguredInputMasked() {
-          return true;
-        }
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("InputMasked");
-        }
-      }
-
       @Order(60.0)
       public class TextInputField extends AbstractStringField {
 
         @Override
         protected int getConfiguredGridH() {
-          return 4;
+          return 6;
         }
 
         @Override
@@ -321,8 +320,165 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
+      private void updateFontAndColors() {
+        String name = StringUtility.nvl(getFontNameField().getValue(), "");
+        int style = NumberUtility.nvl(getFontStyleField().getValue(), 0);
+        int size = NumberUtility.nvl(getFontSizeField().getValue(), 0);
+        FontSpec fs = new FontSpec(name, style, size);
+
+        getTextInputField().setFont(fs);
+
+        String foreground = StringUtility.nvl(getForegroundColorField().getValue(), "000000");
+        String background = StringUtility.nvl(getBackgroundColorField().getValue(), "ffffff");
+
+        getTextInputField().setForegroundColor(foreground);
+        getTextInputField().setBackgroundColor(background);
+      }
+
       @Order(70.0)
+      public class FontNameField extends AbstractStringField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("Font");
+        }
+
+        @Override
+        protected String getConfiguredLabelFont() {
+          return "ITALIC";
+        }
+
+        @Override
+        protected void execChangedValue() throws ProcessingException {
+          updateFontAndColors();
+        }
+      }
+
+      @Order(80.0)
+      public class FontStyleField extends AbstractSmartField<Integer> {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("FontStyle");
+        }
+
+        @Override
+        protected String getConfiguredLabelFont() {
+          return "ITALIC";
+        }
+
+        @Override
+        protected Class<? extends LookupCall> getConfiguredLookupCall() {
+          return FontStyleLookupCall.class;
+        }
+
+        @Override
+        protected void execChangedValue() throws ProcessingException {
+          updateFontAndColors();
+        }
+      }
+
+      @Order(90.0)
+      public class FontSizeField extends AbstractIntegerField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("FontSize");
+        }
+
+        @Override
+        protected String getConfiguredLabelFont() {
+          return "ITALIC";
+        }
+
+        @Override
+        protected Integer getConfiguredMaxValue() {
+          return 100;
+        }
+
+        @Override
+        protected Integer getConfiguredMinValue() {
+          return 1;
+        }
+
+        @Override
+        protected void execChangedValue() throws ProcessingException {
+          updateFontAndColors();
+        }
+      }
+
+      @Order(100.0)
+      public class ForegroundColorField extends AbstractStringField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("ForegroundColor");
+        }
+
+        @Override
+        protected String getConfiguredLabelFont() {
+          return "ITALIC";
+        }
+
+        @Override
+        protected void execChangedValue() throws ProcessingException {
+          updateFontAndColors();
+        }
+
+        @Override
+        protected String execValidateValue(String rawValue) throws ProcessingException {
+          clearErrorStatus();
+
+          if (StringUtility.isNullOrEmpty(rawValue)) {
+            return rawValue;
+          }
+
+          if (!rawValue.matches("[0-9A-Fa-f]{6}")) {
+            this.setErrorStatus("\"" + rawValue + "\" " + TEXTS.get("NoColor"));
+          }
+
+          return rawValue;
+        }
+      }
+
+      @Order(110.0)
+      public class BackgroundColorField extends AbstractStringField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("BackgroundColor");
+        }
+
+        @Override
+        protected String getConfiguredLabelFont() {
+          return "ITALIC";
+        }
+
+        @Override
+        protected void execChangedValue() throws ProcessingException {
+          updateFontAndColors();
+        }
+
+        @Override
+        protected String execValidateValue(String rawValue) throws ProcessingException {
+          clearErrorStatus();
+
+          if (StringUtility.isNullOrEmpty(rawValue)) {
+            return rawValue;
+          }
+
+          if (!rawValue.matches("[0-9A-Fa-f]{6}")) {
+            this.setErrorStatus("\"" + rawValue + "\" " + TEXTS.get("NoColor"));
+          }
+
+          return rawValue;
+        }
+      }
+
+      @Order(120.0)
       public class WrapTextField extends AbstractCheckBox {
+
+        // TODO: does not react on getConfiguredLabelFont, bug???
 
         @Override
         protected String getConfiguredFont() {
@@ -339,6 +495,74 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
           getTextInputField().setWrapText(getValue());
         }
       }
+
+      @Order(130.0)
+      public class StringInputField extends AbstractStringField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("StringField");
+        }
+      }
+
+      @Order(140.0)
+      public class UpperCaseField extends AbstractStringField {
+
+        @Override
+        protected boolean getConfiguredFormatUpper() {
+          return true;
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("UpperCase");
+        }
+      }
+
+      @Order(150.0)
+      public class InputMaskedField extends AbstractStringField {
+
+        @Override
+        protected boolean getConfiguredInputMasked() {
+          return true;
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("InputMasked");
+        }
+      }
+
+      @Order(160.0)
+      public class MaxLengthField extends AbstractIntegerField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("MaxLength");
+        }
+
+        @Override
+        protected String getConfiguredLabelFont() {
+          return "ITALIC";
+        }
+
+        @Override
+        protected void execChangedValue() throws ProcessingException {
+          int maxlen = NumberUtility.nvl(getValue(), 4000);
+          getStringInputField().setMaxLength(maxlen);
+          getUpperCaseField().setMaxLength(maxlen);
+          getInputMaskedField().setMaxLength(maxlen);
+        }
+      }
+
+      @Order(170.0)
+      public class PlaceholderField extends AbstractPlaceholderField {
+
+        @Override
+        protected int getConfiguredGridH() {
+          return 7;
+        }
+      }
     }
 
     @Order(30.0)
@@ -346,17 +570,42 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
 
       @Override
       protected String getConfiguredLabel() {
-        return TEXTS.get("LoremIpsumButton");
+        return TEXTS.get("SampleContent");
       }
 
       @Override
       protected void execClickAction() throws ProcessingException {
-        getTextInputField().setValue(TEXTS.get("Lorem") + "\n" + TEXTS.get("Lorem"));
+        getTextInputField().setValue(TEXTS.get("LoremIpsum") + "\n" + TEXTS.get("Lorem"));
+        getStringInputField().setValue(TEXTS.get("HelloWorld"));
+        getUpperCaseField().setValue(TEXTS.get("HelloWorld"));
+        getInputMaskedField().setValue(TEXTS.get("HelloWorld"));
+
+        System.out.println(getUpperCaseField().getValue());
       }
     }
 
     @Order(40.0)
     public class CloseButton extends AbstractCloseButton {
+    }
+
+    @Order(50.0)
+    public class SampleFormatButton extends AbstractButton {
+
+      @Override
+      protected String getConfiguredLabel() {
+        return TEXTS.get("SampleFormat");
+      }
+
+      @Override
+      protected void execClickAction() throws ProcessingException {
+        getFontNameField().setValue("Courier");
+        getFontSizeField().setValue(14);
+        getForegroundColorField().setValue("000088");
+        getBackgroundColorField().setValue("DDDDFF");
+        getWrapTextField().setValue(true);
+
+        getMaxLengthField().setValue(7);
+      }
     }
   }
 

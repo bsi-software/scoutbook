@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
@@ -20,14 +20,15 @@ import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.ui.UserAgentUtility;
 import org.eclipse.scout.widget.client.ui.forms.LabelFieldForm.MainBox.CloseButton;
+import org.eclipse.scout.widget.client.ui.forms.LabelFieldForm.MainBox.ConfigurationBox;
+import org.eclipse.scout.widget.client.ui.forms.LabelFieldForm.MainBox.ConfigurationBox.MultilineLabelField;
+import org.eclipse.scout.widget.client.ui.forms.LabelFieldForm.MainBox.ConfigurationBox.SetValueTextField;
+import org.eclipse.scout.widget.client.ui.forms.LabelFieldForm.MainBox.ConfigurationBox.TooLongLabelTextGetsTruncatedField;
+import org.eclipse.scout.widget.client.ui.forms.LabelFieldForm.MainBox.ConfigurationBox.VeryLongLabelTextField;
 import org.eclipse.scout.widget.client.ui.forms.LabelFieldForm.MainBox.ExamplesBox;
 import org.eclipse.scout.widget.client.ui.forms.LabelFieldForm.MainBox.ExamplesBox.DisabledField;
 import org.eclipse.scout.widget.client.ui.forms.LabelFieldForm.MainBox.ExamplesBox.LabelField;
 import org.eclipse.scout.widget.client.ui.forms.LabelFieldForm.MainBox.ExamplesBox.StyledField;
-import org.eclipse.scout.widget.client.ui.forms.LabelFieldForm.MainBox.ConfigurationBox;
-import org.eclipse.scout.widget.client.ui.forms.LabelFieldForm.MainBox.ConfigurationBox.MultilineLabelField;
-import org.eclipse.scout.widget.client.ui.forms.LabelFieldForm.MainBox.ConfigurationBox.TooLongLabelTextGetsTruncatedField;
-import org.eclipse.scout.widget.client.ui.forms.LabelFieldForm.MainBox.ConfigurationBox.VeryLongLabelTextField;
 
 public class LabelFieldForm extends AbstractForm implements IPageForm {
 
@@ -79,6 +80,13 @@ public class LabelFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(ConfigurationBox.class);
   }
 
+  /**
+   * @return the SetValueTextField
+   */
+  public SetValueTextField getSetValueTextField() {
+    return getFieldByClass(SetValueTextField.class);
+  }
+
   public StyledField getStyledField() {
     return getFieldByClass(StyledField.class);
   }
@@ -87,6 +95,9 @@ public class LabelFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(TooLongLabelTextGetsTruncatedField.class);
   }
 
+  /**
+   * @return the VeryLongLabelTextField
+   */
   public VeryLongLabelTextField getVeryLongLabelTextField() {
     return getFieldByClass(VeryLongLabelTextField.class);
   }
@@ -173,16 +184,23 @@ public class LabelFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(20.0)
-      public class VeryLongLabelTextField extends AbstractLabelField {
+      public class SetValueTextField extends AbstractLabelField {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("Lorem");
+          return TEXTS.get("EmptyString");
+        }
+
+        // TODO: check if this can be fixed. label allows to have text in the label area, and in the label and the content area, and in the joined area for label + content. but not in the content area only
+        @Override
+        protected boolean getConfiguredLabelVisible() {
+          //return false;
+          return true;
         }
 
         @Override
-        protected int getConfiguredLabelWidthInPixel() {
-          return LABEL_WIDTH_UI;
+        protected void execInitField() throws ProcessingException {
+          setValue(TEXTS.get("SetValueText"));
         }
       }
 
@@ -211,6 +229,36 @@ public class LabelFieldForm extends AbstractForm implements IPageForm {
             value = "<html>" + value + "</html>";
           }
           this.setValue(value);
+        }
+      }
+
+      @Order(40.0)
+      public class VeryLongLabelTextField extends AbstractLabelField {
+
+        @Override
+        protected int getConfiguredGridH() {
+          return 2;
+        }
+
+        @Override
+        protected boolean getConfiguredLabelVisible() {
+          return false;
+        }
+
+        @Override
+        protected boolean getConfiguredWrapText() {
+          return true;
+        }
+
+        @Override
+        protected void execInitField() throws ProcessingException {
+          if (UserAgentUtility.isSwingUi()) {
+            setValue("<html>" + TEXTS.get("Lorem") + "</html>");
+          }
+          else {
+            setValue(TEXTS.get("Lorem"));
+
+          }
         }
       }
     }

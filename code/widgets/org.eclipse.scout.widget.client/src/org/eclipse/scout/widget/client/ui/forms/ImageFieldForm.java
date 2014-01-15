@@ -23,22 +23,19 @@ import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
-import org.eclipse.scout.rt.client.ui.form.fields.checkbox.AbstractCheckBox;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.imagebox.AbstractImageField;
-import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.shared.AbstractIcons;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.widget.client.ui.forms.ImageFieldForm.MainBox.CloseButton;
 import org.eclipse.scout.widget.client.ui.forms.ImageFieldForm.MainBox.ConfigurationBox;
-import org.eclipse.scout.widget.client.ui.forms.ImageFieldForm.MainBox.ConfigurationBox.AutoFitField;
-import org.eclipse.scout.widget.client.ui.forms.ImageFieldForm.MainBox.ConfigurationBox.HorizontalAlignmentField;
 import org.eclipse.scout.widget.client.ui.forms.ImageFieldForm.MainBox.ConfigurationBox.ImageField;
 import org.eclipse.scout.widget.client.ui.forms.ImageFieldForm.MainBox.ConfigurationBox.ImageURLField;
 import org.eclipse.scout.widget.client.ui.forms.ImageFieldForm.MainBox.ConfigurationBox.ScrollbarEnabledField;
-import org.eclipse.scout.widget.client.ui.forms.ImageFieldForm.MainBox.ConfigurationBox.VerticalAlignmentField;
 import org.eclipse.scout.widget.client.ui.forms.ImageFieldForm.MainBox.ExamplesBox;
+import org.eclipse.scout.widget.client.ui.forms.ImageFieldForm.MainBox.ExamplesBox.AlignedCenterField;
+import org.eclipse.scout.widget.client.ui.forms.ImageFieldForm.MainBox.ExamplesBox.AlignedRightField;
 import org.eclipse.scout.widget.client.ui.forms.ImageFieldForm.MainBox.ExamplesBox.DefaultField;
 import org.eclipse.scout.widget.client.ui.forms.ImageFieldForm.MainBox.ExamplesBox.IconContentField;
 import org.eclipse.scout.widget.client.ui.forms.ImageFieldForm.MainBox.SampleContentButton;
@@ -65,10 +62,17 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
   }
 
   /**
-   * @return the AutoFitField
+   * @return the AlignedCenterField
    */
-  public AutoFitField getAutoFitField() {
-    return getFieldByClass(AutoFitField.class);
+  public AlignedCenterField getAlignedCenterField() {
+    return getFieldByClass(AlignedCenterField.class);
+  }
+
+  /**
+   * @return the AlignedRightField
+   */
+  public AlignedRightField getAlignedRightField() {
+    return getFieldByClass(AlignedRightField.class);
   }
 
   @Override
@@ -89,13 +93,6 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
 
   public ConfigurationBox getConfigurationBox() {
     return getFieldByClass(ConfigurationBox.class);
-  }
-
-  /**
-   * @return the HorizontalAlignmentField
-   */
-  public HorizontalAlignmentField getHorizontalAlignmentField() {
-    return getFieldByClass(HorizontalAlignmentField.class);
   }
 
   /**
@@ -137,17 +134,11 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(ScrollbarEnabledField.class);
   }
 
-  /**
-   * @return the VerticalAlignmentField
-   */
-  public VerticalAlignmentField getVerticalAlignmentField() {
-    return getFieldByClass(VerticalAlignmentField.class);
-  }
-
   @Order(10.0)
   public class MainBox extends AbstractGroupBox {
 
     public static final String SCOUT_LOGO = "http://wiki.eclipse.org/images/e/eb/ScoutIconLarge.gif";
+    public static final String BIRD = "http://2.bp.blogspot.com/_LDF9z4ZzZHo/TQZI-CUPl2I/AAAAAAAAAfc/--DuSZRxywM/s1600/bird_1008.jpg";
 
     @Override
     protected int getConfiguredGridColumnCount() {
@@ -158,6 +149,11 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
     public class ExamplesBox extends AbstractGroupBox {
 
       @Override
+      protected int getConfiguredGridColumnCount() {
+        return 2;
+      }
+
+      @Override
       protected String getConfiguredLabel() {
         return TEXTS.get("Examples");
       }
@@ -166,18 +162,30 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
       public class DefaultField extends AbstractImageField {
 
         @Override
+        protected int getConfiguredDragType() {
+          return TYPE_FILE_TRANSFER;
+        }
+
+        @Override
         protected int getConfiguredDropType() {
           return TYPE_IMAGE_TRANSFER;
         }
 
         @Override
         protected int getConfiguredGridH() {
-          return 3;
+          return 4;
         }
 
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("Default");
+        }
+
+        @Override
+        protected TransferObject execDragRequest() throws ProcessingException {
+          // TODO: learn about drag requests to save image from image field on eg. desktop
+          System.out.println("don't yet know how to fill in the transfer object");
+          return null;
         }
 
         @Override
@@ -187,9 +195,10 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
           if (transferObject instanceof FileListTransferObject) {
             FileListTransferObject to = (FileListTransferObject) transferObject;
             String imageName = to.getFilenames()[0];
+            System.out.println(imageName);
             try {
               setImage(IOUtility.getContent(new FileInputStream(imageName)));
-              setAutoFit(true);
+
             }
             catch (Exception e) {
               e.printStackTrace();
@@ -227,13 +236,56 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("IconImage");
+          return TEXTS.get("AlignedLeft");
+        }
+      }
+
+      @Order(30.0)
+      public class AlignedCenterField extends AbstractImageField {
+
+        @Override
+        protected int getConfiguredHorizontalAlignment() {
+          return 0;
+        }
+
+        @Override
+        protected String getConfiguredImageId() {
+          return AbstractIcons.Bookmark;
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("AlignedCenter");
+        }
+      }
+
+      @Order(40.0)
+      public class AlignedRightField extends AbstractImageField {
+
+        @Override
+        protected int getConfiguredHorizontalAlignment() {
+          return 1;
+        }
+
+        @Override
+        protected String getConfiguredImageId() {
+          return AbstractIcons.Bookmark;
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("AlignedRight");
         }
       }
     }
 
     @Order(20.0)
     public class ConfigurationBox extends AbstractGroupBox {
+
+      @Override
+      protected int getConfiguredGridColumnCount() {
+        return 2;
+      }
 
       @Override
       protected String getConfiguredLabel() {
@@ -244,13 +296,18 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
       public class ImageField extends AbstractImageField {
 
         @Override
+        protected boolean getConfiguredAutoFit() {
+          return true;
+        }
+
+        @Override
         protected int getConfiguredGridH() {
           return 5;
         }
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("ImageField");
+          return TEXTS.get("AutoFit");
         }
 
         @Override
@@ -279,68 +336,12 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(20.0)
-      public class ImageURLField extends AbstractStringField {
+      public class ScrollbarEnabledField extends AbstractImageField {
 
         @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("ImageURL");
+        protected int getConfiguredGridH() {
+          return 5;
         }
-      }
-
-      @Order(30.0)
-      public class HorizontalAlignmentField extends AbstractIntegerField {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("HorizontalAlignment");
-        }
-
-        @Override
-        protected Integer getConfiguredMaxValue() {
-          return 1;
-        }
-
-        @Override
-        protected Integer getConfiguredMinValue() {
-          return -1;
-        }
-      }
-
-      @Order(40.0)
-      public class VerticalAlignmentField extends AbstractIntegerField {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("VerticalAlignment");
-        }
-
-        @Override
-        protected Integer getConfiguredMaxValue() {
-          return 1;
-        }
-
-        @Override
-        protected Integer getConfiguredMinValue() {
-          return -1;
-        }
-      }
-
-      @Order(50.0)
-      public class AutoFitField extends AbstractCheckBox {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("AutoFit");
-        }
-
-        @Override
-        protected void execChangedValue() throws ProcessingException {
-          getImageField().setAutoFit(getValue());
-        }
-      }
-
-      @Order(60.0)
-      public class ScrollbarEnabledField extends AbstractCheckBox {
 
         @Override
         protected String getConfiguredLabel() {
@@ -348,8 +349,43 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected void execChangedValue() throws ProcessingException {
-          getImageField().setScrollBarEnabled(getValue());
+        protected Class<? extends IValueField> getConfiguredMasterField() {
+          return ImageFieldForm.MainBox.ConfigurationBox.ImageURLField.class;
+        }
+
+        @Override
+        protected boolean getConfiguredScrollBarEnabled() {
+          return true;
+        }
+
+        @Override
+        protected void execChangedMasterValue(Object newMasterValue) throws ProcessingException {
+          try {
+            URL url = new URL((String) newMasterValue);
+            setImage(IOUtility.getContent(url.openStream()));
+          }
+          catch (Exception e) {
+            e.printStackTrace();
+          }
+        }
+      }
+
+      @Order(30.0)
+      public class ImageURLField extends AbstractStringField {
+
+        @Override
+        protected int getConfiguredGridW() {
+          return 2;
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("ImageURL");
+        }
+
+        @Override
+        protected String getConfiguredLabelFont() {
+          return "ITALIC";
         }
       }
     }
@@ -364,7 +400,7 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
 
       @Override
       protected void execClickAction() throws ProcessingException {
-        getImageURLField().setValue(SCOUT_LOGO);
+        getImageURLField().setValue(BIRD);
       }
     }
 

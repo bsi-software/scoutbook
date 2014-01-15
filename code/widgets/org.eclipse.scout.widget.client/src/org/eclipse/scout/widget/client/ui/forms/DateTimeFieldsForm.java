@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     BSI Business Systems Integration AG - initial API and implementation
  ******************************************************************************/
@@ -247,13 +247,13 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
       public class DateColumnField extends AbstractLabelField {
 
         @Override
-        protected String getConfiguredFont() {
-          return "BOLD";
+        protected String getConfiguredLabel() {
+          return TEXTS.get("EmptyString");
         }
 
         @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("DateField");
+        protected String getConfiguredFont() {
+          return "BOLD";
         }
 
         @Override
@@ -328,12 +328,17 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("TimeField");
+          return TEXTS.get("EmptyString");
         }
 
         @Override
-        protected String getConfiguredLabelFont() {
+        protected String getConfiguredFont() {
           return "BOLD";
+        }
+
+        @Override
+        protected void execInitField() throws ProcessingException {
+          setValue(TEXTS.get("TimeField"));
         }
       }
 
@@ -390,12 +395,17 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("DateTimeField");
+          return TEXTS.get("EmptyString");
         }
 
         @Override
-        protected String getConfiguredLabelFont() {
+        protected String getConfiguredFont() {
           return "BOLD";
+        }
+
+        @Override
+        protected void execInitField() throws ProcessingException {
+          setValue(TEXTS.get("DateTimeField"));
         }
       }
 

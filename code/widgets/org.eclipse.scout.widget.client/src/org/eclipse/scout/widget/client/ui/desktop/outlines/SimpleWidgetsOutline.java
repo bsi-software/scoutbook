@@ -10,12 +10,14 @@ import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.extension.client.ui.desktop.outline.AbstractExtensibleOutline;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.widget.client.ui.desktop.pages.FormPage;
+import org.eclipse.scout.widget.client.ui.forms.ButtonLinkFieldsForm;
+import org.eclipse.scout.widget.client.ui.forms.CheckboxFieldForm;
 import org.eclipse.scout.widget.client.ui.forms.DateTimeFieldsForm;
 import org.eclipse.scout.widget.client.ui.forms.DecimalFieldsForm;
-import org.eclipse.scout.widget.client.ui.forms.ImageFieldForm;
 import org.eclipse.scout.widget.client.ui.forms.LabelFieldForm;
+import org.eclipse.scout.widget.client.ui.forms.MessageBoxForm;
 import org.eclipse.scout.widget.client.ui.forms.NumberFieldsForm;
-import org.eclipse.scout.widget.client.ui.forms.SmartFieldForm;
+import org.eclipse.scout.widget.client.ui.forms.RadioButtonGroupFieldForm;
 import org.eclipse.scout.widget.client.ui.forms.StringFieldForm;
 
 /**
@@ -46,10 +48,16 @@ public class SimpleWidgetsOutline extends AbstractExtensibleOutline {
     FormPage dateTimeFieldPage = new FormPage(DateTimeFieldsForm.class);
     pageList.add(dateTimeFieldPage);
 
-    FormPage smartFieldPage = new FormPage(SmartFieldForm.class);
-    pageList.add(smartFieldPage);
+    FormPage checkboxFieldPage = new FormPage(CheckboxFieldForm.class);
+    pageList.add(checkboxFieldPage);
 
-    FormPage imageFieldPage = new FormPage(ImageFieldForm.class);
-    pageList.add(imageFieldPage);
+    FormPage radioButtonFieldPage = new FormPage(RadioButtonGroupFieldForm.class);
+    pageList.add(radioButtonFieldPage);
+
+    FormPage buttonLinkFieldsPage = new FormPage(ButtonLinkFieldsForm.class);
+    pageList.add(buttonLinkFieldsPage);
+
+    FormPage messageBoxPage = new FormPage(MessageBoxForm.class);
+    pageList.add(messageBoxPage);
   }
 }

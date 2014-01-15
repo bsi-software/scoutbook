@@ -59,7 +59,6 @@ import org.eclipse.scout.widget.client.ui.forms.SmartFieldForm.MainBox.ExamplesB
 import org.eclipse.scout.widget.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithListContentField;
 import org.eclipse.scout.widget.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithTreeContentField;
 import org.eclipse.scout.widget.client.ui.forms.SmartFieldForm.MainBox.SampleContentButton;
-import org.eclipse.scout.widget.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox.PlaceholderField;
 import org.eclipse.scout.widget.shared.services.code.ColorsCodeType;
 import org.eclipse.scout.widget.shared.services.code.IndustryICBCodeType;
 import org.eclipse.scout.widget.shared.services.code.IndustryICBCodeType.ICB9000.ICB9500.ICB9530.ICB9537;
@@ -145,10 +144,6 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
    */
   public MandatorySmartfieldField getMandatorySmartfieldField() {
     return getFieldByClass(MandatorySmartfieldField.class);
-  }
-
-  public PlaceholderField getPlaceholderField() {
-    return getFieldByClass(PlaceholderField.class);
   }
 
   public ConfigurationBox getConfigurationBox() {
@@ -238,12 +233,17 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("SmartFieldWithListContent");
+          return TEXTS.get("EmptyString");
         }
 
         @Override
-        protected String getConfiguredLabelFont() {
+        protected String getConfiguredFont() {
           return "BOLD";
+        }
+
+        @Override
+        protected void execInitField() throws ProcessingException {
+          setValue(TEXTS.get("SmartFieldWithListContent"));
         }
       }
 
@@ -315,12 +315,17 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("SmartFieldWithTreeContent");
+          return TEXTS.get("EmptyString");
         }
 
         @Override
-        protected String getConfiguredLabelFont() {
+        protected String getConfiguredFont() {
           return "BOLD";
+        }
+
+        @Override
+        protected void execInitField() throws ProcessingException {
+          setValue(TEXTS.get("SmartFieldWithTreeContent"));
         }
       }
 

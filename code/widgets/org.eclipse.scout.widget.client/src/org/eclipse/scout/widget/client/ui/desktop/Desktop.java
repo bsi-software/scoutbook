@@ -18,6 +18,7 @@ import org.eclipse.scout.rt.extension.client.ui.desktop.AbstractExtensibleDeskto
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.ui.UserAgentUtility;
 import org.eclipse.scout.widget.client.ClientSession;
+import org.eclipse.scout.widget.client.ui.desktop.outlines.AdvancedWidgetsOutline;
 import org.eclipse.scout.widget.client.ui.desktop.outlines.SimpleWidgetsOutline;
 import org.eclipse.scout.widget.shared.Icons;
 
@@ -30,7 +31,7 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
   @Override
   @SuppressWarnings("unchecked")
   protected Class<? extends IOutline>[] getConfiguredOutlines() {
-    return new Class[]{SimpleWidgetsOutline.class};
+    return new Class[]{SimpleWidgetsOutline.class, AdvancedWidgetsOutline.class};
   }
 
   @Override
@@ -157,6 +158,22 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
     @Override
     protected String getConfiguredText() {
       return TEXTS.get("StandardOutline");
+    }
+  }
+
+  @Order(20.0)
+  public class AdvancedWidgetsOutlineViewButton extends AbstractOutlineViewButton {
+
+    /**
+   * 
+   */
+    public AdvancedWidgetsOutlineViewButton() {
+      super(Desktop.this, AdvancedWidgetsOutline.class);
+    }
+
+    @Override
+    protected String getConfiguredText() {
+      return TEXTS.get("AdvancedWidgets");
     }
   }
 }
