@@ -394,34 +394,23 @@ Needs text
 \end{itemize}
 
 
-
-
-% =========================================================================== %
-\chapter{Layouting}
-needs text
-
-\noindent Existing Documentation
-\begin{itemize}
-  \item concept wiki \url{http://wiki.eclipse.org/Scout/Concepts/Client_Plug-In#Layouting}
-\end{itemize}
-
-% --------------------------------------------------------------------------- %
-\section{The Desktop}
-needs text
-
-% --------------------------------------------------------------------------- %
-\section{The Stuff in the Middle}
-needs text
-
-% --------------------------------------------------------------------------- %
-\section{Form Layout}
-needs text
-
 % =========================================================================== %
 \chapter{Form Fields}
 \chalabel{fields}
 
-needs text
+Every Scout form contains one or several form fields.
+Form fields therefor represent the basic building blocks of a forms content. 
+Depending on their nature, form fields can display information, accept user input or act as container holding inner form fields.
+As such container fields can hold inner container fields it is possible to create forms that meet compolex requirements.
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.8\textwidth]{scoutclientmodel.png}
+\caption{A class diagram for the Scout's client model.}
+\label{fig:scoutclientmodel}
+\end{figure}
+
+
 
 \noindent Existing Documentation
 \begin{itemize}
@@ -438,9 +427,94 @@ needs text
   \item forum: label position \url{http://www.eclipse.org/forums/index.php/t/369109/}
 \end{itemize}
 
+* model component
+* ui component
+* extension point registration
+
+* model
+* label
 * exec methods
 * field validation
 
+
+% --------------------------------------------------------------------------- %
+\section{Label Field}
+needs text
+	
+% --------------------------------------------------------------------------- %
+\section{String Field}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum: \url{http://www.eclipse.org/forums/index.php/t/369263/}
+  \item forum: validation on any key \url{http://www.eclipse.org/forums/index.php/t/198123/}
+\end{itemize}
+
+% --------------------------------------------------------------------------- %
+\section{Integer, Long and BigInteger Fields}
+needs text
+
+% --------------------------------------------------------------------------- %
+\section{Double and BigDecimal Fields}
+needs text
+
+% --------------------------------------------------------------------------- %
+\section{Date, Time and DateTime Fields}
+needs text
+
+% --------------------------------------------------------------------------- %
+\section{Checkbox Field}
+needs text
+
+% --------------------------------------------------------------------------- %
+\section{RadioButton and RadioButtonGroup Fields}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum: \url{http://www.eclipse.org/forums/index.php/t/366324/}
+\end{itemize}
+
+% --------------------------------------------------------------------------- %
+\section{Button and Link Fields}
+needs text
+
+% --------------------------------------------------------------------------- %
+\section{List Box}
+needs text
+
+% --------------------------------------------------------------------------- %
+\section{Tree Box}
+needs text
+
+% --------------------------------------------------------------------------- %
+\section{Smart Field}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item presentation: \url{http://wiki.eclipse.org/images/c/c9/20111102_EclipseConEurope2011-EclipseScout-DiscoverThePotential.pdf}
+  \item forum: \url{http://www.eclipse.org/forums/index.php/t/369542/}
+\end{itemize}
+
+\subsection{Menus}
+Each smart field can have menus attached. The menus will be shown when the user clicks on the \emph{arrow} symbol next to the smart field. Figure \ref{fig:smartfield_menu} shows an example of a smart field along with a set of menus.
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.8\textwidth]{smartfieldmenu.png}
+\caption{Menus attached to a smart field.}
+\label{fig:smartfield_menu}
+\end{figure}
+
+By default, the menus will only be shown if a value of the smart field has been selected. To show the menus even if the smart field is empty, one has to override the menu's \lstinline$getConfiguredEmptySpaceAction$ method:
+
+\begin{lstlisting}[backgroundcolor=\color{white}]
+@Override
+protected boolean getConfiguredEmptySpaceAction() {
+ return true;
+}
+\end{lstlisting}
 	
 % --------------------------------------------------------------------------- %
 \section{Grouping Components}
@@ -478,83 +552,14 @@ needs text
 needs text
 
 % --------------------------------------------------------------------------- %
-\section{Radio Button Group}
+\section{Image Field}
 needs text
 
 \noindent Existing Documentation
 \begin{itemize}
-  \item forum: \url{http://www.eclipse.org/forums/index.php/t/366324/}
+  \item forum: scrollbars \url{http://www.eclipse.org/forums/index.php/t/291205/}
 \end{itemize}
 
-% --------------------------------------------------------------------------- %
-\section{Label Field}
-needs text
-	
-% --------------------------------------------------------------------------- %
-\section{String Field}
-needs text
-
-\noindent Existing Documentation
-\begin{itemize}
-  \item forum: \url{http://www.eclipse.org/forums/index.php/t/369263/}
-  \item forum: validation on any key \url{http://www.eclipse.org/forums/index.php/t/198123/}
-\end{itemize}
-
-% --------------------------------------------------------------------------- %
-\section{Integer Field}
-needs text
-	
-% --------------------------------------------------------------------------- %
-\section{Number Field}
-needs text
-	
-% --------------------------------------------------------------------------- %
-\section{Date Field}
-needs text
-
-% --------------------------------------------------------------------------- %
-\section{Button Field}
-needs text
-
-% --------------------------------------------------------------------------- %
-\section{Link Field}
-needs text
-
-% --------------------------------------------------------------------------- %
-\section{Smart Field}
-needs text
-
-\noindent Existing Documentation
-\begin{itemize}
-  \item presentation: \url{http://wiki.eclipse.org/images/c/c9/20111102_EclipseConEurope2011-EclipseScout-DiscoverThePotential.pdf}
-  \item forum: \url{http://www.eclipse.org/forums/index.php/t/369542/}
-\end{itemize}
-
-\subsection{Menus}
-Each smart field can have menus attached. The menus will be shown when the user clicks on the \emph{arrow} symbol next to the smart field. Figure \ref{fig:smartfield_menu} shows an example of a smart field along with a set of menus.
-\begin{figure}[!htb]
-\centering
-\includegraphics[width=0.8\textwidth]{smartfieldmenu.png}
-\caption{Menus attached to a smart field.}
-\label{fig:smartfield_menu}
-\end{figure}
-
-By default, the menus will only be shown if a value of the smart field has been selected. To show the menus even if the smart field is empty, one has to override the menu's \lstinline$getConfiguredEmptySpaceAction$ method:
-
-\begin{lstlisting}[backgroundcolor=\color{white}]
-@Override
-protected boolean getConfiguredEmptySpaceAction() {
- return true;
-}
-\end{lstlisting}
-
-% --------------------------------------------------------------------------- %
-\section{List Box}
-needs text
-
-% --------------------------------------------------------------------------- %
-\section{Tree Box}
-needs text
 
 % --------------------------------------------------------------------------- %
 \section{Table Field}
@@ -577,20 +582,7 @@ needs text
 \end{itemize}
 
 % --------------------------------------------------------------------------- %
-\section{Image Field}
-needs text
-
-\noindent Existing Documentation
-\begin{itemize}
-  \item forum: scrollbars \url{http://www.eclipse.org/forums/index.php/t/291205/}
-\end{itemize}
-
-% --------------------------------------------------------------------------- %
 \section{HTML Field}
-needs text
-
-% --------------------------------------------------------------------------- %
-\section{Image Field}
 needs text
 
 % --------------------------------------------------------------------------- %
@@ -649,7 +641,11 @@ needs text
 \chapter{Custom Fields}
 \chalabel{custom_fields}
 
-needs text
+As we have seen in the previous chapter, Scout already comes with a large amount of ready to use form fields. 
+However, real life projects often need to meet special business requirements that can not be covered by the existing Scout form fields. 
+For such situations the flexibility of the Scout framework allows the project to extend the exiting set of form fields with custom form fields. 
+
+Custom form fields concists of a couple of components. Modeling and UI and registration and extension point?
 
 \noindent Existing Documentation
 \begin{itemize}
@@ -670,6 +666,26 @@ needs text
   \item forum: form data for template fields \url{http://www.eclipse.org/forums/index.php/t/261235/}
   \item forum: form ''modularisation'' \url{http://www.eclipse.org/forums/index.php/t/245857/}
 \end{itemize}
+
+
+
+% =========================================================================== %
+\chapter{Layouting}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item concept wiki \url{http://wiki.eclipse.org/Scout/Concepts/Client_Plug-In#Layouting}
+\end{itemize}
+
+% --------------------------------------------------------------------------- %
+\section{The Desktop}
+needs text
+
+% --------------------------------------------------------------------------- %
+\section{Form Layout}
+needs text
+
 
 % =========================================================================== %
 \chapter{Bookmarks}
