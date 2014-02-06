@@ -10,8 +10,8 @@ MAKEINDEX = "c:\lyx\MiKTeX 2.9\miktex\bin\makeindex.exe" -s book_index_style.ist
 HTLATEX = "c:\lyx\MiKTeX 2.9\miktex\bin\htlatex.exe"
 TEX = "c:\lyx\MiKTeX 2.9\miktex\bin\tex.exe"
 EBOOKCONVERT = "c:\Program Files\Calibre2\ebook-convert.exe" 
-ZIP =zip -R 
-UNZIP = "unzip"
+ZIP ="c:\Program Files\zip\zip.exe" -R
+UNZIP = "c:\Program Files\zip\unzip.exe"
 COPY =copy
 
 HTMLOUTPARAM = "html,2,info" # use "html,3,next" to produce output on section level
