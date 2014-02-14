@@ -439,9 +439,11 @@ needs text
 
 
 % --------------------------------------------------------------------------- %
-\section{Label Field}
+\section{Label Fields}
 
 Label fields are used to place a read only text anywhere in a Scout form. 
+As shown in the configuration section of \figref{labelfield} such texts can occupy the typical area assigned to a label field on the left, the area typically assigned to data entry on the right or on both sides.
+The form shown in \figref{labelfield} is implemented in class \java{LabelFieldForm} of the Scout widget application.
 
 \begin{figure}
 \includegraphics[width=10cm]{labelfield.png}
@@ -451,39 +453,97 @@ To display text over the whole width of a column or in the area right to the lab
 \figlabel{labelfield}
 \end{figure}
 
+To set the label text in the default area method \java{getConfiguredLabel} is used. 
+If the label text is too long for the reserved area the label gets truncated with trailing \dots.
+The complete label text is then shown in a tooltip.
+
+Also, a number of \java{getConfiguredLabel*} styling properties exist for labels.
+This is not only true for the label field itself but for any form field derived from \java{AbstractFormField}.
+Most of these styling properties can directly be set in the Scout Object Properties view.
+A subset of these properties are shown in the list below.
+
+\begin{itemize}
+  \item Label Position
+  \item Label Horizontal Alignment
+  \item Label Foreground Color
+  \item Label Background Color
+  \item Label Font
+\end{itemize}
+
 \lstinputlisting[
-  label=\lstlabel{field.label.default},
+  label=\lstlabel{field.label.value},
   caption=A simple LabelField.,
   index={AbstractLabelField,Label Field},
-  linerange={121-129},
+  linerange={181-194},
   float
 ]
 {../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ui/forms/LabelFieldForm.java}
 
-	
+To display text in the right hand area an empty string can be used as label text and the text for the value area of the label field can be set with method \java{setValue} in method \java{execInitField} according to \lstref{field.label.value}.
+
+\lstinputlisting[
+  label=\lstlabel{field.label.multiline},
+  caption=A label field displaying multi-line text that covers the whole width of a column.,
+  index={AbstractLabelField,Label Field},
+  linerange={223-251},
+  float
+]
+{../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ui/forms/LabelFieldForm.java}
+
+To display multiline text across both the label and the value area a combination of label field properties has to be used.
+See \lstref{field.label.multiline} for the configuration used in the last label field shown in \figref{labelfield}.
+
 % --------------------------------------------------------------------------- %
-\section{String Field}
+\section{String Fields}
 
 String fields are used to enter simple text strings. 
 In addition, string fields are also useful to enter multiline text or capture masked input.
+The form shown in \figref{stringfield} is implemented in class \java{StringFieldForm} of the Scout widget application.
 
 \begin{figure}
 \includegraphics[width=15cm]{stringfield.png}
 \caption{String fields and example use cases.
 Text content shown in disabled fields can be read and copied to the clipboard, but not edited.
-In multiline string fields the text can be displayed as entered or the text may be wrapped to fit into the available column with.}
+In multi line string fields the text can be displayed as entered or the text may be wrapped to fit into the available column with.}
 \figlabel{stringfield}
 \end{figure}
 
-\noindent Existing Documentation
-\begin{itemize}
-  \item forum: \url{http://www.eclipse.org/forums/index.php/t/369263/}
-  \item forum: validation on any key \url{http://www.eclipse.org/forums/index.php/t/198123/}
-\end{itemize}
+Some of the most typical use cases for string fields are represented in the examples section of \figref{stringfield}.
+In the configuration section of the form a multiline text field is shown.
+As in the case of the label text, font and color styling possibilities are available for the text shown in a string field. 
+Clicking on the \button{Sample Format} and on the \button{Sample Content} prefills some of the fields to create the effect shown in \figref{stringfield}.
+
+In the case of multi line string fields, the field can be configured to either display text lines as they have been entered or wrapped to fit into the available width of the field. 
+This property can be set with the string field's method \java{getConfiguredWrapText} or dynamically with method \java{setWrapText}. 
+Please note that changing this property dynamically at runtime currently only works with the SWT and the Swing rendering components.
+
+\lstinputlisting[
+  label=\lstlabel{field.string.masked},
+  caption=A masked string field.,
+  index={AbstractStringField,String Field},
+  linerange={522-535},
+  float
+]
+{../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ui/forms/StringFieldForm.java}
+
+Additional use cases for the string field are shown in the right column of the configuration section of the string field demo form. 
+Specific string fields are located for the default case, a string field only accepting upper case letters, and a masked field. 
+To code to represent the masked string field is provided in \lstref{field.string.masked}.
+Independent of what the user is typing the masked field keeps the entered content visually hidden. 
+In contrast to all other forms of string fields, the content cannot be copied to the system clipboard.
+It can only be accessed programmatically with the \java{getValue} method of the string field.
+
+String fields also allow for the configuration of the maximum length of the text that can be entered into the field. 
+In its default configuration, a maximum number of 4'000 characters can be entered into a string field. 
+Using method \java{setMaxLength} this limit can be updated dynamically at runtime. 
+Alternatively, this limit can also be set in method \java{getConfiguredMaxLength}. 
 
 % --------------------------------------------------------------------------- %
-\section{Integer, Long and BigInteger Fields}
-needs text
+\section{Number Fields}
+
+For entering numbers, Scout provides three different fields.
+Depending on the valid range of numbers that may be entered, an integer field, a long field or a big integer field best matches the given use case.
+These fields are represented by the classes \java{AbstractIntegerField}, \java{AbstractLongField} and \java{AbstractBigIntegerField}, each one of them extinding class \java{AbstractNumberField}.
 
 \begin{figure}
 \includegraphics[width=15cm]{numberfield.png}
@@ -493,9 +553,44 @@ Distinct number fields are available for \class{Integer}, a \class{Long} or a \c
 \figlabel{numberfield}
 \end{figure}
 
+The form \java{NumberFieldsForm} of the Scout widget application shown in \figref{numberfield} contains examples for all three number field types.
+Separate buttons are available to demonstrate the use of the minimum and the maximum value a number field can hold.
+In the case of the \field{BigInteger}, arbitrarily large or small values may be entered. 
+See \lstref{field.integer.input} for the code corresponding to the input integer field in the configuration section of the example form.
+
+\lstinputlisting[
+  label=\lstlabel{field.integer.input},
+  caption=A simple Integer field.,
+  index={AbstractIntegerField,Integer Field},
+  linerange={511-519},
+  float
+]
+{../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ui/forms/NumberFieldsForm.java}
+
+As already indicated by the class names of the three number fields, the fields serve to enter values that fit into the ranges defined by the Java classes \java{Integer}, \java{Long} and \java{BigInteger}.
+To further restrict the bounds of valid numbers you may use the methods \java{getConfiguredMinValue} and \java{getConfiguredMaxValue}.
+The effect of setting such bounds can be tested by entering values into the \field{Minimum Value} and the \field{Maximum Value} of the example form.
+If, for example, a minimum value of 0 is entered in the \field{Minimum Value} and the user tries to enter the value -1 into one of the input fields, an error marker becomes visible on the input field. 
+A tooltip with the text ''The value is too small; must be between 0 \dots'' further explains the issue to the user.
+In such a case the value entered into the user interface is not propagated to the number field's value.
+This is why the read only \field{getValue()} is not updated in such a case.
+
+To textually format the entered numbers the grouping number field property can be used. 
+In the example form the \checkbox{Grouping} can be used to control this property.
+Ticking/unticking this checkbox will affect the three number input fields in the configuration section of the example form.
+
+More extensive options to specify the formatting of the numbers is provided by the method \java{setFormat} of class \java{AbstractNumberField}. 
+Method \java{setFormat} is accepting an argument of the Java class \java{DecimalFormat}. 
+To demonstrate an example for such a format click on \button{Sample Format} in the example form. 
+For more information please consult the Javadoc for class \java{DecimalFormat}.
+
 % --------------------------------------------------------------------------- %
-\section{Double and BigDecimal Fields}
-needs text
+\section{Decimal Fields}
+
+Scout provides two different form fields for entering decimal values. 
+Depending on the required precision and range of values to be entered a double field or a big decimal field can be used. 
+The two field types are represented by Scout's classes \java{AbstractDoubleField} and \java{AbstractBigDecimalField} and can hold values of the Java types \java{Double} and \java{BigDecimal} respectively. 
+Both the double and the big decimal field extend class \java{AbstractDecimalField} which in turn extends class \java{AbstractNumberField}.
 
 \begin{figure}
 \includegraphics[width=15cm]{decimalfield.png}
@@ -505,9 +600,57 @@ Distinct number fields are available for the \class{Double} and \class{BigDecima
 \figlabel{decimalfield}
 \end{figure}
 
+The example form shown in \figref{decimalfield} demonstrates the usage and some of the available options to configure Scout's decimal fields.
+This example form is defined in class \java{DecimalFieldsForm} of the Scout widget application. 
+
+\lstinputlisting[
+  label=\lstlabel{field.double.styled},
+  caption=A styled decimal field holding Java \java{Double} values. Negative values are shown in red,
+  index={AbstractDoubleField,Double Field},
+  linerange={313-337},
+  float
+]
+{../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ui/forms/DecimalFieldsForm.java}
+
+The styled double field in the example section of the form displays negative values in red and postive values in the default black color. 
+This behaviour is implemented in method \java{execChangedValue} according to \lstref{field.double.styled}. 
+The sample value shown initially is provided in the \java{execInitField} method. 
+Setting the red foreground color explicitely is needed in method \java{execInitField} as the \java{execChangedValue} is only triggered after the initial form is displayed on the screen. 
+
+For displaying and storing the fraction digits of decimal values three different properties exist. 
+Two of them, the \java{getConfiguredMinFractionDigits} and the \java{getConfiguredMinFractionDigits} affect the optical representation of the decimal value. 
+To configure the amount of fraction digits that is effectively represented the property \java{getConfiguredFractionDigits} is used. 
+The need for three different properties might not be immediately clear. 
+To illustrate the concept, let us look at an example use case where a decimal field always has to display exactely 3 fraction digits. 
+Should the user provide more fraction digits we would like to capture this additional information up to 5 fraction digits. 
+
+To configure this behaviour the following settings for this decimal field may be used.
+
+\begin{itemize}
+  \item \textit{Min Fraction Digits}: 3
+  \item \textit{Max Fraction Digits}: 3
+  \item \textit{Fraction Digits}: 5
+\end{itemize}
+
+If the user enters the text ''3.141592653589793'' into this field and tabs to the next field, the field will then display the text ''4.142'' but actually hold the value 3.14159. 
+And if the user just enters a ''3'', the field will display ''3.000'' and hold the value 3.0.
+
+Decimal fields can also be configured to enter percentages in a convenient way. 
+For this use case the \property{Multiplier} can be set to 100 and the \property{Multiplier} to \java{true}. 
+If the user now enters ''5'' into such a decimal field, it will show the text ''5\%'' and hold the value 0.05.
+
+As in the case of number fields more extensive options to specify the formatting of the numbers is provided by \java{setFormat} method of the decimal field. 
+Method \java{setFormat} is accepting an argument of the Java class \java{DecimalFormat}. 
+To demonstrate an example for such a format click on \button{Sample Format} in the example form. 
+For more information please consult the Javadoc for class \java{DecimalFormat}.
+
 % --------------------------------------------------------------------------- %
-\section{Date, Time and DateTime Fields}
-needs text
+\section{Date and Time Fields}
+
+To work with date and time values Scout offers three dinstinct form fields. 
+The \java{AbstractDateField} allows the user to enter a date and the \java{AbstractTimeField} is used to enter a time. 
+The third field \java{AbstractDateTimeField} combines date and time entry into a single form field. 
+Both classes \java{AbstractTimeField} and \java{AbstractDateTimeField} are extending the \java{AbstractDateField} field.
 
 \begin{figure}
 \includegraphics[width=15cm]{datetimefield.png}
@@ -516,8 +659,39 @@ needs text
 \figlabel{datetimefield}
 \end{figure}
 
+The form \java{DateTimeFieldsForm} of the Scout widget application shown in \figref{datetimefield} contains examples for the date and time fields of Scout.
+Separate buttons are available to provide samle values and to demonstrate the formatting options for displaying date and time values.
+Displaying dates and times is highly depending on the used locale.
+That is why the currently used locale is shown in the example section of the form.
+
+To enter date and time values the user can either click on the date and time icons/buttons provided by the fields or directly enter text into the fields. 
+For entering dates the key arrows provide a number of shortcuts. 
+Entering the currnt date can be done by pressing the \key{Up}. 
+Once a day is entered in a date or a combined day time field, the \key{Up} and the \key{Down} can be used to step to the next/previous day. 
+Simultaneously pressing the \key{Shift} or the \key{Ctrl} allows to step to the next/previous month or year.
+
+\lstinputlisting[
+  label=\lstlabel{field.datetime.disabled},
+  caption=A disabled combined date time field initialized with the current time,
+  index={AbstractDateTimeField,DateTime Field},
+  linerange={427-446},
+  float
+]
+{../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ui/forms/DateTimeFieldsForm.java}
+
+The code of the \java{DateTimeDisabledField} field shown in \lstref{field.datetime.disabled} represents the disabled combined date time in the example form. 
+Before the form is opened Scout executes its \java{execInitField} method and sets the fields value to the current date and time. 
+
+In the configuration section the local can be used at runtime to test the effect of the locale to displaying date and time fields. 
+As changing the locale at runtime only works reliably in rich clients the field is only editable in the Swing or the SWT client. 
+To specify the exact formatting of the displayed date and time values a specific format can be set in the \java{getConfiguredFormat} method of the date and time fields. 
+Internally, Scout is using the provided string to create a Java \java{SimpleDateFormat} for formatting. 
+Valid examples for the formatting are entered into the format fields of the example dialog by pressing the \button{Sample Formats}. 
+The string ''EEEE'' shown in date field format field represents the day of the week as shown in configuration section of \figref{datetimefield}. 
+As expected, the textual representation of the day of the week is depending on the used locale. 
+
 % --------------------------------------------------------------------------- %
-\section{Checkbox Field}
+\section{Checkbox Fields}
 needs text
 
 \begin{figure}
@@ -529,7 +703,7 @@ needs text
 
 
 % --------------------------------------------------------------------------- %
-\section{RadioButton and RadioButtonGroup Fields}
+\section{Radio Button Fields}
 needs text
 
 \begin{figure}
@@ -549,7 +723,7 @@ Assigning distinct values to the individual radio buttons allows to query the se
 needs text
 
 \begin{figure}
-\includegraphics[width=9cm]{buttonlink.png}
+\includegraphics[width=11cm]{buttonlink.png}
 \caption{Buttons and links may be placed on a Scout form to initiate actions.
 Buttons may have an associated icon and/or a label.
 Links only have a label.}

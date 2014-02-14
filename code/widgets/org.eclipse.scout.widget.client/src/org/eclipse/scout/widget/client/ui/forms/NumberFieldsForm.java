@@ -65,9 +65,6 @@ import org.eclipse.scout.widget.client.ui.forms.NumberFieldsForm.MainBox.Smalles
 
 public class NumberFieldsForm extends AbstractForm implements IPageForm {
 
-  private static final long MIN_VALUE = 0;
-  private static final long MAX_VALUE = 100000;
-
   public NumberFieldsForm() throws ProcessingException {
     super();
   }
@@ -267,7 +264,6 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         protected String getConfiguredLabel() {
           return TEXTS.get("Default");
         }
-
       }
 
       @Order(30.0)
@@ -519,20 +515,6 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         protected String getConfiguredLabel() {
           return TEXTS.get("IntegerFieldInput");
         }
-
-        @Override
-        protected Integer getConfiguredMinValue() {
-          return (int) MIN_VALUE;
-        }
-
-        @Override
-        protected Integer getConfiguredMaxValue() {
-          return (int) MAX_VALUE;
-        }
-
-        public void setGrouping(boolean grouping) {
-          setGroupingUsed(grouping);
-        }
       }
 
       @Order(20.0)
@@ -595,11 +577,6 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
           getLongInputField().validateContent();
           getBigIntegerInputField().validateContent();
         }
-
-        @Override
-        protected void execInitField() throws ProcessingException {
-          setValue(MIN_VALUE);
-        }
       }
 
       @Order(40.0)
@@ -632,11 +609,6 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
           getLongInputField().validateContent();
           getBigIntegerInputField().validateContent();
         }
-
-        @Override
-        protected void execInitField() throws ProcessingException {
-          setValue(MAX_VALUE);
-        }
       }
 
       @Order(50.0)
@@ -659,9 +631,9 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execChangedValue() throws ProcessingException {
-          getInputField().setGrouping(getValue());
-          getLongInputField().setGrouping(getValue());
-          getBigIntegerInputField().setGrouping(getValue());
+          getInputField().setGroupingUsed(getValue());
+          getLongInputField().setGroupingUsed(getValue());
+          getBigIntegerInputField().setGroupingUsed(getValue());
         }
 
         @Override
@@ -703,20 +675,6 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("LongFieldInput");
-        }
-
-        @Override
-        protected Long getConfiguredMaxValue() {
-          return MAX_VALUE;
-        }
-
-        @Override
-        protected Long getConfiguredMinValue() {
-          return MIN_VALUE;
-        }
-
-        public void setGrouping(boolean grouping) {
-          setGroupingUsed(grouping);
         }
       }
 
@@ -767,20 +725,6 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("BigIntegerFieldInput");
-        }
-
-        @Override
-        protected BigInteger getConfiguredMaxValue() {
-          return BigInteger.valueOf(MAX_VALUE);
-        }
-
-        @Override
-        protected BigInteger getConfiguredMinValue() {
-          return BigInteger.valueOf(MIN_VALUE);
-        }
-
-        public void setGrouping(boolean grouping) {
-          setGroupingUsed(grouping);
         }
       }
 

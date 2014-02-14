@@ -579,8 +579,6 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         getStringInputField().setValue(TEXTS.get("HelloWorld"));
         getUpperCaseField().setValue(TEXTS.get("HelloWorld"));
         getInputMaskedField().setValue(TEXTS.get("HelloWorld"));
-
-        System.out.println(getUpperCaseField().getValue());
       }
     }
 

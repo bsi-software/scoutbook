@@ -12,10 +12,8 @@ package org.eclipse.scout.widget.client.ui.forms;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
-import java.text.ParsePosition;
 
 import org.eclipse.scout.commons.NumberUtility;
-import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
@@ -31,7 +29,6 @@ import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerFi
 import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
 import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholderField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
-import org.eclipse.scout.rt.shared.ScoutTexts;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.widget.client.ui.forms.DecimalFieldsForm.MainBox.CloseButton;
 import org.eclipse.scout.widget.client.ui.forms.DecimalFieldsForm.MainBox.ConfigurationBox;
@@ -70,10 +67,6 @@ import org.eclipse.scout.widget.client.ui.forms.NumberFieldsForm.MainBox.Example
 
 public class DecimalFieldsForm extends AbstractForm implements IPageForm {
 
-  private static final double MIN_VALUE = -Math.PI;
-  private static final double MAX_VALUE = Math.PI;
-
-  private static final BigDecimal TWO = new BigDecimal(2);
   private static final BigDecimal FOUR = new BigDecimal(4);
 
   public DecimalFieldsForm() throws ProcessingException {
@@ -444,10 +437,6 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         protected String getConfiguredLabel() {
           return TEXTS.get("DoubleFieldInput");
         }
-
-        public void setGrouping(boolean grouping) {
-          setGroupingUsed(grouping);
-        }
       }
 
       @Order(20.0)
@@ -557,8 +546,8 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execChangedValue() throws ProcessingException {
-          getInputField().setGrouping(getValue());
-          getBigDecimalInputField().setGrouping(getValue());
+          getInputField().setGroupingUsed(getValue());
+          getBigDecimalInputField().setGroupingUsed(getValue());
         }
       }
 
@@ -715,41 +704,6 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
         protected String getConfiguredLabel() {
           return TEXTS.get("BigDecimalFieldInput");
         }
-
-        public void setGrouping(boolean grouping) {
-          setGroupingUsed(grouping);
-        }
-
-        /**
-         * Parses the provided text and returns its BigInteger representation.
-         * If the provided text does not syntactically represent an integer number,
-         * an exception is thrown.
-         */
-        @Override
-        protected BigDecimal execParseValue(String text) throws ProcessingException {
-          BigDecimal retVal = null;
-          text = StringUtility.nvl(text, "").trim();
-          if (text.length() > 0) {
-            DecimalFormat df = (DecimalFormat) getFormat();
-            df.setParseBigDecimal(true);
-            ParsePosition p = new ParsePosition(0);
-
-            if (isPercent()) {
-              if (text.endsWith("%")) {
-                text = StringUtility.trim(text.substring(0, text.length() - 1));
-              }
-              text = StringUtility.concatenateTokens(text, df.getPositiveSuffix());
-            }
-
-            BigDecimal val = (BigDecimal) df.parse(text, p);
-            // check for bad syntax
-            if (p.getErrorIndex() >= 0 || p.getIndex() != text.length()) {
-              throw new ProcessingException(ScoutTexts.get("InvalidNumberMessageX", text));
-            }
-            retVal = val;
-          }
-          return retVal;
-        }
       }
 
       @Order(130.0)
@@ -852,28 +806,30 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
        * implementation copied from http://java.lykkenborg.no/2005/03/computing-pi-using-bigdecimal.html
        */
       private BigDecimal pi() {
+        BigDecimal two = new BigDecimal(2);
         int scale = NumberUtility.nvl(getFractionDigitsField().getValue(), 20);
         BigDecimal a = BigDecimal.ONE;
-        BigDecimal b = BigDecimal.ONE.divide(sqrt(TWO, scale), scale, BigDecimal.ROUND_HALF_UP);
+        BigDecimal b = BigDecimal.ONE.divide(sqrt(two, scale), scale, BigDecimal.ROUND_HALF_UP);
         BigDecimal t = new BigDecimal(0.25);
         BigDecimal x = BigDecimal.ONE;
         BigDecimal y;
 
         while (!a.equals(b)) {
           y = a;
-          a = a.add(b).divide(TWO, scale, BigDecimal.ROUND_HALF_UP);
+          a = a.add(b).divide(two, scale, BigDecimal.ROUND_HALF_UP);
           b = sqrt(b.multiply(y), scale);
           t = t.subtract(x.multiply(y.subtract(a).multiply(y.subtract(a))));
-          x = x.multiply(TWO);
+          x = x.multiply(two);
         }
 
-        return a.add(b).multiply(a.add(b)).divide(t.multiply(FOUR), scale, BigDecimal.ROUND_HALF_UP);
+        return a.add(b).multiply(a.add(b)).divide(t.multiply(new BigDecimal(4)), scale, BigDecimal.ROUND_HALF_UP);
       }
 
       /**
        * Babylonian square root method (Newton's method)
        */
       private BigDecimal sqrt(BigDecimal a, int scale) {
+        BigDecimal two = new BigDecimal(2);
         BigDecimal x0 = new BigDecimal("0");
         BigDecimal x1 = new BigDecimal(Math.sqrt(a.doubleValue()));
 
@@ -881,7 +837,7 @@ public class DecimalFieldsForm extends AbstractForm implements IPageForm {
           x0 = x1;
           x1 = a.divide(x0, scale, BigDecimal.ROUND_HALF_UP);
           x1 = x1.add(x0);
-          x1 = x1.divide(TWO, scale, BigDecimal.ROUND_HALF_UP);
+          x1 = x1.divide(two, scale, BigDecimal.ROUND_HALF_UP);
         }
 
         return x1;

@@ -437,11 +437,6 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
       public class ListSmartField extends AbstractSmartField<String> {
 
         @Override
-        protected boolean getConfiguredActiveFilterEnabled() {
-          return true;
-        }
-
-        @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("ListSmartField");
         }

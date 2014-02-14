@@ -14,6 +14,7 @@ import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.client.ui.form.ScoutInfoForm;
 import org.eclipse.scout.rt.client.ui.form.outline.DefaultOutlineTableForm;
 import org.eclipse.scout.rt.client.ui.form.outline.DefaultOutlineTreeForm;
+import org.eclipse.scout.rt.extension.client.ui.action.menu.AbstractExtensibleMenu;
 import org.eclipse.scout.rt.extension.client.ui.desktop.AbstractExtensibleDesktop;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.ui.UserAgentUtility;
@@ -145,12 +146,49 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
     }
   }
 
+  @Order(25.0)
+  public class OutlinesMenu extends AbstractExtensibleMenu {
+
+    @Override
+    protected String getConfiguredText() {
+      return TEXTS.get("Outlines");
+    }
+
+    @Order(10.0)
+    public class SimpleWidgetsMenu extends AbstractExtensibleMenu {
+
+      @Override
+      protected String getConfiguredText() {
+        return TEXTS.get("SimpleWidgets");
+      }
+
+      @Override
+      protected void execAction() throws ProcessingException {
+        setOutline(SimpleWidgetsOutline.class);
+      }
+    }
+
+    @Order(20.0)
+    public class AdvancedWidgetsMenu extends AbstractExtensibleMenu {
+
+      @Override
+      protected String getConfiguredText() {
+        return TEXTS.get("AdvancedWidgets");
+      }
+
+      @Override
+      protected void execAction() throws ProcessingException {
+        setOutline(AdvancedWidgetsOutline.class);
+      }
+    }
+  }
+
   @Order(10.0)
   public class StandardOutlineViewButton extends AbstractOutlineViewButton {
 
     /**
-   * 
-   */
+     *
+     */
     public StandardOutlineViewButton() {
       super(Desktop.this, SimpleWidgetsOutline.class);
     }
@@ -165,8 +203,8 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
   public class AdvancedWidgetsOutlineViewButton extends AbstractOutlineViewButton {
 
     /**
-   * 
-   */
+     *
+     */
     public AdvancedWidgetsOutlineViewButton() {
       super(Desktop.this, AdvancedWidgetsOutline.class);
     }

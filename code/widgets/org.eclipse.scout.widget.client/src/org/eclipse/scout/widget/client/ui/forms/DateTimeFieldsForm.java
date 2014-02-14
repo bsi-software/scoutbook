@@ -30,6 +30,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.lookup.LookupCall;
+import org.eclipse.scout.rt.shared.ui.UserAgentUtility;
 import org.eclipse.scout.widget.client.ClientSession;
 import org.eclipse.scout.widget.client.services.lookup.LocaleLookupCall;
 import org.eclipse.scout.widget.client.ui.forms.DateTimeFieldsForm.MainBox.CloseButton;
@@ -61,9 +62,6 @@ import org.eclipse.scout.widget.client.ui.forms.DateTimeFieldsForm.MainBox.NowBu
 import org.eclipse.scout.widget.client.ui.forms.DateTimeFieldsForm.MainBox.SampleFormatButton;
 
 public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
-
-  private static final long MIN_VALUE = 0;
-  private static final long MAX_VALUE = 1000;
 
   public DateTimeFieldsForm() throws ProcessingException {
     super();
@@ -305,7 +303,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execInitField() throws ProcessingException {
-          adjustDate(0, 0, 0);
+          setValue(new Date());
         }
       }
 
@@ -349,12 +347,6 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
         protected String getConfiguredLabel() {
           return TEXTS.get("Default");
         }
-
-        @Override
-        protected void execInitField() throws ProcessingException {
-          //setValue(null);
-          adjustTime(0, 0, 0);
-        }
       }
 
       @Order(80.0)
@@ -386,7 +378,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execInitField() throws ProcessingException {
-          adjustTime(0, 0, 0);
+          setValue(new Date());
         }
       }
 
@@ -447,8 +439,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execInitField() throws ProcessingException {
-          setValue(null);
-          adjustDate(0, 0, 0);
+          setValue(new Date());
         }
       }
     }
@@ -524,7 +515,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execChangedValue() throws ProcessingException {
-          getInputField().setFormat(getDateFieldFormatField().getValue());
+          getInputField().setFormat(getValue());
         }
 
       }
@@ -558,6 +549,15 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
           getInputField().setFormat(getDateFieldFormatField().getValue());
           getTimeInputField().setFormat(getTimeFieldFormatField().getValue());
           getDateTimeInputField().setFormat(getDateTimeFieldFormatField().getValue());
+        }
+
+        @Override
+        protected void execInitField() throws ProcessingException {
+          setValue(ClientSession.get().getLocale());
+
+          if (!UserAgentUtility.isRichClient()) {
+            setEnabled(false);
+          }
         }
       }
 

@@ -10,8 +10,11 @@
  ******************************************************************************/
 package org.eclipse.scout.widget.client.ui.forms;
 
+import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.net.URL;
+
+import javax.imageio.ImageIO;
 
 import org.eclipse.scout.commons.IOUtility;
 import org.eclipse.scout.commons.annotations.Order;
@@ -28,6 +31,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.imagebox.AbstractImageField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.shared.AbstractIcons;
 import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipse.scout.rt.shared.ui.UserAgentUtility;
 import org.eclipse.scout.widget.client.ui.forms.ImageFieldForm.MainBox.CloseButton;
 import org.eclipse.scout.widget.client.ui.forms.ImageFieldForm.MainBox.ConfigurationBox;
 import org.eclipse.scout.widget.client.ui.forms.ImageFieldForm.MainBox.ConfigurationBox.ImageField;
@@ -197,7 +201,15 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
             String imageName = to.getFilenames()[0];
             System.out.println(imageName);
             try {
-              setImage(IOUtility.getContent(new FileInputStream(imageName)));
+              BufferedImage bi = ImageIO.read(new FileInputStream(imageName));
+              setImage(bi);
+              if (getImage() instanceof BufferedImage) {
+                System.out.println("drop request: oha buffered image ...");
+              }
+              else {
+                System.out.println("drop request: oh jeh, kein buffered image ...");
+              }
+              //setImage(IOUtility.getContent(new FileInputStream(imageName)));
 
             }
             catch (Exception e) {
@@ -212,7 +224,21 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
           clearErrorStatus();
           try {
             URL url = new URL(SCOUT_LOGO);
-            setImage(IOUtility.getContent(url.openStream()));
+
+            if (UserAgentUtility.isSwingUi()) {
+              BufferedImage bi = ImageIO.read(url.openStream());
+              setImage(bi);
+            }
+            else {
+              setImage(IOUtility.getContent(url.openStream()));
+            }
+
+            if (getImage() instanceof BufferedImage) {
+              System.out.println("execInitField: oha buffered image ...");
+            }
+            else {
+              System.out.println("execInitField: oh jeh (" + getImage().getClass().getCanonicalName() + "), kein buffered image ...");
+            }
           }
           catch (Exception e) {
             e.printStackTrace();
@@ -313,11 +339,6 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
         @Override
         protected Class<? extends IValueField> getConfiguredMasterField() {
           return ImageFieldForm.MainBox.ConfigurationBox.ImageURLField.class;
-        }
-
-        @Override
-        protected boolean getConfiguredScrollBarEnabled() {
-          return true;
         }
 
         @Override

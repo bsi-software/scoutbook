@@ -118,21 +118,16 @@ public class LabelFieldForm extends AbstractForm implements IPageForm {
         return TEXTS.get("Examples");
       }
 
-      @Order(20.0)
+      @Order(10.0)
       public class LabelField extends AbstractLabelField {
 
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("Default");
         }
-
-        @Override
-        protected String getConfiguredTooltipText() {
-          return TEXTS.get("TooltipTextForLabelField");
-        }
       }
 
-      @Order(30.0)
+      @Order(20.0)
       public class DisabledField extends AbstractLabelField {
 
         @Override
@@ -146,7 +141,7 @@ public class LabelFieldForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(40.0)
+      @Order(30.0)
       public class StyledField extends AbstractLabelField {
 
         @Override
@@ -188,14 +183,7 @@ public class LabelFieldForm extends AbstractForm implements IPageForm {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("EmptyString");
-        }
-
-        // TODO: check if this can be fixed. label allows to have text in the label area, and in the label and the content area, and in the joined area for label + content. but not in the content area only
-        @Override
-        protected boolean getConfiguredLabelVisible() {
-          //return false;
-          return true;
+          return " ";
         }
 
         @Override
@@ -257,7 +245,6 @@ public class LabelFieldForm extends AbstractForm implements IPageForm {
           }
           else {
             setValue(TEXTS.get("Lorem"));
-
           }
         }
       }
