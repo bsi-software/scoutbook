@@ -50,39 +50,6 @@ needs text
   * swt
   * rap
 
-\section{Test for Listing}
-
-introductionary listing
-
-\lstinputlisting[
-  caption=The DesktopForm.java in the UI,
-]
-{../code/helloworld/org.eclipse.scout.helloworld.client/src/org/eclipse/scout/helloworld/client/ui/forms/DesktopForm.java}
-
-
-some text before listing\index{listing} \ref{samplecode}.
-
-\lstinputlisting[
-  label=samplecode,
-  caption=The HelloWorld.java sample with emphasys on \it{println},
-  index={println,main,String},
-  float,
-  emph={println}
-]
-{../code/helloworldJava/HelloWorld.java}
-
-
-\lstinputlisting[
-  label=samplecode-main,
-  caption=Snippet containing the main method,
-  linerange={14-18},
-  float
-]
-{../code/helloworldJava/HelloWorld.java}
-
-
-some text after listing \ref{samplecode} and \ref{samplecode-main}.
-
 % =========================================================================== %
 \chapter{Client Modeling}
 \chalabel{client_modeling}
@@ -113,22 +80,6 @@ needs text
   \item forum: usage counts for text entries: \url{http://www.eclipse.org/forums/index.php/t/261235/}
 \end{itemize}
 
-\begin{lstlisting}[
-  float,
-  caption=A floating HelloWorld example,
-  index={main},
-  gobble=2
-]
-    /*************************************************
-     * main method
-     *************************************************/
-    public static void main(String[] args) {
-        // some normal line comment
-        System.out.println("Hello, World");
-        Some.big().andEspeciallyLong().getThisOrThat().orSomething("string", null).doThis().doThat;
-    }
-\end{lstlisting}
-
 % --------------------------------------------------------------------------- %
 \section{Icons}
 needs text
@@ -155,25 +106,6 @@ needs text
   * dynamic code types
   * hierarchical code types
 
-  
-  
-\lstinputlisting[
-  language=xml,
-  label=samplecode-xml,
-  caption=The \tt{plugin.xml} file,
-  float
-]
-{../code/helloworldJava/xml/plugin.xml}
-
-and then some listing with the config.ini.
-
-\lstinputlisting[
-  language=ini,
-  label=samplecode-ini,
-  caption=The \tt{config.ini} file
-]
-{../code/helloworldJava/ini/config.ini}
-
 % --------------------------------------------------------------------------- %
 \section{Lookup Calls and Services}
 needs text
@@ -185,7 +117,7 @@ needs text
   \item forum: \url{http://www.eclipse.org/forums/index.php/t/279108/}
 \end{itemize}
 
-    * lookup call
+  * lookup call
   * lookup service
   * sqllookup service
 
@@ -692,7 +624,9 @@ As expected, the textual representation of the day of the week is depending on t
 
 % --------------------------------------------------------------------------- %
 \section{Checkbox Fields}
-needs text
+
+Checkboxes can be used to enter/represent simple boolean values. 
+In Scout, checkboxes are derived from class \java{AbstractCheckBox}. 
 
 \begin{figure}
 \includegraphics[width=7cm]{checkboxfield.png}
@@ -701,10 +635,27 @@ needs text
 \figlabel{checkboxfield}
 \end{figure}
 
+In the Scout widget application the use of checkboxes is demonstrated in the form \java{CheckboxFieldForm} that is shown in \figref{checkboxfield}.
+Instead of the method \java{getValue} that is available on the other value fields, the method \java{isChecked} is provided.
+
+\lstinputlisting[
+  label=\lstlabel{field.checkbox.disabled},
+  caption=A disabled check box field initialized with a checked state,
+  index={AbstractCheckBox,Check Box},
+  linerange={144-163},
+  float
+]
+{../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ui/forms/CheckboxFieldForm.java}
+
+A coding example is provided in \lstref{field.checkbox.disabled} for the disabled check box. 
+The initial value is set in method \java{execInitField} using the method \java{setChecked}.
 
 % --------------------------------------------------------------------------- %
 \section{Radio Button Fields}
-needs text
+
+With radio buttons the user can select a single element out of a number of distinct choices. 
+For this, a number of radio buttons may be placed into a radio button group field where a radio button group extends class \java{AbstractRadioButtonGroup}.
+The contained individual buttons are extending class \java{AbstractRadioButton}.
 
 \begin{figure}
 \includegraphics[width=9cm]{radiobuttonfield.png}
@@ -713,26 +664,81 @@ Assigning distinct values to the individual radio buttons allows to query the se
 \figlabel{radiobuttonfield}
 \end{figure}
 
-\noindent Existing Documentation
-\begin{itemize}
-  \item forum: \url{http://www.eclipse.org/forums/index.php/t/366324/}
-\end{itemize}
+\figref{radiobuttonfield} demonstrates the use of radio button groups in Scout. 
+It is implemented in class \java{RadioButtonGroupFieldForm} of the Scout widget application. 
+As shown in the example section of the form radio buttons may have labes and/or icons assigned. 
+If the radio buttons have assigned individual values of the Java type \class{Long} the currently selected value may be obtained using the \java{getValue} method of the radio button group. 
+
+\lstinputlisting[
+  label=\lstlabel{field.radiobuttongroup.styled},
+  caption=A complete radio button group with two radio buttons with individual radio values assigned,
+  index={AbstractCheckBox,Check Box},
+  linerange={289-329},
+  float
+]
+{../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ui/forms/RadioButtonGroupFieldForm.java}
+
+The code representing the styled radio button group is provided in \lstref{field.radiobuttongroup.styled}. 
+The type of the value that is returned by the \java{getValue} method is defined on the radio button group. 
+In the provided listing, the \java{StyledGroupBox} is configured to return a value of the type \java{Long}. 
+Consequently, the individual radio buttons are returning radio values of the type \java{Long} as well in the \java{getConfiguredRadioValue} methods.
+The field \java{PlaceholderField} in the radio button group only serves layouting purposes. 
+Without this placeholder field, the two radio buttons of the styled radio button group would be evenly distributed in the available space. 
 
 % --------------------------------------------------------------------------- %
 \section{Buttons and Links}
-needs text
+
+Buttons and links are used to trigger actions in Scout. 
+Buttons come in two variations, normal push buttons and toggle buttons. 
+While buttons have an associated label and/or icon, links can only have a label. 
+Buttons extend class \java{AbstractButton} and links extend \java{AbstractLinkButton}. 
 
 \begin{figure}
-\includegraphics[width=11cm]{buttonlink.png}
+\includegraphics[width=15cm]{buttonlink.png}
 \caption{Buttons and links may be placed on a Scout form to initiate actions.
 Buttons may have an associated icon and/or a label.
 Links only have a label.}
 \figlabel{buttonlink}
 \end{figure}
 
+Example uses of buttons and links are shown in the form \java{ButtonLinkFieldsForm} of the Scout widget application shown in \figref{buttonlink}. 
+
+\lstinputlisting[
+  label=\lstlabel{field.button.styled},
+  caption=A button with a label and an icon that horizontally streches over the whole column,
+  index={AbstractButton,Button},
+  linerange={208-231},
+  float
+]
+{../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ui/forms/ButtonLinkFieldsForm.java}
+
+In it's simplest form a button just extends class \java{AbstractButton} and overrides \java{getConfiguredLabel} to set the label. 
+The example in \lstref{field.button.styled} also has an icon assigned and stretches over the whole column width. 
+In addition, the example button overrides method \java{getConfiguredProcessButton} to return \java{false}. 
+This has the effect that buttons (and links) appear at the exact location where they are defined a field container. 
+Otherwise, buttons (and links) are placed at the bottom of the container they are defined in. 
+
+\lstinputlisting[
+  label=\lstlabel{field.togglebutton},
+  caption=A toggle button implementation that changes the label text depending on its toggled state,
+  index={AbstractButton,Toggle Button},
+  linerange={245-273},
+  float
+]
+{../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ui/forms/ButtonLinkFieldsForm.java}
+
+The code of the default toggle button in the example form of the widget application is provided in \lstref{field.togglebutton}. 
+To query the state of a toggle button method \java{isSelected} can be used. 
+
+
 % --------------------------------------------------------------------------- %
 \section{Message Boxes}
-needs text
+
+Message boxes are used to provide information to the user of the application or ask the user simple yes/no questions. 
+In Scout, class \java{MessageBox} provides a number of static convenience methods for this purpose. 
+Additionally, message boxes are shown to the user in the case of a processing exception or a veto exception. 
+
+
 
 \begin{figure}
 \includegraphics[width=14cm]{messagebox.png}

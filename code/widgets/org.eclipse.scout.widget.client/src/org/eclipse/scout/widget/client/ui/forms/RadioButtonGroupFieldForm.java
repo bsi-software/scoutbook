@@ -69,7 +69,7 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
   }
 
   /**
-   * @return the ActiveButton
+   * @return the WarningButton
    */
   public ActiveButton getActiveButton() {
     return getFieldByClass(ActiveButton.class);
@@ -295,30 +295,35 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
         }
 
         @Order(10.0)
-        public class ActiveButton extends AbstractRadioButton {
-
-          @Override
-          protected String getConfiguredIconId() {
-            return AbstractIcons.StatusInfo;
-          }
-        }
-
-        @Order(20.0)
-        public class InactiveButton extends AbstractRadioButton {
+        public class WarningButton extends AbstractRadioButton {
 
           @Override
           protected String getConfiguredIconId() {
             return AbstractIcons.StatusWarning;
           }
+
+          @Override
+          protected Object getConfiguredRadioValue() {
+            return Long.valueOf(-1L);
+          }
         }
 
-        @Order(30.0)
-        public class AllButton extends AbstractRadioButton {
+        @Order(20.0)
+        public class ErrorButton extends AbstractRadioButton {
 
           @Override
           protected String getConfiguredIconId() {
             return AbstractIcons.StatusError;
           }
+
+          @Override
+          protected Object getConfiguredRadioValue() {
+            return Long.valueOf(-2L);
+          }
+        }
+
+        @Order(30.0)
+        public class PlaceholderField extends AbstractPlaceholderField {
         }
       }
     }

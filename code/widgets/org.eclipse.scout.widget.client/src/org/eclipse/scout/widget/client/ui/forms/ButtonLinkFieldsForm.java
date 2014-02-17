@@ -35,8 +35,8 @@ import org.eclipse.scout.widget.client.ui.forms.ButtonLinkFieldsForm.MainBox.Con
 import org.eclipse.scout.widget.client.ui.forms.ButtonLinkFieldsForm.MainBox.ConfigurationBox.LabelField;
 import org.eclipse.scout.widget.client.ui.forms.ButtonLinkFieldsForm.MainBox.ExamplesBox;
 import org.eclipse.scout.widget.client.ui.forms.ButtonLinkFieldsForm.MainBox.ExamplesBox.ButtonColumnField;
-import org.eclipse.scout.widget.client.ui.forms.ButtonLinkFieldsForm.MainBox.ExamplesBox.DefaultButton;
 import org.eclipse.scout.widget.client.ui.forms.ButtonLinkFieldsForm.MainBox.ExamplesBox.DefaultField;
+import org.eclipse.scout.widget.client.ui.forms.ButtonLinkFieldsForm.MainBox.ExamplesBox.DefaultLinkButton;
 import org.eclipse.scout.widget.client.ui.forms.ButtonLinkFieldsForm.MainBox.ExamplesBox.DisabledField;
 import org.eclipse.scout.widget.client.ui.forms.ButtonLinkFieldsForm.MainBox.ExamplesBox.LinkField;
 import org.eclipse.scout.widget.client.ui.forms.ButtonLinkFieldsForm.MainBox.ExamplesBox.ToggleButtonDefaultField;
@@ -85,10 +85,10 @@ public class ButtonLinkFieldsForm extends AbstractForm implements IPageForm {
   }
 
   /**
-   * @return the DefaultButton
+   * @return the DefaultLinkButton
    */
-  public DefaultButton getDefaultButton() {
-    return getFieldByClass(DefaultButton.class);
+  public DefaultLinkButton getDefaultLinkButton() {
+    return getFieldByClass(DefaultLinkButton.class);
   }
 
   public DefaultField getDefaultField() {
@@ -157,38 +157,6 @@ public class ButtonLinkFieldsForm extends AbstractForm implements IPageForm {
         return TEXTS.get("Examples");
       }
 
-//
-//      @Order(10.0)
-//      public class Place0Field extends AbstractPlaceholderField {
-//      }
-//
-//      @Order(20.0)
-//      public class DefaultLabelField extends AbstractLabelField {
-//
-//        @Override
-//        protected String getConfiguredLabel() {
-//          return TEXTS.get("Default");
-//        }
-//      }
-//
-//      @Order(30.0)
-//      public class DisabledLabelField extends AbstractLabelField {
-//
-//        @Override
-//        protected String getConfiguredLabel() {
-//          return TEXTS.get("Disabled");
-//        }
-//      }
-//
-//      @Order(40.0)
-//      public class StyledLabelField extends AbstractLabelField {
-//
-//        @Override
-//        protected String getConfiguredLabel() {
-//          return TEXTS.get("Styled");
-//        }
-//      }
-
       @Order(50.0)
       public class ButtonColumnField extends AbstractLabelField {
         // TODO: check for option to display the header label in the content area instead of the label area
@@ -216,7 +184,6 @@ public class ButtonLinkFieldsForm extends AbstractForm implements IPageForm {
         protected boolean getConfiguredProcessButton() {
           return false;
         }
-
       }
 
       @Order(70.0)
@@ -371,7 +338,7 @@ public class ButtonLinkFieldsForm extends AbstractForm implements IPageForm {
       }
 
       @Order(140.0)
-      public class DefaultButton extends AbstractLinkButton {
+      public class DefaultLinkButton extends AbstractLinkButton {
 
         @Override
         protected String getConfiguredLabel() {
@@ -390,7 +357,7 @@ public class ButtonLinkFieldsForm extends AbstractForm implements IPageForm {
       }
 
       @Order(160.0)
-      public class BigIntDisabledField extends AbstractLinkButton {
+      public class DisabledLinkButton extends AbstractLinkButton {
 
         @Override
         protected boolean getConfiguredEnabled() {

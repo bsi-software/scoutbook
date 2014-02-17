@@ -161,14 +161,14 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
   /**
    * @return the Place0Field
    */
-  public Place0Field getPlace0Field(){
+  public Place0Field getPlace0Field() {
     return getFieldByClass(Place0Field.class);
   }
 
   /**
    * @return the Place1Field
    */
-  public Place1Field getPlace1Field(){
+  public Place1Field getPlace1Field() {
     return getFieldByClass(Place1Field.class);
   }
 
