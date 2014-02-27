@@ -381,7 +381,7 @@ The form shown in \figref{labelfield} is implemented in class \java{LabelFieldFo
 \includegraphics[width=10cm]{labelfield.png}
 \caption{Scout fields and example use cases. 
 In the examples section of the form the standard usage of label fields is shown.
-To display text over the whole width of a column or in the area right to the label use method \code{setValue} as shown in the configuration section of the form.}
+To display text over the whole width of a column or in the area right to the label use method \java{setValue} as shown in the configuration section of the form.}
 \figlabel{labelfield}
 \end{figure}
 
@@ -480,7 +480,7 @@ These fields are represented by the classes \java{AbstractIntegerField}, \java{A
 \begin{figure}
 \includegraphics[width=15cm]{numberfield.png}
 \caption{Number fields and example use cases.
-Distinct number fields are available for \class{Integer}, a \class{Long} or a \class{BigInteger} value classes.
+Distinct number fields are available for \java{Integer}, a \java{Long} or a \java{BigInteger} value classes.
 }
 \figlabel{numberfield}
 \end{figure}
@@ -527,7 +527,7 @@ Both the double and the big decimal field extend class \java{AbstractDecimalFiel
 \begin{figure}
 \includegraphics[width=15cm]{decimalfield.png}
 \caption{Decimal fields and example use cases.
-Distinct number fields are available for the \class{Double} and \class{BigDecimal} value classes.
+Distinct number fields are available for the \java{Double} and \java{BigDecimal} value classes.
 }
 \figlabel{decimalfield}
 \end{figure}
@@ -667,7 +667,7 @@ Assigning distinct values to the individual radio buttons allows to query the se
 \figref{radiobuttonfield} demonstrates the use of radio button groups in Scout. 
 It is implemented in class \java{RadioButtonGroupFieldForm} of the Scout widget application. 
 As shown in the example section of the form radio buttons may have labes and/or icons assigned. 
-If the radio buttons have assigned individual values of the Java type \class{Long} the currently selected value may be obtained using the \java{getValue} method of the radio button group. 
+If the radio buttons have assigned individual values of the Java type \java{Long} the currently selected value may be obtained using the \java{getValue} method of the radio button group. 
 
 \lstinputlisting[
   label=\lstlabel{field.radiobuttongroup.styled},
