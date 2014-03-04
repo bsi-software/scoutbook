@@ -730,15 +730,24 @@ Otherwise, buttons (and links) are placed at the bottom of the container they ar
 The code of the default toggle button in the example form of the widget application is provided in \lstref{field.togglebutton}. 
 To query the state of a toggle button method \java{isSelected} can be used. 
 
+In the configuration section of the example form the use of mnemonics using the character \& is demonstrated. 
+Please note, that this feature is not identically available across the different supported UI technologies. 
+In the Swing UI shown in \figref{buttonlink} the label ''\&Toggle'' has the effect, that pressing the \altkey{T} key combination changes the toggle state of this button. 
+In the case of the SWT UI the \key{alt} key is not necessary. 
+Pressing the \key{T} changes the toggle state. 
+In contrast to the Swing UI the letter 'T' is not underlined. 
+To optically indicate shortcut letters in the SWT UI it is recommended to adapt the label from ''\&Toggle'' to ''[\&T]oggle''. 
+The RAP UI does not currently support mnemonics on buttons. 
 
 % --------------------------------------------------------------------------- %
 \section{Message Boxes}
 
-Message boxes are used to provide information to the user of the application or ask the user simple yes/no questions. 
+Message boxes are used to provide information to a user or ask the user simple yes/no questions. 
 In Scout, class \java{MessageBox} provides a number of static convenience methods for this purpose. 
-Additionally, message boxes are shown to the user in the case of a processing exception or a veto exception. 
-
-
+Additionally, message boxes are shown to the user in the case of a processing exception or a veto exception\footnote{
+The processing exceptions type \java{ProcessingException} represents Scout's core exception class. 
+The veto exception type \java{VetoException} is a direct subclass of the processing exception and is typically used in service calls for subjects with insuffiecient authorization. 
+}. 
 
 \begin{figure}
 \includegraphics[width=14cm]{messagebox.png}
@@ -747,6 +756,37 @@ The message box shown in front is defined by the properties entered in the confi
 \figlabel{messagebox}
 \end{figure}
 
+In the examples section of the \java{MessageBoxForm} form shown in \figref{messagebox} a number of links is provided. 
+Clicking on any of these links opens a corresponding message box via the static convenience methods available with class \java{MessageBox}. 
+For example, calling \java{MessageBox.showOkMessage(title, header, info)} opens a message box with a title, a header text and some additional information. 
+
+\lstinputlisting[
+  label=\lstlabel{field.openmessagebox},
+  caption=Configuring and starting of a message box.,
+  index={MessageBox,Configure a Message Box},
+  linerange={434-453},
+  float
+]
+{../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ui/forms/MessageBoxForm.java}
+
+In addition to the static convenience methods, message boxes can be configured to meet specific requirements by a number of parameters. 
+These parameters are shown in \figref{messagebox} in the configuration section of the sample form \java{MessageBoxForm} of the Scout widget application.  
+Clicking on the \button{Sample Content} will fill in example values for the message box parameters. 
+The configured message box can them be started by clicking on the \link{Open the configured MessageBox}. 
+This behaviour is implemented in the link's \java{execClickAction} method according to \lstref{field.openmessagebox}. 
+The text below details the purpose of less evident message box properties.
+
+Message box buttons only appear if an non-emtpy label text is assigned to the \property{Yes Button Text}, the \property{No Button Text} and \property{Cancel Button Text}. 
+If the \property{hidden text} has a non-empty text assigned, an additional \button{Copy} will be added to the message box. 
+An example use case is the case of elaborate error messages (or complete stack traces in cases where this does not negatively impact the application's security). 
+Here the copy button allows to transport this text into the system clipboard. 
+From the clipboard the user may decides to paste this text into an email to the companys help desk. 
+The \property{default return value} specifies the return value of the message box if the box closes autmatically after the time provided in the \property{auto close millisecond} has passed. 
+If the \property{auto close millisecond} is set to -1, the message box will not clause automatically. 
+
+Once a message box is started with method \java{startMessageBox} the user interface is blocked until the user chooses any of the options or clicks the dialog away. 
+The selected option is the provided by the method's return value. 
+If the user closes the message box by hitting the \key{esc} or clicking on the icon to close a dialog, the start method of the message box will always return the value \java{CANCEL\_OPTION} of the \java{IMessageBox} interface.
 
 % --------------------------------------------------------------------------- %
 \section{List Box}
