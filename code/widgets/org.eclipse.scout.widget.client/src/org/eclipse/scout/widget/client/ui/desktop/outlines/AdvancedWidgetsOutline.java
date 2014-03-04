@@ -11,6 +11,7 @@ import org.eclipse.scout.rt.extension.client.ui.desktop.outline.AbstractExtensib
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.widget.client.ui.desktop.pages.FormPage;
 import org.eclipse.scout.widget.client.ui.forms.ImageFieldForm;
+import org.eclipse.scout.widget.client.ui.forms.ListBoxForm;
 import org.eclipse.scout.widget.client.ui.forms.SmartFieldForm;
 
 /**
@@ -25,6 +26,9 @@ public class AdvancedWidgetsOutline extends AbstractExtensibleOutline {
 
   @Override
   protected void execCreateChildPages(Collection<IPage> pageList) throws ProcessingException {
+
+    FormPage listBoxFieldPage = new FormPage(ListBoxForm.class);
+    pageList.add(listBoxFieldPage);
 
     FormPage smartFieldPage = new FormPage(SmartFieldForm.class);
     pageList.add(smartFieldPage);
