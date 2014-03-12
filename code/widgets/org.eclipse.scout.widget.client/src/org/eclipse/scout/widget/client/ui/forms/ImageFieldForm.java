@@ -10,11 +10,9 @@
  ******************************************************************************/
 package org.eclipse.scout.widget.client.ui.forms;
 
-import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileInputStream;
 import java.net.URL;
-
-import javax.imageio.ImageIO;
 
 import org.eclipse.scout.commons.IOUtility;
 import org.eclipse.scout.commons.annotations.Order;
@@ -31,7 +29,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.imagebox.AbstractImageField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.shared.AbstractIcons;
 import org.eclipse.scout.rt.shared.TEXTS;
-import org.eclipse.scout.rt.shared.ui.UserAgentUtility;
+import org.eclipse.scout.widget.client.Activator;
 import org.eclipse.scout.widget.client.ui.forms.ImageFieldForm.MainBox.CloseButton;
 import org.eclipse.scout.widget.client.ui.forms.ImageFieldForm.MainBox.ConfigurationBox;
 import org.eclipse.scout.widget.client.ui.forms.ImageFieldForm.MainBox.ConfigurationBox.ImageField;
@@ -143,6 +141,7 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
 
     public static final String SCOUT_LOGO = "http://wiki.eclipse.org/images/e/eb/ScoutIconLarge.gif";
     public static final String BIRD = "http://2.bp.blogspot.com/_LDF9z4ZzZHo/TQZI-CUPl2I/AAAAAAAAAfc/--DuSZRxywM/s1600/bird_1008.jpg";
+    public static final String BIRD_OFFLINE = "/resources/images/bird_1008.jpg";
 
     @Override
     protected int getConfiguredGridColumnCount() {
@@ -172,12 +171,17 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
 
         @Override
         protected int getConfiguredDropType() {
-          return TYPE_IMAGE_TRANSFER;
+          return TYPE_FILE_TRANSFER;
         }
 
         @Override
         protected int getConfiguredGridH() {
           return 4;
+        }
+
+        @Override
+        protected String getConfiguredImageId() {
+          return AbstractIcons.ApplicationLogo;
         }
 
         @Override
@@ -187,8 +191,13 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
 
         @Override
         protected TransferObject execDragRequest() throws ProcessingException {
-          // TODO: learn about drag requests to save image from image field on eg. desktop
-          System.out.println("don't yet know how to fill in the transfer object");
+          Object content = getImage();
+
+          if (content instanceof byte[]) {
+            File f = IOUtility.createTempFile(getImageId(), (byte[]) content);
+            return new FileListTransferObject(f);
+          }
+
           return null;
         }
 
@@ -196,53 +205,23 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
         protected void execDropRequest(TransferObject transferObject) throws ProcessingException {
           clearErrorStatus();
 
-          if (transferObject instanceof FileListTransferObject) {
-            FileListTransferObject to = (FileListTransferObject) transferObject;
-            String imageName = to.getFilenames()[0];
-            System.out.println(imageName);
-            try {
-              BufferedImage bi = ImageIO.read(new FileInputStream(imageName));
-              setImage(bi);
-              if (getImage() instanceof BufferedImage) {
-                System.out.println("drop request: oha buffered image ...");
+          if (transferObject.isFileList()) {
+            String[] fileName = ((FileListTransferObject) transferObject).getFilenames();
+
+            if (fileName.length > 0) {
+              try {
+                // if you want to work with buffered images
+                // BufferedImage bi = ImageIO.read(new FileInputStream(fileName[0]));
+                // setImage(bi);
+
+                setImage(IOUtility.getContent(new FileInputStream(fileName[0])));
+                setImageId(IOUtility.getFileName(fileName[0]));
               }
-              else {
-                System.out.println("drop request: oh jeh, kein buffered image ...");
+              catch (Exception e) {
+                e.printStackTrace();
+                setErrorStatus(e.getMessage());
               }
-              //setImage(IOUtility.getContent(new FileInputStream(imageName)));
-
             }
-            catch (Exception e) {
-              e.printStackTrace();
-              setErrorStatus(e.getMessage());
-            }
-          }
-        }
-
-        @Override
-        protected void execInitField() throws ProcessingException {
-          clearErrorStatus();
-          try {
-            URL url = new URL(SCOUT_LOGO);
-
-            if (UserAgentUtility.isSwingUi()) {
-              BufferedImage bi = ImageIO.read(url.openStream());
-              setImage(bi);
-            }
-            else {
-              setImage(IOUtility.getContent(url.openStream()));
-            }
-
-            if (getImage() instanceof BufferedImage) {
-              System.out.println("execInitField: oha buffered image ...");
-            }
-            else {
-              System.out.println("execInitField: oh jeh (" + getImage().getClass().getCanonicalName() + "), kein buffered image ...");
-            }
-          }
-          catch (Exception e) {
-            e.printStackTrace();
-            setErrorStatus(e.getMessage());
           }
         }
       }
@@ -343,10 +322,11 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execChangedMasterValue(Object newMasterValue) throws ProcessingException {
+
           getImageURLField().clearErrorStatus();
 
           try {
-            URL url = new URL((String) newMasterValue);
+            URL url = getUrl((String) newMasterValue);
             setImage(IOUtility.getContent(url.openStream()));
           }
           catch (Exception e) {
@@ -382,13 +362,21 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
         @Override
         protected void execChangedMasterValue(Object newMasterValue) throws ProcessingException {
           try {
-            URL url = new URL((String) newMasterValue);
+            URL url = getUrl((String) newMasterValue);
             setImage(IOUtility.getContent(url.openStream()));
           }
           catch (Exception e) {
             e.printStackTrace();
           }
         }
+      }
+
+      private URL getUrl(String urlString) throws Exception {
+        if (urlString.equals(BIRD)) {
+          return Activator.getDefault().getBundle().getResource(BIRD_OFFLINE);
+        }
+
+        return new URL((String) urlString);
       }
 
       @Order(30.0)
