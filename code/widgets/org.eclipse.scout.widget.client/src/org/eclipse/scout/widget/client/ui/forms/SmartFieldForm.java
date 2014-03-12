@@ -176,7 +176,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
   }
 
   /**
-   * @return the ListEntriesField
+   * @return the TreeEntriesField
    */
   public ListEntriesField getListEntriesField() {
     return getFieldByClass(ListEntriesField.class);
@@ -197,7 +197,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
   }
 
   /**
-   * @return the ListEntriesField
+   * @return the TreeEntriesField
    */
   public TreeEntriesField getTreeEntriesField() {
     return getFieldByClass(TreeEntriesField.class);
@@ -722,42 +722,11 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
       @Override
       protected void execClickAction() throws ProcessingException {
         ListEntriesField listEntries = getListEntriesField();
-        listEntries.setValue(
-            "# key;text;iconId;toolTip;font;enabled"
-                + "\nRole100;Trainee;eye;Very limited experience;;true"
-                + "\nRole110;Employee;eye;;bold;true"
-                + "\nRole120;Secretary;eye;No longer available;italic;false"
-                + "\nRole130;Manager;eye;Senior;;true");
+        listEntries.setValue(TEXTS.get("ListBoxUserContent"));
         listEntries.updateLookupRowEntries();
 
         TreeEntriesField treeEntries = getTreeEntriesField();
-        treeEntries.setValue(
-            "# key;parent;text;iconId;toolTip;font;enabled"
-                + "\nAF;;Africa;tree_node;;;false"
-                + "\nEA;AF;Eastern Africa;composerfield_attribute;;;true"
-                + "\nMF;AF;Middle Africa;composerfield_attribute;;;true"
-                + "\nNF;AF;Northern Africa;composerfield_attribute;;;true"
-                + "\nSF;AF;Southern Africa;composerfield_attribute;;;true"
-                + "\nWF;AF;Western Africa;composerfield_attribute;;;true"
-                + "\nAM;;Americas;tree_node;;;false"
-                + "\nLA;AM;Latin America;tree_node;;;false"
-                + "\nSA;LA;South America;composerfield_attribute;;;true"
-                + "\nCR;LA;Caribbean;composerfield_attribute;;;true"
-                + "\nCA;LA;Central America;composerfield_attribute;;;true"
-                + "\nNA;AM;Northern America;composerfield_attribute;;;true"
-                + "\nAN;;Antarctica;tree_node;No available office;italic;false"
-                + "\nAS;;Asia;tree_node;;;false"
-                + "\nCS;AS;Central Asia;composerfield_attribute;;;true"
-                + "\nES;AS;Eastern Asia;composerfield_attribute;;;true"
-                + "\nSS;AS;Southern Asia;composerfield_attribute;;;true"
-                + "\nSES;AS;South-Eastern Asia;composerfield_attribute;;;true"
-                + "\nCS;AS;Western Asia;composerfield_attribute;;;true"
-                + "\nER;;Europe;tree_node;;;false"
-                + "\nEU;ER;Eastern Europe;composerfield_attribute;;;true"
-                + "\nNU;ER;Northern Europe;composerfield_attribute;;;true"
-                + "\nSU;ER;Southern Europe;composerfield_attribute;;;true"
-                + "\nWU;ER;Western Europe;composerfield_attribute;;;true"
-                + "\nOC;;Oceania;tree_node;No available office;italic;false");
+        treeEntries.setValue(TEXTS.get("TreeBoxUserContent"));
         treeEntries.updateLookupRowEntries();
       }
     }

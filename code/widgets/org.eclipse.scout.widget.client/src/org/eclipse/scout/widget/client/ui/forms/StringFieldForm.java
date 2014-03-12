@@ -46,7 +46,11 @@ import org.eclipse.scout.widget.client.ui.forms.StringFieldForm.MainBox.Configur
 import org.eclipse.scout.widget.client.ui.forms.StringFieldForm.MainBox.ExamplesBox;
 import org.eclipse.scout.widget.client.ui.forms.StringFieldForm.MainBox.ExamplesBox.DefaultField;
 import org.eclipse.scout.widget.client.ui.forms.StringFieldForm.MainBox.ExamplesBox.DisabledField;
+import org.eclipse.scout.widget.client.ui.forms.StringFieldForm.MainBox.ExamplesBox.LabelCenterField;
+import org.eclipse.scout.widget.client.ui.forms.StringFieldForm.MainBox.ExamplesBox.LabelLeftField;
+import org.eclipse.scout.widget.client.ui.forms.StringFieldForm.MainBox.ExamplesBox.LabelRightField;
 import org.eclipse.scout.widget.client.ui.forms.StringFieldForm.MainBox.ExamplesBox.MandatoryField;
+import org.eclipse.scout.widget.client.ui.forms.StringFieldForm.MainBox.ExamplesBox.OnFieldLabelField;
 import org.eclipse.scout.widget.client.ui.forms.StringFieldForm.MainBox.ExamplesBox.StyledField;
 import org.eclipse.scout.widget.client.ui.forms.StringFieldForm.MainBox.LoremIpsumButton;
 import org.eclipse.scout.widget.client.ui.forms.StringFieldForm.MainBox.SampleFormatButton;
@@ -129,8 +133,36 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
     return getFieldByClass(ForegroundColorField.class);
   }
 
+  /**
+   * @return the OnFieldLabelField
+   */
+  public OnFieldLabelField getOnFieldLabelField() {
+    return getFieldByClass(OnFieldLabelField.class);
+  }
+
   public InputMaskedField getInputMaskedField() {
     return getFieldByClass(InputMaskedField.class);
+  }
+
+  /**
+   * @return the LabelCenterField
+   */
+  public LabelCenterField getLabelCenterField() {
+    return getFieldByClass(LabelCenterField.class);
+  }
+
+  /**
+   * @return the LabelLeftField
+   */
+  public LabelLeftField getLabelLeftField() {
+    return getFieldByClass(LabelLeftField.class);
+  }
+
+  /**
+   * @return the LabelRightField
+   */
+  public LabelRightField getLabelRightField() {
+    return getFieldByClass(LabelRightField.class);
   }
 
   public LoremIpsumButton getLoremIpsumButton() {
@@ -197,11 +229,6 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
       public class DefaultField extends AbstractStringField {
 
         @Override
-        protected int getConfiguredGridW() {
-          return 2;
-        }
-
-        @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("Default");
         }
@@ -209,11 +236,6 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
 
       @Order(20.0)
       public class MandatoryField extends AbstractStringField {
-
-        @Override
-        protected int getConfiguredGridW() {
-          return 2;
-        }
 
         @Override
         protected String getConfiguredLabel() {
@@ -240,11 +262,6 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         @Override
         protected boolean getConfiguredEnabled() {
           return false;
-        }
-
-        @Override
-        protected int getConfiguredGridW() {
-          return 2;
         }
 
         @Override
@@ -282,13 +299,69 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected int getConfiguredGridW() {
-          return 2;
+        protected String getConfiguredLabel() {
+          return TEXTS.get("Styled");
+        }
+      }
+
+      @Order(50.0)
+      public class OnFieldLabelField extends AbstractStringField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("OnFieldLabel");
+        }
+
+        @Override
+        protected int getConfiguredLabelHorizontalAlignment() {
+          return -1;
+        }
+
+        @Override
+        protected int getConfiguredLabelPosition() {
+          return LABEL_POSITION_ON_FIELD;
+        }
+      }
+
+      @Order(60.0)
+      public class LabelLeftField extends AbstractStringField {
+
+        @Override
+        protected int getConfiguredLabelHorizontalAlignment() {
+          return -1;
         }
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("Styled");
+          return TEXTS.get("LabelLeft");
+        }
+      }
+
+      @Order(70.0)
+      public class LabelCenterField extends AbstractStringField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("LabelCenter");
+        }
+
+        @Override
+        protected int getConfiguredLabelHorizontalAlignment() {
+          return 0;
+        }
+      }
+
+      @Order(80.0)
+      public class LabelRightField extends AbstractStringField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("LabelRight");
+        }
+
+        @Override
+        protected int getConfiguredLabelHorizontalAlignment() {
+          return 1;
         }
       }
     }

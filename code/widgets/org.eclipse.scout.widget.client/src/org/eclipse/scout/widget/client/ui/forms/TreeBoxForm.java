@@ -10,8 +10,8 @@
  ******************************************************************************/
 package org.eclipse.scout.widget.client.ui.forms;
 
-import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.annotations.Order;
@@ -25,33 +25,34 @@ import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractLinkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.checkbox.AbstractCheckBox;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
-import org.eclipse.scout.rt.client.ui.form.fields.listbox.AbstractListBox;
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
+import org.eclipse.scout.rt.client.ui.form.fields.treebox.AbstractTreeBox;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.data.basic.FontSpec;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.LookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 import org.eclipse.scout.rt.shared.ui.UserAgentUtility;
-import org.eclipse.scout.widget.client.services.lookup.FontStyleLookupCall;
-import org.eclipse.scout.widget.client.services.lookup.UserContentListLookupCall;
-import org.eclipse.scout.widget.client.ui.forms.ListBoxForm.MainBox.CloseButton;
-import org.eclipse.scout.widget.client.ui.forms.ListBoxForm.MainBox.ConfigurationBox;
-import org.eclipse.scout.widget.client.ui.forms.ListBoxForm.MainBox.ConfigurationBox.CheckUncheckBox;
-import org.eclipse.scout.widget.client.ui.forms.ListBoxForm.MainBox.ConfigurationBox.CheckUncheckBox.CheckAllButton;
-import org.eclipse.scout.widget.client.ui.forms.ListBoxForm.MainBox.ConfigurationBox.CheckUncheckBox.UncheckAllButton;
-import org.eclipse.scout.widget.client.ui.forms.ListBoxForm.MainBox.ConfigurationBox.FilterCheckedRowsValueField;
-import org.eclipse.scout.widget.client.ui.forms.ListBoxForm.MainBox.ConfigurationBox.ListBoxField;
-import org.eclipse.scout.widget.client.ui.forms.ListBoxForm.MainBox.ConfigurationBox.ListEntriesField;
-import org.eclipse.scout.widget.client.ui.forms.ListBoxForm.MainBox.ExamplesBox;
-import org.eclipse.scout.widget.client.ui.forms.ListBoxForm.MainBox.ExamplesBox.DefaultField;
-import org.eclipse.scout.widget.client.ui.forms.ListBoxForm.MainBox.ExamplesBox.DisabledField;
-import org.eclipse.scout.widget.shared.services.code.ColorsCodeType;
+import org.eclipse.scout.widget.client.services.lookup.UserContentTreeLookupCall;
+import org.eclipse.scout.widget.client.services.lookup.YearsMonthsLookupCall;
+import org.eclipse.scout.widget.client.ui.forms.TreeBoxForm.MainBox.CloseButton;
+import org.eclipse.scout.widget.client.ui.forms.TreeBoxForm.MainBox.ConfigurationBox;
+import org.eclipse.scout.widget.client.ui.forms.TreeBoxForm.MainBox.ConfigurationBox.AutoCheckChildNodesField;
+import org.eclipse.scout.widget.client.ui.forms.TreeBoxForm.MainBox.ConfigurationBox.CheckUncheckBox;
+import org.eclipse.scout.widget.client.ui.forms.TreeBoxForm.MainBox.ConfigurationBox.CheckUncheckBox.CheckAllButton;
+import org.eclipse.scout.widget.client.ui.forms.TreeBoxForm.MainBox.ConfigurationBox.CheckUncheckBox.UncheckAllButton;
+import org.eclipse.scout.widget.client.ui.forms.TreeBoxForm.MainBox.ConfigurationBox.FilterCheckedRowsValueField;
+import org.eclipse.scout.widget.client.ui.forms.TreeBoxForm.MainBox.ConfigurationBox.TreeBoxField;
+import org.eclipse.scout.widget.client.ui.forms.TreeBoxForm.MainBox.ConfigurationBox.TreeEntriesField;
+import org.eclipse.scout.widget.client.ui.forms.TreeBoxForm.MainBox.ExamplesBox;
+import org.eclipse.scout.widget.client.ui.forms.TreeBoxForm.MainBox.ExamplesBox.DefaultField;
+import org.eclipse.scout.widget.client.ui.forms.TreeBoxForm.MainBox.ExamplesBox.DisabledField;
+import org.eclipse.scout.widget.shared.services.code.IndustryICBCodeType;
 
-public class ListBoxForm extends AbstractForm implements IPageForm {
+public class TreeBoxForm extends AbstractForm implements IPageForm {
 
-  public ListBoxForm() throws ProcessingException {
+  public TreeBoxForm() throws ProcessingException {
     super();
   }
 
@@ -62,12 +63,19 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
 
   @Override
   protected String getConfiguredTitle() {
-    return TEXTS.get("ListBox");
+    return TEXTS.get("TreeBox");
   }
 
   @Override
   public void startPageForm() throws ProcessingException {
     startInternal(new PageFormHandler());
+  }
+
+  /**
+   * @return the AutoCheckChildNodesField
+   */
+  public AutoCheckChildNodesField getAutoCheckChildNodesField() {
+    return getFieldByClass(AutoCheckChildNodesField.class);
   }
 
   /**
@@ -115,8 +123,8 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
   /**
    * @return the TreeBoxField
    */
-  public ListBoxField getListBoxField() {
-    return getFieldByClass(ListBoxField.class);
+  public TreeBoxField getTreeBoxField() {
+    return getFieldByClass(TreeBoxField.class);
   }
 
   public MainBox getMainBox() {
@@ -126,8 +134,8 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
   /**
    * @return the TreeEntriesField
    */
-  public ListEntriesField getListEntriesField() {
-    return getFieldByClass(ListEntriesField.class);
+  public TreeEntriesField getTreeEntriesField() {
+    return getFieldByClass(TreeEntriesField.class);
   }
 
   /**
@@ -149,7 +157,7 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(10.0)
-      public class ListBoxWithCodeTypeContentField extends AbstractLabelField {
+      public class TreeBoxWithCodeTypeContentField extends AbstractLabelField {
 
         @Override
         protected String getConfiguredLabel() {
@@ -163,16 +171,16 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execInitField() throws ProcessingException {
-          setValue(TEXTS.get("ListBoxWithCodeTypeContent"));
+          setValue(TEXTS.get("TreeBoxWithCodeTypeContent"));
         }
       }
 
       @Order(20.0)
-      public class DefaultField extends AbstractListBox<Color> {
+      public class DefaultField extends AbstractTreeBox<Long> {
 
         @Override
         protected Class<? extends ICodeType> getConfiguredCodeType() {
-          return ColorsCodeType.class;
+          return IndustryICBCodeType.class;
         }
 
         @Override
@@ -187,7 +195,12 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(30.0)
-      public class DisabledField extends AbstractListBox<Color> {
+      public class DisabledField extends AbstractTreeBox<Long> {
+
+        @Override
+        protected Class<? extends ICodeType> getConfiguredCodeType() {
+          return IndustryICBCodeType.class;
+        }
 
         @Override
         protected boolean getConfiguredEnabled() {
@@ -205,19 +218,14 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected Class<? extends ICodeType> getConfiguredCodeType() {
-          return ColorsCodeType.class;
-        }
-
-        @Override
         protected void execInitField() throws ProcessingException {
-          setValue(new Color[]{ColorsCodeType.RedCode.ID, ColorsCodeType.GreenCode.ID, ColorsCodeType.BlueCode.ID});
-          setFilterCheckedRowsValue(true);
+          setValue(new Long[]{IndustryICBCodeType.ICB8000.ID, IndustryICBCodeType.ICB8000.ICB8500.ID, IndustryICBCodeType.ICB9000.ICB9500.ICB9530.ICB9537.ID,});
+          setFilterCheckedNodesValue(true);
         }
       }
 
       @Order(40.0)
-      public class ListBoxWithLookupCallContentField extends AbstractLabelField {
+      public class TreeBoxWithLookupCallContentField extends AbstractLabelField {
 
         @Override
         protected String getConfiguredLabel() {
@@ -231,12 +239,12 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execInitField() throws ProcessingException {
-          setValue(TEXTS.get("ListBoxWithLookupCallContent"));
+          setValue(TEXTS.get("TreeBoxWithLookupCallContent"));
         }
       }
 
       @Order(50.0)
-      public class DefaultListBox extends AbstractListBox<Integer> {
+      public class DefaultTreeBoxField extends AbstractTreeBox<String> {
 
         @Override
         protected int getConfiguredGridH() {
@@ -250,12 +258,17 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected Class<? extends LookupCall> getConfiguredLookupCall() {
-          return FontStyleLookupCall.class;
+          return YearsMonthsLookupCall.class;
         }
       }
 
       @Order(60.0)
-      public class DisabledListBox extends AbstractListBox<Integer> {
+      public class DisabledTreeBoxField extends AbstractTreeBox<String> {
+
+        @Override
+        protected boolean getConfiguredAutoExpandAll() {
+          return true;
+        }
 
         @Override
         protected boolean getConfiguredEnabled() {
@@ -274,13 +287,16 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected Class<? extends LookupCall> getConfiguredLookupCall() {
-          return FontStyleLookupCall.class;
+          return YearsMonthsLookupCall.class;
         }
 
         @Override
         protected void execInitField() throws ProcessingException {
-          setValue(new Integer[]{2, 3});
-          setFilterCheckedRowsValue(true);
+          int year = Calendar.getInstance().get(Calendar.YEAR);
+          int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
+          int key = 100 * year + month;
+          setValue(new String[]{String.valueOf(key), String.valueOf(key + 1), String.valueOf(key + 2)});
+          setFilterCheckedNodesValue(true);
         }
       }
     }
@@ -332,7 +348,7 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(10.0)
-      public class ListBoxField extends AbstractListBox<String> {
+      public class TreeBoxField extends AbstractTreeBox<String> {
 
         @Override
         protected int getConfiguredGridH() {
@@ -341,12 +357,12 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("ListBox");
+          return TEXTS.get("TreeBox");
         }
 
         @Override
         protected Class<? extends LookupCall> getConfiguredLookupCall() {
-          return UserContentListLookupCall.class;
+          return UserContentTreeLookupCall.class;
         }
       }
 
@@ -363,7 +379,7 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
 
           @Override
           protected void execClickAction() throws ProcessingException {
-            getListBoxField().checkAllKeys();
+            getTreeBoxField().checkAllKeys();
           }
         }
 
@@ -377,7 +393,7 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
 
           @Override
           protected void execClickAction() throws ProcessingException {
-            getListBoxField().uncheckAllKeys();
+            getTreeBoxField().uncheckAllKeys();
           }
         }
       }
@@ -397,7 +413,7 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected Class<? extends IValueField> getConfiguredMasterField() {
-          return ListBoxForm.MainBox.ConfigurationBox.ListBoxField.class;
+          return TreeBoxForm.MainBox.ConfigurationBox.TreeBoxField.class;
         }
 
         @Override
@@ -407,16 +423,16 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(40.0)
-      public class ListEntriesField extends AbstractStringField {
+      public class TreeEntriesField extends AbstractStringField {
 
         @Override
         protected int getConfiguredGridH() {
-          return 5;
+          return 3;
         }
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("ListContent");
+          return TEXTS.get("TreeContent");
         }
 
         @Override
@@ -445,14 +461,13 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
             if (line.length() > 0 && !line.startsWith("#")) {
               String[] t = line.split(";");
 
-              if (t.length >= 6) {
+              if (t.length >= 7) {
                 String active = "true";
 
-                if (t.length == 7) {
+                if (t.length == 8) {
                   active = t[6];
                 }
-
-                rows.add(createLookupRow(t[0], null, t[1], t[2], t[3], t[4], t[5], active));
+                rows.add(createLookupRow(t[0], t[1], t[2], t[3], t[4], t[5], t[6], active));
               }
               else {
                 setErrorStatus(TEXTS.get("LookupRowParseException" + ": '" + line + "'"));
@@ -460,9 +475,9 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
             }
           }
 
-          ((UserContentListLookupCall) getListBoxField().getLookupCall()).setLookupRows(rows);
+          ((UserContentTreeLookupCall) getTreeBoxField().getLookupCall()).setLookupRows(rows);
           try {
-            getListBoxField().initField();
+            getTreeBoxField().initField();
           }
           catch (ProcessingException e) {
             e.printStackTrace();
@@ -485,7 +500,26 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execChangedValue() throws ProcessingException {
-          getListBoxField().setFilterCheckedRowsValue(getValue());
+          getTreeBoxField().setFilterCheckedNodesValue(getValue());
+        }
+      }
+
+      @Order(60.0)
+      public class AutoCheckChildNodesField extends AbstractCheckBox {
+
+        @Override
+        protected String getConfiguredFont() {
+          return "ITALIC";
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("AutoCheckChildNodes");
+        }
+
+        @Override
+        protected void execChangedValue() throws ProcessingException {
+          getTreeBoxField().setAutoCheckChildNodes(getValue());
         }
       }
     }
@@ -500,9 +534,9 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
 
       @Override
       protected void execClickAction() throws ProcessingException {
-        ListEntriesField listEntries = getListEntriesField();
-        listEntries.setValue(TEXTS.get("ListBoxUserContent"));
-        listEntries.updateLookupRowEntries();
+        TreeEntriesField treeEntries = getTreeEntriesField();
+        treeEntries.setValue(TEXTS.get("TreeBoxUserContent"));
+        treeEntries.updateLookupRowEntries();
       }
     }
 
