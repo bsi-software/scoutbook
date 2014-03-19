@@ -12,10 +12,10 @@ package org.eclipse.scout.widget.client.ui.forms;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import org.eclipse.scout.commons.NumberUtility;
-import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
@@ -31,11 +31,9 @@ import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholde
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.shared.TEXTS;
-import org.eclipse.scout.rt.shared.data.basic.FontSpec;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.LookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
-import org.eclipse.scout.rt.shared.ui.UserAgentUtility;
 import org.eclipse.scout.widget.client.services.lookup.LocaleLookupCall;
 import org.eclipse.scout.widget.client.services.lookup.UserContentListLookupCall;
 import org.eclipse.scout.widget.client.services.lookup.UserContentTreeLookupCall;
@@ -59,6 +57,7 @@ import org.eclipse.scout.widget.client.ui.forms.SmartFieldForm.MainBox.ExamplesB
 import org.eclipse.scout.widget.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithListContentField;
 import org.eclipse.scout.widget.client.ui.forms.SmartFieldForm.MainBox.ExamplesBox.SmartFieldWithTreeContentField;
 import org.eclipse.scout.widget.client.ui.forms.SmartFieldForm.MainBox.SampleContentButton;
+import org.eclipse.scout.widget.client.ui.template.formfield.AbstractUserTreeField;
 import org.eclipse.scout.widget.shared.services.code.ColorsCodeType;
 import org.eclipse.scout.widget.shared.services.code.IndustryICBCodeType;
 import org.eclipse.scout.widget.shared.services.code.IndustryICBCodeType.ICB9000.ICB9500.ICB9530.ICB9537;
@@ -395,44 +394,6 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         return TEXTS.get("Configure");
       }
 
-      private LookupRow createLookupRow(String key, String parent, String text, String icon, String tooltip, String font, String enabled, String active) {
-        LookupRow row = new LookupRow(key, text, icon);
-
-        // parent
-        if (!StringUtility.isNullOrEmpty(parent)) {
-          row.setParentKey(parent);
-        }
-        // tool tip
-        if (!StringUtility.isNullOrEmpty(tooltip)) {
-          row.setTooltipText(tooltip);
-        }
-        // font
-        if (!StringUtility.isNullOrEmpty(font)) {
-          FontSpec f = new FontSpec("Arial", 0, 12);
-
-          if (UserAgentUtility.isSwtUi()) {
-            f = new FontSpec("Arial", 0, 8);
-          }
-
-          if (font.equals("italic")) {
-            row.setFont(f.getItalicCopy());
-          }
-          else if (font.equals("bold")) {
-            row.setFont(f.getBoldCopy());
-          }
-        }
-        // enabled
-        if (enabled.equals("false")) {
-          row.setEnabled(false);
-        }
-        // active
-        if (!StringUtility.isNullOrEmpty(active) && active.equals("false")) {
-          row.setActive(false);
-        }
-
-        return row;
-      }
-
       @Order(10.0)
       public class ListSmartField extends AbstractSmartField<String> {
 
@@ -472,7 +433,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(30.0)
-      public class ListEntriesField extends AbstractStringField {
+      public class ListEntriesField extends AbstractUserTreeField {
 
         @Override
         protected int getConfiguredGridH() {
@@ -485,46 +446,18 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected String getConfiguredLabelFont() {
-          return "ITALIC";
-        }
-
-        @Override
-        protected boolean getConfiguredMultilineText() {
-          return true;
-        }
-
-        @Override
         protected void execChangedValue() throws ProcessingException {
-          updateLookupRowEntries();
-        }
-
-        private void updateLookupRowEntries() {
-          clearErrorStatus();
-
+          List<Node> nodes = parseFieldValue(false);
           ArrayList<LookupRow> rows = new ArrayList<LookupRow>();
+          addNodesToLookupRows(nodes, rows);
 
-          for (String line : getValue().split("\n")) {
-            line = line.trim();
-
-            if (line.length() > 0 && !line.startsWith("#")) {
-              String[] t = line.split(";");
-
-              if (t.length >= 6) {
-                String active = "true";
-
-                if (t.length == 7) {
-                  active = t[6];
-                }
-
-                rows.add(createLookupRow(t[0], null, t[1], t[2], t[3], t[4], t[5], active));
-              }
-              else {
-                setErrorStatus(TEXTS.get("LookupRowParseException" + ": '" + line + "'"));
-              }
-            }
-          }
           ((UserContentListLookupCall) getListSmartField().getLookupCall()).setLookupRows(rows);
+          try {
+            getListSmartField().initField();
+          }
+          catch (ProcessingException e) {
+            e.printStackTrace();
+          }
         }
       }
 
@@ -601,12 +534,17 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execChangedMasterValue(Object newMasterValue) throws ProcessingException {
-          setValue(newMasterValue.toString());
+          if (newMasterValue != null) {
+            setValue(newMasterValue.toString());
+          }
+          else {
+            setValue(null);
+          }
         }
       }
 
       @Order(90.0)
-      public class TreeEntriesField extends AbstractStringField {
+      public class TreeEntriesField extends AbstractUserTreeField {
 
         @Override
         protected int getConfiguredGridH() {
@@ -619,44 +557,10 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected String getConfiguredLabelFont() {
-          return "ITALIC";
-        }
-
-        @Override
-        protected boolean getConfiguredMultilineText() {
-          return true;
-        }
-
-        @Override
         protected void execChangedValue() throws ProcessingException {
-          updateLookupRowEntries();
-        }
-
-        private void updateLookupRowEntries() {
-          clearErrorStatus();
-
+          List<Node> nodes = parseFieldValue(true);
           ArrayList<LookupRow> rows = new ArrayList<LookupRow>();
-
-          for (String line : getValue().split("\n")) {
-            line = line.trim();
-
-            if (line.length() > 0 && !line.startsWith("#")) {
-              String[] t = line.split(";");
-
-              if (t.length >= 7) {
-                String active = "true";
-
-                if (t.length == 8) {
-                  active = t[6];
-                }
-                rows.add(createLookupRow(t[0], t[1], t[2], t[3], t[4], t[5], t[6], active));
-              }
-              else {
-                setErrorStatus(TEXTS.get("LookupRowParseException" + ": '" + line + "'"));
-              }
-            }
-          }
+          addNodesToLookupRows(nodes, rows);
 
           ((UserContentTreeLookupCall) getTreeSmartField().getLookupCall()).setLookupRows(rows);
         }
@@ -723,11 +627,9 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
       protected void execClickAction() throws ProcessingException {
         ListEntriesField listEntries = getListEntriesField();
         listEntries.setValue(TEXTS.get("ListBoxUserContent"));
-        listEntries.updateLookupRowEntries();
 
         TreeEntriesField treeEntries = getTreeEntriesField();
         treeEntries.setValue(TEXTS.get("TreeUserContent"));
-        treeEntries.updateLookupRowEntries();
       }
     }
 

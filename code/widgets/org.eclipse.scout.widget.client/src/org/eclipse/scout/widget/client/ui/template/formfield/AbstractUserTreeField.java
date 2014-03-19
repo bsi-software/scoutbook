@@ -38,7 +38,7 @@ public abstract class AbstractUserTreeField extends AbstractStringField {
     return true;
   }
 
-  protected List<Node> parseFieldValue() {
+  protected List<Node> parseFieldValue(boolean isTree) {
     Map<String, Node> parents = new HashMap<String, Node>();
     Node root = new Node();
 
@@ -48,7 +48,7 @@ public abstract class AbstractUserTreeField extends AbstractStringField {
       line = line.trim();
 
       if (line.length() > 0 && !line.startsWith("#")) {
-        Node node = parseLine(line);
+        Node node = parseLine(line, isTree);
 
         if (node.isInvalid()) {
           setErrorStatus(node.invalidMessage() + ". Line: '" + line + "'");
@@ -70,13 +70,20 @@ public abstract class AbstractUserTreeField extends AbstractStringField {
     return root.getChildren();
   }
 
-  private Node parseLine(String line) {
+  private Node parseLine(String line, boolean isTree) {
     String[] t = line.split(";");
+    int tlen = t.length;
     Node node = new Node();
 
-    if (t.length != 8) {
+    if (isTree && t.length != 8) {
       node.setInvalid(true);
       node.setInvalidMessage("Wrong number of tokens. Expected: 8 found: " + t.length);
+      return node;
+    }
+
+    if (!isTree && t.length != 7) {
+      node.setInvalid(true);
+      node.setInvalidMessage("Wrong number of tokens. Expected: 7 found: " + t.length);
       return node;
     }
 
@@ -90,13 +97,16 @@ public abstract class AbstractUserTreeField extends AbstractStringField {
       return node;
     }
 
-    node.setParentKey(t[1]);
-    node.setText(t[2]);
-    node.setIconId(t[3]);
-    node.setToolTip(t[4]);
-    node.setFont(parseFont(t[5]));
-    node.setEnabled(parseBoolean(t[6]));
-    node.setActive(parseBoolean(t[7]));
+    if (isTree) {
+      node.setParentKey(t[1]);
+    }
+
+    node.setText(t[tlen - 6]);
+    node.setIconId(t[tlen - 5]);
+    node.setToolTip(t[tlen - 4]);
+    node.setFont(parseFont(t[tlen - 3]));
+    node.setEnabled(parseBoolean(t[tlen - 2]));
+    node.setActive(parseBoolean(t[tlen - 1]));
 
     return node;
   }
@@ -113,17 +123,17 @@ public abstract class AbstractUserTreeField extends AbstractStringField {
     }
 
     if (font.equals("italic")) {
-      f.getItalicCopy();
+      f = f.getItalicCopy();
     }
     else if (font.equals("bold")) {
-      f.getBoldCopy();
+      f = f.getBoldCopy();
     }
 
     return f;
   }
 
   private boolean parseBoolean(String bool) {
-    return !(StringUtility.isNullOrEmpty(bool) && bool.equals("false"));
+    return !(!StringUtility.isNullOrEmpty(bool) && bool.equals("false"));
   }
 
   protected void printNodes(List<Node> nodes, String ident) {
@@ -159,6 +169,28 @@ public abstract class AbstractUserTreeField extends AbstractStringField {
     return treeNode;
   }
 
+  protected void addNodesToLookupRows(List<Node> nodes, List<LookupRow> rows) {
+    for (Node node : nodes) {
+      rows.add(nodeToLookupRow(node));
+
+      if (!node.isLeaf()) {
+        addNodesToLookupRows(node.getChildren(), rows);
+      }
+    }
+  }
+
+  private LookupRow nodeToLookupRow(Node node) {
+    LookupRow row = new LookupRow(node.getKey(), node.getText(), node.getIconId());
+
+    row.setParentKey(node.getParentKey());
+    row.setTooltipText(node.getToolTip());
+    row.setFont(node.getFont());
+    row.setEnabled(node.isEnabled());
+    row.setActive(node.isActive());
+
+    return row;
+  }
+
   protected List<IMenu> nodesToMenus(List<Node> nodes) {
     ArrayList<IMenu> menus = new ArrayList<IMenu>();
 
@@ -175,44 +207,6 @@ public abstract class AbstractUserTreeField extends AbstractStringField {
     }
 
     return menus;
-  }
-
-  private LookupRow createLookupRow(String key, String parent, String text, String icon, String tooltip, String font, String enabled, String active) {
-    LookupRow row = new LookupRow(key, text, icon);
-
-    // parent
-    if (!StringUtility.isNullOrEmpty(parent)) {
-      row.setParentKey(parent);
-    }
-    // tool tip
-    if (!StringUtility.isNullOrEmpty(tooltip)) {
-      row.setTooltipText(tooltip);
-    }
-    // font
-    if (!StringUtility.isNullOrEmpty(font)) {
-      FontSpec f = new FontSpec("Arial", 0, 12);
-
-      if (UserAgentUtility.isSwtUi()) {
-        f = new FontSpec("Arial", 0, 8);
-      }
-
-      if (font.equals("italic")) {
-        row.setFont(f.getItalicCopy());
-      }
-      else if (font.equals("bold")) {
-        row.setFont(f.getBoldCopy());
-      }
-    }
-    // enabled
-    if (enabled.equals("false")) {
-      row.setEnabled(false);
-    }
-    // active
-    if (!StringUtility.isNullOrEmpty(active) && active.equals("false")) {
-      row.setActive(false);
-    }
-
-    return row;
   }
 
   public class Node {

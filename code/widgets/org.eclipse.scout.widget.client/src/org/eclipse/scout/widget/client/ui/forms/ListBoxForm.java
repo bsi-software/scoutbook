@@ -12,6 +12,7 @@ package org.eclipse.scout.widget.client.ui.forms;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.annotations.Order;
@@ -29,11 +30,9 @@ import org.eclipse.scout.rt.client.ui.form.fields.listbox.AbstractListBox;
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.shared.TEXTS;
-import org.eclipse.scout.rt.shared.data.basic.FontSpec;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.LookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
-import org.eclipse.scout.rt.shared.ui.UserAgentUtility;
 import org.eclipse.scout.widget.client.services.lookup.FontStyleLookupCall;
 import org.eclipse.scout.widget.client.services.lookup.UserContentListLookupCall;
 import org.eclipse.scout.widget.client.ui.forms.ListBoxForm.MainBox.CloseButton;
@@ -47,6 +46,7 @@ import org.eclipse.scout.widget.client.ui.forms.ListBoxForm.MainBox.Configuratio
 import org.eclipse.scout.widget.client.ui.forms.ListBoxForm.MainBox.ExamplesBox;
 import org.eclipse.scout.widget.client.ui.forms.ListBoxForm.MainBox.ExamplesBox.DefaultField;
 import org.eclipse.scout.widget.client.ui.forms.ListBoxForm.MainBox.ExamplesBox.DisabledField;
+import org.eclipse.scout.widget.client.ui.template.formfield.AbstractUserTreeField;
 import org.eclipse.scout.widget.shared.services.code.ColorsCodeType;
 
 public class ListBoxForm extends AbstractForm implements IPageForm {
@@ -293,44 +293,6 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
         return TEXTS.get("Configure");
       }
 
-      private LookupRow createLookupRow(String key, String parent, String text, String icon, String tooltip, String font, String enabled, String active) {
-        LookupRow row = new LookupRow(key, text, icon);
-
-        // parent
-        if (!StringUtility.isNullOrEmpty(parent)) {
-          row.setParentKey(parent);
-        }
-        // tool tip
-        if (!StringUtility.isNullOrEmpty(tooltip)) {
-          row.setTooltipText(tooltip);
-        }
-        // font
-        if (!StringUtility.isNullOrEmpty(font)) {
-          FontSpec f = new FontSpec("Arial", 0, 12);
-
-          if (UserAgentUtility.isSwtUi()) {
-            f = new FontSpec("Arial", 0, 8);
-          }
-
-          if (font.equals("italic")) {
-            row.setFont(f.getItalicCopy());
-          }
-          else if (font.equals("bold")) {
-            row.setFont(f.getBoldCopy());
-          }
-        }
-        // enabled
-        if (enabled.equals("false")) {
-          row.setEnabled(false);
-        }
-        // active
-        if (!StringUtility.isNullOrEmpty(active) && active.equals("false")) {
-          row.setActive(false);
-        }
-
-        return row;
-      }
-
       @Order(10.0)
       public class ListBoxField extends AbstractListBox<String> {
 
@@ -407,7 +369,7 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(40.0)
-      public class ListEntriesField extends AbstractStringField {
+      public class ListEntriesField extends AbstractUserTreeField {
 
         @Override
         protected int getConfiguredGridH() {
@@ -420,45 +382,10 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected String getConfiguredLabelFont() {
-          return "ITALIC";
-        }
-
-        @Override
-        protected boolean getConfiguredMultilineText() {
-          return true;
-        }
-
-        @Override
         protected void execChangedValue() throws ProcessingException {
-          updateLookupRowEntries();
-        }
-
-        private void updateLookupRowEntries() {
-          clearErrorStatus();
-
+          List<Node> nodes = parseFieldValue(false);
           ArrayList<LookupRow> rows = new ArrayList<LookupRow>();
-
-          for (String line : getValue().split("\n")) {
-            line = line.trim();
-
-            if (line.length() > 0 && !line.startsWith("#")) {
-              String[] t = line.split(";");
-
-              if (t.length >= 6) {
-                String active = "true";
-
-                if (t.length == 7) {
-                  active = t[6];
-                }
-
-                rows.add(createLookupRow(t[0], null, t[1], t[2], t[3], t[4], t[5], active));
-              }
-              else {
-                setErrorStatus(TEXTS.get("LookupRowParseException" + ": '" + line + "'"));
-              }
-            }
-          }
+          addNodesToLookupRows(nodes, rows);
 
           ((UserContentListLookupCall) getListBoxField().getLookupCall()).setLookupRows(rows);
           try {
@@ -502,7 +429,6 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
       protected void execClickAction() throws ProcessingException {
         ListEntriesField listEntries = getListEntriesField();
         listEntries.setValue(TEXTS.get("ListBoxUserContent"));
-        listEntries.updateLookupRowEntries();
       }
     }
 

@@ -250,7 +250,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
         @Override
         protected void execChangedValue() throws ProcessingException {
           ITree tree = getTreeField().getTree();
-          List<Node> nodes = parseFieldValue();
+          List<Node> nodes = parseFieldValue(true);
 
           tree.removeAllChildNodes(tree.getRootNode());
           addNodesToTree(nodes, tree, tree.getRootNode());
@@ -273,7 +273,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execChangedValue() throws ProcessingException {
-          List<Node> nodes = parseFieldValue();
+          List<Node> nodes = parseFieldValue(true);
           getTreeField().getTree().setMenus(nodesToMenus(nodes).toArray(new IMenu[]{}));
         }
 
@@ -301,20 +301,6 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
     }
 
     /**
-     * recursive function to mark tree nodes without children as leaf nodes
-     */
-    private void updateLeafNodes(ITreeNode node) {
-      ITreeNode[] children = node.getChildNodes();
-      node.setLeaf(children.length == 0);
-
-      if (children.length > 0) {
-        for (ITreeNode child : children) {
-          updateLeafNodes(child);
-        }
-      }
-    }
-
-    /**
      * recursive function to convert codes (enumerations) into an abstract tree.
      */
     private void addCodesToTree(ICode[] codes, ITreeNode parent, AbstractExtensibleTree tree) {
@@ -339,6 +325,21 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
         }
       }
     }
+
+    /**
+     * recursive function to mark tree nodes without children as leaf nodes
+     */
+    private void updateLeafNodes(ITreeNode node) {
+      ITreeNode[] children = node.getChildNodes();
+      node.setLeaf(children.length == 0);
+
+      if (children.length > 0) {
+        for (ITreeNode child : children) {
+          updateLeafNodes(child);
+        }
+      }
+    }
+
   }
 
   public class PageFormHandler extends AbstractFormHandler {
