@@ -726,7 +726,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         listEntries.updateLookupRowEntries();
 
         TreeEntriesField treeEntries = getTreeEntriesField();
-        treeEntries.setValue(TEXTS.get("TreeBoxUserContent"));
+        treeEntries.setValue(TEXTS.get("TreeUserContent"));
         treeEntries.updateLookupRowEntries();
       }
     }

@@ -15,6 +15,7 @@ import org.eclipse.scout.widget.client.ui.forms.ListBoxForm;
 import org.eclipse.scout.widget.client.ui.forms.SmartFieldForm;
 import org.eclipse.scout.widget.client.ui.forms.SvgFieldForm;
 import org.eclipse.scout.widget.client.ui.forms.TreeBoxForm;
+import org.eclipse.scout.widget.client.ui.forms.TreeFieldForm;
 
 /**
  * @author mzi
@@ -37,6 +38,9 @@ public class AdvancedWidgetsOutline extends AbstractExtensibleOutline {
 
     FormPage smartFieldPage = new FormPage(SmartFieldForm.class);
     pageList.add(smartFieldPage);
+
+    FormPage treeFieldPage = new FormPage(TreeFieldForm.class);
+    pageList.add(treeFieldPage);
 
     FormPage imageFieldPage = new FormPage(ImageFieldForm.class);
     pageList.add(imageFieldPage);

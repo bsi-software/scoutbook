@@ -8,7 +8,8 @@ Export-Package: org.eclipse.scout.widget.client,
  org.eclipse.scout.widget.client.services,
  org.eclipse.scout.widget.client.services.lookup,
  org.eclipse.scout.widget.client.ui.desktop,
- org.eclipse.scout.widget.client.ui.desktop.outlines
+ org.eclipse.scout.widget.client.ui.desktop.outlines,
+ org.eclipse.scout.widget.client.ui.template.formfield
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.scout.rt.client;visibility:=reexport,
  org.eclipse.scout.rt.extension.client;visibility:=reexport,

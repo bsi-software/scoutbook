@@ -113,7 +113,7 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
   }
 
   /**
-   * @return the TreeBoxField
+   * @return the TreeField
    */
   public ListBoxField getListBoxField() {
     return getFieldByClass(ListBoxField.class);

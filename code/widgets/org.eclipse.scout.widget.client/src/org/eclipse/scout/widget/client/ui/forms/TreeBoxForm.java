@@ -121,7 +121,7 @@ public class TreeBoxForm extends AbstractForm implements IPageForm {
   }
 
   /**
-   * @return the TreeBoxField
+   * @return the TreeField
    */
   public TreeBoxField getTreeBoxField() {
     return getFieldByClass(TreeBoxField.class);
@@ -535,7 +535,7 @@ public class TreeBoxForm extends AbstractForm implements IPageForm {
       @Override
       protected void execClickAction() throws ProcessingException {
         TreeEntriesField treeEntries = getTreeEntriesField();
-        treeEntries.setValue(TEXTS.get("TreeBoxUserContent"));
+        treeEntries.setValue(TEXTS.get("TreeUserContent"));
         treeEntries.updateLookupRowEntries();
       }
     }
