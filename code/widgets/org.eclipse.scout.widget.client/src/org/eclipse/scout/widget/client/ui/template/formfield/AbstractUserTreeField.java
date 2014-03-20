@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.scout.commons.StringUtility;
-import org.eclipse.scout.commons.annotations.FormData;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
 import org.eclipse.scout.rt.client.ui.basic.cell.Cell;
@@ -20,12 +19,10 @@ import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringFiel
 import org.eclipse.scout.rt.shared.data.basic.FontSpec;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 import org.eclipse.scout.rt.shared.ui.UserAgentUtility;
-import org.eclipse.scout.widget.shared.ui.template.formfield.AbstractUserTreeFieldData;
 
 /**
  * @author mzi
  */
-@FormData(value = AbstractUserTreeFieldData.class, sdkCommand = FormData.SdkCommand.CREATE, defaultSubtypeSdkCommand = FormData.DefaultSubtypeSdkCommand.CREATE)
 public abstract class AbstractUserTreeField extends AbstractStringField {
 
   @Override
