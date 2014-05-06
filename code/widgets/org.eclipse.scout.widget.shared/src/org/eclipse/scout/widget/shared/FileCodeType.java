@@ -12,13 +12,13 @@ import org.eclipse.scout.rt.shared.services.common.code.AbstractCodeType;
 /**
  * @author mzi
  */
-public class FileCodeType extends AbstractCodeType<String> {
+public class FileCodeType extends AbstractCodeType<String, String> {
 
   private static final long serialVersionUID = 1L;
   /**
    *
    */
-  public static final String ID = null;//TODO [mzi] Auto-generated value
+  public static final String ID = "File Types";
 
   /**
    * @throws org.eclipse.scout.commons.exception.ProcessingException
@@ -114,6 +114,60 @@ public class FileCodeType extends AbstractCodeType<String> {
     @Override
     protected String getConfiguredText() {
       return TEXTS.get("JavaFile");
+    }
+
+    @Override
+    public String getId() {
+      return ID;
+    }
+  }
+
+  @Order(60.0)
+  public static class PdfCode extends AbstractCode<String> {
+
+    private static final long serialVersionUID = 1L;
+
+    public static final String ID = "pdf";
+
+    @Override
+    protected String getConfiguredText() {
+      return TEXTS.get("PdfDocument");
+    }
+
+    @Override
+    public String getId() {
+      return ID;
+    }
+  }
+
+  @Order(70.0)
+  public static class UknownCode extends AbstractCode<String> {
+
+    private static final long serialVersionUID = 1L;
+
+    public static final String ID = "__UNKNOWN__";
+
+    @Override
+    protected String getConfiguredText() {
+      return TEXTS.get("Unknown");
+    }
+
+    @Override
+    public String getId() {
+      return ID;
+    }
+  }
+
+  @Order(80.0)
+  public static class DirectoryCode extends AbstractCode<String> {
+
+    private static final long serialVersionUID = 1L;
+
+    public static final String ID = "__DIR__";
+
+    @Override
+    protected String getConfiguredText() {
+      return TEXTS.get("Directory");
     }
 
     @Override

@@ -24,7 +24,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.data.basic.FontSpec;
-import org.eclipse.scout.rt.shared.services.lookup.LookupCall;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.widget.client.services.lookup.FontStyleLookupCall;
 import org.eclipse.scout.widget.client.ui.forms.CheckboxFieldForm.MainBox.CloseButton;
 import org.eclipse.scout.widget.client.ui.forms.CheckboxFieldForm.MainBox.ConfigurationBox;
@@ -174,12 +174,6 @@ public class CheckboxFieldForm extends AbstractForm implements IPageForm {
         return true;
       }
 
-      @Override
-      protected void execInitField() throws ProcessingException {
-        //TODO [mzi] Auto-generated method stub.
-        super.execInitField();
-      }
-
       @Order(10.0)
       public class CheckboxField extends AbstractCheckBox {
 
@@ -246,8 +240,8 @@ public class CheckboxFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected Class<? extends LookupCall> getConfiguredLookupCall() {
-          return FontStyleLookupCall.class;
+        protected Class<? extends ILookupCall<Integer>> getConfiguredLookupCall() {
+          return (Class<? extends ILookupCall<Integer>>) FontStyleLookupCall.class;
         }
 
         @Override

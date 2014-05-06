@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.scout.commons.StringUtility;
+import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.action.menu.AbstractMenu;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
 import org.eclipse.scout.rt.client.ui.basic.cell.Cell;
@@ -16,6 +17,8 @@ import org.eclipse.scout.rt.client.ui.basic.tree.AbstractTreeNode;
 import org.eclipse.scout.rt.client.ui.basic.tree.ITree;
 import org.eclipse.scout.rt.client.ui.basic.tree.ITreeNode;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
+import org.eclipse.scout.rt.client.ui.messagebox.MessageBox;
+import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.data.basic.FontSpec;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 import org.eclipse.scout.rt.shared.ui.UserAgentUtility;
@@ -166,7 +169,7 @@ public abstract class AbstractUserTreeField extends AbstractStringField {
     return treeNode;
   }
 
-  protected void addNodesToLookupRows(List<Node> nodes, List<LookupRow> rows) {
+  protected void addNodesToLookupRows(List<Node> nodes, List<LookupRow<String>> rows) {
     for (Node node : nodes) {
       rows.add(nodeToLookupRow(node));
 
@@ -176,8 +179,8 @@ public abstract class AbstractUserTreeField extends AbstractStringField {
     }
   }
 
-  private LookupRow nodeToLookupRow(Node node) {
-    LookupRow row = new LookupRow(node.getKey(), node.getText(), node.getIconId());
+  private LookupRow<String> nodeToLookupRow(Node node) {
+    LookupRow<String> row = new LookupRow<>(node.getKey(), node.getText(), node.getIconId());
 
     row.setParentKey(node.getParentKey());
     row.setTooltipText(node.getToolTip());
@@ -193,6 +196,12 @@ public abstract class AbstractUserTreeField extends AbstractStringField {
 
     for (final Node node : nodes) {
       AbstractMenu menu = new AbstractMenu() {
+
+        @Override
+        public void execAction() throws ProcessingException {
+          MessageBox.showOkMessage(TEXTS.get("TableMenu"), TEXTS.get("TableMenuHeader"), getText());
+        }
+
       };
 
       menu.setText(node.getText());

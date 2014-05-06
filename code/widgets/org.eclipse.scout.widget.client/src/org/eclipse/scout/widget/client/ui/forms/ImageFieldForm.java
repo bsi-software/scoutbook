@@ -13,6 +13,7 @@ package org.eclipse.scout.widget.client.ui.forms;
 import java.io.File;
 import java.io.FileInputStream;
 import java.net.URL;
+import java.util.List;
 
 import org.eclipse.scout.commons.IOUtility;
 import org.eclipse.scout.commons.annotations.Order;
@@ -206,16 +207,16 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
           clearErrorStatus();
 
           if (transferObject.isFileList()) {
-            String[] fileName = ((FileListTransferObject) transferObject).getFilenames();
+            List<String> fileName = ((FileListTransferObject) transferObject).getFilenames();
 
-            if (fileName.length > 0) {
+            if (fileName.size() > 0) {
               try {
                 // if you want to work with buffered images
                 // BufferedImage bi = ImageIO.read(new FileInputStream(fileName[0]));
                 // setImage(bi);
 
-                setImage(IOUtility.getContent(new FileInputStream(fileName[0])));
-                setImageId(IOUtility.getFileName(fileName[0]));
+                setImage(IOUtility.getContent(new FileInputStream(fileName.get(0))));
+                setImageId(IOUtility.getFileName(fileName.get(0)));
               }
               catch (Exception e) {
                 e.printStackTrace();

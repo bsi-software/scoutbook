@@ -27,7 +27,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringFiel
 import org.eclipse.scout.rt.client.ui.messagebox.IMessageBox;
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBox;
 import org.eclipse.scout.rt.shared.TEXTS;
-import org.eclipse.scout.rt.shared.services.lookup.LookupCall;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.widget.client.services.lookup.AnswerOptionsLookupCall;
 import org.eclipse.scout.widget.client.services.lookup.IconIdLookupCall;
 import org.eclipse.scout.widget.client.ui.forms.MessageBoxForm.MainBox.CloseButton;
@@ -467,8 +467,8 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected Class<? extends LookupCall> getConfiguredLookupCall() {
-          return AnswerOptionsLookupCall.class;
+        protected Class<? extends ILookupCall<Integer>> getConfiguredLookupCall() {
+          return (Class<? extends ILookupCall<Integer>>) AnswerOptionsLookupCall.class;
         }
 
         @Override
@@ -593,8 +593,8 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected Class<? extends LookupCall> getConfiguredLookupCall() {
-          return IconIdLookupCall.class;
+        protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
+          return (Class<? extends ILookupCall<String>>) IconIdLookupCall.class;
         }
       }
 
@@ -612,8 +612,8 @@ public class MessageBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected Class<? extends LookupCall> getConfiguredLookupCall() {
-          return AnswerOptionsLookupCall.class;
+        protected Class<? extends ILookupCall<Integer>> getConfiguredLookupCall() {
+          return (Class<? extends ILookupCall<Integer>>) AnswerOptionsLookupCall.class;
         }
 
         @Override

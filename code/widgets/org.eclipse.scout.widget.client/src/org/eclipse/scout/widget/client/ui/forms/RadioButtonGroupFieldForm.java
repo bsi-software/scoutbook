@@ -341,12 +341,6 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
         return true;
       }
 
-      @Override
-      protected void execInitField() throws ProcessingException {
-        //TODO [mzi] Auto-generated method stub.
-        super.execInitField();
-      }
-
       @Order(10.0)
       public class RadioButtonGroup extends AbstractRadioButtonGroup<Long> {
 

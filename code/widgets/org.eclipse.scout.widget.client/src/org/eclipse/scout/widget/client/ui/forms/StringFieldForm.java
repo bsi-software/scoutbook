@@ -27,7 +27,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.data.basic.FontSpec;
-import org.eclipse.scout.rt.shared.services.lookup.LookupCall;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.widget.client.services.lookup.FontStyleLookupCall;
 import org.eclipse.scout.widget.client.ui.forms.StringFieldForm.MainBox.CloseButton;
 import org.eclipse.scout.widget.client.ui.forms.StringFieldForm.MainBox.ConfigurationBox;
@@ -441,8 +441,8 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected Class<? extends LookupCall> getConfiguredLookupCall() {
-          return FontStyleLookupCall.class;
+        protected Class<? extends ILookupCall<Integer>> getConfiguredLookupCall() {
+          return (Class<? extends ILookupCall<Integer>>) FontStyleLookupCall.class;
         }
 
         @Override
@@ -551,7 +551,7 @@ public class StringFieldForm extends AbstractForm implements IPageForm {
       @Order(120.0)
       public class WrapTextField extends AbstractCheckBox {
 
-        // TODO: does not react on getConfiguredLabelFont, bug???
+        // TODO: [BUG] does not react on getConfiguredLabelFont, bug???
 
         @Override
         protected String getConfiguredFont() {

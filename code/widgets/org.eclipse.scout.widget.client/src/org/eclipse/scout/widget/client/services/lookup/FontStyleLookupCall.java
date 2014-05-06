@@ -14,17 +14,17 @@ import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 /**
  * @author mzi
  */
-public class FontStyleLookupCall extends LocalLookupCall {
+public class FontStyleLookupCall extends LocalLookupCall<Integer> {
 
   private static final long serialVersionUID = 1L;
 
   @Override
-  protected List<LookupRow> execCreateLookupRows() throws ProcessingException {
-    ArrayList<LookupRow> rows = new ArrayList<LookupRow>();
-    rows.add(new LookupRow(0, TEXTS.get("Default")));
-    rows.add(new LookupRow(1, TEXTS.get("Bold")));
-    rows.add(new LookupRow(2, TEXTS.get("Italic")));
-    rows.add(new LookupRow(3, TEXTS.get("Bold") + " " + TEXTS.get("Italic")));
+  protected List<LookupRow<Integer>> execCreateLookupRows() throws ProcessingException {
+    ArrayList<LookupRow<Integer>> rows = new ArrayList<>();
+    rows.add(new LookupRow<Integer>(0, TEXTS.get("Default")));
+    rows.add(new LookupRow<Integer>(1, TEXTS.get("Bold")));
+    rows.add(new LookupRow<Integer>(2, TEXTS.get("Italic")));
+    rows.add(new LookupRow<Integer>(3, TEXTS.get("Bold") + " " + TEXTS.get("Italic")));
     return rows;
   }
 }

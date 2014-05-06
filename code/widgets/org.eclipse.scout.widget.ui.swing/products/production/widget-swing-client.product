@@ -11,10 +11,12 @@
 
    <launcherArgs>
       <programArgsMac>--launcher.secondThread
--nosplash</programArgsMac>
+-nosplash
+      </programArgsMac>
       <vmArgs>-Xms64m
 -Xmx512m
--XX:MaxPermSize=256m</vmArgs>
+-XX:MaxPermSize=256m
+      </vmArgs>
    </launcherArgs>
 
    <windowImages/>
@@ -30,7 +32,7 @@
    </vm>
 
    <plugins>
-      <plugin id="com.bsiag.scout.rt.ui.swing.laf.rayo.fragment"/>
+      <plugin id="com.bsiag.scout.rt.ui.swing.laf.rayo.fragment" fragment="true"/>
       <plugin id="com.bsiag.scout.rt.ui.swing.rayo"/>
       <plugin id="javax.xml"/>
       <plugin id="org.apache.batik.bridge"/>
@@ -59,6 +61,7 @@
       <plugin id="org.eclipse.osgi.services"/>
       <plugin id="org.eclipse.scout.commons"/>
       <plugin id="org.eclipse.scout.net"/>
+      <plugin id="org.eclipse.scout.org.w3c.dom.svg.fragment" fragment="true"/>
       <plugin id="org.eclipse.scout.rt.client"/>
       <plugin id="org.eclipse.scout.rt.extension.client"/>
       <plugin id="org.eclipse.scout.rt.servicetunnel"/>

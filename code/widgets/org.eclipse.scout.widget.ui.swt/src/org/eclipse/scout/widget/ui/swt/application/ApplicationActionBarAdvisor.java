@@ -1,5 +1,7 @@
 package org.eclipse.scout.widget.ui.swt.application;
 
+import java.util.List;
+
 import org.eclipse.jface.action.ICoolBarManager;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
@@ -48,12 +50,12 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
   }
 
   public void initViewButtons(IDesktop d) {
-    IViewButton[] viewButtons = d.getViewButtons();
+    List<IViewButton> viewButtons = d.getViewButtons();
     int start = 0;
-    int end = Math.min(m_coolbarButton.length, viewButtons.length);
+    int end = Math.min(m_coolbarButton.length, viewButtons.size());
     for (int i = start; i < end; i++) {
       CoolbarButton b = m_coolbarButton[i];
-      IViewButton v = viewButtons[i];
+      IViewButton v = viewButtons.get(i);
 
       b.setEnabled(v.isEnabled() && v.isEnabledGranted());
       if (v.isVisible() && v.isVisibleGranted()) {
@@ -65,12 +67,12 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
       }
     }
 
-    IToolButton[] toolButtons = d.getToolButtons();
+    List<IToolButton> toolButtons = d.getToolButtons();
     start = end + 1;
-    end = Math.min(m_coolbarButton.length, start + toolButtons.length);
+    end = Math.min(m_coolbarButton.length, start + toolButtons.size());
     for (int i = start; i < end; i++) {
       CoolbarButton b = m_coolbarButton[i];
-      IToolButton v = toolButtons[i - start];
+      IToolButton v = toolButtons.get(i - start);
 
       b.setEnabled(v.isEnabled() && v.isEnabledGranted());
       if (v.isVisible() && v.isVisibleGranted()) {
@@ -82,7 +84,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
       }
     }
 
-    if (viewButtons.length + toolButtons.length > NUM_OUTLINE_BUTTONS) {
+    if (viewButtons.size() + toolButtons.size() > NUM_OUTLINE_BUTTONS) {
       logger.warn("There are more buttons configured in the desktop model than prepared in the SWT UI. Consider to increase 'NUM_OUTLINE_BUTTONS' in class '" + getClass().getName() + "'.");
     }
   }

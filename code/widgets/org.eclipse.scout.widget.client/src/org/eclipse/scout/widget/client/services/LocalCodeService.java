@@ -1,14 +1,18 @@
 /**
- * 
+ *
  */
 package org.eclipse.scout.widget.client.services;
 
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.annotations.Priority;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.holders.Holder;
@@ -32,10 +36,10 @@ import org.osgi.framework.Bundle;
 @Priority(1)
 public class LocalCodeService extends AbstractService implements ICodeService {
   private static final IScoutLogger LOG = ScoutLogManager.getLogger(LocalCodeService.class);
-  private HashMap<String, BundleClassDescriptor[]> m_codeTypeClassDescriptorMap = new HashMap<String, BundleClassDescriptor[]>();
+  private HashMap<String, Set<BundleClassDescriptor>> m_codeTypeClassDescriptorMap = new HashMap<String, Set<BundleClassDescriptor>>();
 
   @Override
-  public <T extends ICodeType> T getCodeType(Class<T> type) {
+  public <T extends ICodeType<?, ?>> T getCodeType(Class<T> type) {
     T instance = null;
     try {
       instance = type.newInstance();
@@ -47,12 +51,12 @@ public class LocalCodeService extends AbstractService implements ICodeService {
   }
 
   @Override
-  public <T extends ICodeType> T getCodeType(Long partitionId, Class<T> type) {
+  public <T extends ICodeType<?, ?>> T getCodeType(Long partitionId, Class<T> type) {
     return getCodeType(type);
   }
 
   @Override
-  public ICodeType findCodeTypeById(Object id) {
+  public <T> ICodeType<T, ?> findCodeTypeById(T id) {
     if (id == null) {
       return null;
     }
@@ -65,28 +69,40 @@ public class LocalCodeService extends AbstractService implements ICodeService {
   }
 
   @Override
-  public ICodeType findCodeTypeById(Long partitionId, Object id) {
+  public <T> ICodeType<T, ?> findCodeTypeById(Long partitionId, T id) {
     return findCodeTypeById(id);
   }
 
-  @SuppressWarnings("unchecked")
   @Override
-  public ICodeType[] getCodeTypes(Class... types) {
-    ICodeType[] instances = new ICodeType[types.length];
-    for (int i = 0; i < instances.length; i++) {
-      instances[i] = getCodeType(types[i]);
+  public List<ICodeType<?, ?>> getCodeTypes(Long partitionId, List<Class<? extends ICodeType<?, ?>>> types) {
+    List<ICodeType<?, ?>> instances = new ArrayList<>();
+    for (Class<? extends ICodeType<?, ?>> type : types) {
+      instances.add(getCodeType(type));
     }
     return instances;
   }
 
   @Override
-  public ICodeType[] getCodeTypes(Long partitionId, Class... types) {
-    return getCodeTypes(types);
+  public List<ICodeType<?, ?>> getCodeTypes(List<Class<? extends ICodeType<?, ?>>> types) {
+    List<Class<? extends ICodeType<?, ?>>> missingTypes = new ArrayList<Class<? extends ICodeType<?, ?>>>();
+    List<ICodeType<?, ?>> instances = new ArrayList<ICodeType<?, ?>>();
+
+    for (Class<? extends ICodeType<?, ?>> codeTypeClazz : types) {
+      ICodeType<?, ?> codeType = getCodeType(codeTypeClazz);
+      if (codeType != null) {
+        instances.add(codeType);
+      }
+      else {
+        missingTypes.add(codeTypeClazz);
+      }
+    }
+
+    return Collections.unmodifiableList(instances);
   }
 
   @SuppressWarnings("unchecked")
   @Override
-  public <T extends ICode> T getCode(final Class<T> type) {
+  public <CODE_ID_TYPE, CODE extends ICode<CODE_ID_TYPE>> CODE getCode(final Class<CODE> type) {
     if (type == null) {
       return null;
     }
@@ -120,16 +136,16 @@ public class LocalCodeService extends AbstractService implements ICodeService {
       }
     };
     codeType.visit(v);
-    return (T) codeHolder.getValue();
+    return (CODE) codeHolder.getValue();
   }
 
   @Override
-  public <T extends ICode> T getCode(Long partitionId, Class<T> type) {
+  public <CODE_ID_TYPE, CODE extends ICode<CODE_ID_TYPE>> CODE getCode(Long partitionId, Class<CODE> type) {
     return getCode(type);
   }
 
   @Override
-  public <T extends ICodeType> T reloadCodeType(Class<T> type) {
+  public <T extends ICodeType<?, ?>> T reloadCodeType(Class<T> type) {
     if (type == null) {
       return null;
     }
@@ -137,7 +153,7 @@ public class LocalCodeService extends AbstractService implements ICodeService {
   }
 
   @Override
-  public ICodeType[] reloadCodeTypes(Class... types) {
+  public List<ICodeType<?, ?>> reloadCodeTypes(List<Class<? extends ICodeType<?, ?>>> types) {
     if (types == null) {
       return null;
     }
@@ -145,14 +161,14 @@ public class LocalCodeService extends AbstractService implements ICodeService {
   }
 
   @Override
-  public BundleClassDescriptor[] getAllCodeTypeClasses(String classPrefix) {
-    // There is no classPrefix integration  
+  public Set<BundleClassDescriptor> getAllCodeTypeClasses(String classPrefix) {
+    // There is no classPrefix integration
     if (classPrefix == null) {
-      return new BundleClassDescriptor[0];
+      return Collections.emptySet();
     }
-    BundleClassDescriptor[] a = m_codeTypeClassDescriptorMap.get(classPrefix);
+    Set<BundleClassDescriptor> a = m_codeTypeClassDescriptorMap.get(classPrefix);
     if (a != null) {
-      return a;
+      return CollectionUtility.unmodifiableSet(a);
     }
     //
     HashSet<BundleClassDescriptor> discoveredCodeTypes = new HashSet<BundleClassDescriptor>();
@@ -199,28 +215,28 @@ public class LocalCodeService extends AbstractService implements ICodeService {
         }
       }
     }
-    a = discoveredCodeTypes.toArray(new BundleClassDescriptor[discoveredCodeTypes.size()]);
-    m_codeTypeClassDescriptorMap.put(classPrefix, a);
-    return a;
+    m_codeTypeClassDescriptorMap.put(classPrefix, discoveredCodeTypes);
+    return CollectionUtility.unmodifiableSet(discoveredCodeTypes);
   }
 
+  @SuppressWarnings("unchecked")
   @Override
-  public ICodeType[] getAllCodeTypes(String classPrefix) {
-    ArrayList<Class> list = new ArrayList<Class>();
+  public List<ICodeType<?, ?>> getAllCodeTypes(String classPrefix) {
+    List<Class<? extends ICodeType<?, ?>>> list = new ArrayList<Class<? extends ICodeType<?, ?>>>();
     for (BundleClassDescriptor d : getAllCodeTypeClasses(classPrefix)) {
       try {
-        list.add(Platform.getBundle(d.getBundleSymbolicName()).loadClass(d.getClassName()));
+        list.add((Class<? extends ICodeType<?, ?>>) Platform.getBundle(d.getBundleSymbolicName()).loadClass(d.getClassName()));
       }
       catch (Throwable t) {
         LOG.warn("Loading " + d.getClassName() + " of bundle " + d.getBundleSymbolicName(), t);
         continue;
       }
     }
-    return getCodeTypes(list.toArray(new Class[list.size()]));
+    return getCodeTypes(list);
   }
 
   @Override
-  public ICodeType[] getAllCodeTypes(String classPrefix, Long partitionId) {
+  public List<ICodeType<?, ?>> getAllCodeTypes(String classPrefix, Long partitionId) {
     return getAllCodeTypes(classPrefix);
   }
 

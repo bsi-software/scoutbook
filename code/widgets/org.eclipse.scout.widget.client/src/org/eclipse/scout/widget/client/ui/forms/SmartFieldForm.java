@@ -32,7 +32,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
-import org.eclipse.scout.rt.shared.services.lookup.LookupCall;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 import org.eclipse.scout.widget.client.services.lookup.LocaleLookupCall;
 import org.eclipse.scout.widget.client.services.lookup.UserContentListLookupCall;
@@ -255,8 +255,8 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected Class<? extends LookupCall> getConfiguredLookupCall() {
-          return LocaleLookupCall.class;
+        protected Class<? extends ILookupCall<Locale>> getConfiguredLookupCall() {
+          return (Class<? extends ILookupCall<Locale>>) LocaleLookupCall.class;
         }
       }
 
@@ -264,7 +264,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
       public class MandatoryField extends AbstractSmartField<Color> {
 
         @Override
-        protected Class<? extends ICodeType<?>> getConfiguredCodeType() {
+        protected Class<? extends ICodeType<?, Color>> getConfiguredCodeType() {
           return ColorsCodeType.class;
         }
 
@@ -299,7 +299,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected Class<? extends ICodeType<?>> getConfiguredCodeType() {
+        protected Class<? extends ICodeType<?, Color>> getConfiguredCodeType() {
           return ColorsCodeType.class;
         }
 
@@ -329,10 +329,10 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
       }
 
       @Order(60.0)
-      public class DefaultSmartField extends AbstractSmartField<Object> {
+      public class DefaultSmartField extends AbstractSmartField<Long> {
 
         @Override
-        protected Class<? extends ICodeType<?>> getConfiguredCodeType() {
+        protected Class<? extends ICodeType<?, Long>> getConfiguredCodeType() {
           return IndustryICBCodeType.class;
         }
 
@@ -351,7 +351,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected Class<? extends ICodeType<?>> getConfiguredCodeType() {
+        protected Class<? extends ICodeType<?, Long>> getConfiguredCodeType() {
           return IndustryICBCodeType.class;
         }
 
@@ -375,7 +375,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected Class<? extends ICodeType<?>> getConfiguredCodeType() {
+        protected Class<? extends ICodeType<?, Long>> getConfiguredCodeType() {
           return IndustryICBCodeType.class;
         }
 
@@ -403,8 +403,8 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected Class<? extends LookupCall> getConfiguredLookupCall() {
-          return UserContentListLookupCall.class;
+        protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
+          return (Class<? extends ILookupCall<String>>) UserContentListLookupCall.class;
         }
       }
 
@@ -428,7 +428,9 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execChangedMasterValue(Object newMasterValue) throws ProcessingException {
-          setValue(newMasterValue.toString());
+          if (newMasterValue != null) {
+            setValue(newMasterValue.toString());
+          }
         }
       }
 
@@ -448,7 +450,7 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         @Override
         protected void execChangedValue() throws ProcessingException {
           List<Node> nodes = parseFieldValue(false);
-          ArrayList<LookupRow> rows = new ArrayList<LookupRow>();
+          ArrayList<LookupRow<String>> rows = new ArrayList<>();
           addNodesToLookupRows(nodes, rows);
 
           ((UserContentListLookupCall) getListSmartField().getLookupCall()).setLookupRows(rows);
@@ -509,8 +511,8 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected Class<? extends LookupCall> getConfiguredLookupCall() {
-          return UserContentTreeLookupCall.class;
+        protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
+          return (Class<? extends ILookupCall<String>>) UserContentTreeLookupCall.class;
         }
       }
 
@@ -559,9 +561,9 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         @Override
         protected void execChangedValue() throws ProcessingException {
           List<Node> nodes = parseFieldValue(true);
-          ArrayList<LookupRow> rows = new ArrayList<LookupRow>();
-          addNodesToLookupRows(nodes, rows);
+          List<LookupRow<String>> rows = new ArrayList<>();
 
+          addNodesToLookupRows(nodes, rows);
           ((UserContentTreeLookupCall) getTreeSmartField().getLookupCall()).setLookupRows(rows);
         }
       }

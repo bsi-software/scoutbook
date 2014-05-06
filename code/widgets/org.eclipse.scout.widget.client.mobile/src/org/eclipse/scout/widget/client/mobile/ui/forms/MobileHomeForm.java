@@ -1,7 +1,9 @@
 /**
- * 
+ *
  */
 package org.eclipse.scout.widget.client.mobile.ui.forms;
+
+import java.util.List;
 
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
@@ -159,11 +161,11 @@ public class MobileHomeForm extends AbstractMobileForm implements IOutlineChoose
         }
 
         @Override
-        protected void execRowsSelected(ITableRow[] rows) throws ProcessingException {
-          if (rows == null || rows.length == 0) {
+        protected void execRowsSelected(List<? extends ITableRow> rows) throws ProcessingException {
+          if (rows == null || rows.size() == 0) {
             return;
           }
-          IOutline outline = getOutlineColumn().getValue(rows[0]);
+          IOutline outline = getOutlineColumn().getValue(rows.get(0));
           MobileDesktopUtility.activateOutline(outline);
           getDesktop().removeForm(MobileHomeForm.this);
           clearSelectionDelayed();
@@ -224,7 +226,7 @@ public class MobileHomeForm extends AbstractMobileForm implements IOutlineChoose
     @Override
     protected void execLoad() throws ProcessingException {
       Table table = getOutlinesTableField().getTable();
-      IOutline[] outlines = getDesktop().getAvailableOutlines();
+      List<IOutline> outlines = getDesktop().getAvailableOutlines();
       for (IOutline outline : outlines) {
         if (outline.isVisible() && outline.getRootNode() != null) {
           ITableRow row = table.createRow(new Object[]{outline, outline.getTitle()});

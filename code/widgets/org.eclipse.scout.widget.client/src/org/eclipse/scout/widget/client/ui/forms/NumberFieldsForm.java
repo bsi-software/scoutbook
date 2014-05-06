@@ -239,7 +239,6 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
 
       @Order(10.0)
       public class IntegerColumnField extends AbstractLabelField {
-        // TODO: check for option to display the header label in the content area instead of the label area
 
         @Override
         protected String getConfiguredLabel() {

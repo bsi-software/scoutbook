@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.eclipse.scout.widget.client.services.lookup;
 
@@ -17,7 +17,7 @@ import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 /**
  * @author mzi
  */
-public class LocaleLookupCall extends LocalLookupCall {
+public class LocaleLookupCall extends LocalLookupCall<Locale> {
 
   private static final long serialVersionUID = 1L;
 
@@ -32,14 +32,14 @@ public class LocaleLookupCall extends LocalLookupCall {
   }
 
   @Override
-  protected List<LookupRow> execCreateLookupRows() throws ProcessingException {
-    ArrayList<LookupRow> rows = new ArrayList<LookupRow>();
+  protected List<LookupRow<Locale>> execCreateLookupRows() throws ProcessingException {
+    ArrayList<LookupRow<Locale>> rows = new ArrayList<>();
 
     Locale[] locales = SimpleDateFormat.getAvailableLocales();
     sort(locales);
 
     for (Locale locale : locales) {
-      rows.add(new LookupRow(locale, locale.getDisplayName()));
+      rows.add(new LookupRow<Locale>(locale, locale.getDisplayName()));
     }
 
     return rows;

@@ -29,7 +29,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.shared.TEXTS;
-import org.eclipse.scout.rt.shared.services.lookup.LookupCall;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.rt.shared.ui.UserAgentUtility;
 import org.eclipse.scout.widget.client.ClientSession;
 import org.eclipse.scout.widget.client.services.lookup.LocaleLookupCall;
@@ -534,8 +534,8 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected Class<? extends LookupCall> getConfiguredLookupCall() {
-          return LocaleLookupCall.class;
+        protected Class<? extends ILookupCall<Locale>> getConfiguredLookupCall() {
+          return (Class<? extends ILookupCall<Locale>>) LocaleLookupCall.class;
         }
 
         @Override

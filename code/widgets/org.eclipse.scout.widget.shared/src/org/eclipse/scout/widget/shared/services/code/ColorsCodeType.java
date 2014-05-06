@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.eclipse.scout.widget.shared.services.code;
 
@@ -14,12 +14,12 @@ import org.eclipse.scout.rt.shared.services.common.code.AbstractCodeType;
 /**
  * @author mzi
  */
-public class ColorsCodeType extends AbstractCodeType<Color> {
+public class ColorsCodeType extends AbstractCodeType<Color, Color> {
 
   private static final long serialVersionUID = 1L;
   /**
- * 
- */
+   *
+   */
   public static final Color ID = null;
 
   /**

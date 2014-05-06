@@ -13,23 +13,23 @@ import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 /**
  * @author mzi
  */
-public class IconIdLookupCall extends LocalLookupCall {
+public class IconIdLookupCall extends LocalLookupCall<String> {
 
   private static final long serialVersionUID = 1L;
 
   @Override
-  protected List<LookupRow> execCreateLookupRows() throws ProcessingException {
-    ArrayList<LookupRow> rows = new ArrayList<LookupRow>();
+  protected List<LookupRow<String>> execCreateLookupRows() throws ProcessingException {
+    ArrayList<LookupRow<String>> rows = new ArrayList<>();
 
     // TODO: there might be a better way via reflection over AbstractIcon
-    rows.add(new LookupRow("null", "null"));
-    rows.add(new LookupRow("empty", "empty"));
-    rows.add(new LookupRow("status_info", "status_info"));
-    rows.add(new LookupRow("status_warning", "status_warning"));
-    rows.add(new LookupRow("status_error", "status_error"));
-    rows.add(new LookupRow("wizard_back", "wizard_back"));
-    rows.add(new LookupRow("wizard_next", "wizard_next"));
-    rows.add(new LookupRow("bookmark", "bookmark"));
+    rows.add(new LookupRow<String>("null", "null"));
+    rows.add(new LookupRow<String>("empty", "empty"));
+    rows.add(new LookupRow<String>("status_info", "status_info"));
+    rows.add(new LookupRow<String>("status_warning", "status_warning"));
+    rows.add(new LookupRow<String>("status_error", "status_error"));
+    rows.add(new LookupRow<String>("wizard_back", "wizard_back"));
+    rows.add(new LookupRow<String>("wizard_next", "wizard_next"));
+    rows.add(new LookupRow<String>("bookmark", "bookmark"));
 
     return rows;
   }

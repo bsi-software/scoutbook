@@ -14,7 +14,6 @@ import java.util.List;
 
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
-import org.eclipse.scout.rt.client.ui.action.menu.IMenu;
 import org.eclipse.scout.rt.client.ui.basic.cell.Cell;
 import org.eclipse.scout.rt.client.ui.basic.tree.AbstractTreeNode;
 import org.eclipse.scout.rt.client.ui.basic.tree.ITree;
@@ -122,6 +121,11 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("Default");
+        }
+
+        @Override
+        protected String getConfiguredTooltipText() {
+          return TEXTS.get("TreeContextMenuTooltip");
         }
 
         @Override
@@ -274,7 +278,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
         @Override
         protected void execChangedValue() throws ProcessingException {
           List<Node> nodes = parseFieldValue(true);
-          getTreeField().getTree().setMenus(nodesToMenus(nodes).toArray(new IMenu[]{}));
+          getTreeField().getTree().setMenus(nodesToMenus(nodes));
         }
 
       }
@@ -303,9 +307,9 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
     /**
      * recursive function to convert codes (enumerations) into an abstract tree.
      */
-    private void addCodesToTree(ICode[] codes, ITreeNode parent, AbstractExtensibleTree tree) {
+    private void addCodesToTree(List<? extends ICode<Long>> list, ITreeNode parent, AbstractExtensibleTree tree) {
       // create a tree node for each code
-      for (final ICode code : codes) {
+      for (final ICode<Long> code : list) {
         AbstractTreeNode node = new AbstractTreeNode() {
           @Override
           protected void execDecorateCell(Cell cell) {
@@ -319,8 +323,8 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
         tree.addChildNode(parent, node);
 
         // recursively add child nodes (if any)
-        ICode[] children = code.getChildCodes();
-        if (children.length > 0) {
+        List<? extends ICode<Long>> children = code.getChildCodes();
+        if (children.size() > 0) {
           addCodesToTree(children, node, tree);
         }
       }
@@ -330,13 +334,11 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
      * recursive function to mark tree nodes without children as leaf nodes
      */
     private void updateLeafNodes(ITreeNode node) {
-      ITreeNode[] children = node.getChildNodes();
-      node.setLeaf(children.length == 0);
+      List<ITreeNode> children = node.getChildNodes();
+      node.setLeaf(children.size() == 0);
 
-      if (children.length > 0) {
-        for (ITreeNode child : children) {
-          updateLeafNodes(child);
-        }
+      for (ITreeNode child : children) {
+        updateLeafNodes(child);
       }
     }
 

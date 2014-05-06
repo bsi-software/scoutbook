@@ -25,7 +25,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringFiel
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBox;
 import org.eclipse.scout.rt.shared.AbstractIcons;
 import org.eclipse.scout.rt.shared.TEXTS;
-import org.eclipse.scout.rt.shared.services.lookup.LookupCall;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.widget.client.services.lookup.IconIdLookupCall;
 import org.eclipse.scout.widget.client.ui.forms.ButtonLinkFieldsForm.MainBox.CloseButton;
 import org.eclipse.scout.widget.client.ui.forms.ButtonLinkFieldsForm.MainBox.ConfigurationBox;
@@ -159,7 +159,6 @@ public class ButtonLinkFieldsForm extends AbstractForm implements IPageForm {
 
       @Order(50.0)
       public class ButtonColumnField extends AbstractLabelField {
-        // TODO: check for option to display the header label in the content area instead of the label area
 
         @Override
         protected String getConfiguredLabel() {
@@ -466,8 +465,8 @@ public class ButtonLinkFieldsForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected Class<? extends LookupCall> getConfiguredLookupCall() {
-          return IconIdLookupCall.class;
+        protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
+          return (Class<? extends ILookupCall<String>>) IconIdLookupCall.class;
         }
 
         @Override

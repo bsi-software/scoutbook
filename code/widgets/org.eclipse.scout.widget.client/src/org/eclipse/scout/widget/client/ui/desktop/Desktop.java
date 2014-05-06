@@ -1,5 +1,8 @@
 package org.eclipse.scout.widget.client.ui.desktop;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.logger.IScoutLogger;
@@ -31,8 +34,11 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
 
   @Override
   @SuppressWarnings("unchecked")
-  protected Class<? extends IOutline>[] getConfiguredOutlines() {
-    return new Class[]{SimpleWidgetsOutline.class, AdvancedWidgetsOutline.class};
+  protected List<Class<? extends IOutline>> getConfiguredOutlines() {
+    ArrayList<Class<? extends IOutline>> list = new ArrayList();
+    list.add(SimpleWidgetsOutline.class);
+    list.add(AdvancedWidgetsOutline.class);
+    return list;
   }
 
   @Override
@@ -57,8 +63,8 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
     tableForm.setIconId(Icons.EclipseScout);
     tableForm.startView();
 
-    if (getAvailableOutlines().length > 0) {
-      setOutline(getAvailableOutlines()[0]);
+    if (getAvailableOutlines().size() > 0) {
+      setOutline(getAvailableOutlines().get(0));
     }
 
   }
@@ -95,7 +101,7 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
     }
   }
 
-  // XXX eventually check how to do the bookmark menu locally
+  // TODO: eventually check how to do the bookmark menu locally
   //  @Order(25)
   //  public class BookmarkMenu extends AbstractBookmarkMenu {
   //    public BookmarkMenu() {
@@ -193,10 +199,10 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
       super(Desktop.this, SimpleWidgetsOutline.class);
     }
 
-    @Override
-    protected String getConfiguredText() {
-      return TEXTS.get("StandardOutline");
-    }
+//    @Override
+//    protected String getConfiguredText() {
+//      return TEXTS.get("StandardOutline");
+//    }
   }
 
   @Order(20.0)
@@ -209,9 +215,9 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
       super(Desktop.this, AdvancedWidgetsOutline.class);
     }
 
-    @Override
-    protected String getConfiguredText() {
-      return TEXTS.get("AdvancedWidgets");
-    }
+//    @Override
+//    protected String getConfiguredText() {
+//      return TEXTS.get("AdvancedWidgets");
+//    }
   }
 }

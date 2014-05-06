@@ -3,6 +3,7 @@
 
 <product name="widget" id="org.eclipse.scout.widget.ui.rap.product" application="org.eclipse.scout.widget.ui.rap.app" useFeatures="false" includeLaunchers="true">
 
+
    <configIni use="default">
       <linux>/org.eclipse.scout.widget.ui.rap/products/development/config.ini</linux>
       <macosx>/org.eclipse.scout.widget.ui.rap/products/development/config.ini</macosx>
@@ -15,10 +16,13 @@
 -Xmx512m
 -XX:MaxPermSize=256m
 -Dorg.eclipse.rap.rwt.developmentMode=true
-</vmArgs>
+-Duser.language=de
+-Duser.locale=de
+      </vmArgs>
    </launcherArgs>
 
    <windowImages/>
+
 
    <launcher>
       <solaris/>
@@ -27,8 +31,10 @@
       </win>
    </launcher>
 
+
    <vm>
    </vm>
+
 
    <plugins>
       <plugin id="com.ibm.icu"/>
@@ -87,11 +93,11 @@
       <plugin id="org.eclipse.rap.ui.forms"/>
       <plugin id="org.eclipse.rap.ui.workbench"/>
       <plugin id="org.eclipse.scout.commons"/>
-      <plugin id="org.eclipse.scout.http.servletfilter"/>
       <plugin id="org.eclipse.scout.net"/>
       <plugin id="org.eclipse.scout.rt.client"/>
       <plugin id="org.eclipse.scout.rt.client.mobile"/>
       <plugin id="org.eclipse.scout.rt.extension.client"/>
+      <plugin id="org.eclipse.scout.rt.server.commons"/>
       <plugin id="org.eclipse.scout.rt.servicetunnel"/>
       <plugin id="org.eclipse.scout.rt.shared"/>
       <plugin id="org.eclipse.scout.rt.ui.rap"/>
@@ -111,7 +117,6 @@
       <plugin id="org.w3c.dom.events"/>
       <plugin id="org.w3c.dom.smil"/>
       <plugin id="org.w3c.dom.svg"/>
-      <plugin id="org.w3c.dom.svg.fragment" fragment="true"/>
    </plugins>
 
 

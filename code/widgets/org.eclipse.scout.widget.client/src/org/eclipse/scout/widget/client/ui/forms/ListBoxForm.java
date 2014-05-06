@@ -12,7 +12,9 @@ package org.eclipse.scout.widget.client.ui.forms;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.annotations.Order;
@@ -31,7 +33,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBo
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
-import org.eclipse.scout.rt.shared.services.lookup.LookupCall;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 import org.eclipse.scout.widget.client.services.lookup.FontStyleLookupCall;
 import org.eclipse.scout.widget.client.services.lookup.UserContentListLookupCall;
@@ -171,7 +173,7 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
       public class DefaultField extends AbstractListBox<Color> {
 
         @Override
-        protected Class<? extends ICodeType> getConfiguredCodeType() {
+        protected Class<? extends ICodeType<?, Color>> getConfiguredCodeType() {
           return ColorsCodeType.class;
         }
 
@@ -205,13 +207,17 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected Class<? extends ICodeType> getConfiguredCodeType() {
+        protected Class<? extends ICodeType<?, Color>> getConfiguredCodeType() {
           return ColorsCodeType.class;
         }
 
         @Override
         protected void execInitField() throws ProcessingException {
-          setValue(new Color[]{ColorsCodeType.RedCode.ID, ColorsCodeType.GreenCode.ID, ColorsCodeType.BlueCode.ID});
+          Set<Color> colors = new HashSet<>();
+          colors.add(ColorsCodeType.RedCode.ID);
+          colors.add(ColorsCodeType.GreenCode.ID);
+          colors.add(ColorsCodeType.BlueCode.ID);
+          setValue(colors);
           setFilterCheckedRowsValue(true);
         }
       }
@@ -249,8 +255,8 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected Class<? extends LookupCall> getConfiguredLookupCall() {
-          return FontStyleLookupCall.class;
+        protected Class<? extends ILookupCall<Integer>> getConfiguredLookupCall() {
+          return (Class<? extends ILookupCall<Integer>>) FontStyleLookupCall.class;
         }
       }
 
@@ -273,13 +279,16 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected Class<? extends LookupCall> getConfiguredLookupCall() {
-          return FontStyleLookupCall.class;
+        protected Class<? extends ILookupCall<Integer>> getConfiguredLookupCall() {
+          return (Class<? extends ILookupCall<Integer>>) FontStyleLookupCall.class;
         }
 
         @Override
         protected void execInitField() throws ProcessingException {
-          setValue(new Integer[]{2, 3});
+          Set<Integer> set = new HashSet<>();
+          set.add(2);
+          set.add(3);
+          setValue(set);
           setFilterCheckedRowsValue(true);
         }
       }
@@ -307,8 +316,8 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected Class<? extends LookupCall> getConfiguredLookupCall() {
-          return UserContentListLookupCall.class;
+        protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
+          return (Class<? extends ILookupCall<String>>) UserContentListLookupCall.class;
         }
       }
 
@@ -364,7 +373,9 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execChangedMasterValue(Object newMasterValue) throws ProcessingException {
-          setValue(StringUtility.join(";", (String[]) newMasterValue));
+          if (newMasterValue instanceof Set<?>) {
+            setValue(StringUtility.join(";", ((Set<?>) newMasterValue).toArray(new String[0])));
+          }
         }
       }
 
@@ -384,10 +395,11 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
         @Override
         protected void execChangedValue() throws ProcessingException {
           List<Node> nodes = parseFieldValue(false);
-          ArrayList<LookupRow> rows = new ArrayList<LookupRow>();
-          addNodesToLookupRows(nodes, rows);
+          List<LookupRow<String>> rows = new ArrayList<>();
 
+          addNodesToLookupRows(nodes, rows);
           ((UserContentListLookupCall) getListBoxField().getLookupCall()).setLookupRows(rows);
+
           try {
             getListBoxField().initField();
           }

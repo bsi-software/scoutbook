@@ -12,7 +12,9 @@ package org.eclipse.scout.widget.client.ui.forms;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.annotations.Order;
@@ -31,7 +33,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringFiel
 import org.eclipse.scout.rt.client.ui.form.fields.treebox.AbstractTreeBox;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
-import org.eclipse.scout.rt.shared.services.lookup.LookupCall;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
 import org.eclipse.scout.widget.client.services.lookup.UserContentTreeLookupCall;
 import org.eclipse.scout.widget.client.services.lookup.YearsMonthsLookupCall;
@@ -179,7 +181,7 @@ public class TreeBoxForm extends AbstractForm implements IPageForm {
       public class DefaultField extends AbstractTreeBox<Long> {
 
         @Override
-        protected Class<? extends ICodeType> getConfiguredCodeType() {
+        protected Class<? extends ICodeType<?, Long>> getConfiguredCodeType() {
           return IndustryICBCodeType.class;
         }
 
@@ -198,7 +200,7 @@ public class TreeBoxForm extends AbstractForm implements IPageForm {
       public class DisabledField extends AbstractTreeBox<Long> {
 
         @Override
-        protected Class<? extends ICodeType> getConfiguredCodeType() {
+        protected Class<? extends ICodeType<?, Long>> getConfiguredCodeType() {
           return IndustryICBCodeType.class;
         }
 
@@ -219,7 +221,11 @@ public class TreeBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execInitField() throws ProcessingException {
-          setValue(new Long[]{IndustryICBCodeType.ICB8000.ID, IndustryICBCodeType.ICB8000.ICB8500.ID, IndustryICBCodeType.ICB9000.ICB9500.ICB9530.ICB9537.ID,});
+          Set<Long> codes = new HashSet<>();
+          codes.add(IndustryICBCodeType.ICB8000.ID);
+          codes.add(IndustryICBCodeType.ICB8000.ICB8500.ID);
+          codes.add(IndustryICBCodeType.ICB9000.ICB9500.ICB9530.ICB9537.ID);
+          setValue(codes);
           setFilterCheckedNodesValue(true);
         }
       }
@@ -257,7 +263,7 @@ public class TreeBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected Class<? extends LookupCall> getConfiguredLookupCall() {
+        protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
           return YearsMonthsLookupCall.class;
         }
       }
@@ -286,7 +292,7 @@ public class TreeBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected Class<? extends LookupCall> getConfiguredLookupCall() {
+        protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
           return YearsMonthsLookupCall.class;
         }
 
@@ -295,7 +301,11 @@ public class TreeBoxForm extends AbstractForm implements IPageForm {
           int year = Calendar.getInstance().get(Calendar.YEAR);
           int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
           int key = 100 * year + month;
-          setValue(new String[]{String.valueOf(key), String.valueOf(key + 1), String.valueOf(key + 2)});
+          Set<String> times = new HashSet<>();
+          times.add(String.valueOf(key));
+          times.add(String.valueOf(key + 1));
+          times.add(String.valueOf(key + 2));
+          setValue(times);
           setFilterCheckedNodesValue(true);
         }
       }
@@ -323,7 +333,7 @@ public class TreeBoxForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected Class<? extends LookupCall> getConfiguredLookupCall() {
+        protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
           return UserContentTreeLookupCall.class;
         }
       }
@@ -380,7 +390,9 @@ public class TreeBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execChangedMasterValue(Object newMasterValue) throws ProcessingException {
-          setValue(StringUtility.join(";", (String[]) newMasterValue));
+          if (newMasterValue instanceof Set<?>) {
+            setValue(StringUtility.join(";", ((Set<?>) newMasterValue).toArray(new String[0])));
+          }
         }
       }
 
@@ -400,10 +412,11 @@ public class TreeBoxForm extends AbstractForm implements IPageForm {
         @Override
         protected void execChangedValue() throws ProcessingException {
           List<Node> nodes = parseFieldValue(true);
-          ArrayList<LookupRow> rows = new ArrayList<LookupRow>();
-          addNodesToLookupRows(nodes, rows);
+          List<LookupRow<String>> rows = new ArrayList<>();
 
+          addNodesToLookupRows(nodes, rows);
           ((UserContentTreeLookupCall) getTreeBoxField().getLookupCall()).setLookupRows(rows);
+
           try {
             getTreeBoxField().initField();
           }
