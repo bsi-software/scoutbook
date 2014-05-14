@@ -716,6 +716,11 @@ public class NumberFieldsForm extends AbstractForm implements IPageForm {
 
       @Order(110.0)
       public class Place3Field extends AbstractPlaceholderField {
+
+        @Override
+        protected int getConfiguredGridH() {
+          return 2;
+        }
       }
 
       @Order(120.0)

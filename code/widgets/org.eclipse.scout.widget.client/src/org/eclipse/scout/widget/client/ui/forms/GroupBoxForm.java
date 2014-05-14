@@ -24,26 +24,28 @@ import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholde
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.CloseButton;
-import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ConfigurationBox;
-import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ConfigurationBox.Config1Box;
-import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ConfigurationBox.Config1Box.ScrollableBox;
-import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ConfigurationBox.Config1Box.SectionBox;
-import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ConfigurationBox.Config2Box;
-import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ConfigurationBox.Config2Box.ExpandedField;
-import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ConfigurationBox.Config2Box.Placeholder1Field;
 import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ExamplesBox;
 import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ExamplesBox.Example1Box;
 import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ExamplesBox.Example1Box.DefaultBox;
-import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ExamplesBox.Example1Box.DefaultBox.CommentField;
-import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ExamplesBox.Example1Box.DefaultBox.CompanyField;
-import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ExamplesBox.Example1Box.DefaultBox.FirstNameField;
-import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ExamplesBox.Example1Box.DefaultBox.LastNameField;
 import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ExamplesBox.Example1Box.SingleColumnBox;
 import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ExamplesBox.Example1Box.SingleColumnBox.CityField;
 import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ExamplesBox.Example1Box.SingleColumnBox.CountryField;
 import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ExamplesBox.Example2Box;
 import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ExamplesBox.Example2Box.HorizontalMonthsBox;
 import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ExamplesBox.Example2Box.VerticalMonthsBox;
+import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ExamplesBox.Example3Box;
+import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ExamplesBox.Example3Box.ScrollableBox;
+import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ExamplesBox.Example3Box.SectionBox;
+import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ExamplesBox.Example3Box.SectionBox.CommentField;
+import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ExamplesBox.Example3Box.SectionBox.CompanyField;
+import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ExamplesBox.Example3Box.SectionBox.FirstNameField;
+import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ExamplesBox.Example3Box.SectionBox.LastNameField;
+import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ExamplesBox.VisibilityBox;
+import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ExamplesBox.VisibilityBox.Placeholder1Field;
+import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ExamplesBox.VisibilityBox.Placeholder2Field;
+import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ExamplesBox.VisibilityBox.VisibleCompanyField;
+import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ExamplesBox.VisibilityBox.VisibleFirstNameField;
+import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ExamplesBox.VisibilityBox.VisibleLastNameField;
 import org.eclipse.scout.widget.client.ui.template.formfield.AbstractMonthsBox;
 
 public class GroupBoxForm extends AbstractForm implements IPageForm {
@@ -80,6 +82,20 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
   }
 
   /**
+   * @return the CommentField
+   */
+  public CommentField getCommentField() {
+    return getFieldByClass(CommentField.class);
+  }
+
+  /**
+   * @return the CompanyField
+   */
+  public CompanyField getCompanyField() {
+    return getFieldByClass(CompanyField.class);
+  }
+
+  /**
    * @return the CountryField
    */
   public CountryField getCountryField() {
@@ -107,22 +123,15 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
     return getFieldByClass(Example2Box.class);
   }
 
-  /**
-   * @return the Config1Box
-   */
-  public Config1Box getConfig1Box() {
-    return getFieldByClass(Config1Box.class);
-  }
+  //  /**
+  //   * @return the Config1Box
+  //   */
+  //  public Config1Box getConfig1Box() {
+  //    return getFieldByClass(Config1Box.class);
+  //  }
 
   public ExamplesBox getExamplesBox() {
     return getFieldByClass(ExamplesBox.class);
-  }
-
-  /**
-   * @return the ExpandedField
-   */
-  public ExpandedField getExpandedField() {
-    return getFieldByClass(ExpandedField.class);
   }
 
   /**
@@ -150,36 +159,22 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
     return getFieldByClass(MainBox.class);
   }
 
-  /**
-   * @return the CommentField
-   */
-  public CommentField getCommentField() {
-    return getFieldByClass(CommentField.class);
-  }
-
-  /**
-   * @return the CompanyField
-   */
-  public CompanyField getCompanyField() {
-    return getFieldByClass(CompanyField.class);
-  }
-
-  /**
-   * @return the Config2Box
-   */
-  public Config2Box getConfig2Box() {
-    return getFieldByClass(Config2Box.class);
-  }
-
-  public ConfigurationBox getConfigurationBox() {
-    return getFieldByClass(ConfigurationBox.class);
+  public Example3Box getExample3Box() {
+    return getFieldByClass(Example3Box.class);
   }
 
   /**
    * @return the Placeholder1Field
    */
-  public Placeholder1Field getPlaceholder1Field(){
+  public Placeholder1Field getPlaceholder1Field() {
     return getFieldByClass(Placeholder1Field.class);
+  }
+
+  /**
+   * @return the Placeholder2Field
+   */
+  public Placeholder2Field getPlaceholder2Field() {
+    return getFieldByClass(Placeholder2Field.class);
   }
 
   /**
@@ -208,6 +203,34 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
    */
   public VerticalMonthsBox getVerticalMonthsBox() {
     return getFieldByClass(VerticalMonthsBox.class);
+  }
+
+  /**
+   * @return the VisibilityBox
+   */
+  public VisibilityBox getVisibilityBox() {
+    return getFieldByClass(VisibilityBox.class);
+  }
+
+  /**
+   * @return the VisibleCompanyField
+   */
+  public VisibleCompanyField getVisibleCompanyField() {
+    return getFieldByClass(VisibleCompanyField.class);
+  }
+
+  /**
+   * @return the VisibleFirstNameField
+   */
+  public VisibleFirstNameField getVisibleFirstNameField() {
+    return getFieldByClass(VisibleFirstNameField.class);
+  }
+
+  /**
+   * @return the VisibleLastNameField
+   */
+  public VisibleLastNameField getVisibleLastNameField() {
+    return getFieldByClass(VisibleLastNameField.class);
   }
 
   @Order(10.0)
@@ -406,131 +429,30 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        //        @Order(20.0)
-        //        public class HorizontalMonthsBox extends AbstractGroupBox {
-        //
-        //          @Override
-        //          protected Class<? extends IGroupBoxBodyGrid> getConfiguredBodyGrid() {
-        //            return HorizontalGroupBoxBodyGrid.class;
-        //          }
-        //
-        //          @Override
-        //          protected int getConfiguredGridColumnCount() {
-        //            return 3;
-        //          }
-        //
-        //          @Override
-        //          protected int getConfiguredGridW() {
-        //            return 3;
-        //          }
-        //
-        //          @Override
-        //          protected String getConfiguredLabel() {
-        //            return TEXTS.get("HorizontalLayout");
-        //          }
-        //
-        //          @Order(10.0)
-        //          public class JanuaryField extends AbstractStringField {
-        //
-        //            @Override
-        //            protected String getConfiguredLabel() {
-        //              return TEXTS.get("January");
-        //            }
-        //
-        //            @Override
-        //            protected int getConfiguredLabelWidthInPixel() {
-        //              return 80;
-        //            }
-        //          }
-        //
-        //          @Order(20.0)
-        //          public class FebruaryField extends AbstractStringField {
-        //
-        //            @Override
-        //            protected String getConfiguredLabel() {
-        //              return TEXTS.get("February");
-        //            }
-        //
-        //            @Override
-        //            protected int getConfiguredLabelWidthInPixel() {
-        //              return 80;
-        //            }
-        //          }
-        //
-        //          @Order(30.0)
-        //          public class MarchField extends AbstractStringField {
-        //
-        //            @Override
-        //            protected String getConfiguredLabel() {
-        //              return TEXTS.get("March");
-        //            }
-        //
-        //            @Override
-        //            protected int getConfiguredLabelWidthInPixel() {
-        //              return 80;
-        //            }
-        //          }
-        //
-        //          @Order(40.0)
-        //          public class AprilField extends AbstractStringField {
-        //
-        //            @Override
-        //            protected String getConfiguredLabel() {
-        //              return TEXTS.get("April");
-        //            }
-        //
-        //            @Override
-        //            protected int getConfiguredLabelWidthInPixel() {
-        //              return 80;
-        //            }
-        //          }
-        //
-        //          @Order(50.0)
-        //          public class MayField extends AbstractStringField {
-        //
-        //            @Override
-        //            protected String getConfiguredLabel() {
-        //              return TEXTS.get("May");
-        //            }
-        //
-        //            @Override
-        //            protected int getConfiguredLabelWidthInPixel() {
-        //              return 80;
-        //            }
-        //          }
-        //
-        //          @Order(60.0)
-        //          public class JuneField extends AbstractStringField {
-        //
-        //            @Override
-        //            protected String getConfiguredLabel() {
-        //              return TEXTS.get("June");
-        //            }
-        //
-        //            @Override
-        //            protected int getConfiguredLabelWidthInPixel() {
-        //              return 80;
-        //            }
-        //          }
-        //        }
       }
 
-    }
+      //    }
 
-    @Order(30.0)
-    public class ConfigurationBox extends AbstractGroupBox {
-
-      @Override
-      protected String getConfiguredLabel() {
-        return TEXTS.get("Configure");
-      }
-
-      @Order(10.0)
-      public class Config1Box extends AbstractGroupBox {
+      @Order(30.0)
+      public class Example3Box extends AbstractGroupBox {
 
         @Override
         protected boolean getConfiguredBorderVisible() {
           return false;
+        }
+
+        /**
+         * @return the FirstNameField
+         */
+        public FirstNameField getFirstNameField() {
+          return getFieldByClass(FirstNameField.class);
+        }
+
+        /**
+         * @return the LastNameField
+         */
+        public LastNameField getLastNameField() {
+          return getFieldByClass(LastNameField.class);
         }
 
         @Override
@@ -538,8 +460,20 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
           return 5;
         }
 
-        @Order(20.0)
-        public class SectionBox extends AbstractMonthsBox {
+        @Override
+        protected boolean getConfiguredLabelVisible() {
+          return false;
+        }
+
+        /**
+         * @return the CompanyField
+         */
+        public CompanyField getCompanyField() {
+          return getFieldByClass(CompanyField.class);
+        }
+
+        @Order(10.0)
+        public class SectionBox extends AbstractGroupBox {
 
           @Override
           protected String getConfiguredBorderDecoration() {
@@ -552,6 +486,11 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Override
+          protected int getConfiguredGridH() {
+            return 3;
+          }
+
+          @Override
           protected int getConfiguredGridW() {
             return 3;
           }
@@ -560,9 +499,70 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
           protected String getConfiguredLabel() {
             return TEXTS.get("Section");
           }
+
+          @Override
+          protected boolean getConfiguredFillVertical() {
+            return false;
+          }
+
+          @Override
+          protected int getConfiguredGridColumnCount() {
+            return 2;
+          }
+
+          @Order(10.0)
+          public class FirstNameField extends AbstractStringField {
+
+            @Override
+            protected String getConfiguredLabel() {
+              return TEXTS.get("FirstName");
+            }
+          }
+
+          @Order(20.0)
+          public class LastNameField extends AbstractStringField {
+
+            @Override
+            protected String getConfiguredLabel() {
+              return TEXTS.get("LastName");
+            }
+          }
+
+          @Order(30.0)
+          public class CompanyField extends AbstractStringField {
+
+            @Override
+            protected int getConfiguredGridH() {
+              return 2;
+            }
+
+            @Override
+            protected String getConfiguredLabel() {
+              return TEXTS.get("Company");
+            }
+
+            @Override
+            protected boolean getConfiguredMultilineText() {
+              return true;
+            }
+          }
+
+          @Order(50.0)
+          public class CommentField extends AbstractStringField {
+
+            @Override
+            protected int getConfiguredGridW() {
+              return 2;
+            }
+
+            @Override
+            protected String getConfiguredLabel() {
+              return TEXTS.get("Comments");
+            }
+          }
         }
 
-        @Order(30.0)
+        @Order(60.0)
         public class ScrollableBox extends AbstractMonthsBox {
 
           @Override
@@ -597,16 +597,15 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(20.0)
-      public class Config2Box extends AbstractGroupBox {
-
+      @Order(40.0)
+      public class VisibilityBox extends AbstractGroupBox {
         @Override
         protected boolean getConfiguredBorderVisible() {
           return false;
         }
 
         @Order(10.0)
-        public class ExpandedField extends AbstractCheckBox {
+        public class VisibleFirstNameField extends AbstractCheckBox {
 
           @Override
           protected String getConfiguredFont() {
@@ -614,31 +613,94 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Override
+          protected int getConfiguredGridW() {
+            return 3;
+          }
+
+          @Override
           protected String getConfiguredLabel() {
-            return TEXTS.get("Expanded");
+            return TEXTS.get("VisibleFirstName");
           }
 
           @Override
           protected void execChangedValue() throws ProcessingException {
-            getSectionBox().setExpanded(getValue());
+            getFirstNameField().setVisible(getValue());
           }
 
           @Override
           protected void execInitField() throws ProcessingException {
-            setValue(getSectionBox().isExpanded());
+            setValue(getFirstNameField().isVisible());
           }
         }
 
         @Order(20.0)
-        public class Placeholder1Field extends AbstractPlaceholderField {
+        public class VisibleLastNameField extends AbstractCheckBox {
 
           @Override
-          protected int getConfiguredGridH() {
-            return 2;
+          protected String getConfiguredFont() {
+            return "ITALIC";
+          }
+
+          @Override
+          protected int getConfiguredGridW() {
+            return 3;
+          }
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("VisibleLastName");
+          }
+
+          @Override
+          protected void execChangedValue() throws ProcessingException {
+            getLastNameField().setVisible(getValue());
+          }
+
+          @Override
+          protected void execInitField() throws ProcessingException {
+            setValue(getLastNameField().isVisible());
           }
         }
 
         @Order(30.0)
+        public class VisibleCompanyField extends AbstractCheckBox {
+
+          @Override
+          protected String getConfiguredFont() {
+            return "ITALIC";
+          }
+
+          @Override
+          protected int getConfiguredGridW() {
+            return 3;
+          }
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("VisibleCompany");
+          }
+
+          @Override
+          protected void execChangedValue() throws ProcessingException {
+            getCompanyField().setVisible(getValue());
+          }
+
+          @Override
+          protected void execInitField() throws ProcessingException {
+            setValue(getCompanyField().isVisible());
+          }
+        }
+
+        @Order(40.0)
+        public class Placeholder1Field extends AbstractPlaceholderField {
+
+          @Override
+          protected int getConfiguredGridW() {
+            return 3;
+          }
+        }
+
+        @Order(50.0)
         public class ScrollableField extends AbstractCheckBox {
 
           @Override
@@ -652,6 +714,11 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Override
+          protected int getConfiguredGridW() {
+            return 2;
+          }
+
+          @Override
           protected String getConfiguredLabel() {
             return TEXTS.get("Scrollable");
           }
@@ -662,7 +729,7 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(40.0)
+        @Order(60.0)
         public class VisibleField extends AbstractCheckBox {
 
           @Override
@@ -671,8 +738,13 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
           }
 
           @Override
+          protected int getConfiguredGridW() {
+            return 2;
+          }
+
+          @Override
           protected String getConfiguredLabel() {
-            return TEXTS.get("Visible");
+            return TEXTS.get("VisibleScrollable");
           }
 
           @Override
@@ -685,6 +757,21 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
             setValue(getScrollableBox().isVisible());
           }
         }
+
+        @Order(70.0)
+        public class Placeholder2Field extends AbstractPlaceholderField {
+
+          @Override
+          protected int getConfiguredGridW() {
+            return 2;
+          }
+
+          @Override
+          protected int getConfiguredGridH() {
+            return 2;
+          }
+        }
+
       }
     }
 

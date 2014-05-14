@@ -23,6 +23,7 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.ui.UserAgentUtility;
 import org.eclipse.scout.widget.client.ClientSession;
 import org.eclipse.scout.widget.client.ui.desktop.outlines.AdvancedWidgetsOutline;
+import org.eclipse.scout.widget.client.ui.desktop.outlines.LayoutWidgetsOutline;
 import org.eclipse.scout.widget.client.ui.desktop.outlines.SimpleWidgetsOutline;
 import org.eclipse.scout.widget.shared.Icons;
 
@@ -38,6 +39,7 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
     ArrayList<Class<? extends IOutline>> list = new ArrayList();
     list.add(SimpleWidgetsOutline.class);
     list.add(AdvancedWidgetsOutline.class);
+    list.add(LayoutWidgetsOutline.class);
     return list;
   }
 
@@ -187,6 +189,20 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
         setOutline(AdvancedWidgetsOutline.class);
       }
     }
+
+    @Order(30.0)
+    public class LayoutWidgetsMenu extends AbstractExtensibleMenu {
+
+      @Override
+      protected String getConfiguredText() {
+        return TEXTS.get("LayoutWidgets");
+      }
+
+      @Override
+      protected void execAction() throws ProcessingException {
+        setOutline(LayoutWidgetsOutline.class);
+      }
+    }
   }
 
   @Order(10.0)
@@ -199,10 +215,10 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
       super(Desktop.this, SimpleWidgetsOutline.class);
     }
 
-//    @Override
-//    protected String getConfiguredText() {
-//      return TEXTS.get("StandardOutline");
-//    }
+    //    @Override
+    //    protected String getConfiguredText() {
+    //      return TEXTS.get("StandardOutline");
+    //    }
   }
 
   @Order(20.0)
@@ -215,9 +231,20 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
       super(Desktop.this, AdvancedWidgetsOutline.class);
     }
 
-//    @Override
-//    protected String getConfiguredText() {
-//      return TEXTS.get("AdvancedWidgets");
-//    }
+    //    @Override
+    //    protected String getConfiguredText() {
+    //      return TEXTS.get("AdvancedWidgets");
+    //    }
+  }
+
+  @Order(30.0)
+  public class LayoutWidgetsOutlineViewButton extends AbstractOutlineViewButton {
+
+    /**
+     *
+     */
+    public LayoutWidgetsOutlineViewButton() {
+      super(Desktop.this, LayoutWidgetsOutline.class);
+    }
   }
 }

@@ -26,6 +26,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.datefield.AbstractDateTimeFiel
 import org.eclipse.scout.rt.client.ui.form.fields.datefield.AbstractTimeField;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
+import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholderField;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.shared.TEXTS;
@@ -41,6 +42,7 @@ import org.eclipse.scout.widget.client.ui.forms.DateTimeFieldsForm.MainBox.Confi
 import org.eclipse.scout.widget.client.ui.forms.DateTimeFieldsForm.MainBox.ConfigurationBox.DateTimeInputField;
 import org.eclipse.scout.widget.client.ui.forms.DateTimeFieldsForm.MainBox.ConfigurationBox.GetValueField;
 import org.eclipse.scout.widget.client.ui.forms.DateTimeFieldsForm.MainBox.ConfigurationBox.InputField;
+import org.eclipse.scout.widget.client.ui.forms.DateTimeFieldsForm.MainBox.ConfigurationBox.Placeholder1Field;
 import org.eclipse.scout.widget.client.ui.forms.DateTimeFieldsForm.MainBox.ConfigurationBox.TimeFieldFormatField;
 import org.eclipse.scout.widget.client.ui.forms.DateTimeFieldsForm.MainBox.ConfigurationBox.TimeInputField;
 import org.eclipse.scout.widget.client.ui.forms.DateTimeFieldsForm.MainBox.ExamplesBox;
@@ -53,6 +55,7 @@ import org.eclipse.scout.widget.client.ui.forms.DateTimeFieldsForm.MainBox.Examp
 import org.eclipse.scout.widget.client.ui.forms.DateTimeFieldsForm.MainBox.ExamplesBox.DisabledField;
 import org.eclipse.scout.widget.client.ui.forms.DateTimeFieldsForm.MainBox.ExamplesBox.LocaleField;
 import org.eclipse.scout.widget.client.ui.forms.DateTimeFieldsForm.MainBox.ExamplesBox.MandatoryField;
+import org.eclipse.scout.widget.client.ui.forms.DateTimeFieldsForm.MainBox.ExamplesBox.PlaceholderField;
 import org.eclipse.scout.widget.client.ui.forms.DateTimeFieldsForm.MainBox.ExamplesBox.TimeColumnField;
 import org.eclipse.scout.widget.client.ui.forms.DateTimeFieldsForm.MainBox.ExamplesBox.TimeDisabledField;
 import org.eclipse.scout.widget.client.ui.forms.DateTimeFieldsForm.MainBox.ExamplesBox.TimeField;
@@ -82,6 +85,20 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
    */
   public TimeField getTimeField() {
     return getFieldByClass(TimeField.class);
+  }
+
+  /**
+   * @return the Placeholder1Field
+   */
+  public Placeholder1Field getPlaceholder1Field(){
+    return getFieldByClass(Placeholder1Field.class);
+  }
+
+  /**
+   * @return the PlaceholderField
+   */
+  public PlaceholderField getPlaceholderField(){
+    return getFieldByClass(PlaceholderField.class);
   }
 
   /**
@@ -383,6 +400,10 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
       }
 
       @Order(100.0)
+      public class PlaceholderField extends AbstractPlaceholderField {
+      }
+
+      @Order(110.0)
       public class DateTimeColumnField extends AbstractLabelField {
 
         @Override
@@ -401,7 +422,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(110.0)
+      @Order(120.0)
       public class DateTimeField extends AbstractDateTimeField {
 
         @Override
@@ -410,7 +431,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(120.0)
+      @Order(130.0)
       public class DateTimeMandatoryField extends AbstractDateTimeField {
 
         @Override
@@ -424,7 +445,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(130.0)
+      @Order(140.0)
       public class DateTimeDisabledField extends AbstractDateTimeField {
 
         @Override
@@ -624,6 +645,10 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
       }
 
       @Order(80.0)
+      public class Placeholder1Field extends AbstractPlaceholderField {
+      }
+
+      @Order(90.0)
       public class DateTimeInputField extends AbstractDateTimeField {
 
         @Override
@@ -632,7 +657,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(90.0)
+      @Order(100.0)
       public class GetDateTimeValueField extends AbstractStringField {
 
         @Override
@@ -661,7 +686,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
         }
       }
 
-      @Order(100.0)
+      @Order(110.0)
       public class DateTimeFieldFormatField extends AbstractStringField {
 
         @Override

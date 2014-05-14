@@ -11,6 +11,7 @@ import org.eclipse.scout.rt.extension.client.ui.desktop.outline.AbstractExtensib
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.widget.client.ui.desktop.pages.FormPage;
 import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm;
+import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm;
 
 /**
  * @author mzi
@@ -27,5 +28,8 @@ public class LayoutWidgetsOutline extends AbstractExtensibleOutline {
 
     FormPage groupBoxPage = new FormPage(GroupBoxForm.class);
     pageList.add(groupBoxPage);
+
+    FormPage sequenceBoxPage = new FormPage(SequenceBoxForm.class);
+    pageList.add(sequenceBoxPage);
   }
 }

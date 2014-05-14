@@ -23,12 +23,17 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.scout.commons.IOUtility;
+import org.eclipse.scout.commons.NumberUtility;
+import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.dnd.FileListTransferObject;
 import org.eclipse.scout.commons.dnd.TransferObject;
 import org.eclipse.scout.commons.exception.ProcessingException;
+import org.eclipse.scout.commons.exception.ProcessingStatus;
 import org.eclipse.scout.rt.client.ui.action.keystroke.AbstractKeyStroke;
+import org.eclipse.scout.rt.client.ui.basic.cell.Cell;
 import org.eclipse.scout.rt.client.ui.basic.filechooser.FileChooser;
 import org.eclipse.scout.rt.client.ui.basic.table.ColumnSet;
 import org.eclipse.scout.rt.client.ui.basic.table.ITable;
@@ -84,6 +89,7 @@ import org.eclipse.scout.widget.client.ui.forms.TableFieldForm.MainBox.ExamplesB
 import org.eclipse.scout.widget.client.ui.forms.TableFieldForm.MainBox.ExamplesBox.DefaultField;
 import org.eclipse.scout.widget.client.ui.forms.TableFieldForm.MainBox.ExamplesBox.DefaultField.Table.DeleteMenu;
 import org.eclipse.scout.widget.shared.FileCodeType;
+import org.eclipse.scout.widget.shared.Icons;
 import org.eclipse.scout.widget.shared.services.code.IndustryICBCodeType;
 
 public class TableFieldForm extends AbstractForm implements IPageForm {
@@ -563,6 +569,8 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
       @Order(10.0)
       public class TableField extends AbstractTableField {
 
+        private static final String EDITABLE_CELL_BACKGROUND_COLOR = "EFEFFF";
+
         private long maxId = 0;
 
         @Override
@@ -635,8 +643,8 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
             return getColumnSet().getColumnByClass(IndustryColumn.class);
           }
 
-          public ParticipansColumn getParticipansColumn() {
-            return getColumnSet().getColumnByClass(ParticipansColumn.class);
+          public ParticipantsColumn getParticipantsColumn() {
+            return getColumnSet().getColumnByClass(ParticipantsColumn.class);
           }
 
           public WebPageColumn getWebPageColumn() {
@@ -649,6 +657,14 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
           public IdColumn getIdColumn() {
             return getColumnSet().getColumnByClass(IdColumn.class);
+          }
+
+          /**
+           * if editable field is set to true and row-id > 2 true is returned.
+           * otherwise, false is returned.
+           */
+          private boolean isEditable(ITableRow row) {
+            return getIsEditableField().getValue() && getIdColumn().getValue(row) > 2;
           }
 
           @Order(10.0)
@@ -685,7 +701,27 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
             @Override
             protected boolean execIsEditable(ITableRow row) throws ProcessingException {
-              return getIsEditableField().getValue() && getIdColumn().getValue(row) > 2;
+              if (Table.this.isEditable(row)) {
+                row.getCellForUpdate(getNameColumn()).setBackgroundColor(EDITABLE_CELL_BACKGROUND_COLOR);
+                return true;
+              }
+              return false;
+            }
+
+            @Override
+            protected String execValidateValue(ITableRow row, String rawValue) throws ProcessingException {
+              Cell cell = row.getCellForUpdate(getNameColumn());
+
+              if (StringUtility.isNullOrEmpty(rawValue)) {
+                cell.setErrorStatus(new ProcessingStatus(TEXTS.get("NoEmptyName"), IStatus.ERROR));
+                cell.setIconId(Icons.StatusError);
+              }
+              else {
+                cell.clearErrorStatus();
+                cell.setIconId(null);
+              }
+
+              return rawValue;
             }
           }
 
@@ -704,7 +740,11 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
             @Override
             protected boolean execIsEditable(ITableRow row) throws ProcessingException {
-              return getIsEditableField().getValue() && getIdColumn().getValue(row) > 2;
+              if (Table.this.isEditable(row)) {
+                row.getCellForUpdate(getLocationColumn()).setBackgroundColor(EDITABLE_CELL_BACKGROUND_COLOR);
+                return true;
+              }
+              return false;
             }
           }
 
@@ -723,7 +763,11 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
             @Override
             protected boolean execIsEditable(ITableRow row) throws ProcessingException {
-              return getIsEditableField().getValue() && getIdColumn().getValue(row) > 2;
+              if (Table.this.isEditable(row)) {
+                row.getCellForUpdate(getDateColumn()).setBackgroundColor(EDITABLE_CELL_BACKGROUND_COLOR);
+                return true;
+              }
+              return false;
             }
           }
 
@@ -752,12 +796,16 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
             @Override
             protected boolean execIsEditable(ITableRow row) throws ProcessingException {
-              return getIsEditableField().getValue() && getIdColumn().getValue(row) > 2;
+              if (Table.this.isEditable(row)) {
+                row.getCellForUpdate(getIndustryColumn()).setBackgroundColor(EDITABLE_CELL_BACKGROUND_COLOR);
+                return true;
+              }
+              return false;
             }
           }
 
           @Order(70.0)
-          public class ParticipansColumn extends AbstractLongColumn {
+          public class ParticipantsColumn extends AbstractLongColumn {
 
             @Override
             protected boolean getConfiguredEditable() {
@@ -771,7 +819,27 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
             @Override
             protected boolean execIsEditable(ITableRow row) throws ProcessingException {
-              return getIsEditableField().getValue();
+              if (getIsEditableField().getValue()) {
+                row.getCellForUpdate(getParticipantsColumn()).setBackgroundColor(EDITABLE_CELL_BACKGROUND_COLOR);
+                return true;
+              }
+              return false;
+            }
+
+            @Override
+            protected Long execValidateValue(ITableRow row, Long rawValue) throws ProcessingException {
+              Cell cell = row.getCellForUpdate(this);
+
+              if (NumberUtility.nvl(rawValue, 1) >= 0) {
+                cell.clearErrorStatus();
+                cell.setIconId(null);
+              }
+              else {
+                cell.setErrorStatus(new ProcessingStatus(TEXTS.get("NoNegNumber"), IStatus.ERROR));
+                cell.setIconId(Icons.StatusError);
+              }
+
+              return rawValue;
             }
           }
 
@@ -795,7 +863,11 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
             @Override
             protected boolean execIsEditable(ITableRow row) throws ProcessingException {
-              return getIsEditableField().getValue() && getIdColumn().getValue(row) > 2;
+              if (Table.this.isEditable(row)) {
+                row.getCellForUpdate(getIndustryColumn()).setBackgroundColor(EDITABLE_CELL_BACKGROUND_COLOR);
+                return true;
+              }
+              return false;
             }
           }
 
