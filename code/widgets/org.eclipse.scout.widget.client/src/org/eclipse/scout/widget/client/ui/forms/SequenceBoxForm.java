@@ -25,7 +25,6 @@ import org.eclipse.scout.rt.client.ui.form.fields.doublefield.AbstractDoubleFiel
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.imagebox.AbstractImageField;
 import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
-import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholderField;
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
@@ -34,6 +33,15 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.CloseButton;
 import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox;
+import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.FieldVisibilityBox;
+import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.FieldVisibilityBox.CompanySearchBox;
+import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.FieldVisibilityBox.CompanySearchBox.CompanyField;
+import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.FieldVisibilityBox.CompanySearchBox.CompanySearchButton;
+import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.FieldVisibilityBox.CompanySearchBox.EmployeesField;
+import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.FieldVisibilityBox.CompanySearchBox.IndustryField;
+import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.FieldVisibilityBox.VisibleCompanyField;
+import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.FieldVisibilityBox.VisibleEmployeeField;
+import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.FieldVisibilityBox.VisibleIndustryField;
 import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.FromToBox;
 import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.FromToBox.DefaultBox;
 import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.FromToBox.DefaultBox.FromField;
@@ -44,22 +52,13 @@ import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.Examples
 import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.FromToBox.MandatoryBox;
 import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.FromToBox.MandatoryBox.MandatoryFrom;
 import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.FromToBox.MandatoryBox.MandatoryTo;
-import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.OtherBox;
-import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.OtherBox.CompanySearchBox;
-import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.OtherBox.CompanySearchBox.CompanyField;
-import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.OtherBox.CompanySearchBox.CompanySearchButton;
-import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.OtherBox.CompanySearchBox.EmployeesField;
-import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.OtherBox.CompanySearchBox.IndustryField;
-import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.OtherBox.Placeholder1Field;
-import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.OtherBox.SearchBox;
-import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.OtherBox.SearchBox.FirstNameField;
-import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.OtherBox.SearchBox.FormResetButton;
-import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.OtherBox.SearchBox.IconField;
-import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.OtherBox.SearchBox.LastNameField;
-import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.OtherBox.SearchBox.SearchButton;
-import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.OtherBox.VisibleCompanyField;
-import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.OtherBox.VisibleEmployeeField;
-import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.OtherBox.VisibleIndustryField;
+import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.PersonSearchBox;
+import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.PersonSearchBox.SearchBox;
+import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.PersonSearchBox.SearchBox.FirstNameField;
+import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.PersonSearchBox.SearchBox.FormResetButton;
+import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.PersonSearchBox.SearchBox.IconField;
+import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.PersonSearchBox.SearchBox.LastNameField;
+import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.PersonSearchBox.SearchBox.SearchButton;
 import org.eclipse.scout.widget.shared.Icons;
 import org.eclipse.scout.widget.shared.services.code.IndustryICBCodeType;
 
@@ -126,6 +125,13 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
 
   public ExamplesBox getExamplesBox() {
     return getFieldByClass(ExamplesBox.class);
+  }
+
+  /**
+   * @return the FieldVisibilityBox
+   */
+  public FieldVisibilityBox getFieldVisibilityBox() {
+    return getFieldByClass(FieldVisibilityBox.class);
   }
 
   /**
@@ -224,17 +230,10 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
   }
 
   /**
-   * @return the OtherBox
+   * @return the PersonSearchBox
    */
-  public OtherBox getOtherBox() {
-    return getFieldByClass(OtherBox.class);
-  }
-
-  /**
-   * @return the Placeholder1Field
-   */
-  public Placeholder1Field getPlaceholder1Field() {
-    return getFieldByClass(Placeholder1Field.class);
+  public PersonSearchBox getPersonSearchBox() {
+    return getFieldByClass(PersonSearchBox.class);
   }
 
   /**
@@ -433,7 +432,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(20.0)
-      public class OtherBox extends AbstractGroupBox {
+      public class PersonSearchBox extends AbstractGroupBox {
 
         @Override
         protected int getConfiguredGridW() {
@@ -442,7 +441,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("OtherUsage");
+          return TEXTS.get("PersonSearch");
         }
 
         @Order(10.0)
@@ -547,8 +546,14 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
           }
         }
 
-        @Order(20.0)
-        public class Placeholder1Field extends AbstractPlaceholderField {
+      }
+
+      @Order(30.0)
+      public class FieldVisibilityBox extends AbstractGroupBox {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("FieldVisibility");
         }
 
         @Order(30.0)
