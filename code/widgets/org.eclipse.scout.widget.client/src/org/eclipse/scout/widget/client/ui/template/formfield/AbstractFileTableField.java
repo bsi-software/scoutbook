@@ -102,10 +102,11 @@ public abstract class AbstractFileTableField extends AbstractTableField {
       return "delete";
     }
 
-    @Override
-    protected boolean getConfiguredMultiSelectionAction() {
-      return true;
-    }
+    // TODO: check why this disappeared from menuactions
+//    @Override
+//    protected boolean getConfiguredMultiSelectionAction() {
+//      return true;
+//    }
 
     @Override
     protected void execAction() throws ProcessingException {

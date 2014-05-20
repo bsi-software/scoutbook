@@ -168,7 +168,7 @@ public class LocalCodeService extends AbstractService implements ICodeService {
     }
     Set<BundleClassDescriptor> a = m_codeTypeClassDescriptorMap.get(classPrefix);
     if (a != null) {
-      return CollectionUtility.unmodifiableSet(a);
+      return CollectionUtility.hashSet(a);
     }
     //
     HashSet<BundleClassDescriptor> discoveredCodeTypes = new HashSet<BundleClassDescriptor>();
@@ -216,7 +216,7 @@ public class LocalCodeService extends AbstractService implements ICodeService {
       }
     }
     m_codeTypeClassDescriptorMap.put(classPrefix, discoveredCodeTypes);
-    return CollectionUtility.unmodifiableSet(discoveredCodeTypes);
+    return CollectionUtility.hashSet(discoveredCodeTypes);
   }
 
   @SuppressWarnings("unchecked")
