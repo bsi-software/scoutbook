@@ -12,6 +12,8 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.widget.client.ui.desktop.pages.FormPage;
 import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm;
 import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm;
+import org.eclipse.scout.widget.client.ui.forms.SplitBoxForm;
+import org.eclipse.scout.widget.client.ui.forms.TabBoxForm;
 
 /**
  * @author mzi
@@ -31,5 +33,11 @@ public class LayoutWidgetsOutline extends AbstractExtensibleOutline {
 
     FormPage sequenceBoxPage = new FormPage(SequenceBoxForm.class);
     pageList.add(sequenceBoxPage);
+
+    FormPage tabBoxPage = new FormPage(TabBoxForm.class);
+    pageList.add(tabBoxPage);
+
+    FormPage splitBoxPage = new FormPage(SplitBoxForm.class);
+    pageList.add(splitBoxPage);
   }
 }

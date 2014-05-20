@@ -25,6 +25,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.doublefield.AbstractDoubleFiel
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.imagebox.AbstractImageField;
 import org.eclipse.scout.rt.client.ui.form.fields.integerfield.AbstractIntegerField;
+import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholderField;
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
@@ -33,15 +34,11 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.CloseButton;
 import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox;
-import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.FieldVisibilityBox;
-import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.FieldVisibilityBox.CompanySearchBox;
-import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.FieldVisibilityBox.CompanySearchBox.CompanyField;
-import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.FieldVisibilityBox.CompanySearchBox.CompanySearchButton;
-import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.FieldVisibilityBox.CompanySearchBox.EmployeesField;
-import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.FieldVisibilityBox.CompanySearchBox.IndustryField;
-import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.FieldVisibilityBox.VisibleCompanyField;
-import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.FieldVisibilityBox.VisibleEmployeeField;
-import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.FieldVisibilityBox.VisibleIndustryField;
+import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.CompanySearchBox;
+import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.CompanySearchBox.CompanyField;
+import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.CompanySearchBox.CompanySearchButton;
+import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.CompanySearchBox.EmployeesField;
+import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.CompanySearchBox.IndustryField;
 import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.FromToBox;
 import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.FromToBox.DefaultBox;
 import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.FromToBox.DefaultBox.FromField;
@@ -59,6 +56,11 @@ import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.Examples
 import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.PersonSearchBox.SearchBox.IconField;
 import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.PersonSearchBox.SearchBox.LastNameField;
 import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.PersonSearchBox.SearchBox.SearchButton;
+import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.Placeholder1Field;
+import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.FieldVisibilityBox;
+import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.FieldVisibilityBox.VisibleCompanyField;
+import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.FieldVisibilityBox.VisibleEmployeeField;
+import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.FieldVisibilityBox.VisibleIndustryField;
 import org.eclipse.scout.widget.shared.Icons;
 import org.eclipse.scout.widget.shared.services.code.IndustryICBCodeType;
 
@@ -237,6 +239,13 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
   }
 
   /**
+   * @return the Placeholder1Field
+   */
+  public Placeholder1Field getPlaceholder1Field() {
+    return getFieldByClass(Placeholder1Field.class);
+  }
+
+  /**
    * @return the SearchBox
    */
   public SearchBox getSearchBox() {
@@ -265,14 +274,14 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
   }
 
   /**
-   * @return the VisibleEmployeeField
+   * @return the VisibleMonthsField
    */
   public VisibleEmployeeField getVisibleEmployeeField() {
     return getFieldByClass(VisibleEmployeeField.class);
   }
 
   /**
-   * @return the VisibleIndustryField
+   * @return the VisibleCommentsField
    */
   public VisibleIndustryField getVisibleIndustryField() {
     return getFieldByClass(VisibleIndustryField.class);
@@ -549,143 +558,152 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(30.0)
-      public class FieldVisibilityBox extends AbstractGroupBox {
+      public class Placeholder1Field extends AbstractPlaceholderField {
+      }
+
+      @Order(40.0)
+      public class CompanySearchBox extends AbstractSequenceBox {
 
         @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("FieldVisibility");
+        protected boolean getConfiguredAutoCheckFromTo() {
+          return false;
+        }
+
+        @Override
+        protected int getConfiguredGridW() {
+          return 2;
+        }
+
+        @Order(10.0)
+        public class CompanyField extends AbstractStringField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Company");
+          }
+        }
+
+        @Order(20.0)
+        public class EmployeesField extends AbstractIntegerField {
+
+          @Override
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Employees");
+          }
         }
 
         @Order(30.0)
-        public class CompanySearchBox extends AbstractSequenceBox {
+        public class IndustryField extends AbstractSmartField<Long> {
 
           @Override
-          protected boolean getConfiguredAutoCheckFromTo() {
-            return false;
+          protected Class<? extends ICodeType<?, Long>> getConfiguredCodeType() {
+            return IndustryICBCodeType.class;
           }
 
           @Override
-          protected int getConfiguredGridW() {
-            return 2;
-          }
-
-          @Order(10.0)
-          public class CompanyField extends AbstractStringField {
-
-            @Override
-            protected String getConfiguredLabel() {
-              return TEXTS.get("Company");
-            }
-          }
-
-          @Order(20.0)
-          public class EmployeesField extends AbstractIntegerField {
-
-            @Override
-            protected String getConfiguredLabel() {
-              return TEXTS.get("Employees");
-            }
-          }
-
-          @Order(30.0)
-          public class IndustryField extends AbstractSmartField<Long> {
-
-            @Override
-            protected Class<? extends ICodeType<?, Long>> getConfiguredCodeType() {
-              return IndustryICBCodeType.class;
-            }
-
-            @Override
-            protected String getConfiguredLabel() {
-              return TEXTS.get("Industry");
-            }
-          }
-
-          @Order(40.0)
-          public class CompanySearchButton extends AbstractButton {
-
-            @Override
-            protected String getConfiguredLabel() {
-              return TEXTS.get("Retrieve");
-            }
+          protected String getConfiguredLabel() {
+            return TEXTS.get("Industry");
           }
         }
 
         @Order(40.0)
-        public class VisibleCompanyField extends AbstractCheckBox {
-
-          @Override
-          protected String getConfiguredFont() {
-            return "ITALIC";
-          }
+        public class CompanySearchButton extends AbstractButton {
 
           @Override
           protected String getConfiguredLabel() {
-            return TEXTS.get("VisibleCompany");
-          }
-
-          @Override
-          protected void execChangedValue() throws ProcessingException {
-            getCompanyField().setVisible(getValue());
-          }
-
-          @Override
-          protected void execInitField() throws ProcessingException {
-            setValue(getCompanyField().isVisible());
-          }
-        }
-
-        @Order(50.0)
-        public class VisibleEmployeeField extends AbstractCheckBox {
-
-          @Override
-          protected String getConfiguredFont() {
-            return "ITALIC";
-          }
-
-          @Override
-          protected String getConfiguredLabel() {
-            return TEXTS.get("VisibleEmployee");
-          }
-
-          @Override
-          protected void execChangedValue() throws ProcessingException {
-            getEmployeesField().setVisible(getValue());
-          }
-
-          @Override
-          protected void execInitField() throws ProcessingException {
-            setValue(getEmployeesField().isVisible());
-          }
-        }
-
-        @Order(60.0)
-        public class VisibleIndustryField extends AbstractCheckBox {
-
-          @Override
-          protected String getConfiguredFont() {
-            return "ITALIC";
-          }
-
-          @Override
-          protected String getConfiguredLabel() {
-            return TEXTS.get("VisibleIndustry0");
-          }
-
-          @Override
-          protected void execChangedValue() throws ProcessingException {
-            getIndustryField().setVisible(getValue());
-          }
-
-          @Override
-          protected void execInitField() throws ProcessingException {
-            setValue(getIndustryField().isVisible());
+            return TEXTS.get("Retrieve");
           }
         }
       }
     }
 
-    @Order(50.0)
+    @Order(20.0)
+    public class FieldVisibilityBox extends AbstractGroupBox {
+
+      @Override
+      protected int getConfiguredGridColumnCount() {
+        return 1;
+      }
+
+      @Override
+      protected String getConfiguredLabel() {
+        return TEXTS.get("FieldVisibility");
+      }
+
+      @Order(40.0)
+      public class VisibleCompanyField extends AbstractCheckBox {
+
+        @Override
+        protected String getConfiguredFont() {
+          return "ITALIC";
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("VisibleCompany");
+        }
+
+        @Override
+        protected void execChangedValue() throws ProcessingException {
+          getCompanyField().setVisible(getValue());
+        }
+
+        @Override
+        protected void execInitField() throws ProcessingException {
+          setValue(getCompanyField().isVisible());
+        }
+      }
+
+      @Order(50.0)
+      public class VisibleEmployeeField extends AbstractCheckBox {
+
+        @Override
+        protected String getConfiguredFont() {
+          return "ITALIC";
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("VisibleEmployee");
+        }
+
+        @Override
+        protected void execChangedValue() throws ProcessingException {
+          getEmployeesField().setVisible(getValue());
+        }
+
+        @Override
+        protected void execInitField() throws ProcessingException {
+          setValue(getEmployeesField().isVisible());
+        }
+      }
+
+      @Order(60.0)
+      public class VisibleIndustryField extends AbstractCheckBox {
+
+        @Override
+        protected String getConfiguredFont() {
+          return "ITALIC";
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("VisibleIndustry0");
+        }
+
+        @Override
+        protected void execChangedValue() throws ProcessingException {
+          getIndustryField().setVisible(getValue());
+        }
+
+        @Override
+        protected void execInitField() throws ProcessingException {
+          setValue(getIndustryField().isVisible());
+        }
+      }
+    }
+
+    @Order(30.0)
     public class CloseButton extends AbstractCloseButton {
     }
   }

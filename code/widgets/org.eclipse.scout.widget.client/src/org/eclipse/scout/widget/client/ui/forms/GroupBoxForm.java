@@ -40,12 +40,11 @@ import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ExamplesBox
 import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ExamplesBox.Example3Box.SectionBox.CompanyField;
 import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ExamplesBox.Example3Box.SectionBox.FirstNameField;
 import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ExamplesBox.Example3Box.SectionBox.LastNameField;
-import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ExamplesBox.VisibilityBox;
-import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ExamplesBox.VisibilityBox.Placeholder1Field;
-import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ExamplesBox.VisibilityBox.Placeholder2Field;
-import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ExamplesBox.VisibilityBox.VisibleCompanyField;
-import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ExamplesBox.VisibilityBox.VisibleFirstNameField;
-import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.ExamplesBox.VisibilityBox.VisibleLastNameField;
+import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.VisibilityBox;
+import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.VisibilityBox.Placeholder2Field;
+import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.VisibilityBox.VisibleCompanyField;
+import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.VisibilityBox.VisibleFirstNameField;
+import org.eclipse.scout.widget.client.ui.forms.GroupBoxForm.MainBox.VisibilityBox.VisibleLastNameField;
 import org.eclipse.scout.widget.client.ui.template.formfield.AbstractMonthsBox;
 
 public class GroupBoxForm extends AbstractForm implements IPageForm {
@@ -164,13 +163,6 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
   }
 
   /**
-   * @return the Placeholder1Field
-   */
-  public Placeholder1Field getPlaceholder1Field() {
-    return getFieldByClass(Placeholder1Field.class);
-  }
-
-  /**
    * @return the Placeholder2Field
    */
   public Placeholder2Field getPlaceholder2Field() {
@@ -236,7 +228,7 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
   @Order(10.0)
   public class MainBox extends AbstractGroupBox {
 
-    @Order(20.0)
+    @Order(10.0)
     public class ExamplesBox extends AbstractGroupBox {
 
       @Override
@@ -596,186 +588,132 @@ public class GroupBoxForm extends AbstractForm implements IPageForm {
           }
         }
       }
+    }
+
+    @Order(20.0)
+    public class VisibilityBox extends AbstractGroupBox {
+
+      @Override
+      protected double getConfiguredGridWeightY() {
+        return 0.0;
+      }
+
+      @Override
+      protected String getConfiguredLabel() {
+        return TEXTS.get("FieldVisibility");
+      }
+
+      @Order(10.0)
+      public class VisibleFirstNameField extends AbstractCheckBox {
+
+        @Override
+        protected String getConfiguredFont() {
+          return "ITALIC";
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("VisibleFirstName");
+        }
+
+        @Override
+        protected void execChangedValue() throws ProcessingException {
+          getFirstNameField().setVisible(getValue());
+        }
+
+        @Override
+        protected void execInitField() throws ProcessingException {
+          setValue(getFirstNameField().isVisible());
+        }
+      }
+
+      @Order(20.0)
+      public class VisibleLastNameField extends AbstractCheckBox {
+
+        @Override
+        protected String getConfiguredFont() {
+          return "ITALIC";
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("VisibleLastName");
+        }
+
+        @Override
+        protected void execChangedValue() throws ProcessingException {
+          getLastNameField().setVisible(getValue());
+        }
+
+        @Override
+        protected void execInitField() throws ProcessingException {
+          setValue(getLastNameField().isVisible());
+        }
+      }
+
+      @Order(30.0)
+      public class VisibleCompanyField extends AbstractCheckBox {
+
+        @Override
+        protected String getConfiguredFont() {
+          return "ITALIC";
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("VisibleCompany");
+        }
+
+        @Override
+        protected void execChangedValue() throws ProcessingException {
+          getCompanyField().setVisible(getValue());
+        }
+
+        @Override
+        protected void execInitField() throws ProcessingException {
+          setValue(getCompanyField().isVisible());
+        }
+      }
 
       @Order(40.0)
-      public class VisibilityBox extends AbstractGroupBox {
+      public class Placeholder1Field extends AbstractPlaceholderField {
+      }
+
+      @Order(60.0)
+      public class VisibleField extends AbstractCheckBox {
+
         @Override
-        protected boolean getConfiguredBorderVisible() {
-          return false;
+        protected String getConfiguredFont() {
+          return "ITALIC";
         }
 
-        @Order(10.0)
-        public class VisibleFirstNameField extends AbstractCheckBox {
-
-          @Override
-          protected String getConfiguredFont() {
-            return "ITALIC";
-          }
-
-          @Override
-          protected int getConfiguredGridW() {
-            return 3;
-          }
-
-          @Override
-          protected String getConfiguredLabel() {
-            return TEXTS.get("VisibleFirstName");
-          }
-
-          @Override
-          protected void execChangedValue() throws ProcessingException {
-            getFirstNameField().setVisible(getValue());
-          }
-
-          @Override
-          protected void execInitField() throws ProcessingException {
-            setValue(getFirstNameField().isVisible());
-          }
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("VisibleScrollable");
         }
 
-        @Order(20.0)
-        public class VisibleLastNameField extends AbstractCheckBox {
-
-          @Override
-          protected String getConfiguredFont() {
-            return "ITALIC";
-          }
-
-          @Override
-          protected int getConfiguredGridW() {
-            return 3;
-          }
-
-          @Override
-          protected String getConfiguredLabel() {
-            return TEXTS.get("VisibleLastName");
-          }
-
-          @Override
-          protected void execChangedValue() throws ProcessingException {
-            getLastNameField().setVisible(getValue());
-          }
-
-          @Override
-          protected void execInitField() throws ProcessingException {
-            setValue(getLastNameField().isVisible());
-          }
+        @Override
+        protected void execChangedValue() throws ProcessingException {
+          getScrollableBox().setVisible(getValue());
         }
 
-        @Order(30.0)
-        public class VisibleCompanyField extends AbstractCheckBox {
-
-          @Override
-          protected String getConfiguredFont() {
-            return "ITALIC";
-          }
-
-          @Override
-          protected int getConfiguredGridW() {
-            return 3;
-          }
-
-          @Override
-          protected String getConfiguredLabel() {
-            return TEXTS.get("VisibleCompany");
-          }
-
-          @Override
-          protected void execChangedValue() throws ProcessingException {
-            getCompanyField().setVisible(getValue());
-          }
-
-          @Override
-          protected void execInitField() throws ProcessingException {
-            setValue(getCompanyField().isVisible());
-          }
+        @Override
+        protected void execInitField() throws ProcessingException {
+          setValue(getScrollableBox().isVisible());
         }
+      }
 
-        @Order(40.0)
-        public class Placeholder1Field extends AbstractPlaceholderField {
+      @Order(70.0)
+      public class Placeholder2Field extends AbstractPlaceholderField {
 
-          @Override
-          protected int getConfiguredGridW() {
-            return 3;
-          }
+        @Override
+        protected int getConfiguredGridH() {
+          return 3;
         }
-
-        @Order(50.0)
-        public class ScrollableField extends AbstractCheckBox {
-
-          @Override
-          protected boolean getConfiguredEnabled() {
-            return false;
-          }
-
-          @Override
-          protected String getConfiguredFont() {
-            return "ITALIC";
-          }
-
-          @Override
-          protected int getConfiguredGridW() {
-            return 2;
-          }
-
-          @Override
-          protected String getConfiguredLabel() {
-            return TEXTS.get("Scrollable");
-          }
-
-          @Override
-          protected void execInitField() throws ProcessingException {
-            setValue(getScrollableBox().isScrollable());
-          }
-        }
-
-        @Order(60.0)
-        public class VisibleField extends AbstractCheckBox {
-
-          @Override
-          protected String getConfiguredFont() {
-            return "ITALIC";
-          }
-
-          @Override
-          protected int getConfiguredGridW() {
-            return 2;
-          }
-
-          @Override
-          protected String getConfiguredLabel() {
-            return TEXTS.get("VisibleScrollable");
-          }
-
-          @Override
-          protected void execChangedValue() throws ProcessingException {
-            getScrollableBox().setVisible(getValue());
-          }
-
-          @Override
-          protected void execInitField() throws ProcessingException {
-            setValue(getScrollableBox().isVisible());
-          }
-        }
-
-        @Order(70.0)
-        public class Placeholder2Field extends AbstractPlaceholderField {
-
-          @Override
-          protected int getConfiguredGridW() {
-            return 2;
-          }
-
-          @Override
-          protected int getConfiguredGridH() {
-            return 2;
-          }
-        }
-
       }
     }
 
-    @Order(40.0)
+    @Order(30.0)
     public class CloseButton extends AbstractCloseButton {
     }
   }
