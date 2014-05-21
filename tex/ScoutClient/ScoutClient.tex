@@ -238,6 +238,7 @@ needs text
 	* tree form
 	* tree field
 
+	
 % --------------------------------------------------------------------------- %
 \section{Pages}
 needs text
@@ -369,6 +370,10 @@ needs text
 * exec methods
 * field validation
 
+
+% =========================================================================== %
+\chapter{Simple Widgets}
+\chalabel{simplewidgets}
 
 % --------------------------------------------------------------------------- %
 \section{Label Fields}
@@ -788,13 +793,31 @@ Once a message box is started with method \java{startMessageBox} the user interf
 The selected option is the provided by the method's return value. 
 If the user closes the message box by hitting the \key{esc} or clicking on the icon to close a dialog, the start method of the message box will always return the value \java{CANCEL\_OPTION} of the \java{IMessageBox} interface.
 
+% =========================================================================== %
+\chapter{Advanced Widgets}
+\chalabel{advancedwidgets}
+
 % --------------------------------------------------------------------------- %
 \section{List Box}
 needs text
 
+\begin{figure}
+\includegraphics[width=14cm]{listbox.png}
+\caption{List boxes and use cases.
+More text.}
+\figlabel{listbox}
+\end{figure}
+
 % --------------------------------------------------------------------------- %
 \section{Tree Box}
 needs text
+
+\begin{figure}
+\includegraphics[width=14cm]{treebox.png}
+\caption{Tree boxes and use cases.
+More text.}
+\figlabel{treebox}
+\end{figure}
 
 % --------------------------------------------------------------------------- %
 \section{Smart Field}
@@ -831,46 +854,46 @@ protected boolean getConfiguredEmptySpaceAction() {
  return true;
 }
 \end{lstlisting}
-	
-% --------------------------------------------------------------------------- %
-\section{Grouping Components}
-needs text
-
-* layouting
-* group box
-* tab box
-* sequence box 
-* split box
 
 % --------------------------------------------------------------------------- %
-\section{Group Box}
+\section{Tree Field}
 needs text
 
-% --------------------------------------------------------------------------- %
-\section{Tab Box}
-needs text
+\begin{figure}
+\includegraphics[width=15cm]{treefield.png}
+\caption{Tree fields and example use cases.
+More text.}
+\figlabel{treefield}
+\end{figure}
 
 % --------------------------------------------------------------------------- %
-\section{Sequence Box}
+\section{Table Field}
 needs text
+
+\begin{figure}
+\includegraphics[width=15cm]{tablefield.png}
+\caption{Table fields and example use cases.
+More text.}
+\figlabel{tablefield}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=15cm]{editabletablefield.png}
+\caption{An editable table field.
+More text.}
+\figlabel{editabletablefield}
+\end{figure}
 
 \noindent Existing Documentation
 \begin{itemize}
-  \item forum: \url{http://www.eclipse.org/forums/index.php/t/414629/}
+  \item wiki tutorial \url{http://wiki.eclipse.org/Scout/Tutorial/3.8/Minicrm/Table_Field}
+  \item forum: \url{http://www.eclipse.org/forums/index.php/t/392053/}
+  \item forum: load/save data \url{http://www.eclipse.org/forums/index.php/t/253311/}
 \end{itemize}
-
-* exec methods
-* field validation
-
-
-% --------------------------------------------------------------------------- %
-\section{Split Box}
-needs text
 
 % --------------------------------------------------------------------------- %
 \section{Image Field}
 needs text
-
 
 \begin{figure}
 \includegraphics[width=14cm]{imagefield.png}
@@ -884,39 +907,25 @@ needs text
   \item forum: scrollbars \url{http://www.eclipse.org/forums/index.php/t/291205/}
 \end{itemize}
 
-
-% --------------------------------------------------------------------------- %
-\section{Table Field}
-needs text
-
-\noindent Existing Documentation
-\begin{itemize}
-  \item wiki tutorial \url{http://wiki.eclipse.org/Scout/Tutorial/3.8/Minicrm/Table_Field}
-  \item forum: \url{http://www.eclipse.org/forums/index.php/t/392053/}
-  \item forum: load/save data \url{http://www.eclipse.org/forums/index.php/t/253311/}
-\end{itemize}
-
-% --------------------------------------------------------------------------- %
-\section{Page Field}
-needs text
-
-\noindent Existing Documentation
-\begin{itemize}
-  \item forum: \url{http://www.eclipse.org/forums/index.php/t/395360/}
-\end{itemize}
-
-% --------------------------------------------------------------------------- %
-\section{HTML Field}
-needs text
-
 % --------------------------------------------------------------------------- %
 \section{SVG Field}
 needs text
+
+\begin{figure}
+\includegraphics[width=15cm]{svgfield.png}
+\caption{SVG fields and example use cases.
+More text.}
+\figlabel{svgfield}
+\end{figure}
 
 \noindent Existing Documentation
 \begin{itemize}
   \item wiki tutorial \url{http://wiki.eclipse.org/Scout/Tutorial/3.8/SVG_Field}
 \end{itemize}
+
+% --------------------------------------------------------------------------- %
+\section{HTML Field}
+needs text
 
 % --------------------------------------------------------------------------- %
 \section{Browser Field}
@@ -939,6 +948,73 @@ needs text
   \item forum: execloaditems \url{http://www.eclipse.org/forums/index.php/t/277447/}
   \item forum: filtering items \url{http://www.eclipse.org/forums/index.php/t/285644/}
   \item forum: usage example \url{http://www.eclipse.org/forums/index.php/t/265028/}
+\end{itemize}
+
+% =========================================================================== %
+\chapter{Layout Widgets}
+\chalabel{layoutwidgets}
+
+% --------------------------------------------------------------------------- %
+\section{Group Box}
+needs text
+
+
+\begin{figure}
+\includegraphics[width=15cm]{groupbox.png}
+\caption{Group boxes and example use cases.
+More text.}
+\figlabel{groupbox}
+\end{figure}
+
+% --------------------------------------------------------------------------- %
+\section{Tab Box}
+needs text
+
+\begin{figure}
+\includegraphics[width=15cm]{tabbox.png}
+\caption{Tab boxes and example use cases.
+More text.}
+\figlabel{tabbox}
+\end{figure}
+
+% --------------------------------------------------------------------------- %
+\section{Sequence Box}
+needs text
+
+\begin{figure}
+\includegraphics[width=15cm]{sequencebox.png}
+\caption{Sequence boxes and example use cases.
+More text.}
+\figlabel{sequencebox}
+\end{figure}
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum: \url{http://www.eclipse.org/forums/index.php/t/414629/}
+\end{itemize}
+
+* exec methods
+* field validation
+
+% --------------------------------------------------------------------------- %
+\section{Split Box}
+needs text
+
+\begin{figure}
+\includegraphics[width=15cm]{splitbox.png}
+\caption{Split boxes and example use cases.
+More text.}
+\figlabel{splitbox}
+\end{figure}
+
+
+% --------------------------------------------------------------------------- %
+\section{Page Field}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum: \url{http://www.eclipse.org/forums/index.php/t/395360/}
 \end{itemize}
 
 % --------------------------------------------------------------------------- %

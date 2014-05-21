@@ -49,13 +49,13 @@ import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.Examples
 import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.FromToBox.MandatoryBox;
 import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.FromToBox.MandatoryBox.MandatoryFrom;
 import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.FromToBox.MandatoryBox.MandatoryTo;
-import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.PersonSearchBox;
-import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.PersonSearchBox.SearchBox;
-import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.PersonSearchBox.SearchBox.FirstNameField;
-import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.PersonSearchBox.SearchBox.FormResetButton;
-import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.PersonSearchBox.SearchBox.IconField;
-import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.PersonSearchBox.SearchBox.LastNameField;
-import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.PersonSearchBox.SearchBox.SearchButton;
+import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.HorizontalFieldGroupBox;
+import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.HorizontalFieldGroupBox.SearchBox;
+import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.HorizontalFieldGroupBox.SearchBox.FirstNameField;
+import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.HorizontalFieldGroupBox.SearchBox.FormResetButton;
+import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.HorizontalFieldGroupBox.SearchBox.IconField;
+import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.HorizontalFieldGroupBox.SearchBox.LastNameField;
+import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.HorizontalFieldGroupBox.SearchBox.SearchButton;
 import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.ExamplesBox.Placeholder1Field;
 import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.FieldVisibilityBox;
 import org.eclipse.scout.widget.client.ui.forms.SequenceBoxForm.MainBox.FieldVisibilityBox.VisibleCompanyField;
@@ -232,10 +232,10 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
   }
 
   /**
-   * @return the PersonSearchBox
+   * @return the HorizontalFieldGroupBox
    */
-  public PersonSearchBox getPersonSearchBox() {
-    return getFieldByClass(PersonSearchBox.class);
+  public HorizontalFieldGroupBox getHorizontalFieldGroupBox() {
+    return getFieldByClass(HorizontalFieldGroupBox.class);
   }
 
   /**
@@ -441,7 +441,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(20.0)
-      public class PersonSearchBox extends AbstractGroupBox {
+      public class HorizontalFieldGroupBox extends AbstractGroupBox {
 
         @Override
         protected int getConfiguredGridW() {
@@ -450,7 +450,7 @@ public class SequenceBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("PersonSearch");
+          return TEXTS.get("HorizontalFieldGroupUsage");
         }
 
         @Order(10.0)

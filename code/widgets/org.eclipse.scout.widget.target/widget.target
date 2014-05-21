@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="widget" sequenceNumber="9">
+<?pde version="3.8"?><target name="widget" sequenceNumber="12">
 <locations>
 <location path="${eclipse_home}\" type="Directory"/>
 <location path="${scout_rap_target}" type="Directory"/>
@@ -8,12 +8,12 @@
 <repository location="http://download.eclipse.org/rt/rap/incubator/2.3/fileupload/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="com.bsiag.scout.rt.ui.swing.laf.rayo.source.feature.group" version="4.0.0.20140515-1155"/>
-<repository location="http://tools.bsiag.com/marketplace/rayo/4.0"/>
+<unit id="org.eclipse.scout.rt.ui.rap.incubator.filechooser.source.feature.group" version="4.0.0.20140521-1447"/>
+<repository location="http://download.eclipse.org/scout/releases/4.0"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.scout.rt.ui.rap.incubator.filechooser.source.feature.group" version="4.0.0.20140507-1550"/>
-<repository location="http://download.eclipse.org/scout/releases/4.0"/>
+<unit id="com.bsiag.scout.rt.ui.swing.laf.rayo.source.feature.group" version="4.0.0.20140515-1155"/>
+<repository location="http://tools.bsiag.com/marketplace/rayo/4.0"/>
 </location>
 </locations>
 <launcherArgs>

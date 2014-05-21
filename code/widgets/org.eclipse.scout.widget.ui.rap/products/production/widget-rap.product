@@ -14,7 +14,7 @@
       <vmArgs>-Xms32m
 -Xmx512m
 -XX:MaxPermSize=256m
-</vmArgs>
+      </vmArgs>
    </launcherArgs>
 
    <windowImages/>
@@ -45,6 +45,8 @@
       <plugin id="org.apache.batik.util.gui"/>
       <plugin id="org.apache.batik.xml"/>
       <plugin id="org.apache.commons.codec"/>
+      <plugin id="org.apache.commons.fileupload"/>
+      <plugin id="org.apache.commons.io"/>
       <plugin id="org.apache.commons.logging"/>
       <plugin id="org.eclipse.core.commands"/>
       <plugin id="org.eclipse.core.contenttype"/>
@@ -71,6 +73,8 @@
       <plugin id="org.eclipse.help"/>
       <plugin id="org.eclipse.osgi"/>
       <plugin id="org.eclipse.osgi.services"/>
+      <plugin id="org.eclipse.rap.addons.filedialog"/>
+      <plugin id="org.eclipse.rap.addons.fileupload"/>
       <plugin id="org.eclipse.rap.jface"/>
       <plugin id="org.eclipse.rap.jface.databinding"/>
       <plugin id="org.eclipse.rap.rwt"/>
@@ -87,6 +91,7 @@
       <plugin id="org.eclipse.scout.rt.servicetunnel"/>
       <plugin id="org.eclipse.scout.rt.shared"/>
       <plugin id="org.eclipse.scout.rt.ui.rap"/>
+      <plugin id="org.eclipse.scout.rt.ui.rap.incubator.filechooser"/>
       <plugin id="org.eclipse.scout.rt.ui.rap.mobile"/>
       <plugin id="org.eclipse.scout.rt.ui.rap.theme.rayo"/>
       <plugin id="org.eclipse.scout.rt.ui.rap.theme.rayo.mobile" fragment="true"/>
