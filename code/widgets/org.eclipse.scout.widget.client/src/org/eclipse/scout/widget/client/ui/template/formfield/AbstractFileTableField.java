@@ -153,8 +153,7 @@ public abstract class AbstractFileTableField extends AbstractTableField {
 
     @Override
     protected TransferObject execCopy(List<? extends ITableRow> rows) throws ProcessingException {
-      //TODO [mzi] Auto-generated method stub.
-      // method call leads to runtime exceptions: tunnel is null ??
+      //TODO [BUG] method call leads to runtime exceptions: tunnel is null ??
       return super.execCopy(rows);
     }
 
@@ -338,13 +337,11 @@ public abstract class AbstractFileTableField extends AbstractTableField {
 
       @Override
       protected void execAction() throws ProcessingException {
-        // TODO: [BUG] file chooser seems to be pretty broken ...
-        // issue (1) set type load = true, dialog still says "save as..." and asks if it should overwrite file ...
-        // issue (2) multi select doesn't work
         FileChooser fc = new FileChooser();
-        List<File> files = fc.startChooser();
+
         fc.setTypeLoad(true);
         fc.setMultiSelect(true);
+        List<File> files = fc.startChooser();
 
         for (File file : files) {
           addFile(file);

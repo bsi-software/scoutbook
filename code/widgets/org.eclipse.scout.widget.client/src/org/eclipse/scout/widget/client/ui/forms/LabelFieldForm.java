@@ -20,15 +20,6 @@ import org.eclipse.scout.rt.client.ui.form.fields.labelfield.AbstractLabelField;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.ui.UserAgentUtility;
 import org.eclipse.scout.widget.client.ui.forms.LabelFieldForm.MainBox.CloseButton;
-import org.eclipse.scout.widget.client.ui.forms.LabelFieldForm.MainBox.ConfigurationBox;
-import org.eclipse.scout.widget.client.ui.forms.LabelFieldForm.MainBox.ConfigurationBox.MultilineLabelField;
-import org.eclipse.scout.widget.client.ui.forms.LabelFieldForm.MainBox.ConfigurationBox.SetValueTextField;
-import org.eclipse.scout.widget.client.ui.forms.LabelFieldForm.MainBox.ConfigurationBox.TooLongLabelTextGetsTruncatedField;
-import org.eclipse.scout.widget.client.ui.forms.LabelFieldForm.MainBox.ConfigurationBox.VeryLongLabelTextField;
-import org.eclipse.scout.widget.client.ui.forms.LabelFieldForm.MainBox.ExamplesBox;
-import org.eclipse.scout.widget.client.ui.forms.LabelFieldForm.MainBox.ExamplesBox.DisabledField;
-import org.eclipse.scout.widget.client.ui.forms.LabelFieldForm.MainBox.ExamplesBox.LabelField;
-import org.eclipse.scout.widget.client.ui.forms.LabelFieldForm.MainBox.ExamplesBox.StyledField;
 
 public class LabelFieldForm extends AbstractForm implements IPageForm {
 
@@ -54,52 +45,6 @@ public class LabelFieldForm extends AbstractForm implements IPageForm {
   @Override
   public CloseButton getCloseButton() {
     return getFieldByClass(CloseButton.class);
-  }
-
-  public ExamplesBox getExamplesBox() {
-    return getFieldByClass(ExamplesBox.class);
-  }
-
-  public DisabledField getDisabledField() {
-    return getFieldByClass(DisabledField.class);
-  }
-
-  public LabelField getLabelField() {
-    return getFieldByClass(LabelField.class);
-  }
-
-  public MainBox getMainBox() {
-    return getFieldByClass(MainBox.class);
-  }
-
-  public MultilineLabelField getMultilineLabelField() {
-    return getFieldByClass(MultilineLabelField.class);
-  }
-
-  public ConfigurationBox getConfigurationBox() {
-    return getFieldByClass(ConfigurationBox.class);
-  }
-
-  /**
-   * @return the SetValueTextField
-   */
-  public SetValueTextField getSetValueTextField() {
-    return getFieldByClass(SetValueTextField.class);
-  }
-
-  public StyledField getStyledField() {
-    return getFieldByClass(StyledField.class);
-  }
-
-  public TooLongLabelTextGetsTruncatedField getTooLongLabelTextGetsTruncatedField() {
-    return getFieldByClass(TooLongLabelTextGetsTruncatedField.class);
-  }
-
-  /**
-   * @return the VeryLongLabelTextField
-   */
-  public VeryLongLabelTextField getVeryLongLabelTextField() {
-    return getFieldByClass(VeryLongLabelTextField.class);
   }
 
   @Order(10.0)

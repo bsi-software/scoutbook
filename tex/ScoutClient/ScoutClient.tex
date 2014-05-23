@@ -24,7 +24,7 @@ needs text
 \end{itemize}
 
 % --------------------------------------------------------------------------- %
-\section{Component Model}
+\section{Client Model}
 needs text
 
 \noindent Existing Documentation
@@ -38,7 +38,11 @@ needs text
   * other
   
 % --------------------------------------------------------------------------- %
-\section{Separation of UI Technologies}
+\section{Client Server Communication}
+needs text
+
+% --------------------------------------------------------------------------- %
+\section{UI Technologies}
 needs text
 
 \noindent Existing Documentation
@@ -49,16 +53,6 @@ needs text
   * swing
   * swt
   * rap
-
-% =========================================================================== %
-\chapter{Client Modeling}
-\chalabel{client_modeling}
-
-needs text. this should be a complete chapter as the client modeling is one
-of scouts key features.
-
-internal structure to be decided. consequences for other chapters/sections in
-this part to be verified
 
 % =========================================================================== %
 \chapter{Shared Components}
@@ -156,6 +150,17 @@ needs text
 needs text
 
 % --------------------------------------------------------------------------- %
+\section{Overview}
+
+needs text
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.8\textwidth]{scoutclientmodel.png}
+\caption{A class diagram for the Scout's client model.}
+\label{fig:scoutclientmodel}
+\end{figure}
+
+% --------------------------------------------------------------------------- %
 \section{Splash Screen}
 needs text
 
@@ -231,6 +236,21 @@ needs text
 	* form validation
 
 % --------------------------------------------------------------------------- %
+\section{Form Fields}
+needs text
+
+Every Scout form contains one or several form fields.
+Form fields therefor represent the basic building blocks of a forms content. 
+Depending on their nature, form fields can display information, accept user input or act as container holding inner form fields.
+As such container fields can hold inner container fields it is possible to create forms that meet compolex requirements.
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item concept wiki (links) \url{http://wiki.eclipse.org/Scout/Concepts/Client_Plug-In#Form_fields}
+  \item concept wiki screenshots \url{http://wiki.eclipse.org/Scout/Concepts/Field}
+\end{itemize}
+
+% --------------------------------------------------------------------------- %
 \section{Trees}
 needs text
 
@@ -264,7 +284,7 @@ needs text
   \item forum: position of search form \url{http://www.eclipse.org/forums/index.php/t/353895/}
   \item forum: statement builder stuff \url{http://www.eclipse.org/forums/index.php/t/165805/}
 \end{itemize}
-	
+
 % --------------------------------------------------------------------------- %
 \section{Tables}
 needs text
@@ -336,15 +356,6 @@ Form fields therefor represent the basic building blocks of a forms content.
 Depending on their nature, form fields can display information, accept user input or act as container holding inner form fields.
 As such container fields can hold inner container fields it is possible to create forms that meet compolex requirements.
 
-\begin{figure}[!htb]
-\centering
-\includegraphics[width=0.8\textwidth]{scoutclientmodel.png}
-\caption{A class diagram for the Scout's client model.}
-\label{fig:scoutclientmodel}
-\end{figure}
-
-
-
 \noindent Existing Documentation
 \begin{itemize}
   \item concept wiki (links) \url{http://wiki.eclipse.org/Scout/Concepts/Client_Plug-In#Form_fields}
@@ -374,6 +385,41 @@ needs text
 % =========================================================================== %
 \chapter{Simple Widgets}
 \chalabel{simplewidgets}
+
+This chapter presents the most commonly used Scout widgets.
+Based on the Scout widget demo application provided with this book.
+ 
+Except for the Message box at the end of this chapter the widgets discussed are all Scout form fields. 
+For each field, example use cases are described. 
+In addition, a screenshot of the corresponding form in the widget application illustrates these use cases.
+Finally, exemplary code snippets taken from the widget application close the loop to the actual implementation of these widgets in the applications source code.
+
+
+\begin{figure}
+\includegraphics[width=15cm]{widgetapp_swt.png}
+\caption{Scout fields and example use cases. 
+In the examples section of the form the standard usage of label fields is shown.
+To display text over the whole width of a column or in the area right to the label use method \java{setValue} as shown in the configuration section of the form.}
+\figlabel{widgetapp_swt}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=15cm]{widgetapp_web.png}
+\caption{Scout fields and example use cases. 
+In the examples section of the form the standard usage of label fields is shown.
+To display text over the whole width of a column or in the area right to the label use method \java{setValue} as shown in the configuration section of the form.}
+\figlabel{widgetapp_web}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=5cm]{widgetapp_mobile1.png}
+\includegraphics[width=5cm]{widgetapp_mobile2.png}
+\includegraphics[width=5cm]{widgetapp_mobile3.png}
+\caption{Scout fields and example use cases. 
+In the examples section of the form the standard usage of label fields is shown.
+To display text over the whole width of a column or in the area right to the label use method \java{setValue} as shown in the configuration section of the form.}
+\figlabel{widgetapp_web}
+\end{figure}
 
 % --------------------------------------------------------------------------- %
 \section{Label Fields}

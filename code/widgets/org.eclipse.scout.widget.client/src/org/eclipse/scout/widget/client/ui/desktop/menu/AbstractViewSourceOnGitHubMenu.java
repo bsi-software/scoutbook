@@ -26,8 +26,8 @@ public abstract class AbstractViewSourceOnGitHubMenu extends AbstractMenu {
   @Override
   protected void execAction() throws ProcessingException {
     String linkaddress = "https://github.com/BSI-Business-Systems-Integration-AG/scoutbook/" +
-        "/blob/master" +
-        "/code/widgets/org.eclipse.scout.widget.client/src/" +
+        "blob/master/" +
+        "code/widgets/org.eclipse.scout.widget.client/src/" +
         provideSourceClass().getCanonicalName().replace(".", "/") + ".java";
 
     SERVICES.getService(IShellService.class).shellOpen(linkaddress);
