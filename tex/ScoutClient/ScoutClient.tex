@@ -251,6 +251,25 @@ As such container fields can hold inner container fields it is possible to creat
 \end{itemize}
 
 % --------------------------------------------------------------------------- %
+\subsection{Common Aspects}
+needs text
+
+\noindent Existing Documentation
+\begin{itemize}
+  \item forum: label position \url{http://www.eclipse.org/forums/index.php/t/369109/}
+\end{itemize}
+
+* model component
+* ui component
+* extension point registration
+
+* model
+* label
+* value
+* exec methods
+* field validation
+
+% --------------------------------------------------------------------------- %
 \section{Trees}
 needs text
 
@@ -346,41 +365,109 @@ Needs text
   \item forum: \url{http://www.eclipse.org/forums/index.php/t/366971/}
 \end{itemize}
 
-
 % =========================================================================== %
-\chapter{Form Fields}
-\chalabel{fields}
+\chapter{The Widgets Demo Application}
+\chalabel{widgetsdemo}
 
-Every Scout form contains one or several form fields.
-Form fields therefor represent the basic building blocks of a forms content. 
-Depending on their nature, form fields can display information, accept user input or act as container holding inner form fields.
-As such container fields can hold inner container fields it is possible to create forms that meet compolex requirements.
+This chapter introduces the "Scout Widgets Demo App".
+The purpose of this demo application is to provide example use cases for Scout's most commonly used UI widgets. 
+Therefore, the application mainly serves as a hands-on reference on how to use and configure Scout UI widgets and does not contain any useful business logic.
 
-\noindent Existing Documentation
-\begin{itemize}
-  \item concept wiki (links) \url{http://wiki.eclipse.org/Scout/Concepts/Client_Plug-In#Form_fields}
-  \item concept wiki screenshots \url{http://wiki.eclipse.org/Scout/Concepts/Field}
-\end{itemize}
+It is interesting to note that the widget demo application works out-of-the-box with any of the currently supported UI technologies. 
+Therefore, the widget demo application is capable to run as a native desktop application, as a web application in browsers, as well as on touch-enabled mobile devices. 
+Comparing individual aspects of the the desktop application with its mobile/tablet version reveals the default strategies used to map desktop widgets to substantially different usage/form factor found on mobile devices. 
+Please observe that for the complete widget application only a handful of lines of code actually depend on a specific UI technology. 
+The interested reader can easily verify this by searching the application's code for the occurrences of class \java{UserAgentUtility}.
+
+In the text below the organisation of the widget demo application is first described in \secref{widgetdemo_ui}. 
+And in \secref{widgetdemo_architecture}, the setup in the form of a Scout client only application is explained.
 
 % --------------------------------------------------------------------------- %
-\section{Common Aspects}
-needs text
+\section{The User Interface}
+\seclabel{widgetdemo_ui}
 
-\noindent Existing Documentation
-\begin{itemize}
-  \item forum: label position \url{http://www.eclipse.org/forums/index.php/t/369109/}
-\end{itemize}
+The application is organized into separate outlines for thematic groups of widgets. 
+Each of the application's outline then presents a list of widgets in a navigation tree.
+This is shown in \figref{widgetapp_github} for the \outline{Simple Widgets} that contains examples for simple UI widgets such as label fields or string fields.
 
-* model component
-* ui component
-* extension point registration
+\begin{figure}
+\includegraphics[width=14cm]{widgetapp_github_menu.png}
+\caption{The "Scout Widgets Demo App". 
+The widgets demo application features examples of the most commonly used Scout widgets.
+For each widget shown, example use cases are presented in a individual form. 
+As shown in the screenshot, the corresponding Scout source code is made available via the \contextmenu{View Source on GitHub}. }
+\figlabel{widgetapp_github}
+\end{figure}
 
-* model
-* label
-* value
-* exec methods
-* field validation
+For each UI widget a corresponding example form presents a number of typical use cases and configuration options. 
+The example forms are designed to be independent from each other. 
+It should therefore be possible to read and understand the source code of each example form with minimal effort.
+Via the \contextmenu{Open in Dialog \dots} the content of the view is displayed in a modal scout form. 
+As shown in \figref{widgetapp_github}, the complete source code for the selected form can be accessd via the \contextmenu{View Source on GitHub}.
 
+\begin{figure}
+\includegraphics[width=14cm]{widgetapp_swt.png}
+\caption{The "Scout Widgets Demo App" running as an SWT desktop application.}
+\figlabel{widgetapp_swt}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=14cm]{widgetapp_web.png}
+\caption{The "Scout Widgets Demo App" running in the browser.}
+\figlabel{widgetapp_web}
+\end{figure}
+
+The widget demo application can also be run as a native SWT desktop application. 
+This is shown in \figref{widgetapp_swt}.
+And the exact same application also runs in a browser as a web application shown in \figref{widgetapp_web}.
+
+\begin{figure}
+\includegraphics[width=4.5cm]{widgetapp_mobile1.png}
+\includegraphics[width=4.5cm]{widgetapp_mobile2.png}
+\includegraphics[width=4.5cm]{widgetapp_mobile3.png}
+\caption{The "Scout Widgets Demo App" running on a mobile device. 
+On the left, all outlines of the application are displayed on the home screen.
+The screens shown in the middle allows to navigate through ''Simple Widgets'' outline while the selected ''StringField'' form is shown on the right.
+}
+\figlabel{widgetapp_mobile}
+\end{figure}
+
+In \figref{widgetapp_mobile}, the content of the widget demo application is shown on a mobile device. 
+On the home screen of the mobile application, the available outlines are presented. 
+When the user selects a specific outline, the associated navigation tree is then shown as a scrollable list. 
+Finally, when the user selects a specific widget, the associated example form is shown. 
+
+% --------------------------------------------------------------------------- %
+\section{Client Only Architecture}
+\seclabel{widgetdemo_architecture}
+
+As the sole purpose of the widget demo application is to demonstrate the usage of the UI elements provided by the Scout framework, no server side data access and/or business logic is required. 
+Therefore, the widget demo application has been designed as a standalone, client only applications. 
+As a side effect, the architecture of this widget application may be used as a template to build similar client only applications with the Scout framework. 
+The text below explains the main differences between the setup of the widget demo applications and the ``Hello World'' application introduced in \charef{helloworld}.
+
+The most obvious difference of the widget demo application to the ``Hello World'' example is the missing server plugin. 
+The other differences are found in all areas where Scout handles the client server communication.  
+Compared to the setup of the ``Hello World'' example there are three aspects that are solved differently in the widget demo application. 
+* DesktopService
+* LocalCodeService
+* FormHandler
+
+application setup almost identical to client server setup. 
+differences:
+* application startup in class clientsession (compare to helloworld) -> listing
+* no setup service tunnel 
+* local code service (no details)
+* form handlers (pageformhandler) are empty. hello world with desktop form calls server in exec load method
+
+Alternative use cases for client only applications can be found in software packages to manage digital archives for personal documents or the content of private wine cellars. 
+Many such applications do not require a dedicated server application but still need access to a (local) database. 
+Although possible, it is not recommended to implement the business logic and the access to the database in the application's client plugin. 
+A much better approach is to take advantage of the offline support provided by the Scout framework. 
+As in typical client server projects, the presentation logic is implemented in the application's client plugin and the business logic with the database access are located in the application's server plugin. 
+A detailed description of this setup including step-by-step instructions is available on the Scout Wiki\footnote{
+Standalone Client with DB Access: \url{http://wiki.eclipse.org/Scout/HowTo/Create_a_Standalone_Client_with_DB_Access}
+}.
 
 % =========================================================================== %
 \chapter{Simple Widgets}
@@ -394,32 +481,6 @@ For each field, example use cases are described.
 In addition, a screenshot of the corresponding form in the widget application illustrates these use cases.
 Finally, exemplary code snippets taken from the widget application close the loop to the actual implementation of these widgets in the applications source code.
 
-
-\begin{figure}
-\includegraphics[width=15cm]{widgetapp_swt.png}
-\caption{Scout fields and example use cases. 
-In the examples section of the form the standard usage of label fields is shown.
-To display text over the whole width of a column or in the area right to the label use method \java{setValue} as shown in the configuration section of the form.}
-\figlabel{widgetapp_swt}
-\end{figure}
-
-\begin{figure}
-\includegraphics[width=15cm]{widgetapp_web.png}
-\caption{Scout fields and example use cases. 
-In the examples section of the form the standard usage of label fields is shown.
-To display text over the whole width of a column or in the area right to the label use method \java{setValue} as shown in the configuration section of the form.}
-\figlabel{widgetapp_web}
-\end{figure}
-
-\begin{figure}
-\includegraphics[width=5cm]{widgetapp_mobile1.png}
-\includegraphics[width=5cm]{widgetapp_mobile2.png}
-\includegraphics[width=5cm]{widgetapp_mobile3.png}
-\caption{Scout fields and example use cases. 
-In the examples section of the form the standard usage of label fields is shown.
-To display text over the whole width of a column or in the area right to the label use method \java{setValue} as shown in the configuration section of the form.}
-\figlabel{widgetapp_web}
-\end{figure}
 
 % --------------------------------------------------------------------------- %
 \section{Label Fields}
