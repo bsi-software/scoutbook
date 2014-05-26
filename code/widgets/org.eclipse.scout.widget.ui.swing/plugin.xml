@@ -8,10 +8,10 @@
   <extension id="product" point="org.eclipse.core.runtime.products">
     <product
           application="org.eclipse.scout.widget.ui.swing.app"
-          name="widget">
+          name="widget Client">
        <property
              name="appName"
-             value="widget">
+             value="widget Client">
        </property>
     </product>
   </extension>

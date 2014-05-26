@@ -355,7 +355,7 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
         }
 
         @Order(10.0)
-        public class No1Button extends AbstractRadioButton {
+        public class No1Button extends AbstractRadioButton<Long> {
 
           @Override
           protected String getConfiguredLabel() {
@@ -364,7 +364,7 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
         }
 
         @Order(20.0)
-        public class No2Button extends AbstractRadioButton {
+        public class No2Button extends AbstractRadioButton<Long> {
 
           @Override
           protected String getConfiguredLabel() {
@@ -378,7 +378,7 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
         }
 
         @Order(30.0)
-        public class No3Button extends AbstractRadioButton {
+        public class No3Button extends AbstractRadioButton<Long> {
 
           @Override
           protected String getConfiguredLabel() {

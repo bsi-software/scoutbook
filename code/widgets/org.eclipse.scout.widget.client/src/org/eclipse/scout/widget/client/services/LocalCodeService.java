@@ -55,6 +55,7 @@ public class LocalCodeService extends AbstractService implements ICodeService {
     return getCodeType(type);
   }
 
+  @SuppressWarnings("unchecked")
   @Override
   public <T> ICodeType<T, ?> findCodeTypeById(T id) {
     if (id == null) {

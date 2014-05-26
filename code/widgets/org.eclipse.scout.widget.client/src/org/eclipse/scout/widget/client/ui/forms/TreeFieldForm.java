@@ -155,10 +155,11 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
             }
 
             @Override
-            protected void execPrepareAction() throws ProcessingException {
+            protected void execOwnerValueChanged(Object newOwnerValue) throws ProcessingException {
               setVisible(getSelectedNode().getChildNodeCount() > 0);
               setEnabled(!getSelectedNode().isExpanded());
             }
+
           }
 
           @Order(20.0)
@@ -175,7 +176,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
             }
 
             @Override
-            protected void execPrepareAction() throws ProcessingException {
+            protected void execOwnerValueChanged(Object newOwnerValue) throws ProcessingException {
               setVisible(getSelectedNode().getChildNodeCount() > 0);
               setEnabled(getSelectedNode().isExpanded());
             }

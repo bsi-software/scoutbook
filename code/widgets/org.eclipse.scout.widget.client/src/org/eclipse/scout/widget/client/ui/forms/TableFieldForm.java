@@ -540,11 +540,13 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           @Order(10.0)
           public class NewEventMenu extends AbstractExtensibleMenu {
 
+            // TODO find out what to do here (removed with luna 4.0 m7)
             @Override
             protected boolean getConfiguredEmptySpaceAction() {
               return true;
             }
 
+            // TODO find out what to do here (removed with luna 4.0 m7)
             @Override
             protected boolean getConfiguredSingleSelectionAction() {
               return false;
