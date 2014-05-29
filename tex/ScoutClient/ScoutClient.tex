@@ -375,12 +375,12 @@ Needs text
 \chalabel{widgetsdemo}
 
 This chapter introduces the "Scout Widgets Demo App".
-The purpose of this demo application is to provide example use cases for Scout's most commonly used UI widgets. 
-Therefore, the application mainly serves as a hands-on reference on how to use and configure Scout UI widgets and does not contain any useful business logic.
+The purpose of this demo application is to present Scout's most commonly used UI widgets. 
+Therefore, the application does not contain any business logic but only serves as a hands-on reference on how to use and configure Scout UI widgets.
 
 It is interesting to note that the widget demo application works out-of-the-box with any of the currently supported UI technologies. 
-Therefore, the widget demo application is capable to run as a native desktop application, as a web application in browsers, as well as on touch-enabled mobile devices. 
-Comparing individual aspects of the the desktop application with its mobile/tablet version reveals the default strategies used to map desktop widgets to substantially different usage/form factor found on mobile devices. 
+This means that with the same code base the widget demo application is capable to run as a native desktop application, as a web application in browsers, as well as on touch-enabled mobile devices. 
+Comparing individual aspects of the the desktop application with its mobile/tablet version reveals the default strategies used to map desktop widgets to the substantially different usage/form factor found on mobile devices. 
 Please observe that for the complete widget application only a handful of lines of code actually depend on a specific UI technology. 
 The interested reader can easily verify this by searching the application's code for the occurrences of class \java{UserAgentUtility}.
 
@@ -447,9 +447,16 @@ Finally, when the user selects a specific widget, the associated example form is
 \seclabel{widgetdemo_architecture}
 
 As the sole purpose of the widget demo application is to demonstrate the usage of the UI elements provided by the Scout framework, no server side data access and/or business logic is required. 
-Therefore, the widget demo application has been designed as a client only applications. 
-As a side effect, the architecture of this widget application may be used as a template to build similar client only applications with the Scout framework. 
-The text below explains the main differences between the setup of the widget demo applications and the ``Hello World'' application introduced in \charef{helloworld}.
+Therefore, the widget demo application has been designed as a client only application. 
+As a side effect, the architecture of this widget application may also be used as a template to build similar client only applications with the Scout framework. 
+It is important to note that this architecture can only be recommended for very simple applications. 
+For more complex software packages, for example personal digital archives or private accounting software, it is not recommended to implement the business logic and the access to the database in the application's client plugin. 
+A much cleaner approach is to take advantage of the offline support provided by the Scout framework. 
+As in typical Scout client server projects, the presentation logic can be implemented in the client plugin and business logic and access to a (local) database are located in the server plugin. 
+A detailed description of this setup including step-by-step instructions is available on the Scout Wiki\footnote{
+Standalone Client with DB Access: \url{http://wiki.eclipse.org/Scout/HowTo/Create_a_Standalone_Client_with_DB_Access}
+}.
+In the text below the client only setup of the widget demo application is explained by looking at the main differences to the setup of the ``Hello World'' application introduced in \charef{helloworld}. 
 
 \lstinputlisting[
   label=\lstlabel{demoapp.clientsession},
@@ -461,40 +468,25 @@ The text below explains the main differences between the setup of the widget dem
 {../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ClientSession.java}
 
 The most obvious difference of the widget demo application to the ``Hello World'' client server example is the missing server (plugin). 
-Consequently, the widget demo application also does not need a service tunnel to handly any client server communication.
-The setup of this service tunnel is typical initiated in method \java{execLoadSession} of the client's \java{ClientSession} class. 
-Therefore, the setup of the service tunnel is commented out in the Scout widget demo as shown in \lstref{demoapp.clientsession}. 
+Consequently, the widget demo application also does not need a service tunnel to handle client server communication.
+As the setup of this service tunnel is typically initiated in method \java{execLoadSession} of the client's \java{ClientSession} class, 
+the setup of the service tunnel has been commented out in the widget demo application according to \lstref{demoapp.clientsession}. 
 
 The next difference between typical Scout applications and the widget demo lies in the handling of code types and codes. 
 Accessing code types and codes is the responsibility of the server's \java{CodeService} class in Scout applications. 
-As the widget demo does not have a server but we still want to work with codes and code types, a \java{LocalCodeService} class had to be added to the client's plugin. 
+As the widget demo does not have a server but we still want to work with codes and code types, a \java{LocalCodeService} class has been added to the client's plugin. 
 
 The last difference of note between the ``Hello World'' example and the widget demo application lies in the implementation of the form handler classes. 
 In the desktop form's view handler of the ``Hello World'' application the data to be displayed is retrieved via the server's \java{DesktopService} as shown in \lstref{helloworld.viewhandler}. 
-Whereas in the widget demo application the individual forms do not have to handle any external data. 
-As a result, no corresponding logic is necessary in the form handler classes.
-
-Alternative use cases for client only applications can be found in software packages to manage digital archives for personal documents or the content of private wine cellars. 
-Many such applications do not require a dedicated server application but still need access to a (local) database. 
-Although possible, it is not recommended to implement the business logic and the access to the database in the application's client plugin. 
-A much better approach is to take advantage of the offline support provided by the Scout framework. 
-As in typical client server projects, the presentation logic is implemented in the application's client plugin and the business logic with the database access are located in the application's server plugin. 
-A detailed description of this setup including step-by-step instructions is available on the Scout Wiki\footnote{
-Standalone Client with DB Access: \url{http://wiki.eclipse.org/Scout/HowTo/Create_a_Standalone_Client_with_DB_Access}
-}.
+As the forms of the widget demo application do not load/persist any data from/to a server, no such logic is required in the form handlers and the corresponding classes remain empty. 
 
 % =========================================================================== %
 \chapter{Simple Widgets}
 \chalabel{simplewidgets}
 
-This chapter presents the most commonly used Scout widgets.
-Based on the Scout widget demo application provided with this book.
- 
-Except for the Message box at the end of this chapter the widgets discussed are all Scout form fields. 
-For each field, example use cases are described. 
-In addition, a screenshot of the corresponding form in the widget application illustrates these use cases.
-Finally, exemplary code snippets taken from the widget application close the loop to the actual implementation of these widgets in the applications source code.
-
+This chapter presents the most commonly used Scout widgets based on the widget demo application introduced above. 
+For each widget the most frequently observed use cases are presented and illustrated with the widget specific example forms. 
+And exemplary code snippets taken from the widget application help to close the loop to the actual implementation of these widgets in the applications source code.
 
 % --------------------------------------------------------------------------- %
 \section{Label Fields}
