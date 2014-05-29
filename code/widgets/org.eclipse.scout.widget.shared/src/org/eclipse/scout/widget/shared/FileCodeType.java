@@ -38,7 +38,7 @@ public class FileCodeType extends AbstractCodeType<String, String> {
   }
 
   @Order(10.0)
-  public static class HTMLCode extends AbstractCode<String> {
+  public static class HtmlCode extends AbstractCode<String> {
 
     private static final long serialVersionUID = 1L;
     public static final String ID = "html";

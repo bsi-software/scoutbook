@@ -24,6 +24,9 @@ public class ClientSession extends AbstractClientSession {
 
   @Override
   public void execLoadSession() throws ProcessingException {
+    // we have no server -> we don't need a service tunnel
+    // setServiceTunnel(new ClientHttpServiceTunnel(this, UriUtility.toUrl(getBundle().getBundleContext().getProperty("server.url"))));
+
     CODES.getAllCodeTypes(org.eclipse.scout.widget.shared.Activator.PLUGIN_ID);
     setDesktop(new Desktop());
   }

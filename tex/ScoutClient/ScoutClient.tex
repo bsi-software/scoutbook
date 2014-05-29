@@ -85,7 +85,7 @@ needs text
 \end{itemize}
 
 % --------------------------------------------------------------------------- %
-\section{Codes and Code Types}
+\section{Code Types and Codes}
 needs text
 
 \noindent Existing Documentation
@@ -114,6 +114,11 @@ needs text
   * lookup call
   * lookup service
   * sqllookup service
+
+javadoc: 
+package org.eclipse.scout.rt.shared.services.lookup;
+public class LookupCall<KEY_TYPE> implements ILookupCall<KEY_TYPE>, Cloneable, Serializable, ITypeWithClassId {
+
 
 % --------------------------------------------------------------------------- %
 \section{Permissions}
@@ -442,23 +447,32 @@ Finally, when the user selects a specific widget, the associated example form is
 \seclabel{widgetdemo_architecture}
 
 As the sole purpose of the widget demo application is to demonstrate the usage of the UI elements provided by the Scout framework, no server side data access and/or business logic is required. 
-Therefore, the widget demo application has been designed as a standalone, client only applications. 
+Therefore, the widget demo application has been designed as a client only applications. 
 As a side effect, the architecture of this widget application may be used as a template to build similar client only applications with the Scout framework. 
 The text below explains the main differences between the setup of the widget demo applications and the ``Hello World'' application introduced in \charef{helloworld}.
 
-The most obvious difference of the widget demo application to the ``Hello World'' example is the missing server plugin. 
-The other differences are found in all areas where Scout handles the client server communication.  
-Compared to the setup of the ``Hello World'' example there are three aspects that are solved differently in the widget demo application. 
-* DesktopService
-* LocalCodeService
-* FormHandler
+\lstinputlisting[
+  label=\lstlabel{demoapp.clientsession},
+  caption=The setup of the client session in the Scout widget demo application.,
+  index={ClientSession,execLoadSession},
+  linerange={25-33},
+  float
+]
+{../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ClientSession.java}
 
-application setup almost identical to client server setup. 
-differences:
-* application startup in class clientsession (compare to helloworld) -> listing
-* no setup service tunnel 
-* local code service (no details)
-* form handlers (pageformhandler) are empty. hello world with desktop form calls server in exec load method
+The most obvious difference of the widget demo application to the ``Hello World'' client server example is the missing server (plugin). 
+Consequently, the widget demo application also does not need a service tunnel to handly any client server communication.
+The setup of this service tunnel is typical initiated in method \java{execLoadSession} of the client's \java{ClientSession} class. 
+Therefore, the setup of the service tunnel is commented out in the Scout widget demo as shown in \lstref{demoapp.clientsession}. 
+
+The next difference between typical Scout applications and the widget demo lies in the handling of code types and codes. 
+Accessing code types and codes is the responsibility of the server's \java{CodeService} class in Scout applications. 
+As the widget demo does not have a server but we still want to work with codes and code types, a \java{LocalCodeService} class had to be added to the client's plugin. 
+
+The last difference of note between the ``Hello World'' example and the widget demo application lies in the implementation of the form handler classes. 
+In the desktop form's view handler of the ``Hello World'' application the data to be displayed is retrieved via the server's \java{DesktopService} as shown in \lstref{helloworld.viewhandler}. 
+Whereas in the widget demo application the individual forms do not have to handle any external data. 
+As a result, no corresponding logic is necessary in the form handler classes.
 
 Alternative use cases for client only applications can be found in software packages to manage digital archives for personal documents or the content of private wine cellars. 
 Many such applications do not require a dedicated server application but still need access to a (local) database. 

@@ -237,7 +237,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
         private static final String EDITABLE_CELL_BACKGROUND_COLOR = "EFEFFF";
 
-        private long maxId = 0;
+        private long m_maxId = 0;
 
         @Override
         protected int getConfiguredGridH() {
@@ -254,11 +254,14 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           return TEXTS.get("TableField");
         }
 
-        @Override
-        protected void execInitField() throws ProcessingException {
+        private long getNextId() {
+          return ++m_maxId;
+        }
+
+        public void addExampleRows() throws ProcessingException {
           try {
-            getTable().addRowByArray(new Object[]{++maxId, "Eclipsecon USA", "San Francisco, USA", DateFormat.getDateInstance(DateFormat.SHORT, Locale.GERMANY).parse("18.03.14"), IndustryICBCodeType.ICB9000.ICB9500.ICB9530.ICB9537.ID, 680L, "http://www.eclipsecon.org"});
-            getTable().addRowByArray(new Object[]{++maxId, "Javaland", "Brühl, Germany", DateFormat.getDateInstance(DateFormat.SHORT, Locale.GERMANY).parse("25.03.14"), IndustryICBCodeType.ICB9000.ICB9500.ICB9530.ICB9537.ID, 810L, "http://www.javaland.eu"});
+            getTable().addRowByArray(new Object[]{getNextId(), "Eclipsecon USA", "San Francisco, USA", DateFormat.getDateInstance(DateFormat.SHORT, Locale.GERMANY).parse("18.03.14"), IndustryICBCodeType.ICB9000.ICB9500.ICB9530.ICB9537.ID, 680L, "http://www.eclipsecon.org"});
+            getTable().addRowByArray(new Object[]{getNextId(), "Javaland", "Brühl, Germany", DateFormat.getDateInstance(DateFormat.SHORT, Locale.GERMANY).parse("25.03.14"), IndustryICBCodeType.ICB9000.ICB9500.ICB9530.ICB9537.ID, 810L, "http://www.javaland.eu"});
           }
           catch (ParseException e) {
             throw new ProcessingException(e.getMessage());
@@ -271,12 +274,14 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
           ITable table = getTable();
 
-          getSelectedRowsField().setValue(rowsToKeyString(table.getSelectedRows()));
-          // TODO [BUG] getinsertedrows doesn't return anything regardless of inserting rows
-          getInsertedRowsField().setValue(rowsToKeyString(table.getInsertedRows()));
-          // TODO [BUG] getupdatedrows also returns inserting rows. bug?
-          getUpdatedRowsField().setValue(rowsToKeyString(table.getUpdatedRows()));
-          getDeletedRowsField().setValue(rowsToKeyString(table.getDeletedRows()));
+          // TODO why is updatetablestatus called during construction of the table?
+//          if (!getForm().isFormLoading()) {
+          if (getRootGroupBox() != null) {
+            getSelectedRowsField().setValue(rowsToKeyString(table.getSelectedRows()));
+            getInsertedRowsField().setValue(rowsToKeyString(table.getInsertedRows()));
+            getUpdatedRowsField().setValue(rowsToKeyString(table.getUpdatedRows()));
+            getDeletedRowsField().setValue(rowsToKeyString(table.getDeletedRows()));
+          }
         }
 
         private String rowsToKeyString(List<ITableRow> list) {
@@ -562,10 +567,10 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
               ColumnSet cols = getColumnSet();
               ITableRow row = new TableRow(cols);
 
-              row.getCellForUpdate(getIdColumn()).setValue(++maxId);
+              row.getCellForUpdate(getIdColumn()).setValue(++m_maxId);
               row.getCellForUpdate(getNameColumn()).setValue("New Event");
 
-              addRow(row);
+              addRow(row, true);
             }
           }
 
@@ -849,6 +854,7 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
 
       @Override
       protected void execClickAction() throws ProcessingException {
+        getTableField().addExampleRows();
       }
     }
 
