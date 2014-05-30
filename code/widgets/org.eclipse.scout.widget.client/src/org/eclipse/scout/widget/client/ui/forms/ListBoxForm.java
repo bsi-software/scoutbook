@@ -354,7 +354,7 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
       }
 
       @Order(30.0)
-      public class GetValueField extends AbstractStringField {
+      public class GetCheckedKeysField extends AbstractStringField {
 
         @Override
         protected boolean getConfiguredEnabled() {
@@ -363,7 +363,7 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected String getConfiguredLabel() {
-          return TEXTS.get("GetValue");
+          return TEXTS.get("getCheckedKeys");
         }
 
         @Override
@@ -373,9 +373,8 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execChangedMasterValue(Object newMasterValue) throws ProcessingException {
-          if (newMasterValue instanceof Set<?>) {
-            setValue(StringUtility.join(";", ((Set<?>) newMasterValue).toArray(new String[0])));
-          }
+          Set<String> keys = getListBoxField().getCheckedKeys();
+          setValue(StringUtility.join(";", keys.toArray(new String[0])));
         }
       }
 

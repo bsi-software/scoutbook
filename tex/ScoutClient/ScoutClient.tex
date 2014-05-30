@@ -507,8 +507,7 @@ To set the label text in the default area method \java{getConfiguredLabel} is us
 If the label text is too long for the reserved area the label gets truncated with trailing \dots.
 The complete label text is then shown in a tooltip.
 
-Also, a number of \java{getConfiguredLabel*} styling properties exist for labels.
-This is not only true for the label field itself but for any form field derived from \java{AbstractFormField}.
+As for any form field derived from \java{AbstractFormField}, a number of \java{getConfigured*} styling properties exist for label fields.
 Most of these styling properties can directly be set in the Scout Object Properties view.
 A subset of these properties are shown in the list below.
 
@@ -524,7 +523,7 @@ A subset of these properties are shown in the list below.
   label=\lstlabel{field.label.value},
   caption=A simple LabelField.,
   index={AbstractLabelField,Label Field},
-  linerange={181-194},
+  linerange={66-73},
   float
 ]
 {../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ui/forms/LabelFieldForm.java}
@@ -535,7 +534,7 @@ To display text in the right hand area an empty string can be used as label text
   label=\lstlabel{field.label.multiline},
   caption=A label field displaying multi-line text that covers the whole width of a column.,
   index={AbstractLabelField,Label Field},
-  linerange={223-251},
+  linerange={168-195},
   float
 ]
 {../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ui/forms/LabelFieldForm.java}
@@ -571,7 +570,7 @@ Please note that changing this property dynamically at runtime currently only wo
   label=\lstlabel{field.string.masked},
   caption=A masked string field.,
   index={AbstractStringField,String Field},
-  linerange={522-535},
+  linerange={595-607},
   float
 ]
 {../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ui/forms/StringFieldForm.java}
@@ -612,7 +611,7 @@ See \lstref{field.integer.input} for the code corresponding to the input integer
   label=\lstlabel{field.integer.input},
   caption=A simple Integer field.,
   index={AbstractIntegerField,Integer Field},
-  linerange={511-519},
+  linerange={510-517},
   float
 ]
 {../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ui/forms/NumberFieldsForm.java}
@@ -724,7 +723,7 @@ Simultaneously pressing the \key{Shift} or the \key{Ctrl} allows to step to the 
   label=\lstlabel{field.datetime.disabled},
   caption=A disabled combined date time field initialized with the current time,
   index={AbstractDateTimeField,DateTime Field},
-  linerange={427-446},
+  linerange={448-465},
   float
 ]
 {../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ui/forms/DateTimeFieldsForm.java}
@@ -743,8 +742,8 @@ As expected, the textual representation of the day of the week is depending on t
 % --------------------------------------------------------------------------- %
 \section{Checkbox Fields}
 
-Checkboxes can be used to enter/represent simple boolean values. 
-In Scout, checkboxes are derived from class \java{AbstractCheckBox}. 
+Check boxes can be used to enter/represent simple boolean values. 
+In Scout, check boxes are derived from class \java{AbstractCheckBox}. 
 
 \begin{figure}
 \includegraphics[width=7cm]{checkboxfield.png}
@@ -753,8 +752,9 @@ In Scout, checkboxes are derived from class \java{AbstractCheckBox}.
 \figlabel{checkboxfield}
 \end{figure}
 
-In the Scout widget application the use of checkboxes is demonstrated in the form \java{CheckboxFieldForm} that is shown in \figref{checkboxfield}.
-Instead of the method \java{getValue} that is available on the other value fields, the method \java{isChecked} is provided.
+In the Scout widget application the use of check boxes is demonstrated in the form \java{CheckboxFieldForm} that is shown in \figref{checkboxfield}. 
+To access the current value, Scout provides the method \java{isChecked} for check box fields. 
+This naming reflects the boolean state of a check boxes and differs from the other Scout value fields that provide a \java{getValue} method.  
 
 \lstinputlisting[
   label=\lstlabel{field.checkbox.disabled},
@@ -801,7 +801,7 @@ The type of the value that is returned by the \java{getValue} method is defined 
 In the provided listing, the \java{StyledGroupBox} is configured to return a value of the type \java{Long}. 
 Consequently, the individual radio buttons are returning radio values of the type \java{Long} as well in the \java{getConfiguredRadioValue} methods.
 The field \java{PlaceholderField} in the radio button group only serves layouting purposes. 
-Without this placeholder field, the two radio buttons of the styled radio button group would be evenly distributed in the available space. 
+Without this place holder field, the two radio buttons of the styled radio button group would be evenly distributed in the available space. 
 
 % --------------------------------------------------------------------------- %
 \section{Buttons and Links}
@@ -823,9 +823,9 @@ Example uses of buttons and links are shown in the form \java{ButtonLinkFieldsFo
 
 \lstinputlisting[
   label=\lstlabel{field.button.styled},
-  caption=A button with a label and an icon that horizontally streches over the whole column,
+  caption=A button with a label and an icon that horizontally stretches over the whole column,
   index={AbstractButton,Button},
-  linerange={208-231},
+  linerange={207-229},
   float
 ]
 {../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ui/forms/ButtonLinkFieldsForm.java}
@@ -833,14 +833,14 @@ Example uses of buttons and links are shown in the form \java{ButtonLinkFieldsFo
 In it's simplest form a button just extends class \java{AbstractButton} and overrides \java{getConfiguredLabel} to set the label. 
 The example in \lstref{field.button.styled} also has an icon assigned and stretches over the whole column width. 
 In addition, the example button overrides method \java{getConfiguredProcessButton} to return \java{false}. 
-This has the effect that buttons (and links) appear at the exact location where they are defined a field container. 
+This has the effect that buttons (and links) appear at the exact location where they are defined in a field container. 
 Otherwise, buttons (and links) are placed at the bottom of the container they are defined in. 
 
 \lstinputlisting[
   label=\lstlabel{field.togglebutton},
   caption=A toggle button implementation that changes the label text depending on its toggled state,
   index={AbstractButton,Toggle Button},
-  linerange={245-273},
+  linerange={244-271},
   float
 ]
 {../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ui/forms/ButtonLinkFieldsForm.java}
@@ -910,20 +910,61 @@ If the user closes the message box by hitting the \key{esc} or clicking on the i
 \chapter{Advanced Widgets}
 \chalabel{advancedwidgets}
 
+This chapter presents some of the more complex widgets of the Scout framework. 
+Such as fields to handle and display list, tree and table data. 
+As in the previous chapter, for each described form field example use cases, screen shots and code snippets are provided. 
+
 % --------------------------------------------------------------------------- %
 \section{List Box}
-needs text
+
+List boxes allow a user to select of a subset of the presented elements. 
+The individual elements are all displayed in the form of checkable options and are provided to the list box in the form of a code type or a lookup call. 
 
 \begin{figure}
 \includegraphics[width=14cm]{listbox.png}
-\caption{List boxes and use cases.
-More text.}
+\caption{List boxes to select elements represented by code types and lookup calls.}
 \figlabel{listbox}
 \end{figure}
 
+\lstinputlisting[
+  label=\lstlabel{field.listbox},
+  caption=A simple ListBox field backed with a code type representing different colors.,
+  index={ListBox},
+  linerange={172-189},
+  float
+]
+{../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ui/forms/ListBoxForm.java}
+
+A number of use cases are provided in the ''ListBox´´ form shown in \figref{listbox}. 
+These list box examples use either code types or lookup calls as their data source. 
+A simple code example for a list box backed by a code type is provided in \lstref{field.listbox}. 
+
+In the \field{List Content} located on the right hand side of the configuration box, it is also possible to enter user defined content. 
+After entering some example data and pressing the \key{Tab}, the user content is parsed and used to update the elements displayed in the \field{ListBox}. 
+To get the initial example data shown in \figref{listbox}, use the \button{Sample Content} of the list box example form. 
+Basically, the content of each text row is parsed into a lookup row according to the format provided in the first row of the sample content: \texttt{\# key;text;iconId;...}. 
+The resulting lookup rows are then used to dynamically update the content of the lookup call associated with the \field{ListBox}.
+
+\lstinputlisting[
+  label=\lstlabel{field.getcheckedkeys},
+  caption=Updating the \field{getCheckedKeys} whenever the use changes the selection of elements,
+  index={ListBox.getCheckedKeys},
+  linerange={356-379},
+  float
+]
+{../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ui/forms/ListBoxForm.java}
+
+To access the currently selected elements of a list box method \java{getCheckedKeys} may be used. 
+This is demonstrated in \lstref{field.getcheckedkeys} using the \field{getCheckedKeys} in the example form. 
+In order to get notified for every change of the list box field, the list box field is registered as the master in method \java{getConfiguredMasterField}. 
+The implementation of method \java{execChangedMasterValue} is then called whenever the state of the master field is changed. 
+In the case of \lstref{field.getcheckedkeys}, the list of selected keys can be retrieved from the list box and shown in the \field{getCheckedKeys}. 
+
 % --------------------------------------------------------------------------- %
 \section{Tree Box}
-needs text
+
+Tree boxes are working very similar to list boxes. 
+The only major difference to the list box is the fact that the elements presented are represented in the form of trees. 
 
 \begin{figure}
 \includegraphics[width=14cm]{treebox.png}

@@ -136,7 +136,7 @@ public class DateTimeFieldsForm extends AbstractForm implements IPageForm {
   }
 
   /**
-   * @return the GetValueField
+   * @return the GetCheckedKeysField
    */
   public GetValueField getGetValueField() {
     return getFieldByClass(GetValueField.class);
