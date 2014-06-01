@@ -911,14 +911,19 @@ If the user closes the message box by hitting the \key{esc} or clicking on the i
 \chalabel{advancedwidgets}
 
 This chapter presents some of the more complex widgets of the Scout framework. 
-Such as fields to handle and display list, tree and table data. 
-As in the previous chapter, for each described form field example use cases, screen shots and code snippets are provided. 
+This set of widgets includes fields to handle and display list, tree and table data. 
+Also included in this chapter are widgets to display images in both raster and vector formats.  
+As in the previous chapter, for each described widget, screenshots of example use cases and corresponding code snippets are provided. 
 
 % --------------------------------------------------------------------------- %
 \section{List Box}
 
-List boxes allow a user to select of a subset of the presented elements. 
-The individual elements are all displayed in the form of checkable options and are provided to the list box in the form of a code type or a lookup call. 
+List boxes allow a user to select a subset of a predefined list of elements. 
+The individual elements are displayed in the form of checkable options. 
+To check or uncheck a specific element, the user may click on a element or press the \key{Space} when an element has the focus. 
+To define the list of elements that are presented in a list box, code types or a lookup calls can be used. 
+Example use cases using both code types and lookup calls for the definition of the presented elements are implemented in class \java{ListBoxForm} of the Scout widget application. 
+See \figref{listbox} for a screenshot of the example form. 
 
 \begin{figure}
 \includegraphics[width=14cm]{listbox.png}
@@ -928,22 +933,27 @@ The individual elements are all displayed in the form of checkable options and a
 
 \lstinputlisting[
   label=\lstlabel{field.listbox},
-  caption=A simple ListBox field backed with a code type representing different colors.,
+  caption=A simple ListBox field backed by a code type that returns elements of type \java{Color}.,
   index={ListBox},
   linerange={172-189},
   float
 ]
 {../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ui/forms/ListBoxForm.java}
 
-A number of use cases are provided in the ''ListBox´´ form shown in \figref{listbox}. 
-These list box examples use either code types or lookup calls as their data source. 
-A simple code example for a list box backed by a code type is provided in \lstref{field.listbox}. 
-
-In the \field{List Content} located on the right hand side of the configuration box, it is also possible to enter user defined content. 
+In the example section of \figref{listbox} the list boxes in the left column retrieve the elements to be displayed from code types. 
+And in the right column, the displayed elements are retrieved from lookup calls. 
+The implementation of the top left \field{Default} is provided in \lstref{field.listbox}. 
+List boxes are derived from class \java{AbstractListBox} and parameterized by the type of keys of the elements. 
+Please note that the specified key type of a list box must match the key type of the elements provided by code types or lookup calls. 
+In our example, the list box type \java{Color} matches the key type of the code type \java{ColorsCodeType} configured in method \java{getConfiguredCodeType}. 
+	
+In the \field{List Content} located on the right hand side of the configuration section of \figref{listbox} it is also possible to enter user defined content. 
 After entering some example data and pressing the \key{Tab}, the user content is parsed and used to update the elements displayed in the \field{ListBox}. 
 To get the initial example data shown in \figref{listbox}, use the \button{Sample Content} of the list box example form. 
 Basically, the content of each text row is parsed into a lookup row according to the format provided in the first row of the sample content: \texttt{\# key;text;iconId;...}. 
-The resulting lookup rows are then used to dynamically update the content of the lookup call associated with the \field{ListBox}.
+The resulting lookup rows are then used to dynamically update the content of the lookup call associated with the \field{ListBox}. 
+List boxes can be configured to only display the checked elements. 
+For this, the configuration method \java{getConfiguredFilterCheckedNodes} may be used. 
 
 \lstinputlisting[
   label=\lstlabel{field.getcheckedkeys},
@@ -960,18 +970,54 @@ In order to get notified for every change of the list box field, the list box fi
 The implementation of method \java{execChangedMasterValue} is then called whenever the state of the master field is changed. 
 In the case of \lstref{field.getcheckedkeys}, the list of selected keys can be retrieved from the list box and shown in the \field{getCheckedKeys}. 
 
+To read or write the content of a list box field from or to a form data on the server side, methods \java{getValue} and\java{setValue} have to be used. 
+Both methods work with typed sets, requiring the type defined for the list box field.
+
 % --------------------------------------------------------------------------- %
 \section{Tree Box}
 
-Tree boxes are working very similar to list boxes. 
-The only major difference to the list box is the fact that the elements presented are represented in the form of trees. 
+Tree box fields allow a user to select a subset of a predefined list of elements. 
+The difference to list boxes lies in the organisation of the presented elements. 
+Instead of presenting the elements as a list, a tree structure is used with tree box fields. 
+To check and uncheck a specific element, the user may click on a element or press the \key{Space} when an element has the focus. 
+In addition, tree boxes can also be configured to check or uncheck the complete sub tree when clicking on an element. 
+To define the trees presented in tree boxes, hierarchical code types and lookup calls can be used. 
+Example use cases for tree box fields are implemented in class \java{TreeBoxForm} of the Scout widget application.
+A screenshot of the tree box example form is shown in \figref{treebox}. 
 
 \begin{figure}
 \includegraphics[width=14cm]{treebox.png}
-\caption{Tree boxes and use cases.
-More text.}
+\caption{Tree box fields displaying elements defined by hierarchical code types and lookup calls.}
 \figlabel{treebox}
 \end{figure}
+
+\lstinputlisting[
+  label=\lstlabel{field.treebox},
+  caption=A simple TreeBox field backed by a lookup call that returns element keys of type \java{String}.,
+  index={TreeBox},
+  linerange={252-269},
+  float
+]
+{../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ui/forms/TreeBoxForm.java}
+
+In the example section of \figref{treebox} the tree boxes in the left column retrieve the elements to be displayed from hierarchical code types. 
+And in the right column, the displayed elements are retrieved from hierarchical lookup calls. 
+The implementation of the top right \field{Default} is provided in \lstref{field.treebox}. 
+Tree boxes are derived from class \java{AbstractTreeBox} and parameterized by the type of keys of the tree elements. 
+As in the case of list box fields, the the specified type of a tree box must match the key type of the code type or the lookup call. 
+In our example, the tree box type \java{String} matches the type of the lookup call \java{YearsMonthsLookupCall} configured in method \java{getConfiguredLookupCall}.
+
+In the configuration section of the form shown in \figref{treebox} the user may enter any tree data into the \field{Tree Content}. 
+To get the initial tree data shown in \figref{treebox}, use the \button{Sample Content}. 
+Tree boxes can be configured in several ways. 
+Using method \java{getConfiguredAutoExpandAll}, the element tree will be initially expanded. 
+Configuration method \java{getConfiguredFilterCheckedNodes} hides all elements that are not checked.
+And with method \java{getConfiguredAutoCheckChildNodes}, checking or unchecking a tree element automatically updates the elements in the subtree accordingly. 
+
+To access the currently selected elements, the tree box method \java{getCheckedKeys} returns a typed set of keys. 
+The type of the key set is determined by the type of the tree box. 
+To read or write the content of a tree box field on the server side, methods \java{getValue} and\java{setValue} have to be used. 
+Both methods work with typed sets, requiring the type defined for the tree box field.
 
 % --------------------------------------------------------------------------- %
 \section{Smart Field}
