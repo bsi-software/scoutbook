@@ -9,17 +9,11 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.AbstractCode;
 import org.eclipse.scout.rt.shared.services.common.code.AbstractCodeType;
 
-/**
- * @author mzi
- */
 public class IndustryICBCodeType extends AbstractCodeType<Long, Long> {
 
   private static final long serialVersionUID = 1L;
-  public static final Long ID = 100L;
+  public static final Long ID = 0000L;
 
-  /**
-   * @throws org.eclipse.scout.commons.exception.ProcessingException
-   */
   public IndustryICBCodeType() throws ProcessingException {
     super();
   }

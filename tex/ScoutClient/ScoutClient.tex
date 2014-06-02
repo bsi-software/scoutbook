@@ -56,7 +56,13 @@ needs text
 
 % =========================================================================== %
 \chapter{Shared Components}
-needs text
+
+In this chapter deals with the content of the shared plugin of any Scout application. 
+As the name ''shared´´ already indicates, this plugin contains code and resources that need to be available to both the Scout client and the server application. 
+
+The chapter starts with the internationalization of texts in Scout and icon resources. 
+Then, the less visible components are introduced. 
+These include permissions, code types, lookup calls and form data objects. 
   
 % --------------------------------------------------------------------------- %
 \section{Texts / i18n / NLS Support}
@@ -86,7 +92,67 @@ needs text
 
 % --------------------------------------------------------------------------- %
 \section{Code Types and Codes}
-needs text
+
+The Scout framework uses code types to represent enumerated types\footnote{
+Enumerated type: \url{http://en.wikipedia.org/wiki/Enumerated_type}
+}. 
+And the individual named values of a code type are called codes in Scout. 
+The code type and all of its individual codes have associated translated texts, and an id of a specific type. 
+Additional features that enhance Scout code types over simple Java enumerations include the possibility to organize code types hierarchically and to dynamically add codes from external sources. 
+
+% ........................................................................... %
+\subsection{A Simple Example}
+
+
+
+% ........................................................................... %
+\subsection{Hierarchical Codes}
+
+\begin{figure}
+\includegraphics[width=9cm]{hierarchicalcodetype.png}
+\caption{A hierarchical code type class shown in the Scout SDK.}
+\figlabel{hierarchicalcodetype}
+\end{figure}
+
+To explain the definition and use of hierarchical codes we use the Industry Classification Benchmark as a concrete example. 
+The Industry Classification Benchmark or ICB\footnote{
+Industry Classification Benchmark (ICB): \url{http://www.icbenchmark.com/}
+}
+allows to hierarchically classify companies and organisations into industries, super sectors, sectors and sub sectors. 
+Each organizational level has a unique number assigned and a name. 
+This hierarchical setup can easily be transferred to a hierarchical Scout code type. 
+See \figref{hierarchicalcodetype} for a screenshot of the partially expanded ICB code type class in the Scout SDK. 
+
+\lstinputlisting[
+  label=\lstlabel{codetype.hierarchical},
+  caption=A hierarchical code type for the Industry Classification Benchmark.,
+  index={AbstractCodeType,Code Type},
+  linerange={12-34,2942-2942},
+  float
+]
+{../code/widgets/org.eclipse.scout.widget.shared/src/org/eclipse/scout/widget/shared/services/code/IndustryICBCodeType.java}
+
+The corresponding code for the ICB code type is provided in \lstref{codetype.hierarchical}. 
+derived from \java{AbstractCodeType}, parameterized by the type of the id of the code type \java{Long} and the type of the individual codes \java{Long} again
+according to convention code type starts with as an ID smallest number of codes, namely 0L, codes increasing according to icb definition
+hierachical defined in \java{getConfiguredIsHierarchy}. 
+
+\lstinputlisting[
+  label=\lstlabel{codetype.hierarchicalcode},
+  caption=An individual code class of the Industry Classification Benchmark.,
+  index={AbstractCode, Code},
+  linerange={2804-2819},
+  float
+]
+{../code/widgets/org.eclipse.scout.widget.shared/src/org/eclipse/scout/widget/shared/services/code/IndustryICBCodeType.java}
+
+As an example \lstref{codetype.hierarchicalcode}.
+derived from \java{AbstractCode}, parameterized by the type individual codes \java{Long} again
+ID according to icb definition
+
+
+% ........................................................................... %
+\subsection{Loading Codes Dynamically}
 
 \noindent Existing Documentation
 \begin{itemize}
