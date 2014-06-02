@@ -17,7 +17,6 @@ import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.client.ui.form.ScoutInfoForm;
 import org.eclipse.scout.rt.client.ui.form.outline.DefaultOutlineTableForm;
 import org.eclipse.scout.rt.client.ui.form.outline.DefaultOutlineTreeForm;
-import org.eclipse.scout.rt.extension.client.ui.action.menu.AbstractExtensibleMenu;
 import org.eclipse.scout.rt.extension.client.ui.desktop.AbstractExtensibleDesktop;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.ui.UserAgentUtility;
@@ -34,13 +33,12 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
   }
 
   @Override
-  @SuppressWarnings("unchecked")
   protected List<Class<? extends IOutline>> getConfiguredOutlines() {
-    ArrayList<Class<? extends IOutline>> list = new ArrayList();
-    list.add(SimpleWidgetsOutline.class);
-    list.add(AdvancedWidgetsOutline.class);
-    list.add(LayoutWidgetsOutline.class);
-    return list;
+    List<Class<? extends IOutline>> outlines = new ArrayList<>();
+    outlines.add(SimpleWidgetsOutline.class);
+    outlines.add(AdvancedWidgetsOutline.class);
+    outlines.add(LayoutWidgetsOutline.class);
+    return outlines;
   }
 
   @Override
@@ -103,7 +101,7 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
     }
   }
 
-  // TODO: eventually check how to do the bookmark menu locally
+  // TODO: check how to do the bookmark menu locally
   //  @Order(25)
   //  public class BookmarkMenu extends AbstractBookmarkMenu {
   //    public BookmarkMenu() {
@@ -154,95 +152,22 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
     }
   }
 
-  @Order(25.0)
-  public class OutlinesMenu extends AbstractExtensibleMenu {
-
-    @Override
-    protected String getConfiguredText() {
-      return TEXTS.get("Outlines");
-    }
-
-    @Order(10.0)
-    public class SimpleWidgetsMenu extends AbstractExtensibleMenu {
-
-      @Override
-      protected String getConfiguredText() {
-        return TEXTS.get("SimpleWidgets");
-      }
-
-      @Override
-      protected void execAction() throws ProcessingException {
-        setOutline(SimpleWidgetsOutline.class);
-      }
-    }
-
-    @Order(20.0)
-    public class AdvancedWidgetsMenu extends AbstractExtensibleMenu {
-
-      @Override
-      protected String getConfiguredText() {
-        return TEXTS.get("AdvancedWidgets");
-      }
-
-      @Override
-      protected void execAction() throws ProcessingException {
-        setOutline(AdvancedWidgetsOutline.class);
-      }
-    }
-
-    @Order(30.0)
-    public class LayoutWidgetsMenu extends AbstractExtensibleMenu {
-
-      @Override
-      protected String getConfiguredText() {
-        return TEXTS.get("LayoutWidgets");
-      }
-
-      @Override
-      protected void execAction() throws ProcessingException {
-        setOutline(LayoutWidgetsOutline.class);
-      }
-    }
-  }
-
   @Order(10.0)
-  public class StandardOutlineViewButton extends AbstractOutlineViewButton {
-
-    /**
-     *
-     */
-    public StandardOutlineViewButton() {
+  public class SimpleWidgetsOutlineViewButton extends AbstractOutlineViewButton {
+    public SimpleWidgetsOutlineViewButton() {
       super(Desktop.this, SimpleWidgetsOutline.class);
     }
-
-    //    @Override
-    //    protected String getConfiguredText() {
-    //      return TEXTS.get("StandardOutline");
-    //    }
   }
 
   @Order(20.0)
   public class AdvancedWidgetsOutlineViewButton extends AbstractOutlineViewButton {
-
-    /**
-     *
-     */
     public AdvancedWidgetsOutlineViewButton() {
       super(Desktop.this, AdvancedWidgetsOutline.class);
     }
-
-    //    @Override
-    //    protected String getConfiguredText() {
-    //      return TEXTS.get("AdvancedWidgets");
-    //    }
   }
 
   @Order(30.0)
   public class LayoutWidgetsOutlineViewButton extends AbstractOutlineViewButton {
-
-    /**
-     *
-     */
     public LayoutWidgetsOutlineViewButton() {
       super(Desktop.this, LayoutWidgetsOutline.class);
     }

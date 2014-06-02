@@ -1,5 +1,7 @@
 package org.eclipse.scout.widget.ui.swt.application;
 
+import org.eclipse.scout.rt.ui.swt.basic.application.ApplicationActionBarAdvisor;
+import org.eclipse.scout.widget.ui.swt.Activator;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.ui.application.ActionBarAdvisor;
 import org.eclipse.ui.application.IActionBarConfigurer;
@@ -17,14 +19,14 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 
   @Override
   public ActionBarAdvisor createActionBarAdvisor(IActionBarConfigurer configurer) {
-    return new ApplicationActionBarAdvisor(configurer);
+    return new ApplicationActionBarAdvisor(configurer, Activator.getDefault().getEnvironment());
   }
 
   @Override
   public void preWindowOpen() {
     IWorkbenchWindowConfigurer configurer = getWindowConfigurer();
     configurer.setInitialSize(new Point(1024, 768));
-    configurer.setShowCoolBar(ApplicationActionBarAdvisor.NUM_OUTLINE_BUTTONS > 0);
+    configurer.setShowCoolBar(true);
     configurer.setShowStatusLine(true);
     configurer.setShowProgressIndicator(true);
     configurer.setShowMenuBar(true);
