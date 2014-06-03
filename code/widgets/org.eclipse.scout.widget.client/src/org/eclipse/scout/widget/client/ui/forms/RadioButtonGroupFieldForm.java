@@ -18,6 +18,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.IValueField;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCloseButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractRadioButton;
+import org.eclipse.scout.rt.client.ui.form.fields.button.IRadioButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.longfield.AbstractLongField;
 import org.eclipse.scout.rt.client.ui.form.fields.placeholder.AbstractPlaceholderField;
@@ -26,6 +27,8 @@ import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringFiel
 import org.eclipse.scout.rt.client.ui.messagebox.MessageBox;
 import org.eclipse.scout.rt.shared.AbstractIcons;
 import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
+import org.eclipse.scout.rt.shared.ui.UserAgentUtility;
 import org.eclipse.scout.widget.client.ui.forms.RadioButtonGroupFieldForm.MainBox.CloseButton;
 import org.eclipse.scout.widget.client.ui.forms.RadioButtonGroupFieldForm.MainBox.ConfigurationBox;
 import org.eclipse.scout.widget.client.ui.forms.RadioButtonGroupFieldForm.MainBox.ConfigurationBox.GetValueField;
@@ -38,14 +41,12 @@ import org.eclipse.scout.widget.client.ui.forms.RadioButtonGroupFieldForm.MainBo
 import org.eclipse.scout.widget.client.ui.forms.RadioButtonGroupFieldForm.MainBox.ConfigurationBox.ValueButton3Field;
 import org.eclipse.scout.widget.client.ui.forms.RadioButtonGroupFieldForm.MainBox.ExamplesBox;
 import org.eclipse.scout.widget.client.ui.forms.RadioButtonGroupFieldForm.MainBox.ExamplesBox.DefaultGroup;
-import org.eclipse.scout.widget.client.ui.forms.RadioButtonGroupFieldForm.MainBox.ExamplesBox.DefaultGroup.ActiveButton;
-import org.eclipse.scout.widget.client.ui.forms.RadioButtonGroupFieldForm.MainBox.ExamplesBox.DefaultGroup.AllButton;
-import org.eclipse.scout.widget.client.ui.forms.RadioButtonGroupFieldForm.MainBox.ExamplesBox.DefaultGroup.InactiveButton;
 import org.eclipse.scout.widget.client.ui.forms.RadioButtonGroupFieldForm.MainBox.ExamplesBox.DisabledGroup;
-import org.eclipse.scout.widget.client.ui.forms.RadioButtonGroupFieldForm.MainBox.ExamplesBox.DisabledGroup.DisableButton;
-import org.eclipse.scout.widget.client.ui.forms.RadioButtonGroupFieldForm.MainBox.ExamplesBox.DisabledGroup.EnableButton;
-import org.eclipse.scout.widget.client.ui.forms.RadioButtonGroupFieldForm.MainBox.ExamplesBox.DisabledGroup.Place01Field;
+import org.eclipse.scout.widget.client.ui.forms.RadioButtonGroupFieldForm.MainBox.ExamplesBox.DisabledGroup.ActiveButton;
+import org.eclipse.scout.widget.client.ui.forms.RadioButtonGroupFieldForm.MainBox.ExamplesBox.DisabledGroup.AllButton;
+import org.eclipse.scout.widget.client.ui.forms.RadioButtonGroupFieldForm.MainBox.ExamplesBox.DisabledGroup.InactiveButton;
 import org.eclipse.scout.widget.client.ui.forms.RadioButtonGroupFieldForm.MainBox.SampleContentButton;
+import org.eclipse.scout.widget.shared.services.code.EventTypeCodeType;
 
 public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm {
 
@@ -107,24 +108,10 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
   }
 
   /**
-   * @return the DisableButton
-   */
-  public DisableButton getDisableButton() {
-    return getFieldByClass(DisableButton.class);
-  }
-
-  /**
    * @return the DisabledGroup
    */
   public DisabledGroup getDisabledGroup() {
     return getFieldByClass(DisabledGroup.class);
-  }
-
-  /**
-   * @return the EnableButton
-   */
-  public EnableButton getEnableButton() {
-    return getFieldByClass(EnableButton.class);
   }
 
   public ExamplesBox getExamplesBox() {
@@ -151,13 +138,6 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
 
   public ConfigurationBox getConfigurationBox() {
     return getFieldByClass(ConfigurationBox.class);
-  }
-
-  /**
-   * @return the Place01Field
-   */
-  public Place01Field getPlace01Field() {
-    return getFieldByClass(Place01Field.class);
   }
 
   /**
@@ -211,8 +191,39 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
         }
 
         @Override
+        protected Class<? extends ICodeType<?, Long>> getConfiguredCodeType() {
+          return EventTypeCodeType.class;
+        }
+
+        @Override
+        protected void execInitField() throws ProcessingException {
+          setValue(EventTypeCodeType.ExternalCode.ID);
+        }
+      }
+
+      @Order(20.0)
+      public class DisabledGroup extends AbstractRadioButtonGroup<Long> {
+
+        @Override
+        protected boolean getConfiguredEnabled() {
+          return false;
+        }
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("Disabled");
+        }
+
+        @Override
         protected void execInitField() throws ProcessingException {
           getActiveButton().setSelected(true);
+
+          // TODO: https://bugs.eclipse.org/bugs/show_bug.cgi?id=436497
+          if (UserAgentUtility.isSwingUi()) {
+            for (IRadioButton<Long> button : getButtons()) {
+              button.setEnabled(false);
+            }
+          }
         }
 
         @Order(10.0)
@@ -240,49 +251,6 @@ public class RadioButtonGroupFieldForm extends AbstractForm implements IPageForm
           protected String getConfiguredLabel() {
             return TEXTS.get("All");
           }
-        }
-      }
-
-      @Order(20.0)
-      public class DisabledGroup extends AbstractRadioButtonGroup<Long> {
-
-        @Override
-        protected boolean getConfiguredEnabled() {
-          return false;
-        }
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Disabled");
-        }
-
-        @Override
-        protected void execInitField() throws ProcessingException {
-          getEnableButton().setEnabled(false);
-          getDisableButton().setEnabled(false);
-          getDisableButton().setSelected(true);
-        }
-
-        @Order(10.0)
-        public class EnableButton extends AbstractRadioButton {
-
-          @Override
-          protected String getConfiguredLabel() {
-            return TEXTS.get("Enable");
-          }
-        }
-
-        @Order(20.0)
-        public class DisableButton extends AbstractRadioButton {
-
-          @Override
-          protected String getConfiguredLabel() {
-            return TEXTS.get("Disable");
-          }
-        }
-
-        @Order(30.0)
-        public class Place01Field extends AbstractPlaceholderField {
         }
       }
 

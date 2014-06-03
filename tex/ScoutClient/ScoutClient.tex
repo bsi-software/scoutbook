@@ -11,49 +11,6 @@
   \sloppy
 \fi
 
-
-% =========================================================================== %
-\chapter{Overview}
-\chalabel{client_overview}
-
-needs text
-  
-\noindent Existing Documentation
-\begin{itemize}
-  \item concept wiki \url{http://wiki.eclipse.org/Scout/Concepts/Client_Plug-In}
-\end{itemize}
-
-% --------------------------------------------------------------------------- %
-\section{Client Model}
-needs text
-
-\noindent Existing Documentation
-\begin{itemize}
-  \item wiki concept \url{http://wiki.eclipse.org/Scout/Concepts/Client_Plug-In#Component_Model}
-  \item concept wiki \url{http://wiki.eclipse.org/Scout/Concepts/ClientSession}
-\end{itemize}
-
-  * client session
-  * ui
-  * other
-  
-% --------------------------------------------------------------------------- %
-\section{Client Server Communication}
-needs text
-
-% --------------------------------------------------------------------------- %
-\section{UI Technologies}
-needs text
-
-\noindent Existing Documentation
-\begin{itemize}
-  \item wiki concept \url{http://wiki.eclipse.org/Scout/Concepts/Client_Plug-In#Separation_of_UI_and_GUI}
-\end{itemize}
-  
-  * swing
-  * swt
-  * rap
-
 % =========================================================================== %
 \chapter{Shared Components}
 
@@ -92,27 +49,85 @@ needs text
 
 % --------------------------------------------------------------------------- %
 \section{Code Types and Codes}
+\seclabel{code_types_codes}
 
-The Scout framework uses code types to represent enumerated types\footnote{
+Code types and codes are widely used in business applications. 
+In general, any set of named entities that remains more or less fixed over time can be seen as a code type. 
+They can be used to model the organisational structure of companies, to represent business units or to categorise or segment entities. 
+Frequently, enumerations or enumerated types\footnote{
 Enumerated type: \url{http://en.wikipedia.org/wiki/Enumerated_type}
-}. 
-And the individual named values of a code type are called codes in Scout. 
-The code type and all of its individual codes have associated translated texts, and an id of a specific type. 
-Additional features that enhance Scout code types over simple Java enumerations include the possibility to organize code types hierarchically and to dynamically add codes from external sources. 
+}
+are used as synonyms for code types. 
+The individual named entities in a code type are called codes in Scout. 
+
+Both code types and codes have associated names (translated texts) and IDs. 
+As in the case of standard Java enumerations, Scout codes can also have associated values. 
+A set of additional features enhances Scout code types over simple Java enumerations:
+\begin{itemize}
+  \item Code types can be organized hierarchically
+  \item Code types support multitenancy for individual codes
+  \item Code types and codes can be accessed through a code service 
+  \item Codes can by added from external sources dynamically at runtime 
+  \item Codes are cached on both client and server side
+\end{itemize}
+
+The text below first introduces the basic features of code types and codes using a simple example with static codes. 
+Then, hierarchical code types and the dynamic loading of codes from external sources is explained. 
 
 % ........................................................................... %
 \subsection{A Simple Example}
 
+As a simple example we assume that an event managing organization works with an application to plan events for customers. 
+To distinguish public and private events it is natural to define a corresponding code type. 
+Both the code type and all its elements will have an assigned ID and associated translated texts. 
+See \lstref{codetype.simple} for a possible implementation of such a code type. 
 
+\lstinputlisting[
+  label=\lstlabel{codetype.simple},
+  caption=A code type with associated codes.,
+  index={AbstractCodeType,Code Type},
+  linerange={15-66,89},
+  float
+]
+{../code/widgets/org.eclipse.scout.widget.shared/src/org/eclipse/scout/widget/shared/services/code/EventTypeCodeType.java}
+
+The code type class and its codes shown in \lstref{codetype.simple} have been created using the creation wizards provided by the Scout SDK as described in \secref{wizard_code_type}. 
+In Scout, code type classes are derived from class \java{AbstractCodeType<CODE\_TYPE\_ID, CODE\_ID>}. 
+In the provided example, both the code type ID and the code ID are typed with \java{Long}.
+The value of the event code type ID is assigned by \java{Long ID = 10000L}. 
+The contained codes for public and private events are realized by the inner classes \java{PublicCode} and \java{PrivateCode} that are derived from Scout's \java{AbstractCode<CODE\_ID>} class. 
+Their individual IDs then have assigned the numbers 10010 and 10020 respectively. 
+This pattern follows the convention to leave an ample number space between any two code type IDs. 
+This space can then be used for the individual codes of a code type that need ID values as well. 
+
+In the above example the types for the ID values are defined by the generic parameter \java{<Long>}. 
+And other classes from the package \java{java.lang} work well too. 
+In fact, any Java class may be used as a key type for code types and codes as long as it satisfies the following requirements:
+\begin{itemize}
+  \item Key types implement \java{Serializable}
+  \item Key types correctly implement the \java{equals} and \java{hashCode} methods
+  \item Key types are available in the Scout server and the client application.
+\end{itemize}
+
+\lstinputlisting[
+  label=\lstlabel{code.inactive},
+  caption=A codes that is set to inactive.,
+  index={AbstractCode, Code},
+  linerange={68-88},
+  float
+]
+{../code/widgets/org.eclipse.scout.widget.shared/src/org/eclipse/scout/widget/shared/services/code/EventTypeCodeType.java}
+
+To allow for language specific translations, the configuration method \java{getConfiguredText} is used for both the names of code types and codes. 
+A frequently used code property is the active flag to mark obsolete codes. 
+Setting individual codes to inactive is useful for codes that are still linked with existing data but should not longer be used when entering new data into the application. 
+As shown in \lstref{code.inactive}, codes can be marked inactive by returning false in method \java{getConfiguredActive}. 
+
+A set of additional code properties is available to control the appearance of individual codes. 
+Clicking on an individual code in the Scout Explorer provides the list in the Scout Object Property view. 
 
 % ........................................................................... %
-\subsection{Hierarchical Codes}
-
-\begin{figure}
-\includegraphics[width=9cm]{hierarchicalcodetype.png}
-\caption{A hierarchical code type class shown in the Scout SDK.}
-\figlabel{hierarchicalcodetype}
-\end{figure}
+\subsection{Hierarchical Code Types}
 
 To explain the definition and use of hierarchical codes we use the Industry Classification Benchmark as a concrete example. 
 The Industry Classification Benchmark or ICB\footnote{
@@ -120,8 +135,7 @@ Industry Classification Benchmark (ICB): \url{http://www.icbenchmark.com/}
 }
 allows to hierarchically classify companies and organisations into industries, super sectors, sectors and sub sectors. 
 Each organizational level has a unique number assigned and a name. 
-This hierarchical setup can easily be transferred to a hierarchical Scout code type. 
-See \figref{hierarchicalcodetype} for a screenshot of the partially expanded ICB code type class in the Scout SDK. 
+This setup can easily be transferred to a hierarchical Scout code type. 
 
 \lstinputlisting[
   label=\lstlabel{codetype.hierarchical},
@@ -132,39 +146,51 @@ See \figref{hierarchicalcodetype} for a screenshot of the partially expanded ICB
 ]
 {../code/widgets/org.eclipse.scout.widget.shared/src/org/eclipse/scout/widget/shared/services/code/IndustryICBCodeType.java}
 
-The corresponding code for the ICB code type is provided in \lstref{codetype.hierarchical}. 
-derived from \java{AbstractCodeType}, parameterized by the type of the id of the code type \java{Long} and the type of the individual codes \java{Long} again
-according to convention code type starts with as an ID smallest number of codes, namely 0L, codes increasing according to icb definition
-hierachical defined in \java{getConfiguredIsHierarchy}. 
+\begin{figure}
+\includegraphics[width=9cm]{hierarchicalcodetype.png}
+\caption{A hierarchical code type class shown in the Scout SDK.}
+\figlabel{hierarchicalcodetype}
+\end{figure}
 
-\lstinputlisting[
-  label=\lstlabel{codetype.hierarchicalcode},
-  caption=An individual code class of the Industry Classification Benchmark.,
-  index={AbstractCode, Code},
-  linerange={2804-2819},
-  float
-]
-{../code/widgets/org.eclipse.scout.widget.shared/src/org/eclipse/scout/widget/shared/services/code/IndustryICBCodeType.java}
-
-As an example \lstref{codetype.hierarchicalcode}.
-derived from \java{AbstractCode}, parameterized by the type individual codes \java{Long} again
-ID according to icb definition
-
+The corresponding code for the ICB code type is provided in \lstref{codetype.hierarchical} where its hierarchical nature is reflected by method \java{getConfiguredIsHierarchy}. 
+The actual hierarchical codes are then implemented as nested inner code classes that are derived from Scout class \java{AbstractCode}. 
+See \figref{hierarchicalcodetype} for a screenshot of the partially expanded ICB code type class in the Scout SDK. 
 
 % ........................................................................... %
 \subsection{Loading Codes Dynamically}
 
-\noindent Existing Documentation
-\begin{itemize}
-  \item how-to wiki: \url{http://wiki.eclipse.org/Scout/Tutorial/3.8/Minicrm/Code_Types}
-  \item concept wiki \url{http://wiki.eclipse.org/Scout/Concepts/CodeType}
-  \item forum: codes from database \url{http://www.eclipse.org/forums/index.php/t/282531/}
-\end{itemize}
+Although codes types remain mostly static in their nature, they do evolve over time in any real world application. 
+Requiring that all codes are statically defined in the application's code base would result in the necessity to update the code base for every change of a code required by the business. 
+Clearly, such a setup is not sustainable and this is why Scout allows to dynamically update the set of codes contained in a code type.
 
-  * codes and codetypes
-  * static code types
-  * dynamic code types
-  * hierarchical code types
+\lstinputlisting[
+  label=\lstlabel{codetype.addcodes},
+  caption=Adding codes dynamically in method \java{execLoadCodes}.,
+  index={execLoadCodes,Code Type|Load Codes Dynamically},
+  linerange={21-51,195-211},
+  float
+]
+{../code/widgets/org.eclipse.scout.widget.shared/src/org/eclipse/scout/widget/shared/services/code/ColorsCodeType.java}
+
+At startup of a Scout application the codes of all defined code types are loaded into memory. 
+For this, Scout internally calls method \java{loadCodes} for each code type class derived from class \java{AbstractCodeType}. 
+In this method Scout first creates objects representing the statically defined codes and then dynamically adds additional codes in method \java{execLoadCodes}. 
+By overriding this method, a code type class can dynamically add codes from any external sources. 
+An example for the dynamic loading of codes is provided in \lstref{codetype.addcodes}. 
+Please note that this code snipped only illustrates the principle and does therefore not access any external web services or databases. 
+
+As codes have IDs and can be defined both statically in code and dynamically from external data, conflicting definitions of codes are inevitable. 
+In the Scout framework these conflicts are resolved in method \java{execOverrideCode}. 
+In the default implementation provided by class \java{AbstractCodeType}, priority is given to the dynamically defined code. 
+Only attributes that are undefined for the dynamic code are copied from the static code definition. 
+This logic can be changed for any code type by simply overriding method \java{execOverrideCode} with the desired behaviour. 
+In the example provided in \lstref{codetype.addcodes} the code with ID \java{Color.YELLOW} is defined both statically and dynamically. 
+As a result, the translated text for key \java{"YellowDynamic"} is shown in the user interface as it has priority over the statically defined text key \java{"Yellow"}. 
+
+To have access to all codes at runtime, Scout provides the convenience accessor \java{CODES}. 
+This accessor encapsulates the access to the \java{ICodeService} and provides a number of useful methods. 
+At startup, all codes are loaded and cached in the applications client session using method \java{getAllCodeTypes}. 
+And for a class \java{MyCodeType}, all its codes can be retrieved by \java{CODES.getCodeType(MyCodeType.class).getCodes()}. 
 
 % --------------------------------------------------------------------------- %
 \section{Lookup Calls and Services}
@@ -183,7 +209,7 @@ needs text
 
 javadoc: 
 package org.eclipse.scout.rt.shared.services.lookup;
-public class LookupCall<KEY_TYPE> implements ILookupCall<KEY_TYPE>, Cloneable, Serializable, ITypeWithClassId {
+public class LookupCall<KEY\_TYPE> implements ILookupCall<KEY\_TYPE>, Cloneable, Serializable, ITypeWithClassId {
 
 
 % --------------------------------------------------------------------------- %
@@ -221,7 +247,7 @@ needs text
 needs text
 
 % --------------------------------------------------------------------------- %
-\section{Overview}
+\section{Client Model}
 
 needs text
 \begin{figure}[!htb]
@@ -850,19 +876,34 @@ Assigning distinct values to the individual radio buttons allows to query the se
 
 \figref{radiobuttonfield} demonstrates the use of radio button groups in Scout. 
 It is implemented in class \java{RadioButtonGroupFieldForm} of the Scout widget application. 
-As shown in the example section of the form radio buttons may have labes and/or icons assigned. 
-If the radio buttons have assigned individual values of the Java type \java{Long} the currently selected value may be obtained using the \java{getValue} method of the radio button group. 
+As shown in the example section of the form, radio buttons may have labes and/or icons assigned. 
 
 \lstinputlisting[
-  label=\lstlabel{field.radiobuttongroup.styled},
-  caption=A complete radio button group with two radio buttons with individual radio values assigned,
-  index={AbstractCheckBox,Check Box},
-  linerange={289-329},
+  label=\lstlabel{field.radiobuttongroup},
+  caption=A radio button group defined by a code type,
+  index={AbstractRadioButtonGroup,Radio Button Group},
+  linerange={186-202},
   float
 ]
 {../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ui/forms/RadioButtonGroupFieldForm.java}
 
-The code representing the styled radio button group is provided in \lstref{field.radiobuttongroup.styled}. 
+The simplest way to define the content of a radio button group is by using its configuration properties \java{getConfiguredCodeType} or \java{getConfiguredLookupCall}. 
+\lstref{field.radiobuttongroup} provides the implementation of ''Default创 radio button group \java{DefaultGroup}. 
+This radio button group is typed by the generic parameter \java{Long} and the individual radio buttons are obtained from the code type \java{EventTypeCodeType} specified in method \java{getConfiguredCodeType}.
+Please note that the \java{Long} type matches the key type of the codes in the \java{EventTypeCodeType}. 
+The generic parameter used in the definition of a radio button group also determines the type that will be returned by the group's \java{getValue} method. 
+
+\lstinputlisting[
+  label=\lstlabel{field.radiobuttongroup.styled},
+  caption=A complete radio button group with two radio buttons with individual radio values assigned,
+  linerange={257-296},
+  float
+]
+{../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ui/forms/RadioButtonGroupFieldForm.java}
+
+Alternatively, the individual buttons in a radio button group can also be defined as inner classes. 
+This approach has been used for the ''Styled创 radio button group in the example section of the \java{RadioButtonGroupFieldForm}. 
+The corresponding code is provided in \lstref{field.radiobuttongroup.styled}. 
 The type of the value that is returned by the \java{getValue} method is defined on the radio button group. 
 In the provided listing, the \java{StyledGroupBox} is configured to return a value of the type \java{Long}. 
 Consequently, the individual radio buttons are returning radio values of the type \java{Long} as well in the \java{getConfiguredRadioValue} methods.
@@ -1045,6 +1086,7 @@ Both methods work with typed sets, requiring the type defined for the list box f
 Tree box fields allow a user to select a subset of a predefined list of elements. 
 The difference to list boxes lies in the organisation of the presented elements. 
 Instead of presenting the elements as a list, a tree structure is used with tree box fields. 
+
 To check and uncheck a specific element, the user may click on a element or press the \key{Space} when an element has the focus. 
 In addition, tree boxes can also be configured to check or uncheck the complete sub tree when clicking on an element. 
 To define the trees presented in tree boxes, hierarchical code types and lookup calls can be used. 
@@ -1087,15 +1129,30 @@ Both methods work with typed sets, requiring the type defined for the tree box f
 
 % --------------------------------------------------------------------------- %
 \section{Smart Field}
-needs text
+
+Smart fields are used to select a single value from a set of named elements. 
+And the ''search-as-you-type创 functionality of smart fields offers a good usability even if the list contains a large number of elements to choose from. 
+The content of smart fields can either be provided by code types or lookup calls. 
+Consequently, smart fields work with both lists and hierarchical structures and the content may come from a static set of values or is dynamically provided at runtime. 
+
+To select an elements in a smart field the user can either use the mouse or the keyboard. 
+Pressing the \key{Up Arrow} or the \key{Down Arrow} shows the list of entries when the smart field has the focus.
+Alternatively, the use can click with the mouse on the smart field icon. 
+By typing a part of the name of the desired entry into the field, the ''search-as-you-type创 support kicks in and a filtered list of elements is displayed. 
+The selected entry can be confirmed by using the \key{Enter} or the \key{Tab}. 
 
 \begin{figure}
 \includegraphics[width=14cm]{smartfield.png}
-\caption{A smart field is a combo box on steroids.
-Smart fields support ''search-as-you-type'' and are used to select a value out of a list or a tree.
-The content values may come from a static set of values or can be dynamically provided at runtime.}
+\caption{Smart field examples. 
+Smart fields support ''search-as-you-type创 and are used to select a value from of a list of elements or a tree.}
 \figlabel{smartfield}
 \end{figure}
+
+Example use cases for smart fields are provided in class \java{SmartFieldForm} of the Scout widget application and a screenshot of this example form is shown in \figref{smartfield}. 
+The left hand side of the demo form contains smart fields based on list content and on the right hand side smart fields backed with hierarchical content are shown. 
+In the example section of the demo form, some of the code types are backed by code types and others by lookup calls. 
+And in the configuration section the content shown in the smart fields can be entered manually at runtime. 
+To obtain the content shown in \figref{smartfield}, use the \button{Sample Content}. 
 
 \noindent Existing Documentation
 \begin{itemize}
@@ -1113,13 +1170,6 @@ Each smart field can have menus attached. The menus will be shown when the user 
 \end{figure}
 
 By default, the menus will only be shown if a value of the smart field has been selected. To show the menus even if the smart field is empty, one has to override the menu's \lstinline$getConfiguredEmptySpaceAction$ method:
-
-\begin{lstlisting}[backgroundcolor=\color{white}]
-@Override
-protected boolean getConfiguredEmptySpaceAction() {
- return true;
-}
-\end{lstlisting}
 
 % --------------------------------------------------------------------------- %
 \section{Tree Field}

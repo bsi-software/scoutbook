@@ -591,9 +591,30 @@ This reflects the fact that services may be defined on both the client and the s
 
 % --------------------------------------------------------------------------- %
 \subsection{Creating new Code Types and Codes}
-needs text
+\seclabel{wizard_code_type}
 
-New code type and new code wizards
+The \wizard{New Code Type} allows to create new code types. 
+As access to code types and codes is required from both client and server applications they are located in the application's shared plugin. 
+Consequently, the \contextmenu{New Code Type...} is provided on the \folder{Code Types} under the green shared node in the Scout Explorer. 
+
+\begin{figure}
+\includegraphics[width=7cm]{wizard_code_type.png} \hspace{5mm}
+\includegraphics[width=7cm]{wizard_code.png}
+\caption{The Scout SDK wizards to create a new code type (left) and a new code (right).}
+\figlabel{wizard_code_type}
+\end{figure}
+
+A screenshot of the wizard to create a new code type is shown on the left side of \figref{wizard_code_type}. 
+The \field{Code Id} contains the ID that will be assigned to the new code type. 
+Take care to ensure that the content of this field matches with the type provided in the \field{Datatype of CodeType Id}. 
+The \field {Name} contains an optional name for the code type, and the \field{Class Name} the name of the Java class to be created. 
+If the name field is filled in, the class name field is automatically derived from the provided name. 
+
+The \wizard{New Code} shown on the right side of \figref{wizard_code_type} allows to create individual codes. 
+In the Scout Explorer it can be accessed through the \contextmenu{New Code ...} on existing code type nodes. 
+For hierarchical code types, this wizard is also made available on existing codes to create inner codes. 
+
+For a detailed introduction into code types and codes see \secref{code_types_codes}. 
 
 % --------------------------------------------------------------------------- %
 \subsection{Creating new Permissions}

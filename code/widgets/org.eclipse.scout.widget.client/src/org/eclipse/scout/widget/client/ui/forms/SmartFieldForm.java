@@ -280,8 +280,14 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
 
         @Override
         protected void execChangedValue() throws ProcessingException {
-          String color = Integer.toHexString(getValue().getRGB()).substring(2);
-          setBackgroundColor(color);
+          Color color = getValue();
+          if (color == null) {
+            setBackgroundColor(null);
+          }
+          else {
+            String hex = Integer.toHexString(color.getRGB()).substring(2);
+            setBackgroundColor(hex);
+          }
         }
       }
 
@@ -430,6 +436,9 @@ public class SmartFieldForm extends AbstractForm implements IPageForm {
         protected void execChangedMasterValue(Object newMasterValue) throws ProcessingException {
           if (newMasterValue != null) {
             setValue(newMasterValue.toString());
+          }
+          else {
+            setValue(null);
           }
         }
       }

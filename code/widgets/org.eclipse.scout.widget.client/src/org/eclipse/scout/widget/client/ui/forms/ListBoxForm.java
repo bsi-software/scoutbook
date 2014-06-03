@@ -32,6 +32,8 @@ import org.eclipse.scout.rt.client.ui.form.fields.listbox.AbstractListBox;
 import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBox;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.shared.TEXTS;
+import org.eclipse.scout.rt.shared.services.common.code.CODES;
+import org.eclipse.scout.rt.shared.services.common.code.ICode;
 import org.eclipse.scout.rt.shared.services.common.code.ICodeType;
 import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.rt.shared.services.lookup.LookupRow;
@@ -214,9 +216,13 @@ public class ListBoxForm extends AbstractForm implements IPageForm {
         @Override
         protected void execInitField() throws ProcessingException {
           Set<Color> colors = new HashSet<>();
-          colors.add(ColorsCodeType.RedCode.ID);
+
           colors.add(ColorsCodeType.GreenCode.ID);
           colors.add(ColorsCodeType.BlueCode.ID);
+          // get a dynamically added code
+          ICode<Color> red = CODES.getCodeType(ColorsCodeType.class).getCode(Color.RED);
+          colors.add(red.getId());
+
           setValue(colors);
           setFilterCheckedRowsValue(true);
         }

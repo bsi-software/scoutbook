@@ -4,27 +4,25 @@
 package org.eclipse.scout.widget.shared.services.code;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.code.AbstractCode;
 import org.eclipse.scout.rt.shared.services.common.code.AbstractCodeType;
+import org.eclipse.scout.rt.shared.services.common.code.CodeRow;
+import org.eclipse.scout.rt.shared.services.common.code.ICodeRow;
 
 /**
  * @author mzi
  */
-public class ColorsCodeType extends AbstractCodeType<Color, Color> {
+public class ColorsCodeType extends AbstractCodeType<Long, Color> {
 
   private static final long serialVersionUID = 1L;
-  /**
-   *
-   */
-  public static final Color ID = null;
+  public static final Long ID = 20000L;
 
-  /**
-   * @throws org.eclipse.scout.commons.exception.ProcessingException
-   */
   public ColorsCodeType() throws ProcessingException {
     super();
   }
@@ -35,8 +33,20 @@ public class ColorsCodeType extends AbstractCodeType<Color, Color> {
   }
 
   @Override
-  public Color getId() {
+  public Long getId() {
     return ID;
+  }
+
+  @Override
+  protected List<? extends ICodeRow<Color>> execLoadCodes(Class<? extends ICodeRow<Color>> codeRowType) throws ProcessingException {
+    List<ICodeRow<Color>> codes = new ArrayList<>();
+
+    codes.add(new CodeRow<Color>(Color.PINK, TEXTS.get("Pink")));
+    codes.add(new CodeRow<Color>(Color.RED, TEXTS.get("Red")));
+    codes.add(new CodeRow<Color>(Color.WHITE, TEXTS.get("White")));
+    codes.add(new CodeRow<Color>(Color.YELLOW, TEXTS.get("YellowDynamic")));
+
+    return codes;
   }
 
   @Order(10.0)
@@ -167,7 +177,7 @@ public class ColorsCodeType extends AbstractCodeType<Color, Color> {
     }
   }
 
-  @Order(120.0)
+  @Order(110.0)
   public static class OrangeCode extends AbstractCode<Color> {
     private static final long serialVersionUID = 1L;
     public static final Color ID = Color.ORANGE;
@@ -183,55 +193,7 @@ public class ColorsCodeType extends AbstractCodeType<Color, Color> {
     }
   }
 
-  @Order(130.0)
-  public static class PinkCode extends AbstractCode<Color> {
-    private static final long serialVersionUID = 1L;
-    public static final Color ID = Color.PINK;
-
-    @Override
-    protected String getConfiguredText() {
-      return TEXTS.get("Pink");
-    }
-
-    @Override
-    public Color getId() {
-      return ID;
-    }
-  }
-
-  @Order(60.0)
-  public static class RedCode extends AbstractCode<Color> {
-    private static final long serialVersionUID = 1L;
-    public static final Color ID = Color.RED;
-
-    @Override
-    protected String getConfiguredText() {
-      return TEXTS.get("Red");
-    }
-
-    @Override
-    public Color getId() {
-      return ID;
-    }
-  }
-
-  @Order(50.0)
-  public static class WhiteCode extends AbstractCode<Color> {
-    private static final long serialVersionUID = 1L;
-    public static final Color ID = Color.WHITE;
-
-    @Override
-    protected String getConfiguredText() {
-      return TEXTS.get("White");
-    }
-
-    @Override
-    public Color getId() {
-      return ID;
-    }
-  }
-
-  @Order(110.0)
+  @Order(120.0)
   public static class YellowCode extends AbstractCode<Color> {
     private static final long serialVersionUID = 1L;
     public static final Color ID = Color.YELLOW;
