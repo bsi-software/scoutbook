@@ -279,9 +279,7 @@ public class TreeFieldForm extends AbstractForm implements IPageForm {
         @Override
         protected void execChangedValue() throws ProcessingException {
           List<Node> nodes = parseFieldValue(true);
-          getTreeField().getTree().setMenus(nodesToMenus(nodes));
-          // TODO: replace by this with luna rc2
-          // getTreeField().getTree().getContextMenu().addChildActions(nodesToMenus(nodes));
+          getTreeField().getTree().getContextMenu().addChildActions(nodesToMenus(nodes));
         }
       }
     }

@@ -1,6 +1,13 @@
-/**
+/*******************************************************************************
+ * Copyright (c) 2013 BSI Business Systems Integration AG.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  *
- */
+ * Contributors:
+ *     BSI Business Systems Integration AG - initial API and implementation
+ ******************************************************************************/
 package org.eclipse.scout.widget.client.ui.template.formfield;
 
 import java.io.BufferedInputStream;
@@ -13,6 +20,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.IOUtility;
 import org.eclipse.scout.commons.annotations.FormData;
 import org.eclipse.scout.commons.annotations.Order;
@@ -20,6 +28,8 @@ import org.eclipse.scout.commons.dnd.FileListTransferObject;
 import org.eclipse.scout.commons.dnd.TransferObject;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.action.keystroke.AbstractKeyStroke;
+import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
+import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
 import org.eclipse.scout.rt.client.ui.basic.filechooser.FileChooser;
 import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractBooleanColumn;
@@ -101,12 +111,6 @@ public abstract class AbstractFileTableField extends AbstractTableField {
     protected String getConfiguredKeyStroke() {
       return "delete";
     }
-
-    // TODO: check why this disappeared from menuactions
-//    @Override
-//    protected boolean getConfiguredMultiSelectionAction() {
-//      return true;
-//    }
 
     @Override
     protected void execAction() throws ProcessingException {
@@ -321,13 +325,8 @@ public abstract class AbstractFileTableField extends AbstractTableField {
     public class AddMenu extends AbstractExtensibleMenu {
 
       @Override
-      protected boolean getConfiguredEmptySpaceAction() {
-        return true;
-      }
-
-      @Override
-      protected boolean getConfiguredSingleSelectionAction() {
-        return false;
+      protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+        return CollectionUtility.<IMenuType> hashSet(TableMenuType.EmptySpace, TableMenuType.Header, TableMenuType.SingleSelection);
       }
 
       @Override
@@ -354,8 +353,8 @@ public abstract class AbstractFileTableField extends AbstractTableField {
     public class DeleteMenu extends AbstractExtensibleMenu {
 
       @Override
-      protected boolean getConfiguredMultiSelectionAction() {
-        return true;
+      protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+        return CollectionUtility.<IMenuType> hashSet(TableMenuType.MultiSelection, TableMenuType.SingleSelection);
       }
 
       @Override
@@ -372,5 +371,4 @@ public abstract class AbstractFileTableField extends AbstractTableField {
       }
     }
   }
-
 }

@@ -14,13 +14,17 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.NumberUtility;
 import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.exception.ProcessingStatus;
+import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
+import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
 import org.eclipse.scout.rt.client.ui.basic.cell.Cell;
 import org.eclipse.scout.rt.client.ui.basic.table.ColumnSet;
 import org.eclipse.scout.rt.client.ui.basic.table.ITable;
@@ -275,7 +279,6 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           ITable table = getTable();
 
           // TODO why is updatetablestatus called during construction of the table?
-//          if (!getForm().isFormLoading()) {
           if (getRootGroupBox() != null) {
             getSelectedRowsField().setValue(rowsToKeyString(table.getSelectedRows()));
             getInsertedRowsField().setValue(rowsToKeyString(table.getInsertedRows()));
@@ -545,16 +548,9 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           @Order(10.0)
           public class NewEventMenu extends AbstractExtensibleMenu {
 
-            // TODO find out what to do here (removed with luna 4.0 m7)
             @Override
-            protected boolean getConfiguredEmptySpaceAction() {
-              return true;
-            }
-
-            // TODO find out what to do here (removed with luna 4.0 m7)
-            @Override
-            protected boolean getConfiguredSingleSelectionAction() {
-              return false;
+            protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+              return CollectionUtility.<IMenuType> hashSet(TableMenuType.EmptySpace, TableMenuType.SingleSelection);
             }
 
             @Override
@@ -578,8 +574,8 @@ public class TableFieldForm extends AbstractForm implements IPageForm {
           public class DeleteEventMenu extends AbstractExtensibleMenu {
 
             @Override
-            protected boolean getConfiguredMultiSelectionAction() {
-              return true;
+            protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+              return CollectionUtility.<IMenuType> hashSet(TableMenuType.MultiSelection, TableMenuType.SingleSelection);
             }
 
             @Override
