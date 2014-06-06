@@ -52,8 +52,8 @@ needs text
 \seclabel{code_types_codes}
 
 Code types and codes are widely used in business applications. 
-In general, any set of named entities that remains more or less fixed over time can be seen as a code type. 
-They can be used to model the organisational structure of companies, to represent business units or to categorise or segment entities. 
+In general, any fixed set of named entities can be seen as a code type. 
+Code types can be used to model the organisational structure of companies, to represent business units or to categorise or segment entities. 
 Frequently, enumerations or enumerated types\footnote{
 Enumerated type: \url{http://en.wikipedia.org/wiki/Enumerated_type}
 }
@@ -194,22 +194,40 @@ And for a class \java{MyCodeType}, all its codes can be retrieved by \java{CODES
 
 % --------------------------------------------------------------------------- %
 \section{Lookup Calls and Services}
-needs text
+
+Lookup calls are are used to look up lists of lookup rows in the form of key-text pairs. 
+The list of lookup rows returned is usually defined by some search criteria. 
+When the look up is triggered by a key, only a single element is returned. 
+And when a string is provided as a search criteria, the returned list typically contains the lookup rows that contain the given search text as a substring. 
+
+For lookup calls two main use cases exist. 
+In the first case, the lookup data is locally available, not too large and can be kept in memory. 
+In this situation, the lookup data can be directly created in the call itself. 
+This works well when the data to be looked up is based on a code type for example. 
+In the other case, the lookup data is dynamic in nature, the amount of data is large and needs to be read from some external source, such as a database or a web service. 
+For large amounts of external data, the lookup call will make use of a lookup service that is providing the necessary data. 
+
+
  
 \noindent Existing Documentation
 \begin{itemize}
   \item presentation: \url{http://wiki.eclipse.org/images/c/c9/20111102_EclipseConEurope2011-EclipseScout-DiscoverThePotential.pdf}
+  \item tutorial: \url{https://wiki.eclipse.org/Scout/Tutorial/Lookup_Calls}
+  \item tutorial minicrm: \url{https://wiki.eclipse.org/Scout/Tutorial/4.0/Minicrm/Lookup_Calls_and_Lookup_Services}
   \item concept wiki: \url{http://wiki.eclipse.org/Scout/Concepts/LookupCall}
+  \item concept wiki: \url{http://wiki.eclipse.org/Scout/Concepts/Lookup_Service}
   \item forum: \url{http://www.eclipse.org/forums/index.php/t/279108/}
+  \item javadoc lookupcall: \url{https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.shared/src/org/eclipse/scout/rt/shared/services/lookup/LookupCall.java}
+  \item javadoc lookuprow: \url{https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.shared/src/org/eclipse/scout/rt/shared/services/lookup/LookupRow.java}
+  \item javadoc codelookupcall \url{https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.shared/src/org/eclipse/scout/rt/shared/services/lookup/CodeLookupCall.java}
+  \item javadoc locallookupcall \url{https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.shared/src/org/eclipse/scout/rt/shared/services/lookup/LocalLookupCall.java}
+  \item javadoc ilookupservice \url{https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.shared/src/org/eclipse/scout/rt/shared/services/lookup/ILookupService.java}	
+  \item javadoc lookupservices \url{https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.server/src/org/eclipse/scout/rt/server/services/lookup/}
 \end{itemize}
 
   * lookup call
   * lookup service
   * sqllookup service
-
-javadoc: 
-package org.eclipse.scout.rt.shared.services.lookup;
-public class LookupCall<KEY\_TYPE> implements ILookupCall<KEY\_TYPE>, Cloneable, Serializable, ITypeWithClassId {
 
 
 % --------------------------------------------------------------------------- %
@@ -1131,12 +1149,12 @@ Both methods work with typed sets, requiring the type defined for the tree box f
 \section{Smart Field}
 
 Smart fields are used to select a single value from a set of named elements. 
-And the ''search-as-you-type创 functionality of smart fields offers a good usability even if the list contains a large number of elements to choose from. 
+As smart fields offer ''search-as-you-type创 functionality, the field works well for very large sets of elements.  
 The content of smart fields can either be provided by code types or lookup calls. 
 Consequently, smart fields work with both lists and hierarchical structures and the content may come from a static set of values or is dynamically provided at runtime. 
 
 To select an elements in a smart field the user can either use the mouse or the keyboard. 
-Pressing the \key{Up Arrow} or the \key{Down Arrow} shows the list of entries when the smart field has the focus.
+Pressing the \key{Up Arrow} or the \key{Down Arrow} in the field shows the list of entries when the smart field has the focus.
 Alternatively, the use can click with the mouse on the smart field icon. 
 By typing a part of the name of the desired entry into the field, the ''search-as-you-type创 support kicks in and a filtered list of elements is displayed. 
 The selected entry can be confirmed by using the \key{Enter} or the \key{Tab}. 
@@ -1150,7 +1168,7 @@ Smart fields support ''search-as-you-type创 and are used to select a value from 
 
 Example use cases for smart fields are provided in class \java{SmartFieldForm} of the Scout widget application and a screenshot of this example form is shown in \figref{smartfield}. 
 The left hand side of the demo form contains smart fields based on list content and on the right hand side smart fields backed with hierarchical content are shown. 
-In the example section of the demo form, some of the code types are backed by code types and others by lookup calls. 
+In the example section of the demo form, some smart fields are backed by code types and others by lookup calls. 
 And in the configuration section the content shown in the smart fields can be entered manually at runtime. 
 To obtain the content shown in \figref{smartfield}, use the \button{Sample Content}. 
 

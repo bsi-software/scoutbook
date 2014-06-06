@@ -22,7 +22,6 @@ import java.util.Set;
 
 import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.IOUtility;
-import org.eclipse.scout.commons.annotations.FormData;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.dnd.FileListTransferObject;
 import org.eclipse.scout.commons.dnd.TransferObject;
@@ -51,12 +50,7 @@ import org.eclipse.scout.widget.client.Activator;
 import org.eclipse.scout.widget.client.ui.forms.TableFieldForm;
 import org.eclipse.scout.widget.client.ui.template.formfield.AbstractFileTableField.Table.DeleteMenu;
 import org.eclipse.scout.widget.shared.FileCodeType;
-import org.eclipse.scout.widget.shared.ui.template.formfield.AbstractFileTableFieldData;
 
-/**
- * @author mzi
- */
-@FormData(value = AbstractFileTableFieldData.class, sdkCommand = FormData.SdkCommand.CREATE, defaultSubtypeSdkCommand = FormData.DefaultSubtypeSdkCommand.CREATE)
 public abstract class AbstractFileTableField extends AbstractTableField {
   protected static final String FILE_SIZE_FORMAT = "#,### KB";
   protected static final long FILE_SIZE_FACTOR = 1024;

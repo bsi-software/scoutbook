@@ -3,17 +3,14 @@
  */
 package org.eclipse.scout.widget.client.ui.template.formfield;
 
-import org.eclipse.scout.commons.annotations.FormData;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.shared.TEXTS;
-import org.eclipse.scout.widget.shared.ui.template.formfield.AbstractMonthsBoxData;
 
 /**
  * @author mzi
  */
-@FormData(value = AbstractMonthsBoxData.class, sdkCommand = FormData.SdkCommand.CREATE, defaultSubtypeSdkCommand = FormData.DefaultSubtypeSdkCommand.CREATE)
 public abstract class AbstractMonthsBox extends AbstractGroupBox {
 
   /**

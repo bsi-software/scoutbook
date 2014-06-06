@@ -7,8 +7,7 @@ Bundle-Activator: org.eclipse.scout.widget.shared.Activator
 Export-Package: org.eclipse.scout.widget.shared,
  org.eclipse.scout.widget.shared.services,
  org.eclipse.scout.widget.shared.services.code,
- org.eclipse.scout.widget.shared.services.common.text,
- org.eclipse.scout.widget.shared.ui.template.formfield
+ org.eclipse.scout.widget.shared.services.common.text
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.scout.rt.shared;visibility:=reexport
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
