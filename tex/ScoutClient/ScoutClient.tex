@@ -189,6 +189,8 @@ As a result, the translated text for key \java{"YellowDynamic"} is shown in the 
 
 To have access to all codes at runtime, Scout provides the convenience accessor \java{CODES}. 
 This accessor encapsulates the access to the \java{ICodeService} and provides a number of useful methods. 
+% TODO where are the code services? widget has localcodeservice in client, registered in plugin.xml of client
+% TODO helloworld does not seem to have registered a code service in shared or server or client. why not???
 At startup, all codes are loaded and cached in the applications client session using method \java{getAllCodeTypes}. 
 And for a class \java{MyCodeType}, all its codes can be retrieved by \java{CODES.getCodeType(MyCodeType.class).getCodes()}. 
 
@@ -203,10 +205,46 @@ And when a string is provided as a search criteria, the returned list typically 
 For lookup calls two main use cases exist. 
 In the first case, the lookup data is locally available, not too large and can be kept in memory. 
 In this situation, the lookup data can be directly created in the call itself. 
-This works well when the data to be looked up is based on a code type for example. 
+As an example, you may consider a lookup call where the lookup data is based on a code type.
 In the other case, the lookup data is dynamic in nature, the amount of data is large and needs to be read from some external source, such as a database or a web service. 
-For large amounts of external data, the lookup call will make use of a lookup service that is providing the necessary data. 
+To access large amounts of external data, a lookup call typically invokes a so called lookup service that is providing the necessary data. 
+This is exactly the scenario that was used in the ''My Contacts´´ application of the book's first part in \secref{adding_the_smartfield}. 
+In the contact form of that application, a company smart field is used to let the user select a specific entry from a list of companies. 
+And in turn, this smart field uses a company lookup call that is backed by a company lookup service. 
+This lookup service then accesses a database to create the list of companies required for the company smart field. 
 
+in the text below
+(0) general aspects: 
+    * getDataBy{Key|Text|Rec|All}
+	* additional properties as constraints to the result set: master field
+	* for a specific implementation additional properties can be added with getters/setters ? -> yes as they are passed to services as bind variables
+(1) local lookup calls in the client plugin
+(2) lookup calls in the shared plugin
+(3) lookup services are only mentioned here for completeness. full discussion in book part 3 for scout server
+
+\lstinputlisting[
+  label=\lstlabel{lookup.local.simple},
+  caption=A simple local lookup call defining it's entries in method \java{execCreateLookupRows}.,
+  index={execCreateLookupRows,Lookup Call|Local Lookup Call},
+  linerange={17-30},
+  float
+]
+{../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/services/lookup/FontStyleLookupCall.java}
+
+\lstinputlisting[
+  label=\lstlabel{lookup.local.simple},
+  caption=A local code lookup call. This lookup removes inactive codes in the lookup data.,
+  index={Code Lookup Call},
+  linerange={14-36},
+  float
+]
+{../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/services/lookup/EventTypeLookupCall.java}
+
+\begin{figure}
+\includediagram{10cm}{lookup_call}
+\caption{Implementing a lookup call with a corresponding lookup service. Scout framework components are shown in orange, user code in blue.}
+\figlabel{lookup_call}
+\end{figure}
 
  
 \noindent Existing Documentation
@@ -225,7 +263,6 @@ For large amounts of external data, the lookup call will make use of a lookup se
   \item javadoc lookupservices \url{https://eclipse.googlesource.com/scout/org.eclipse.scout.rt/+/Luna_RC3/org.eclipse.scout.rt.server/src/org/eclipse/scout/rt/server/services/lookup/}
 \end{itemize}
 
-  * lookup call
   * lookup service
   * sqllookup service
 

@@ -21,24 +21,25 @@ public class LocaleLookupCall extends LocalLookupCall<Locale> {
 
   private static final long serialVersionUID = 1L;
 
-  private void sort(Locale[] locales) {
+  private Locale[] sort(Locale[] locales) {
     Comparator<Locale> localeComparator = new Comparator<Locale>() {
       @Override
       public int compare(Locale locale1, Locale locale2) {
         return locale1.toString().compareTo(locale2.toString());
       }
     };
+
     Arrays.sort(locales, localeComparator);
+
+    return locales;
   }
 
   @Override
   protected List<LookupRow<Locale>> execCreateLookupRows() throws ProcessingException {
     ArrayList<LookupRow<Locale>> rows = new ArrayList<>();
-
     Locale[] locales = SimpleDateFormat.getAvailableLocales();
-    sort(locales);
 
-    for (Locale locale : locales) {
+    for (Locale locale : sort(locales)) {
       rows.add(new LookupRow<Locale>(locale, locale.getDisplayName()));
     }
 

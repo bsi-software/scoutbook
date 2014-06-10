@@ -13,6 +13,11 @@
             class="org.eclipse.scout.widget.client.services.LocalCodeService"
             session="org.eclipse.scout.widget.client.ClientSession">
       </service>
+      <service
+            factory="org.eclipse.scout.rt.client.services.ClientServiceFactory"
+            class="org.eclipse.scout.widget.client.services.LocalAccessControlService"
+            session="org.eclipse.scout.widget.client.ClientSession">
+      </service>
    </extension>
 
 </plugin>

@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.eclipse.scout.transport.shared
+Bundle-SymbolicName: org.eclipse.scout.transport.shared;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.eclipse.scout.transport.shared.Activator
+Export-Package: org.eclipse.scout.transport.shared,
+ org.eclipse.scout.transport.shared.services,
+ org.eclipse.scout.transport.shared.services.entity,
+ org.eclipse.scout.transport.shared.services.code,
+ org.eclipse.scout.transport.shared.services.common.text,
+ org.eclipse.scout.transport.shared.services.lookup
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.scout.rt.shared;visibility:=reexport
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
