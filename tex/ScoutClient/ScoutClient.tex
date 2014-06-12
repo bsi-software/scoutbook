@@ -215,12 +215,12 @@ This lookup service then accesses a database to create the list of companies req
 
 in the text below
 (0) general aspects: 
-    * getDataBy{Key|Text|Rec|All}
+    * getDataBy{Key|Text|Rec?|All}
 	* additional properties as constraints to the result set: master field
 	* for a specific implementation additional properties can be added with getters/setters ? -> yes as they are passed to services as bind variables
 (1) local lookup calls in the client plugin
 (2) lookup calls in the shared plugin
-(3) lookup services are only mentioned here for completeness. full discussion in book part 3 for scout server
+(3) lookup services are only mentioned here for completeness. full discussion in book part 3 for scout server? or not? probably needs to be here ...
 
 \lstinputlisting[
   label=\lstlabel{lookup.local.simple},
@@ -239,6 +239,8 @@ in the text below
   float
 ]
 {../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/services/lookup/EventTypeLookupCall.java}
+
+TODO: fix \figref{lookup_call}: MyLookupService extends AbstractLookupService and implements IMyLookupService that extends ILookupService which 
 
 \begin{figure}
 \includediagram{10cm}{lookup_call}
