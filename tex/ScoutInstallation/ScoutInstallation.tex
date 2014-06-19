@@ -20,10 +20,9 @@
 \section{Overview}
 
 This chapter walks you through the installation of Eclipse Scout. 
-The installation description (as well as the rest of this book) is written and tested for Eclipse Scout 3.9.
-Scout 3.9.0 will be delivered as part of the Eclipse Kepler release train on June 26, 2013.
-Detailed information regarding the scheduling of the Kepler release train is provided in the Eclipse
-wiki\footnote{Kepler release plan: \url{http://wiki.eclipse.org/Kepler/Simultaneous_Release_Plan}}.
+The installation description (as well as the rest of this book) is written and tested for Eclipse Scout 4.0 which is delivered as integral part of the Eclipse Luna release train, 2014.
+Detailed information regarding the scheduling of this release train is provided in the Eclipse
+wiki\footnote{Luna release plan: \url{http://wiki.eclipse.org/Luna/Simultaneous_Release_Plan}}.
 
 We assume that you have not installed any software relevant for the content of this book.
 This is why the Scout installation chapter starts with the installation of the Java Development Kit (JDK).
@@ -36,35 +35,38 @@ As Scout applications have been built primarily on the Windows platform in the p
 \section{Download and Install a JDK}
 
 The first step to install Scout is to have an existing and working installation of a JDK.
-It is recommended to go for the most recent download of Java 7.
+It is currently recommended to go for the most recent download of Java 7.
 
-You may also use Scout with Java 6.
-However, be aware that the communicated end of life for Oracle's Java 6 is February 
-2013.\footnote{Java 6 End of Life: \url{http://www.oracle.com/technetwork/java/eol-135779.html}}
-Java 5 is not supported. 
-Running Scout on Java 8 is realistic for the 2014 release train of Eclipse.
-This guess is based on the Java SE Roadmap press 
-release.\footnote{Java SE Roadmap press release: \url{http://www.oracle.com/us/corporate/press/1854982}}
+Using Scout with Java 8 is possible and has been tested as part of Eclipse release train testing\footnote{
+Scout 4.0 platforms: \url{https://wiki.eclipse.org/Scout/Release/Luna\#Tested_Platforms}}. 
+We are currently not aware of any productive installation so far, but this is likely to change in the near future as Oracle's published end of public updates for Java 7 is scheduled for April 2015\footnote{
+Java 7 end of public support: \url{http://www.oracle.com/technetwork/java/eol-135779.html}}.
+
+You may still use Scout with Java 6.
+However, this version is no longer tested with Scout and has reached Oracle's end of public updates on February 2013.
+Older Java versions will no longer work together with the Scout framework. 
 
 \subsection{Windows}
 
 On the Windows platform, we recommend to install the Oracle JDK 7 together with Scout. 
-The reason for this recommendation is simple.
-Eclipse Scout is officially tested with the Oracle JDK 7 on Windows.
-
 To successfully install the JDK you need to have at least local admin rights.
 You also need to know your hardware architecture in order to download the correct JDK installer. 
 The steps necessary to determine your hardware architecture are described on Microsoft's support 
-site.\footnote{Windows 32/64-bit installation: \url{http://support.microsoft.com/kb/827218}}
+site\footnote{
+Windows 32/64-bit installation: \url{http://support.microsoft.com/kb/827218}
+}.
 
 Once you know your hardware architecture, go to Oracle's official download 
-site\footnote{Official JDK 7 download: \url{http://www.oracle.com/technetwork/java/javase/downloads/index.html}}.
-There, click on the big Java download button and you will be shown the various \textit{Java SE Development Kit 7 Downloads}.
-Accept the licence agreement by clicking on the appropriate radio button.
-Select the \textit{Windows x64} package if you are running 64-bit Windows as shown in \figref{jdk_download_oracle}.
+site\footnote{
+Official JDK 7 download: \url{http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html}
+} 
+and accept the licence agreement by clicking on the appropriate radio button.
+Then, select the \textit{Windows x64} package if you are running 64-bit Windows as shown in \figref{jdk_download_oracle}.
 If you are running 32-bit Windows, go for the \textit{Windows x86} package.
 It is also recommended to download the \textit{Java SE 7 Documentation}.
-The documentation package is also available from the official download site, located further down under section \textit{Additional Resources}.
+The Java API documentation package is available from the official download site\footnote{
+Java API documentation download: \url{http://www.oracle.com/technetwork/java/javase/downloads/index.html}
+}, located further down under section \textit{Additional Resources}.
 
 \begin{figure}
 \includegraphics[width=15cm]{oracle_jdk_download.png}
@@ -72,8 +74,8 @@ The documentation package is also available from the official download site, loc
 \figlabel{jdk_download_oracle}
 \end{figure}
 
-Once you have successfully downloaded the JDK installer follow the Windows installation 
-guide\footnote{Install the JDK: \url{http://docs.oracle.com/javase/7/docs/webnotes/install/windows/jdk-installation-windows.html\#Run}}.
+Once you have successfully downloaded the JDK installer, follow the Windows installation guide\footnote{
+Install the JDK: \url{http://docs.oracle.com/javase/7/docs/webnotes/install/windows/jdk-installation-windows.html\#Run}}.
 To verify the installation you might want to go through this Java ''Hello World!'' 
 tutorial\footnote{Windows Java ''Hello World!'': \url{http://docs.oracle.com/javase/tutorial/getStarted/cupojava/win32.html}}.
 
@@ -87,18 +89,19 @@ needs text
 \section{Download and Install Scout}
 \seclabel{download_install}
 
-Installing Eclipse Scout 3.9 requires a working JDK 6 or JDK 7 installation.
+Installing Eclipse Scout 4.0 requires a working JDK installation of version 7 or 8.
 If this is missing, see the previous section for installation instructions.
 
-As the Eclipse Kepler release is officially shipping on June 26, 2013 we need to download Scout 3.9 from the developer builds download
-page\footnote{Eclipse developer builds download: \url{http://www.eclipse.org/downloads/index-developer.php}}.
+As the Eclipse Luna release is officially shipping on June 25, 2014 we need to download Scout 4.0 from the download page for the developer builds\footnote{
+Eclipse developer builds download: \url{http://www.eclipse.org/downloads/index-developer.php}
+} until then.
 The download page should look as shown in \figref{scout_download}.
-In this screenshot, the packages available for \textit{Eclipse Kepler (4.3) M4} are shown and \textit{Windows} is preselected in the dropdown list.
+In this screenshot, the packages available for \textit{Eclipse Luna (4.4) RC3} are shown and \textit{Windows} is preselected in the dropdown list.
 Should the download page show the wrong platform in the dropdown list, you will need to choose the correct one manually.
 
 \begin{figure}
 \includegraphics[width=15cm]{scout_download.png}
-\caption{Eclipse Kepler developer builds download page. The Scout package is highlighted}
+\caption{The download page for the developer builds of the Eclipse packages.}
 \figlabel{scout_download}
 \end{figure}
 
@@ -109,7 +112,8 @@ The following sections describe the installation steps depending on the operatin
 For Windows, the Eclipse download page offers two versions for each package.
 In \figref{scout_download}, the links for these two versions are called \textit{Windows 32 Bit} and \textit{Windows 64 Bit}.
 To decide which version to download you first need to know if you have installed a 64-bit JDK or a 32-bit JDK and then download the corresponding Eclipse installation.
-Because this is important, let us be very explicit: \textbf{If you are using a 64-bit JDK you must download the 64-bit version of the Eclipse Scout package. If you are using a 32-bit JDK you must download the 32-bit version of the Eclipse Scout package.}
+This is important, so let us be very explicit: \textbf{If you are using a 64-bit JDK you must download the 64-bit version of the Eclipse Scout package. 
+If you are using a 32-bit JDK you must download the 32-bit version of the Eclipse Scout package.}
 Any other combination will simply not work.
 
 If you just installed the JDK yourself you will remember what you have installed. 
@@ -121,9 +125,9 @@ The output will then look similar to the one provided below.
   language=console
 ]
 C:\Users\scouty>java -version
-java version "1.7.0_02"
-Java(TM) SE Runtime Environment (build 1.7.0_02-b13)
-Java HotSpot(TM) 64-Bit Server VM (build 22.0-b10, mixed mode)
+java version "1.7.0_55"
+Java(TM) SE Runtime Environment (build 1.7.0_55-b13)
+Java HotSpot(TM) 64-Bit Server VM (build 24.55-b03, mixed mode)
 \end{lstlisting}
 
 If you have installed a 32-bit version this fact is not explicitly mentioned.
@@ -133,21 +137,21 @@ See below for an example output of a 32-bit installation.
   language=console
 ]
 C:\Users\scouty>java -version
-java version "1.6.0_20"
-Java(TM) SE Runtime Environment (build 1.6.0_20-b02)
-Java HotSpot(TM) Client VM (build 16.3-b01, mixed mode, sharing)
+java version "1.7.0_55"
+Java(TM) SE Runtime Environment (build 1.7.0_55-b13)
+Java HotSpot(TM) Client VM (build 24.55-b03, mixed mode, sharing)
 \end{lstlisting}
 
 Now you know which version of the Eclipse Scout package to download.
-Installation of the Scout package does not require any administrative priviledges, unlike the JDK installation.
+In contrast to the JDK installation, installation of the Scout package does not require any administrative priviledges.
 As the package is a simple ZIP file, you may unpack its content to a location of your choice as shown in \figref{scout_unzip}. 
 If possible, we recommend a target directory such as 
-\filename{C:\scout\kepler_m4}.
+\filename{C:\scout\luna}.
 Such a target directory avoids two problems that we had to deal with in the past:
 path names including spaces, and very long path names that may break the functionality of your zip/unzip tool.
 
 \begin{figure}
-\includegraphics[width=15cm]{scout_extract_zip.png}
+\includegraphics[width=13cm]{scout_extract_zip.png}
 \caption{Extracting Eclipse Scout to its target directory}
 \figlabel{scout_unzip}
 \end{figure}
@@ -201,7 +205,7 @@ In the long list of system properties you will find lines similar to the ones sh
 \begin{lstlisting}[
   language=ini
 ]
-*** Date: Mittwoch, 9. Januar 2013 20:05:53 Mitteleurop�ische Normalzeit
+*** Date: Donnerstag, 19. Juni 2014 10:37:17 Normalzeit
 
 *** Platform Details:
 
@@ -235,7 +239,7 @@ needs text
 
 This section describes the installation of Scout into an existing Eclipse installation.
 As the audience of this section is assumed to be familiar with Eclipse, we do not describe how you got your Eclipse installation in the first place.
-For the provided screenshots we start from the popular package \textit{Eclipse IDE for Java EE Developers} from the Juno release.
+For the provided screenshots we start from the popular package \textit{Eclipse IDE for Java EE Developers}.
 
 \begin{figure}
 \includegraphics[width=13cm]{eclipse_install_new_software.png}
@@ -248,15 +252,15 @@ Then select the \menu{Help|Install New Software...} as shown in \figref{eclipse_
 
 \begin{figure}
 \includegraphics[width=13cm]{eclipse_add_repository.png}
-\caption{Add the Scout Kepler repository}
+\caption{Add the current Scout repository}
 \figlabel{eclipse_add_repository}
 \end{figure}
 
 In the install dialog, click on the \button{Add...} to enter the link to the Scout repository.
 This opens the popup dialog \textit{Add Repository}
-As shown in \figref{eclipse_add_repository} you may use ''Scout Kepler'' for the \field{Name}.
-For the \field{Location} enter the Scout Kepler release repository as specified below.
-\url{http://download.eclipse.org/scout/releases/3.9}.
+As shown in \figref{eclipse_add_repository}, you may use ''Scout Luna'' for the \field{Name}.
+For the \field{Location} enter the Scout release repository as specified below.
+\url{http://download.eclipse.org/scout/releases/4.0}.
 
 \begin{figure}
 \includegraphics[width=13cm]{eclipse_select_scout_features.png}
@@ -264,22 +268,12 @@ For the \field{Location} enter the Scout Kepler release repository as specified 
 \figlabel{eclipse_select_scout_features}
 \end{figure}
 
-After connecting to the Scout Kepler repository you may both Scout features as shown in \figref{eclipse_select_scout_features}.
-Then, move through the installation with the \button{Next} and accept the presented EPL terms.
-Currently, there is still unsigned content included in the features.
-So please click away the corresponding warning and accept the request for a restart of Eclipse.
-Finally, you may add the Scout perspective to end up at a state very similar to \figref{scout_perspective}.
-
-TODO: Open a bug for this scenario, as a large amount of errors is shown in the \tab{Error Log} of Eclipse.
-
-\fbox{
-  \parbox{12cm}{
-\noindent Existing Documentation
-\begin{itemize}
-  \item wiki howto \url{http://wiki.eclipse.org/Scout/HowTo/3.8/Install_Scout_SDK\#Add_the_Scout_SDK_to_your_Eclipse_installation}
-\end{itemize}
-  }
-}
+After the Eclipse IDE has connected to the Scout repository, select the Scout feature \textit{Scout Application Development} as shown in \figref{eclipse_select_scout_features}.
+Then, move through the installation with the \button{Next}.
+On the last installation step, accept the presented EPL terms by clicking on the appropriate radio button. 
+To complete the installation, click the \button{Finish} and accept the request for a restart of Eclipse.
+After the restart of the Eclipse IDE, you may add the Scout perspective using the \menu{Window|Open Perspective|Other ...} and selecting the Scout perspective from the presented list. 
+Clicking on the Scout perspective button should then result in a state very similar to \figref{scout_perspective}.
 
 % --------------------------------------------------------------------------- %
 \section{Verifying the Installation}

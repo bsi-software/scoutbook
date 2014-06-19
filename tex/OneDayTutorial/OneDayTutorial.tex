@@ -23,16 +23,16 @@ The presented demo application borrows heavily from a Scout tutorial published 2
 Java Magazin 7.12: \url{https://jaxenter.de/magazines/JavaMagazin72012}.
 } 
 for the Scout release 3.8 (Juno).
-Compared to the 2012 tutorial, the version presented in this chapter has been slightly polished and updated to the Scout release 3.9 (Kepler).
+Compared to the 2012 tutorial, the version presented in this chapter has been slightly polished and updated to the Scout release 4.0 (Luna).
 
-Specifically, we will build an outline based Scout application featuring a navigation tree and pages to present information in tabular form. 
+According to this step-by-step tutorial, we will build an outline based Scout application featuring a navigation tree and pages to present information in tabular form. 
 In addition, the application also shows how to work with forms to enter and/or update data, menus and context menus. 
-On the server side, we show how to work with databases, how to use logging in Scout applications and how to include standard Java libraries available in JAR files. 
+On the server side, we show how to work with databases, how to use logging in Scout applications and how to include standard Java libraries in the form of JAR files. 
 
 The chapter is organized as follows.
 In the first section, the finished demo application is explained from the user perspective. 
 The remaining sections focus on the individual steps to implement the ''My Contacts'' application. 
-To follow the description of the implementation the reader is assumed to be familiar with the ''Hello World'' tutorial and the Scout SDK as described in \charef{tooling}. 
+To be able to easily follow the text, we assume that the reader is familiar with the ''Hello World'' tutorial and the Scout SDK as described in \charef{tooling}. 
 
 % --------------------------------------------------------------------------- %
 \section{The ''My Contacts'' Application}
@@ -180,8 +180,8 @@ For the \field{Project Name} use the name \java{org.eclipsescout.contacts} as sh
 In the second wizard step select the application template \element{Outline Tree and Table Form} as shown on the right side of \figref{new_project_contacts}.
 
 \begin{figure}
-\includegraphics[width=7cm]{project_contacts_explorer.png} \hspace{5mm}
-\includegraphics[width=7cm]{project_contacts_properties.png}
+\includegraphics[width=6cm]{project_contacts_explorer.png} \hspace{5mm}
+\includegraphics[width=6cm]{project_contacts_properties.png}
 \caption{The setting of the \textit{Technology} section in the Scout Object Properties of the ''My Contacts'' application.}
 \figlabel{project_contacts_properties}
 \end{figure}
@@ -202,18 +202,21 @@ first.
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/Desktop.java}
 
-Adding the Docx4j support will also add the \menu{Export to Excel} under tools menu on the application's desktop.
+Remark: Adding the Docx4j support will add the \menu{Export to Excel} under tools menu on the application's desktop. 
+This presence of this feature will then allow to export contacts shown in the application to an Excel sheet. 
 As shown in \lstref{mycontacts.desktop.menu.exportoexcel}, the \java{ScoutXlsxSpreadsheetAdapter} first creates an excel file based on the currently active page in the \java{execAction} method. 
 Then the file is opened on the client using the \java{shellOpen} method.
 
 \begin{figure}
 \includegraphics[width=7cm]{desktop_explorer.png} \hspace{5mm}
 \includegraphics[width=7cm]{desktop_properties.png}
-\caption{Configure the application name in the title field of the Desktop's properties. }
+\caption{Configure the application name ''My Contacts'' in the title field of the Desktop's properties. }
 \figlabel{desktop_properties}
 \end{figure}
 
-To set the applications name select the \node{Desktop} in the Scout Explorer to access it's Scout Object Properties as shown in \figref{desktop_properties}.
+After this initial project setup step we first define the application's name shown on the main dialog. 
+For this, select the \node{Desktop} under the green client node in the Scout Explorer.
+This opens it's Scout Object Properties as shown in \figref{desktop_properties}.
 In the \field{Title} enter the string ''My Contacts'' and create a new translated text entry.  
 
 \lstinputlisting[
@@ -226,21 +229,22 @@ In the \field{Title} enter the string ''My Contacts'' and create a new translate
 {../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/Desktop.java}
 
 As shown in \lstref{mycontacts.desktop.execopened} the application's organisation into a tree and a table form is explicitly defined in method \java{execOpened}. 
-Click on the \link{Exec Opened} in the Scout Object Properties to access the Java code of this method.
-First, using the \java{UserAgentUtility} class, the method checks if the client is working with a desktop or a web client. 
-If not, the method returns and the tree and table setup is not used. 
+Click on the \link{Exec Opened} in the desktop's Scout Object Properties to access the Java code of this method.
+First, using the \java{UserAgentUtility} class, the method checks if the client is working with a desktop, a web or a mobile client. 
+If the user is not working with a desktop client, \java{execOpened} returns immediately and the tree and table setup is not used. 
 Instead, the \java{MobileHomeForm} defined in plugin \element{org.eclipsescout.contacts.client.mobile} is used. 
-In case the user is working with a web client or a desktop client, default tree and table forms are created and started. 
+In case the user is working with a web client or a desktop client, the default tree and table forms are created and started. 
 Finally, the currently active outline is set to the \java{StandardOutline}, as this is the only outline defined in this application.
 
 % --------------------------------------------------------------------------- %
 \section{Adding the Person Page}
 
 \begin{figure}
-\includegraphics[width=5cm]{new_page_person_contextmenu.png} \hspace{2mm}
-\includegraphics[width=4.5cm]{new_page_person_1.png} \hspace{2mm}
-\includegraphics[width=4.5cm]{new_page_person_2.png}
-\caption{Add the person table page below the standard outline. }
+\includegraphics[height=5cm]{new_page_person_contextmenu.png} \\ 
+\vspace{2mm}
+\includegraphics[height=6cm]{new_page_person_1.png} \hspace{2mm}
+\includegraphics[height=6cm]{new_page_person_2.png}
+\caption{Add the person table page as a child page of the standard outline. }
 \figlabel{new_page_person}
 \end{figure}
 
@@ -264,9 +268,10 @@ Make sure the other fields are filled in as shown in \figref{new_page_person} an
 Note that your code will only look the same once you have added the company page in a later step of the implementation of this application.
 
 \begin{figure}
-\includegraphics[width=5cm]{new_column_personid_contextmenu.png} \hspace{2mm}
-\includegraphics[width=4.5cm]{new_column_personid_1.png} \hspace{2mm}
-\includegraphics[width=4.5cm]{new_column_personid_2.png}
+\includegraphics[height=7cm]{new_column_personid_contextmenu.png} \\
+\vspace{2mm}
+\includegraphics[height=7cm]{new_column_personid_1.png} \hspace{2mm}
+\includegraphics[height=7cm]{new_column_personid_2.png}
 \caption{Add columns to the person page.}
 \figlabel{new_column_personid}
 \end{figure}
@@ -275,7 +280,7 @@ Now, drill down to the \folder{Columns} under the \node{PersonTablePage} as show
 Here we can add the desired table columns to the person page. 
 Start with the column that will hold the person id. 
 For this, start the column wizard as shown on the left side of \figref{new_column_personid} and select the string column template. 
-In the second wizard step, enter ''PersonId'' into the \field{Class Name},select the radio button \element{Create one more column} and click on the \button{Finish}. 
+In the second wizard step, enter ''PersonId'' into the \field{Class Name}, select the radio button \element{Create one more column} and click on the \button{Finish}. 
 This will restart the column wizard to enter the next columns. 
 Create the remaining string columns with the following names.
 
@@ -308,8 +313,8 @@ In the properties \element{Advanced Properties} section check the \property{Prim
 The resulting Java code for the primary key column and the first name column is provided in \lstref{mycontacts.desktop.outline.personpage.columns}. 
 
 \begin{figure}
-\includegraphics[height=5cm]{new_bean_companyid_contextmenu.png} \hspace{5mm}
-\includegraphics[height=5cm]{new_bean_companyid.png}
+\includegraphics[height=4cm]{new_bean_companyid_contextmenu.png} \hspace{5mm}
+\includegraphics[height=4cm]{new_bean_companyid.png}
 \caption{Add the \element{CompanyId} variable to the person page.}
 \figlabel{new_bean_companyid}
 \end{figure}
@@ -330,8 +335,8 @@ For the Java representation of such variables the standard bean pattern is used 
 \section{Adding the Company Page}
 
 \begin{figure}
-\includegraphics[width=6.5cm]{add_existing_page_contextmenu.png} \hspace{5mm}
-\includegraphics[width=7.5cm]{add_existing_page.png}
+\includegraphics[height=4.5cm]{add_existing_page_contextmenu.png} \hspace{5mm}
+\includegraphics[height=4.5cm]{add_existing_page.png}
 \caption{Add the person page below the the company page.}
 \figlabel{add_existing_page}
 \end{figure}
@@ -345,7 +350,7 @@ For the Java representation of such variables the standard bean pattern is used 
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outlines/pages/CompanyTablePage.java}
 
-After adding the person page, we add a company page to the standard outline. 
+After adding the person page, we also add a company page under the \node{Child Pages} to the standard outline. 
 To add the company page we use the same wizards as described in the previous section for the person page. 
 For the \field{Name} we enter the new translated text ''Company'' and the columns to add are the following.
 
@@ -366,8 +371,8 @@ Please note that this convenience added by the Scout SDK wizard only works if th
 \section{Installing the Database}
 
 \begin{figure}
-\includegraphics[width=7cm]{new_service_derby_contextmenu.png} \hspace{5mm}
-\includegraphics[width=7cm]{new_service_derby.png} 
+\includegraphics[height=5cm]{new_service_derby_contextmenu.png} \hspace{5mm}
+\includegraphics[height=5cm]{new_service_derby.png} 
 \caption{Add the service to access the Derby database under folder \element{SQL Services}. }
 \figlabel{new_service_derby}
 \end{figure}
@@ -402,8 +407,8 @@ This setup is handy for development purposes but you may want to set the databas
 \end{figure}
 
 \begin{figure}
-\includegraphics[height=5.5cm]{new_operation_installstorage_contextmenu.png} \hspace{5mm}
-\includegraphics[height=5.5cm]{new_operation_installstorage.png} 
+\includegraphics[height=4.5cm]{new_operation_installstorage_contextmenu.png} \hspace{5mm}
+\includegraphics[height=4.5cm]{new_operation_installstorage.png} 
 \caption{Add the service operation to create the DB schema. }
 \figlabel{new_operation_installstorage}
 \end{figure}
