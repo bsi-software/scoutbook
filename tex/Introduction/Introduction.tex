@@ -402,9 +402,9 @@ We will start by building the application from scratch and then we'll deploy the
 Except for a single line of code in the server part of the ''Hello World'' application, we will only be using the tooling provided by the Scout SDK.
 
 Based on this simple ''Hello World'' applications a large number of Scout concepts can be illustrated.
-Rather than including this background material in this tutorial, such information is provided separately in \charef{helloworld_background}.
+Rather than including such background material in this tutorial, this information is provided separately in \charef{helloworld_background}.
 This tutorial is also available in the Scout wiki\footnote{
-''Hello World'' wiki tutorial: \url{http://wiki.eclipse.org/Scout/Tutorial/3.9/HelloWorld}
+''Hello World'' wiki tutorial: \url{http://wiki.eclipse.org/Scout/Tutorial/4.0/HelloWorld}
 }.
 
 % --------------------------------------------------------------------------- %
@@ -465,21 +465,21 @@ Selecting the application's \node{org.eclipse.scout.helloworld} in the Scout Exp
 As we can see in \figref{start_client}, we have product launchers for four different development products.
 
 \begin{tabular}{ l l }
+  \textbf{Server} & The Scout server application\\
   \textbf{RAP}    & The RAP server application for web and mobile clients\\
   \textbf{Swing}  & The Scout Swing desktop client application\\
   \textbf{SWT}    & The Scout SWT desktop client application\\
-  \textbf{Server} & The Scout server application\\
 \end{tabular}
 
 \begin{figure}
 \includegraphics[width=14cm]{sdk_start_client_product.png} 
-\caption{Starting the SWT client in the Scout SDK using the provided SWT product launcher. Make sure to start the server before starting any client product.}
+\caption{Starting the web client in the Scout SDK using the provided RAP product launcher. Make sure to start the server before starting any client product.}
 \figlabel{start_client}
 \index{Product launchers}
 \end{figure}
 
 Each product launcher box provides a link to the corresponding Eclipse product file\footnote{
-Product files define all the necessary elements of an application.
+Product files define the set of all components that are necessary to build the complete application.
 },
 the configuration file\footnote{
 The configuration file \filename{config.ini} provides parameters that are read at startup of the corresponding program.
@@ -494,17 +494,17 @@ Client products may also be stopped by closing the client's main window or using
 
 Before any of the client products is started, we need to start the server product using the green circle or the bug launcher icon.
 During startup of the Scout server you should see console output similar to the one shown on the right hand side of \figref{start_client}.
-Once the server is running, you may start the SWT client as shown in \figref{start_client}, the Swing client, and the RAP server in the same way.
-With a running RAP product, you may also display the Scout client in a web browser.
-Just type the address \texttt{http://localhost:8082/web} into the browser's navigation bar.
+Once the server is running, you may start the web client as shown in \figref{start_client}, the Swing client, or the SWT client in the same way.
+And with a running RAP product, the Scout web client can be opened in a web browser.
+Just click on the provided \link{Automatic Device Dispatch} or open a a browser and manually type the address \texttt{http://localhost:8082/web} into the browser's navigation bar.
 
 \begin{figure}
+\includegraphics[width=4.5cm]{hellworld_empty_rap.png} \hspace{3mm}
 \includegraphics[width=4.5cm]{hellworld_empty_swing.png} \hspace{3mm}
-\includegraphics[width=4.5cm]{hellworld_empty_swt.png} \hspace{3mm}
-\includegraphics[width=4.5cm]{hellworld_empty_rap.png}
+\includegraphics[width=4.5cm]{hellworld_empty_swt.png}
 \caption{Running the three client applications. 
 Each client displays an empty desktop form. 
-From left to right: The Swing client, the SWT client, and the web client}
+From left to right: The web client, the Swing client, and the SWT client}
 \figlabel{helloworld_empty}
 \end{figure}
 
@@ -534,8 +534,8 @@ With a click of the right mouse button over the \element{MainBox}, the available
 To start the form field wizard we select the \menu{New Form Field ...} as shown in \figref{new_field_context_menu}.
 
 \begin{figure}
-\includegraphics[width=7cm]{sdk_new_field_groupbox_1.png} \hspace{8mm}
-\includegraphics[width=7cm]{sdk_new_field_groupbox_2.png}
+\includegraphics[height=4cm]{sdk_new_field_groupbox_1.png} \hspace{8mm}
+\includegraphics[height=4cm]{sdk_new_field_groupbox_2.png}
 \caption{Adding the \textit{DesktopBox} field with the Scout SDK form field wizard.}
 \index{SDK Wizard!New Form Field}
 \figlabel{helloworld_groupboxfield}
@@ -549,8 +549,8 @@ This step is shown on the right side of \figref{helloworld_groupboxfield}.
 The Scout SDK will add the necessary Java code for the \java{DesktopBox} in the background.
 
 \begin{figure}
-\includegraphics[width=6cm]{sdk_new_field_stringfield_1.png} \hspace{8mm}
-\includegraphics[width=7cm]{sdk_new_field_stringfield_2.png}
+\includegraphics[height=4cm]{sdk_new_field_stringfield_1.png} \hspace{8mm}
+\includegraphics[height=4cm]{sdk_new_field_stringfield_2.png}
 \caption{Adding a \textit{StringField} and providing a new translation entry.}
 \index{SDK Wizard!Add Translation Entry}
 \figlabel{helloworld_stringfield}
@@ -621,12 +621,12 @@ The only line of Java code we write in our ''Hello World'' application is printe
 For the complete implementation of the load method see \lstref{helloworld.load}.
 
 \begin{lstlisting}[backgroundcolor=\color{white}]
-  formData.getMessage().setValue("hello world!");
+  formData.getMessage().setValue("Hello World!");
 \end{lstlisting}
 
 \lstinputlisting[
   label=\lstlabel{helloworld.load},
-  caption=Assigning "hello world" to the form data's message field.,
+  caption=Assigning ''Hello World!'' to the form data's message field.,
   index={DesktopFormData,DesktopProcessService},
   linerange={10-15},
   float
@@ -652,13 +652,13 @@ As a result, we will get a Scout desktop application that looks the same as the 
 \begin{figure}
 \includegraphics[width=6cm]{sdk_rayo_add_checkbox.png} \hspace{5mm}
 \includegraphics[width=7cm]{sdk_rayo_confirm_changes.png}
-\caption{Adding the Rayo Swing look and feel. The Rayo checkbox to activate the look and feel is highlighted on the left hand side. The dialog on the right hand side shows the changes in the Swing plugin that will be made by the Scout SDK.}
+\caption{Adding the Rayo Swing look and feel. The Rayo checkbox to activate the look and feel is highlighted on the left hand side. The dialog on the right hand side shows the changes in the Swing plugin and the target file that will be made by the Scout SDK.}
 \figlabel{selecting_rayo}
 \end{figure}
 
 To add Rayo in the Scout SDK to our ''Hello World'' project, switch to the Scout Explorer and select the top-level \node{org.eclipse.scout.helloworld}.
 Then, according to \figref{selecting_rayo}, select the checkbox \element{Rayo Swing Look and Feel for Eclipse Scout} under the \element{Technologies} section of the Scout Object Properties.
-This brings up a dialog showing the proposed changes to the Swing plugin of the ''Hello World'' application. 
+This brings up a dialog showing the proposed changes to application's target file and the Swing plugin of the ''Hello World'' application. 
 These changes need to be confirmed with the \button{OK}.
 The first time the user adds the Rayo feature in the Scout SDK, Eclipse needs to download the package from the Eclipse Marketplace.
 This download and subsequent installation of Rayo will make you to go through the following steps.
@@ -696,7 +696,7 @@ In the first wizard step, the target directory for the WAR files and the artefac
 \end{figure}
 
 \begin{figure}
-\includegraphics[width=10cm]{export_wizard_1.png}
+\includegraphics[width=12cm]{export_wizard_1.png}
 \caption{The first dialog of the \wizard{Export Scout Project}. 
 Here, the target directory for the WAR files that will be generated by the wizard is specified.}
 \figlabel{export_wizard_1}
@@ -727,7 +727,7 @@ For this, we need to change the selected product to \element{helloworld-swing-cl
 With \button{Next} we move to the last wizard step.
 
 \begin{figure}
-\includegraphics[width=8cm]{export_wizard_4.png}
+\includegraphics[width=12cm]{export_wizard_4.png}
 \caption{The last dialog of the \wizard{Export Scout Project} defines the export of the RAP server.
 Normally, the proposed field values do not need any adjustments.}
 \figlabel{export_wizard_4}
@@ -767,11 +767,11 @@ Once the web browser displays the successful running of your Tomcat instance, sw
 After entering user name and password the browser will display the ''Tomcat Web Application Manager'' as shown in \figref{deploy_tomcat_2}.
 If you don't know the correct username or password you may look it up in the file \filename{tomcat-users.xml} as described in \appref{tomcat_dirs_and_files}.
 
-After logging successfully into Tomcats manager application, you can select the WAR file(s) to be deployed using button ''Choose File'' according to the right hand side of \figref{deploy_tomcat_2}.
+After logging successfully into Tomcat's manager application, you can select the WAR file(s) to be deployed using button ''Choose File'' according to the right hand side of \figref{deploy_tomcat_2}.
 After picking your \filename{helloworld_server.war} and \filename{helloworld.war} file and closing the file chooser, click on button ''Deploy'' (located below button ''Choose File'') to deploy the application to the Tomcat web server.
 This will copy the selected WAR file into Tomcats \filename{webapps} directory and unpack its content into a subdirectory with the same name.
-Deploying the file \filename{helloworld.war} will extract its contents into a subdirectory named \filename{helloworld} as shown in \figref{tomcat.install.dir}.
-Accordingly, the file \filename{helloworld_server.war} will be extracted into subdirectory \filename{helloworld_server}.
+Deploying the file \filename{helloworld.war} will extract its contents into a subdirectory named \filename{helloworld}.
+And the file \filename{helloworld_server.war} will be extracted into subdirectory \filename{helloworld_server}.
 You can now connect to the deployed application using the browser of your choice and enter the following address.
 
 \begin{lstlisting}
@@ -928,7 +928,7 @@ Its value is set to 'View' to display the desktop form as a view and not as a di
 
 \begin{figure}
 \includegraphics[width=15cm]{sdk_helloworld_viewhandler.png}
-\caption{Scout SDK showing the DesktopForm's \textit{ViewHandler} in the Scout Explorer and the form properties in the Scout Object Properties.}
+\caption{Scout SDK showing the DesktopForm's \textit{ViewHandler} in the Scout Explorer and the properties of the DesktopForm in the Scout Object Properties.}
 \figlabel{helloworld_viewhandler}
 \end{figure}
 
@@ -1193,16 +1193,16 @@ The Scout SDK takes care of this time consuming and error prone task.
 
 \lstinputlisting[
   label=\lstlabel{helloworld.textproviderservice},
-  caption=The \java{DefaultTextProviderService} class. Its getter method provides the path and the base name for the text property files,
+  caption=The \java{HelloworldTextProviderService} class. Its getter method provides the path and the base name for the text property files,
   index={Text Provider Service},
   linerange={5-10},
   float
 ]
-{../code/helloworld/org.eclipse.scout.helloworld.shared/src/org/eclipse/scout/helloworld/shared/services/common/text/DefaultTextProviderService.java}
+{../code/helloworld/org.eclipse.scout.helloworld.shared/src/org/eclipse/scout/helloworld/shared/services/common/text/HelloworldTextProviderService.java}
 
 \begin{figure}
 \includegraphics[width=14cm]{sdk_nls_editor.png} 
-\caption{The NLS editor provided by the Scout SDK. This editor is opened via the \link{Open NLS Editor ...} in the Scout Object Properties of the \node{DefaultTextProviderService}.
+\caption{The NLS editor provided by the Scout SDK. This editor is opened via the \link{Open NLS Editor ...} in the Scout Object Properties of the \node{HelloworldTextProviderService}.
 }
 \index{NLS editor}
 \figlabel{nls_editor}
@@ -1358,8 +1358,8 @@ In the second WAR file, the Ajax server based on Eclipse RAP is contained.
 This Ajax server provides the URLs that can be accessed by web browsers running on desktop computers or tablet and mobile devices.
 
 \begin{figure}
-\includegraphics[height=5cm]{helloworld_server_war.png} \hspace{5mm}
-\includegraphics[height=5cm]{helloworld_server_war_eclipse.png}
+\includegraphics[height=4cm]{helloworld_server_war.png} \hspace{5mm}
+\includegraphics[height=4cm]{helloworld_server_war_eclipse.png}
 \caption{The organisation of the ''Hello World'' server WAR file.
 The right side reveals the location of the \java{config.ini} file and the application's plugin files} 
 \figlabel{helloworld_server_war}
