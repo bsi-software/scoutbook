@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.eclipse.scout.helloworld.client.ui.forms;
 
 import org.eclipse.scout.commons.annotations.FormData;
@@ -18,9 +15,6 @@ import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringFiel
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.service.SERVICES;
 
-/**
- * @author mzi
- */
 @FormData(value = DesktopFormData.class, sdkCommand = FormData.SdkCommand.CREATE)
 public class DesktopForm extends AbstractForm {
 
@@ -52,16 +46,9 @@ public class DesktopForm extends AbstractForm {
   }
 
   /**
-   * @throws org.eclipse.scout.commons.exception.ProcessingException
-   */
-  public void startView() throws ProcessingException {
-    startInternal(new ViewHandler());
-  }
-
-  /**
    * @return the DesktopBox
    */
-  public DesktopBox getDesktopBox(){
+  public DesktopBox getDesktopBox() {
     return getFieldByClass(DesktopBox.class);
   }
 
@@ -75,7 +62,7 @@ public class DesktopForm extends AbstractForm {
   /**
    * @return the MessageField
    */
-  public MessageField getMessageField(){
+  public MessageField getMessageField() {
     return getFieldByClass(MessageField.class);
   }
 
@@ -107,5 +94,9 @@ public class DesktopForm extends AbstractForm {
       importFormData(formData);
 
     }
+  }
+
+  public void startView() throws ProcessingException {
+    startInternal(new ViewHandler());
   }
 }

@@ -240,11 +240,15 @@ Finally, the currently active outline is set to the \java{StandardOutline}, as t
 \section{Adding the Person Page}
 
 \begin{figure}
-\includegraphics[height=5cm]{new_page_person_contextmenu.png} \\ 
-\vspace{2mm}
+\includegraphics[height=6cm]{new_page_person_contextmenu.png} 
+\caption{Create a new page as a child page of the standard outline. }
+\figlabel{new_page_person_contextmenu}
+\end{figure}
+
+\begin{figure}
 \includegraphics[height=6cm]{new_page_person_1.png} \hspace{2mm}
 \includegraphics[height=6cm]{new_page_person_2.png}
-\caption{Add the person table page as a child page of the standard outline. }
+\caption{Create a new page with the corresponding SDK wizard. To present the list of persons in a table, choose the template \java{AbstractPageWithTable} as shown on the left.}
 \figlabel{new_page_person}
 \end{figure}
 
@@ -513,7 +517,7 @@ In it's \java{runTransaction} method we can then call the \java{installStorage} 
 An additional Scout topic that is touched in this \java{ServerApplication} class is the Scout logging. 
 As shown in \lstref{mycontacts.server.serverapplication}, a static \java{logger} object is created using Scout's \java{ScoutLogManager} class. 
 Events can then be logged with the \java{logger.info} method where \java{info} refers to the log level attached to this message. 
-Similar to the database setup described above, the logging setup can be defined in \filename{config.ini} file. 
+Similar to the database setup described above, the logging setup is defined in the \filename{config.ini} file. 
 The default setup defined for the development product is provided in \lstref{mycontacts.server.configini.logging}.
 Further information regarding logging in Eclipse Scout is available in the Scout wiki\footnote{
 Logging in Eclipse Scout: \url{http://wiki.eclipse.org/Scout/Concepts/Logging}.
@@ -529,10 +533,10 @@ Logging in Eclipse Scout: \url{http://wiki.eclipse.org/Scout/Concepts/Logging}.
 \figlabel{new_service_persontabledata}
 \end{figure}
 
-In the section before, we have implemented the access to the Derby database for the Scout server. 
-And during the server startup, the application's database schema can now be created and populated with some initial data. 
+In the section before we have implemented and configured the SQL service to access the Derby database from the Scout server. 
+And during the first server startup, the application's database schema is created and populated with some initial data. 
 
-Here, this schema and the implemented database access is used to fetch the data for the client application's person page and the company page. 
+Now, this SQL service is ready to be used to fetch the data for the client application's person page and the company page. 
 The best place to implement these data provider methods is in the server's \java{StandardOutlineService} class. 
 This class has been created by the Scout SDK during the initial project creation step.
 It is meant to hold the operations that fetch the data for populating the elements visible in the outline tree and outline pages. 
@@ -578,8 +582,8 @@ This will display the complete list of the Scout utility classes as shown in \fi
 \section{Creating the Person Form}
 
 \begin{figure}
-\includegraphics[height=7cm]{new_form_person_contextmenu.png} \hspace{5mm}
-\includegraphics[height=7cm]{new_form_person.png}
+\includegraphics[height=6.2cm]{new_form_person_contextmenu.png} \hspace{5mm}
+\includegraphics[height=6.2cm]{new_form_person.png}
 \caption{Add the person form.}
 \figlabel{new_form_person}
 \end{figure}
@@ -594,8 +598,8 @@ On the client side the \java{PersonForm} class with the necessary form handlers 
 On the server side, a \java{PersonProcessService} with all necessary service operations referenced by the form handlers is implemented. 
 
 \begin{figure}
-\includegraphics[height=4.5cm]{new_bean_personid_contextmenu.png} \hspace{5mm}
-\includegraphics[height=4.5cm]{new_bean_personid.png}
+\includegraphics[height=4cm]{new_bean_personid_contextmenu.png} \hspace{5mm}
+\includegraphics[height=4cm]{new_bean_personid.png}
 \caption{Add the \element{PersonId} variable to the person form.}
 \figlabel{new_bean_personid}
 \end{figure}
@@ -609,8 +613,8 @@ Then, click the \button{Finish} to close the wizard.
 \subsection{Creating the Form Layout with From Fields}
 
 \begin{figure}
-\includegraphics[width=7cm]{new_field_personbox.png} \hspace{5mm}
-\includegraphics[width=7cm]{new_field_personbox_name.png}
+\includegraphics[height=5.6cm]{new_field_personbox.png} \hspace{5mm}
+\includegraphics[height=5.6cm]{new_field_personbox_name.png}
 \caption{Add the first group box field to the person form.}
 \figlabel{new_field_personbox}
 \end{figure}
@@ -618,11 +622,14 @@ Then, click the \button{Finish} to close the wizard.
 As a next step we create the main layout structure of the person form. 
 According to the screenshot of the person form shown in \figref{my_contacts_swt} the form is organized into an upper box including the first name, the last name and a picture field. 
 In the ''Details'' box in the lower half of the form some additional fields are found, such as the date of birth field. 
-The bottom of the form holds a ''Show Map ...'' link.
+And the bottom of the form holds a ''Show Map ...'' link.
 We start with the general layout by adding the \java{PersonBox} according to \figref{new_field_personbox}. 
-And again on the person's from \node{MainBox} we add a second group box field using the label ''Detail''. 
-The link is added with the \wizard{New Form Field} too. 
-In the first wizard step select the type \java{LinkButton} and use a new translated text ''Show Map ...'' for the \field{Name}
+In the first step (omitted in \figref{new_field_personbox}) of the new form field wizard the field type \java{GroupBox} has to be selected. 
+Below the person box we add the detail group box. 
+As before, we select the  \java{GroupBox} field type and click on the \button{Next}. 
+In the second wizard step we then enter the text ''Detail'' into the \field{Name}. 
+Finally, the link is added with the \wizard{New Form Field} too. 
+In the first wizard step select the type \java{LinkButton} and use a new text ''Show Map ...'' for the \field{Name}
 
 We now add the form fields listed below using the the \wizard{New Form Field} multiple times. 
 Most fields are of type \java{StringField} and different field types are separately indicated. 
@@ -644,8 +651,8 @@ Most fields are of type \java{StringField} and different field types are separat
 \end{itemize} 
 
 \begin{figure}
-\includegraphics[width=7cm]{new_field_picture_contextmenu.png} \hspace{5mm}
-\includegraphics[width=7cm]{new_field_picture.png}
+\includegraphics[height=6.5cm]{new_field_picture_contextmenu.png} \hspace{5mm}
+\includegraphics[height=6.5cm]{new_field_picture.png}
 \caption{Add the picture field to the first group box of the person form.}
 \figlabel{new_field_picture}
 \end{figure}
@@ -658,8 +665,8 @@ For this, select the \node{PictureUrlField} in the Scout Explorer and then untic
 Note that to access the visibility property you need to open the section \element{Advanced Properties} first. 
 
 \begin{figure}
-\includegraphics[width=7cm]{picture_field_properties_1.png} \hspace{5mm}
-\includegraphics[width=7cm]{picture_field_properties_2.png}
+\includegraphics[height=7cm]{picture_field_properties_1.png} \hspace{5mm}
+\includegraphics[height=7cm]{picture_field_properties_2.png}
 \caption{Set the properties for the picture field of the person form.}
 \figlabel{picture_field_properties}
 \end{figure}
@@ -691,7 +698,7 @@ Method \java{setAutoFit} is called to adapt the picture to the dimensions availa
 \begin{figure}
 \includegraphics[width=7cm]{new_form_url_1.png} \hspace{5mm}
 \includegraphics[width=7cm]{new_form_url_2.png}
-\caption{Add the URL editor form.}
+\caption{Add the URL editor form. This form does not need any connections to the server. Therefore, the related components such as services and the form data can be removed in the second wizard step shown on the right side.}
 \figlabel{new_form_url}
 \end{figure}
 
@@ -711,8 +718,8 @@ As this form only holds a single URL field, we omit the description of the creat
 In \lstref{mycontacts.client.forms.pictureurl} just the form's \java{MainBox} code is shown. 
 
 \begin{figure}
-\includegraphics[width=7cm]{new_menu_editurl_contextmenu.png} \hspace{5mm}
-\includegraphics[width=7cm]{new_menu_editurl.png}
+\includegraphics[height=6.6cm]{new_menu_editurl_contextmenu.png} \hspace{5mm}
+\includegraphics[height=6.6cm]{new_menu_editurl.png}
 \caption{Add the URL edit menu to the picture field.}
 \figlabel{new_menu_editurl}
 \end{figure}
@@ -739,8 +746,8 @@ Such a change will then trigger method \java{execChangedMasterValue} of the \jav
 \subsection{Linking the Person Form to the Person Page}
 
 \begin{figure}
-\includegraphics[width=7cm]{new_menu_editperson_contextmenu.png} \hspace{5mm}
-\includegraphics[width=7cm]{new_menu_editperson.png}
+\includegraphics[height=5cm]{new_menu_editperson_contextmenu.png} \hspace{5mm}
+\includegraphics[height=5cm]{new_menu_editperson.png}
 \caption{Add the Person edit menu to the person page.}
 \figlabel{new_menu_editperson}
 \end{figure}
@@ -767,8 +774,8 @@ Now, you may also add the ''New Person ...'' menu in the same way.
 Except that you pick the \java{NewHander} in the \wizard{New Menu} instead of the modify handler. 
 
 \begin{figure}
-\includegraphics[height=5.5cm]{person_table_explorer.png} \hspace{5mm}
-\includegraphics[height=5.5cm]{person_table_properties.png}
+\includegraphics[height=6.5cm]{person_table_explorer.png} \hspace{5mm}
+\includegraphics[height=6.5cm]{person_table_properties.png}
 \caption{Set the behaviour for the row level action on the person table.}
 \figlabel{person_table_properties}
 \end{figure}
@@ -799,14 +806,14 @@ In the simplest case the smart field provides access to a small and locally prov
 But for the intended use in the ''My Contacts'' application, we will need to access a list of elements provided by the server that will be compiled dynamically at runtime. 
 
 \begin{figure}
-\includegraphics[width=6cm]{new_lookupcall_company_contextmenu.png} 
+\includegraphics[width=8cm]{new_lookupcall_company_contextmenu.png} 
 \caption{Add a lookup call to the applications shared node.}
 \figlabel{new_lookupcall_company_contextmenu}
 \end{figure}
 
 \begin{figure}
-\includegraphics[height=5.5cm]{new_lookupcall_company_1.png} \hspace{5mm}
-\includegraphics[height=5.5cm]{new_lookupcall_company_2.png}
+\includegraphics[height=6cm]{new_lookupcall_company_1.png} \hspace{5mm}
+\includegraphics[height=6cm]{new_lookupcall_company_2.png}
 \caption{The two wizard steps to enter the details of the company lookup call.}
 \figlabel{new_lookupcall_company}
 \end{figure}
@@ -856,9 +863,9 @@ The bind variable \java{:key} and \java{:text} are provided by Scout and hold th
 \end{figure}
 
 \begin{figure}
-\includegraphics[height=5cm]{new_smartfield_company_1.png} \hspace{5mm}
-\includegraphics[height=5cm]{new_smartfield_company_2.png}
-\caption{Create the company smart field for the person form.}
+\includegraphics[height=5.5cm]{new_smartfield_company_1.png} \hspace{5mm}
+\includegraphics[height=5.5cm]{new_smartfield_company_2.png}
+\caption{Create the company smart field for the person form. In the second wizard step shown on the right side, first remove the content in the \field{Generic Type} and then select the company lookup call into the corresponding field.}
 \figlabel{new_smartfield_company}
 \end{figure}
 
