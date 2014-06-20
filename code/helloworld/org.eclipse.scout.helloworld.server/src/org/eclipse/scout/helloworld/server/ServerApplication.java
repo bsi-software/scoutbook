@@ -12,7 +12,7 @@ import org.eclipse.scout.commons.logger.ScoutLogManager;
  * osgi.console=
  * eclipse.consoleLog=true
  * org.eclipse.equinox.http.jetty.http.port=8080
- * org.eclipse.equinox.http.jetty.context.path=/helloworld
+ * org.eclipse.equinox.http.jetty.context.path=/helloworld_server
  * osgi.bundles=org.eclipse.equinox.common@2:start, org.eclipse.update.configurator@start,
  * org.eclipse.equinox.http.jetty@start, org.eclipse.equinox.http.registry@start, org.eclipse.core.runtime@start
  * osgi.bundles.defaultStartLevel=4

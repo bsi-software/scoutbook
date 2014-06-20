@@ -9,7 +9,7 @@ public class DesktopService extends AbstractService implements IDesktopService {
 
   @Override
   public DesktopFormData load(DesktopFormData formData) throws ProcessingException {
-    formData.getMessage().setValue("hello world!");
+    formData.getMessage().setValue("Hello World!");
     return formData;
   }
 }

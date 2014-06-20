@@ -16,17 +16,26 @@ import org.eclipse.ui.PlatformUI;
  * <h3>Activator</h3> This class controls all aspects of the application's execution
  */
 public class Application implements IApplication {
+  private Display m_display;
 
   @Override
   public Object start(final IApplicationContext context) throws Exception {
-    Subject subject = new Subject();
-    subject.getPrincipals().add(new SimplePrincipal(System.getProperty("user.name")));
-    return Subject.doAs(subject, new PrivilegedExceptionAction<Object>() {
-      @Override
-      public Object run() throws Exception {
-        return startSecure(context);
+    m_display = getApplicationDisplay();
+    try {
+      Subject subject = new Subject();
+      subject.getPrincipals().add(new SimplePrincipal(System.getProperty("user.name")));
+      return Subject.doAs(subject, new PrivilegedExceptionAction<Object>() {
+        @Override
+        public Object run() throws Exception {
+          return startSecure(context);
+        }
+      });
+    }
+    finally {
+      if (m_display != null) {
+        m_display.dispose();
       }
-    });
+    }
   }
 
   public Integer startSecure(final IApplicationContext context) throws Exception {
@@ -50,5 +59,12 @@ public class Application implements IApplication {
         workbench.close();
       }
     });
+  }
+
+  public Display getApplicationDisplay() {
+    if (m_display == null) {
+      m_display = Display.getDefault();
+    }
+    return m_display;
   }
 }

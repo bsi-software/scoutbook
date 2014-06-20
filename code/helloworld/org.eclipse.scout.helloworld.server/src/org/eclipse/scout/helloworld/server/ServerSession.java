@@ -7,6 +7,7 @@ import org.eclipse.scout.rt.server.AbstractServerSession;
 import org.eclipse.scout.rt.server.ServerJob;
 
 public class ServerSession extends AbstractServerSession {
+  private static final long serialVersionUID = 1L;
   private static IScoutLogger logger = ScoutLogManager.getLogger(ServerSession.class);
 
   public ServerSession() {

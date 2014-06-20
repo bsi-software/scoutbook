@@ -1,7 +1,9 @@
+/**
+ * 
+ */
 package org.eclipse.scout.helloworld.client.ui.forms;
 
 import org.eclipse.scout.commons.annotations.FormData;
-import org.eclipse.scout.commons.annotations.FormData.SdkCommand;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.helloworld.client.ui.forms.DesktopForm.MainBox.DesktopBox;
@@ -16,9 +18,15 @@ import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringFiel
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.service.SERVICES;
 
-@FormData(value = DesktopFormData.class, sdkCommand = SdkCommand.CREATE)
+/**
+ * @author mzi
+ */
+@FormData(value = DesktopFormData.class, sdkCommand = FormData.SdkCommand.CREATE)
 public class DesktopForm extends AbstractForm {
 
+  /**
+   * @throws org.eclipse.scout.commons.exception.ProcessingException
+   */
   public DesktopForm() throws ProcessingException {
     super();
   }
@@ -43,15 +51,31 @@ public class DesktopForm extends AbstractForm {
     return Icons.EclipseScout;
   }
 
-  public DesktopBox getDesktopBox() {
+  /**
+   * @throws org.eclipse.scout.commons.exception.ProcessingException
+   */
+  public void startView() throws ProcessingException {
+    startInternal(new ViewHandler());
+  }
+
+  /**
+   * @return the DesktopBox
+   */
+  public DesktopBox getDesktopBox(){
     return getFieldByClass(DesktopBox.class);
   }
 
+  /**
+   * @return the MainBox
+   */
   public MainBox getMainBox() {
     return getFieldByClass(MainBox.class);
   }
 
-  public MessageField getMessageField() {
+  /**
+   * @return the MessageField
+   */
+  public MessageField getMessageField(){
     return getFieldByClass(MessageField.class);
   }
 
@@ -81,10 +105,7 @@ public class DesktopForm extends AbstractForm {
       exportFormData(formData);
       formData = service.load(formData);
       importFormData(formData);
-    }
-  }
 
-  public void startView() throws ProcessingException {
-    startInternal(new ViewHandler());
+    }
   }
 }

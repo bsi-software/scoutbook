@@ -1,9 +1,5 @@
 package org.eclipse.scout.helloworld.ui.swt;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-
-import org.eclipse.scout.helloworld.ui.swt.application.ApplicationActionBarAdvisor;
 import org.eclipse.scout.helloworld.ui.swt.editor.ScoutEditorPart;
 import org.eclipse.scout.helloworld.ui.swt.views.CenterView;
 import org.eclipse.scout.helloworld.ui.swt.views.EastView;
@@ -15,19 +11,14 @@ import org.eclipse.scout.helloworld.ui.swt.views.SouthView;
 import org.eclipse.scout.helloworld.ui.swt.views.SouthWestView;
 import org.eclipse.scout.helloworld.ui.swt.views.WestView;
 import org.eclipse.scout.rt.client.AbstractClientSession;
-import org.eclipse.scout.rt.client.ui.desktop.IDesktop;
 import org.eclipse.scout.rt.client.ui.form.IForm;
 import org.eclipse.scout.rt.ui.swt.AbstractSwtEnvironment;
 import org.eclipse.scout.rt.ui.swt.ISwtEnvironmentListener;
 import org.eclipse.scout.rt.ui.swt.SwtEnvironmentEvent;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.osgi.framework.Bundle;
 
 public class SwtEnvironment extends AbstractSwtEnvironment {
-
-  private ApplicationActionBarAdvisor m_advisor;
 
   public SwtEnvironment(Bundle bundle, String perspectiveId, Class<? extends AbstractClientSession> clientSessionClazz) {
     super(bundle, perspectiveId, clientSessionClazz);
@@ -53,48 +44,12 @@ public class SwtEnvironment extends AbstractSwtEnvironment {
       @Override
       public void environmentChanged(SwtEnvironmentEvent e) {
         if (e.getType() == SwtEnvironmentEvent.STOPPED) {
-          PlatformUI.getWorkbench().close();
-        }
-      }
-    });
-    addEnvironmentListener(new ISwtEnvironmentListener() {
-      @Override
-      public void environmentChanged(SwtEnvironmentEvent e) {
-        if (e.getType() == SwtEnvironmentEvent.STARTED) {
-          removeEnvironmentListener(this);
-          IDesktop d = getClientSession().getDesktop();
-          if (d != null) {
-            setWindowTitle(d.getTitle());
-            d.addPropertyChangeListener(IDesktop.PROP_TITLE, new PropertyChangeListener() {
-              @Override
-              public void propertyChange(PropertyChangeEvent evt) {
-                setWindowTitle((String) evt.getNewValue());
-              }
-            });
-            if (m_advisor != null) {
-              m_advisor.initViewButtons(d);
-            }
+          if (!PlatformUI.getWorkbench().isClosing()) {
+            PlatformUI.getWorkbench().close();
           }
         }
       }
     });
-  }
 
-  public void setAdvisor(ApplicationActionBarAdvisor advisor) {
-    m_advisor = advisor;
-  }
-
-  private void setWindowTitle(final String title) {
-    for (IWorkbenchWindow w : PlatformUI.getWorkbench().getWorkbenchWindows()) {
-      final Shell s = w.getShell();
-      if (!s.isDisposed()) {
-        s.getDisplay().asyncExec(new Runnable() {
-          @Override
-          public void run() {
-            s.setText(title);
-          }
-        });
-      }
-    }
   }
 }
