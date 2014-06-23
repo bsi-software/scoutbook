@@ -277,6 +277,10 @@ public class PersonForm extends AbstractForm {
           protected void execAction() throws ProcessingException {
             PictureURLForm form = new PictureURLForm();
             form.startModify();
+            form.waitFor();
+            if (form.isFormStored()) {
+              getPictureURLField().setValue(form.getPictureURLField().getValue());
+            }
           }
         }
       }

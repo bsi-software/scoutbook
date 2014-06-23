@@ -36,6 +36,18 @@ public class DBInstallService extends AbstractService implements IDBInstallServi
     }
   }
 
+  private Set<String> getExistingTables() throws ProcessingException {
+    Object[][] existingTables = SQL.select("SELECT tablename FROM sys.systables");
+    HashSet<String> result = new HashSet<String>(existingTables.length);
+
+    for (Object[] row : existingTables) {
+      String table = (row[0] + "").toUpperCase();
+      result.add(table);
+    }
+
+    return result;
+  }
+
   private void createCompanyTable(Set<String> tables, boolean addInitialData) throws ProcessingException {
     if (!tables.contains("COMPANY")) {
       SQL.insert("CREATE TABLE COMPANY ("
@@ -91,15 +103,5 @@ public class DBInstallService extends AbstractService implements IDBInstallServi
         // nop
       }
     }
-  }
-
-  private Set<String> getExistingTables() throws ProcessingException {
-    Object[][] existingTables = SQL.select("SELECT tablename FROM sys.systables");
-    HashSet<String> result = new HashSet<String>(existingTables.length);
-    for (Object[] row : existingTables) {
-      String table = (row[0] + "").toUpperCase();
-      result.add(table);
-    }
-    return result;
   }
 }

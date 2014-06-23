@@ -170,18 +170,11 @@ public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table
     return SERVICES.getService(IStandardOutlineService.class).getPersonTableData(getCompanyId());
   }
 
-  /**
-   * @return the CompanyId
-   */
   @FormData
   public String getCompanyId() {
     return m_companyId;
   }
 
-  /**
-   * @param companyId
-   *          the CompanyId to set
-   */
   @FormData
   public void setCompanyId(String companyId) {
     m_companyId = companyId;

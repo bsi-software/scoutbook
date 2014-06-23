@@ -11,9 +11,12 @@ import org.eclipse.scout.rt.client.ui.form.AbstractFormHandler;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractCancelButton;
 import org.eclipse.scout.rt.client.ui.form.fields.button.AbstractOkButton;
 import org.eclipse.scout.rt.client.ui.form.fields.groupbox.AbstractGroupBox;
+import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipsescout.contacts.client.ui.forms.PictureURLForm.MainBox.CancelButton;
 import org.eclipsescout.contacts.client.ui.forms.PictureURLForm.MainBox.OkButton;
+import org.eclipsescout.contacts.client.ui.forms.PictureURLForm.MainBox.URLBox;
+import org.eclipsescout.contacts.client.ui.forms.PictureURLForm.MainBox.URLBox.PictureURLField;
 
 /**
  * @author mzi
@@ -79,14 +82,41 @@ public class PictureURLForm extends AbstractForm {
     return getFieldByClass(OkButton.class);
   }
 
+  /**
+   * @return the PictureURLField
+   */
+  public PictureURLField getPictureURLField(){
+    return getFieldByClass(PictureURLField.class);
+  }
+
+  /**
+   * @return the URLBox
+   */
+  public URLBox getURLBox(){
+    return getFieldByClass(URLBox.class);
+  }
+
   @Order(10.0)
   public class MainBox extends AbstractGroupBox {
 
     @Order(10.0)
-    public class OkButton extends AbstractOkButton {
+    public class URLBox extends AbstractGroupBox {
+
+      @Order(10.0)
+      public class PictureURLField extends AbstractStringField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("PictureURL");
+        }
+      }
     }
 
     @Order(20.0)
+    public class OkButton extends AbstractOkButton {
+    }
+
+    @Order(30.0)
     public class CancelButton extends AbstractCancelButton {
     }
   }

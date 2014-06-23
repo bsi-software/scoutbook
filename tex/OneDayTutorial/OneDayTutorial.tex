@@ -197,7 +197,7 @@ first.
   label=\lstlabel{mycontacts.desktop.menu.exportoexcel},
   caption=The \java{ExportToExcelMenu} class added by the Docx4j support to the application's tools menu.,
   index={ScoutXlsxSpreadsheetAdapter,IShellService,shellOpen},
-  linerange={145-162},
+  linerange={138-155},
   float
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/Desktop.java}
@@ -223,7 +223,7 @@ In the \field{Title} enter the string ''My Contacts'' and create a new translate
   label=\lstlabel{mycontacts.desktop.execopened},
   caption=The \java{execOpened} method of desktop class of the "My Contacts" application. The application's organisation into a tree and a table form is defined here.,
   index={execOpened,Desktop,UserAgentUtility},
-  linerange={49-70},
+  linerange={56-79},
   float
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/Desktop.java}
@@ -263,7 +263,7 @@ Make sure the other fields are filled in as shown in \figref{new_page_person} an
   label=\lstlabel{mycontacts.desktop.outline.personpage},
   caption=The \java{execCreateChildPages} method of the standard outline. At the current implementation step the company table page is not (yet) added.,
   index={execCreateChildPages, StandardOutline},
-  linerange={19-25},
+  linerange={24-30},
   float
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outlines/StandardOutline.java}
@@ -305,10 +305,10 @@ Create the remaining string columns with the following names.
   label=\lstlabel{mycontacts.desktop.outline.personpage.columns},
   caption=The person id and the first name columns of the \java{PersonTablePage} class. ,
   index={A primary key table column and a default string column.},
-  linerange={71-93},
+  linerange={82-104},
   float
 ]
-{../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outlines/pages/PersonTablePage.java}
+{../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outline/pages/PersonTablePage.java}
 
 Once you have created all these columns we will mark the person id column as the primary key column for the person page. 
 In the Scout Explorer select the \node{PersonIdColumn} to open the corresponding Scout Object Properties. 
@@ -327,10 +327,10 @@ The resulting Java code for the primary key column and the first name column is 
   label=\lstlabel{mycontacts.desktop.outline.personpage.columns},
   caption=The company id variable of the \java{PersonTablePage} class. ,
   index={A table page property bean.},
-  linerange={18-21,162-172},
+  linerange={31-35,172-183},
   float
 ]
-{../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outlines/pages/PersonTablePage.java}
+{../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outline/pages/PersonTablePage.java}
 
 As we will later add and link the person page with a company page, we add a company id variable to the person page as shown in \figref{new_bean_companyid}. 
 For the Java representation of such variables the standard bean pattern is used as shown in \lstref{mycontacts.desktop.outline.personpage.columns}.
@@ -349,10 +349,10 @@ For the Java representation of such variables the standard bean pattern is used 
   label=\lstlabel{mycontacts.desktop.outline.companypage.linking},
   caption=Linking the \java{PersonTablePage} with the parent \java{CompanyTablePage}.,
   index={Linking pages hierarchically.},
-  linerange={30-36},
+  linerange={38-44},
   float
 ]
-{../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outlines/pages/CompanyTablePage.java}
+{../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outline/pages/CompanyTablePage.java}
 
 After adding the person page, we also add a company page under the \node{Child Pages} to the standard outline. 
 To add the company page we use the same wizards as described in the previous section for the person page. 
@@ -423,7 +423,7 @@ This setup is handy for development purposes but you may want to set the databas
   caption=The \java{installStorage} service operation to create the database schema for the ''My Contacts'' application.
   New tables are created if they are not found by \java{getExistingTables} in the existing schema.,
   index={A service operation to install a database schema.},
-  linerange={14-16,21-36,94-105},
+  linerange={20-50,107-108},
   float
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/DBInstallService.java}
@@ -441,7 +441,7 @@ For this, the member variable \java{m\_doSetup} is used that might also be set b
 \lstinputlisting[
   label=\lstlabel{mycontacts.server.services.installdb.company},
   caption=Setting up the \java{COMPANY} table of the ''My Contacts'' application.,
-  linerange={37-56},
+  linerange={51-70},
   float
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/DBInstallService.java}
@@ -449,7 +449,7 @@ For this, the member variable \java{m\_doSetup} is used that might also be set b
 \lstinputlisting[
   label=\lstlabel{mycontacts.server.services.installdb.person},
   caption=Setting up the \java{PERSON} table of the ''My Contacts'' application.,
-  linerange={57-79},
+  linerange={71-93},
   float
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/DBInstallService.java}
@@ -457,7 +457,7 @@ For this, the member variable \java{m\_doSetup} is used that might also be set b
 \lstinputlisting[
   label=\lstlabel{mycontacts.server.services.installdb.users_param},
   caption=Setting up the \java{USERS\_PARAM} table of the ''My Contacts'' application.,
-  linerange={80-94},
+  linerange={94-106},
   float
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/DBInstallService.java}
@@ -589,10 +589,10 @@ This will display the complete list of the Scout utility classes as shown in \fi
   label=\lstlabel{mycontacts.client.pages.loadpersontabledata},
   caption=Loading the person data into the person table page.,
   index={execLoadTableData},
-  linerange={37-41},
+  linerange={168-172},
   float
 ]
-{../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outlines/pages/PersonTablePage.java}
+{../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outline/pages/PersonTablePage.java}
 
 As we have implemented the server service methods to load person and company data from the database, we can now use these services to load the data into the client. 
 For this, we first navigate to the \java{PersonTablePage} under the orange client node in the Scout SDK.
@@ -705,7 +705,7 @@ This results in the picture to cover the vertical space of 5 form fields.
   label=\lstlabel{mycontacts.client.forms.person.picturefield},
   caption=The behaviour of the person form's \java{PictureField} is triggered by changes in field \java{PictureUrlField}.,
   index={getConfiguredMasterField, execChangedMasterValue, IOUtility},
-  linerange={133-135,151-167,186-187},
+  linerange={233-235,251-267,286-287},
   float
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PersonForm.java}
@@ -734,7 +734,7 @@ That is why almost all form and service artefacts are deselected in the second w
 \lstinputlisting[
   label=\lstlabel{mycontacts.client.forms.pictureurl},
   caption=The UI structure of the \java{PictureURLForm} used to update the URL of the picture field in the person form.,
-  linerange={17-18,52-67,78-80},
+  linerange={24-25,99-114,122-123,126-127},
   float
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PictureURLForm.java}
@@ -758,7 +758,7 @@ See \lstref{mycontacts.client.forms.person.picturefield.editmenu} for the actual
   caption=The edit menu implemented in class \java{EditURLMenu} of the picture field.
   If the URL was changed the picture URL field of the person form is set accordingly in method \java{execAction},
   index={execAction},
-  linerange={168-185},
+  linerange={268-285},
   float
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PersonForm.java}
@@ -782,10 +782,10 @@ Such a change will then trigger method \java{execChangedMasterValue} of the \jav
   caption=The \java{EditPersonMenu} to edit the person selected in the person table.
   The person id taken from the corresponding (invisible) column is transferred to the person form before the form is started.,
   index={isFormStored, reloadPage},
-  linerange={112-131},
+  linerange={123-142},
   float
 ]
-{../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outlines/pages/PersonTablePage.java}
+{../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outline/pages/PersonTablePage.java}
 
 The user of the ''My Contacts'' application wants to use the person form to show/edit attributes of a specific person.
 To support this use case, we need to link this form with the ''My Contacts'' application. 
@@ -809,10 +809,10 @@ Except that you pick the \java{NewHander} in the \wizard{New Menu} instead of th
   label=\lstlabel{mycontacts.desktop.outline.personpage.execrowaction},
   caption=The \java{execRowAction} method on table pages is used to trigger an action when a row is selected with a double click or \textsc{<Enter>}.,
   index={execRowAction},
-  linerange={58-62},
+  linerange={63-67},
   float
 ]
-{../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outlines/pages/PersonTablePage.java}
+{../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outline/pages/PersonTablePage.java}
 
 To open the person form with a double click on a person row or by hitting the \key{Enter} key, you may add a corresponding \java{execRowAction} on the person page. 
 This method can be added to the person table by clicking on the green plus icon next to the operation \element{Exec Row Action} as shown in \figref{person_table_properties}. 
@@ -856,7 +856,7 @@ We can now close this wizard with the \button{Finish} and add the business logic
   label=\lstlabel{mycontacts.shared.lookup.companylookupcall},
   caption=The company lookup call with its \java{getConfiguredService} method in the application's shared plugin.,
   index={LookupCall, getConfiguredService, CompanyLookupCall},
-  linerange={7-16},
+  linerange={12-21},
   float
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.shared/src/org/eclipsescout/contacts/shared/services/lookup/CompanyLookupCall.java}
@@ -907,7 +907,7 @@ Finally, the position of the new company smart field can be set in the \field{Si
   label=\lstlabel{mycontacts.client.forms.person.companyfield},
   caption=The smart field \java{CompanyField} of the person form and its wiring with the company lookup call.,
   index={AbstractSmartField, getConfiguredLookupCall},
-  linerange={233-247},
+  linerange={324-337},
   float
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PersonForm.java}
@@ -945,7 +945,7 @@ Here, we set the \property{Grid H} to 6 and update the \property{Width in Pixel}
   label=\lstlabel{mycontacts.client.forms.map},
   caption=In the \java{execInitField} method of the map form the image content is fetched from the Google Maps API.,
   index={execInitField, AbstractImageField},
-  linerange={81-99},
+  linerange={115-133},
   float
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/MapForm.java}
@@ -968,7 +968,7 @@ Here, just enter the new translated text ''Show Map ...'' into the \field{Name} 
   caption=The implementation of the ''Show Map ...'' link button. 
   In method \java{execClickAction} a new map form is first created, the the address variable is set with the content of the person's location and the form is opened with \java{startModify}. 
   index={execClickAction},
-  linerange={275-290},
+  linerange={347-362},
   float
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PersonForm.java}
@@ -983,7 +983,7 @@ As shown in \lstref{mycontacts.client.forms.person.clickmaplink}, we only need t
   label=\lstlabel{mycontacts.client.personform.modifyhandler},
   caption=The \java{execLoad} and the  \java{execStore} methods of the person form's modify handler.,
   index={ModifyHandler,AbstractFormHandler},
-  linerange={292-312},
+  linerange={364-384},
   float
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PersonForm.java}
@@ -999,7 +999,7 @@ And method \java{execStore} is called by the Scout framework after the user has 
   label=\lstlabel{mycontacts.server.services.personservice.load},
   caption=The \java{load} and the \java{store} methods of the server's \java{PersonService}.,
   index={PersonService},
-  linerange={18-19,48-96},
+  linerange={24-25,55-104},
   float
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/ui/forms/PersonService.java}
@@ -1022,7 +1022,7 @@ As its implementation has been created by the Scout SDK wizard, it does not do a
   label=\lstlabel{mycontacts.server.services.personservice.create},
   caption=The \java{create} method of the server's \java{PersonService}.,
   index={PersonService},
-  linerange={18-19,28-47,95-96},
+  linerange={24-25,35-54,103-104},
   float
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/ui/forms/PersonService.java}
@@ -1104,7 +1104,7 @@ Once the wizard has completed the classes defined in the two JAR files can direc
   label=\lstlabel{mycontacts.server.linkedin.initialize},
   caption=The \java{LinkedInService} service with it's \java{initializeService} method defined in the \java{IService} interface.,
   index={IService, initializeService},
-  linerange={32-50,160-161},
+  linerange={38-57,195-196},
   float
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/LinkedInService.java}
@@ -1128,7 +1128,7 @@ For the Scribe \filename{LinkedInExample.java} example class see: \url{https://g
   label=\lstlabel{mycontacts.server.linkedin.authurl},
   caption=The \java{getAuthUrl} method of the LinkedIn service.,
   index={AbstractSmartField, getConfiguredLookupCall},
-  linerange={51-57},
+  linerange={58-65},
   float
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/LinkedInService.java}
@@ -1154,7 +1154,7 @@ Then, open class \java{LinkedInService} and add the String parameter \java{secur
 \lstinputlisting[
   label=\lstlabel{mycontacts.server.linkedin.refreshtoken},
   caption=The \java{refreshToken} method is used to create a new access token to fetch data from the LinkedIn API.,
-  linerange={58-85},
+  linerange={66-98},
   float
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/LinkedInService.java}
@@ -1168,7 +1168,7 @@ Once we have both the access token and the user id available in method {refreshT
   label=\lstlabel{mycontacts.server.linkedin.readcontacts},
   caption=The \java{readContacts} method to fetch the users connection using the LinkedIn API.
   The necessary access token is created in method \java{getToken} based on the information stored in the database for the logged in user.,
-  linerange={123-159},
+  linerange={136-195},
   float
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/LinkedInService.java}
@@ -1233,7 +1233,7 @@ To simplify access to this data provided by the LinkedIn API we implement a smal
 \lstinputlisting[
   label=\lstlabel{mycontacts.server.linkedin.domutil},
   caption=The \java{DomUtility} class provides functions to parse the XML data structure provided by the LinkedIn API.,
-  linerange={13-45},
+  linerange={16-48},
   float
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/DomUtility.java}
@@ -1249,7 +1249,7 @@ Before the class can be saved, the necessary imports need to be fixed by pressin
 \lstinputlisting[
   label=\lstlabel{mycontacts.server.linkedin.updatecontacts},
   caption=The \java{updateContacts} method is used to enter/update existing contacts based on new data fetched from LinkedIn.,
-  linerange={86-122},
+  linerange={99-135},
   float
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/LinkedInService.java}
@@ -1301,10 +1301,10 @@ As shown on the right side of \figref{tokenform_securitycode}, deselect the \pro
   label=\lstlabel{mycontacts.client.forms.refreshtoken},
   caption=The structure of the refresh token form. The security code field gets enabled in method \java{execClickAction} after the authentication link button is pressed.,
   index={AbstractLinkButton,execClickAction},
-  linerange={23-25,65-104},
+  linerange={29-30,113-133,142-158,195-196},
   float
 ]
-{../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/RefreshTokenForm.java}
+{../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/RefreshLinkedInTokenForm.java}
 
 The implementation of the forms' structure is provided in \lstref{mycontacts.client.forms.refreshtoken}.
 In the \java{execClickAction} method of the \java{OpenAuthURLButton} link button the necessary information for the auth link is obtained from the server. 
@@ -1329,7 +1329,7 @@ To close the wizard, click the \button{Finish}.
 \lstinputlisting[
   label=\lstlabel{mycontacts.client.desktop.refreshtokenmenu},
   caption=The menu to refresh the LinkedIn token starts the token form and then sends token parameters with the new security code to the LinkedIn backend service.,
-  linerange={79-105},
+  linerange={88-114},
   float
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/Desktop.java}
@@ -1349,7 +1349,7 @@ For this, we first retrieve the necessary parameters to call the backend service
 \lstinputlisting[
   label=\lstlabel{mycontacts.client.desktop.updatecontacts},
   caption=The menu to update the stored persons with current LinkedIn data.,
-  linerange={129-144},
+  linerange={156-171},
   float
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/Desktop.java}
