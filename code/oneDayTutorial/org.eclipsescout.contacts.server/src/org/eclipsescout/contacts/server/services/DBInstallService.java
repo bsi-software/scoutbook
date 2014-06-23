@@ -1,3 +1,6 @@
+/**
+ *
+ */
 package org.eclipsescout.contacts.server.services;
 
 import java.util.HashSet;
@@ -11,13 +14,12 @@ import org.eclipse.scout.rt.server.services.common.jdbc.SQL;
 import org.eclipse.scout.service.AbstractService;
 import org.eclipsescout.contacts.shared.services.IDBInstallService;
 
+/**
+ * @author mzi
+ */
 public class DBInstallService extends AbstractService implements IDBInstallService {
 
   private boolean m_doSetup = true;
-
-  public boolean getDoSetup() {
-    return m_doSetup;
-  }
 
   public void setDoSetup(boolean doSetup) {
     m_doSetup = doSetup;
@@ -79,12 +81,11 @@ public class DBInstallService extends AbstractService implements IDBInstallServi
 
   private void createUsersParamTable(Set<String> tables, boolean addInitialData) throws ProcessingException {
     if (!tables.contains("USERS_PARAM")) {
-      SQL.insert(" CREATE TABLE USERS_PARAM ("
+      SQL.insert("CREATE TABLE USERS_PARAM ("
           + " username VARCHAR(32) NOT NULL, "
           + " param VARCHAR(32) NOT NULL, "
           + " value VARCHAR(512), "
-          + " CONSTRAINT PARAM_PK PRIMARY KEY (username, param)"
-          + ")");
+          + " CONSTRAINT PARAM_PK PRIMARY KEY (username, param))");
 
       if (addInitialData) {
         // nop

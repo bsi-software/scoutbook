@@ -6,8 +6,8 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.eclipsescout.contacts.client.Activator
 Export-Package: org.eclipsescout.contacts.client,
  org.eclipsescout.contacts.client.ui.desktop,
+ org.eclipsescout.contacts.client.ui.desktop.outline.pages,
  org.eclipsescout.contacts.client.ui.desktop.outlines,
- org.eclipsescout.contacts.client.ui.desktop.outlines.pages,
  org.eclipsescout.contacts.client.ui.forms
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.scout.rt.client;visibility:=reexport,

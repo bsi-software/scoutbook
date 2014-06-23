@@ -1,3 +1,6 @@
+/**
+ *
+ */
 package org.eclipsescout.contacts.server.ui.forms;
 
 import java.util.UUID;
@@ -15,6 +18,9 @@ import org.eclipsescout.contacts.shared.ui.forms.ICompanyService;
 import org.eclipsescout.contacts.shared.ui.forms.ReadCompanyPermission;
 import org.eclipsescout.contacts.shared.ui.forms.UpdateCompanyPermission;
 
+/**
+ * @author mzi
+ */
 public class CompanyService extends AbstractService implements ICompanyService {
 
   @Override
@@ -22,7 +28,7 @@ public class CompanyService extends AbstractService implements ICompanyService {
     if (!ACCESS.check(new CreateCompanyPermission())) {
       throw new VetoException(TEXTS.get("AuthorizationFailed"));
     }
-
+    //TODO [mzi] business logic here.
     return formData;
   }
 
@@ -31,7 +37,6 @@ public class CompanyService extends AbstractService implements ICompanyService {
     if (!ACCESS.check(new CreateCompanyPermission())) {
       throw new VetoException(TEXTS.get("AuthorizationFailed"));
     }
-
     if (StringUtility.isNullOrEmpty(formData.getCompanyId())) {
       formData.setCompanyId(UUID.randomUUID().toString());
     }
@@ -61,7 +66,7 @@ public class CompanyService extends AbstractService implements ICompanyService {
         + "INTO "
         + ":name, "
         + ":location, "
-        + ":uRL",
+        + ":URL",
         formData);
 
     return formData;
@@ -74,10 +79,10 @@ public class CompanyService extends AbstractService implements ICompanyService {
     }
 
     SQL.update("UPDATE COMPANY SET "
-        + "name     = :name, "
+        + "name = :name, "
         + "location = :location, "
-        + "url      = :uRL "
-        + "WHERE company_id=:companyId ",
+        + "url = :URL "
+        + "WHERE company_id = :companyId ",
         formData);
 
     return formData;

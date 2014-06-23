@@ -1,3 +1,6 @@
+/**
+ *
+ */
 package org.eclipsescout.contacts.server.ui.forms;
 
 import java.util.UUID;
@@ -15,6 +18,9 @@ import org.eclipsescout.contacts.shared.ui.forms.PersonFormData;
 import org.eclipsescout.contacts.shared.ui.forms.ReadPersonPermission;
 import org.eclipsescout.contacts.shared.ui.forms.UpdatePersonPermission;
 
+/**
+ * @author mzi
+ */
 public class PersonService extends AbstractService implements IPersonService {
 
   @Override
@@ -22,6 +28,7 @@ public class PersonService extends AbstractService implements IPersonService {
     if (!ACCESS.check(new CreatePersonPermission())) {
       throw new VetoException(TEXTS.get("AuthorizationFailed"));
     }
+    //TODO [mzi] business logic here.
     return formData;
   }
 
@@ -62,7 +69,7 @@ public class PersonService extends AbstractService implements IPersonService {
         + "FROM PERSON "
         + "WHERE PERSON_ID = :personId "
         + "INTO "
-        + ":pictureUrl, "
+        + ":pictureURL, "
         + ":firstName, "
         + ":lastName, "
         + ":company, "
@@ -79,13 +86,14 @@ public class PersonService extends AbstractService implements IPersonService {
     if (!ACCESS.check(new UpdatePersonPermission())) {
       throw new VetoException(TEXTS.get("AuthorizationFailed"));
     }
+
     SQL.update("UPDATE PERSON SET "
-        + "picture_url   = :pictureUrl, "
-        + "first_name    = :firstName, "
-        + "last_name     = :lastName, "
-        + "headline      = :headline, "
-        + "company_id    = :company, "
-        + "location      = :location, "
+        + "picture_url = :pictureURL, "
+        + "first_name = :firstName, "
+        + "last_name = :lastName, "
+        + "headline = :headline, "
+        + "company_id = :company, "
+        + "location = :location, "
         + "date_of_birth = :dateOfBirth "
         + "WHERE person_id = :personId ",
         formData);

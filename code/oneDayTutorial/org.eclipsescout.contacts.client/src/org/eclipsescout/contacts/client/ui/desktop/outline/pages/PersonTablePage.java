@@ -1,8 +1,17 @@
-package org.eclipsescout.contacts.client.ui.desktop.outlines.pages;
+/**
+ *
+ */
+package org.eclipsescout.contacts.client.ui.desktop.outline.pages;
 
+import java.util.Set;
+
+import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.annotations.FormData;
 import org.eclipse.scout.commons.annotations.Order;
+import org.eclipse.scout.commons.annotations.PageData;
 import org.eclipse.scout.commons.exception.ProcessingException;
+import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
+import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
 import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithTable;
@@ -14,38 +23,34 @@ import org.eclipse.scout.service.SERVICES;
 import org.eclipsescout.contacts.client.ui.forms.PersonForm;
 import org.eclipsescout.contacts.shared.Icons;
 import org.eclipsescout.contacts.shared.services.IStandardOutlineService;
+import org.eclipsescout.contacts.shared.ui.desktop.outline.pages.PersonTablePageData;
 
+/**
+ * @author mzi
+ */
+@PageData(PersonTablePageData.class)
 public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table> {
 
   private String m_companyId;
-
-  @Override
-  protected String getConfiguredIconId() {
-    return Icons.Eye;
-  }
-
-  @Override
-  protected boolean getConfiguredLeaf() {
-    return true;
-  }
 
   @Override
   protected String getConfiguredTitle() {
     return TEXTS.get("Person");
   }
 
-  @Override
-  protected Object[][] execLoadTableData(SearchFilter filter) throws ProcessingException {
-    return SERVICES.getService(IStandardOutlineService.class).getPersonTableData(getCompanyId());
-  }
-
   @Order(10.0)
   public class Table extends AbstractExtensibleTable {
 
+    /**
+     * @return the LastNameColumn
+     */
     public LastNameColumn getLastNameColumn() {
       return getColumnSet().getColumnByClass(LastNameColumn.class);
     }
 
+    /**
+     * @return the HeadlineColumn
+     */
     public HeadlineColumn getHeadlineColumn() {
       return getColumnSet().getColumnByClass(HeadlineColumn.class);
     }
@@ -60,10 +65,16 @@ public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table
       getMenu(EditPersonMenu.class).execAction();
     }
 
+    /**
+     * @return the FirstNameColumn
+     */
     public FirstNameColumn getFirstNameColumn() {
       return getColumnSet().getColumnByClass(FirstNameColumn.class);
     }
 
+    /**
+     * @return the PersonIdColumn
+     */
     public PersonIdColumn getPersonIdColumn() {
       return getColumnSet().getColumnByClass(PersonIdColumn.class);
     }
@@ -133,18 +144,13 @@ public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table
     public class NewPersonMenu extends AbstractExtensibleMenu {
 
       @Override
+      protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+        return CollectionUtility.<IMenuType> hashSet(TableMenuType.EmptySpace);
+      }
+
+      @Override
       protected String getConfiguredText() {
         return TEXTS.get("NewPerson");
-      }
-
-      @Override
-      protected boolean getConfiguredEmptySpaceAction() {
-        return true;
-      }
-
-      @Override
-      protected boolean getConfiguredSingleSelectionAction() {
-        return false;
       }
 
       @Override
@@ -159,11 +165,23 @@ public class PersonTablePage extends AbstractPageWithTable<PersonTablePage.Table
     }
   }
 
+  @Override
+  protected Object[][] execLoadTableData(SearchFilter filter) throws ProcessingException {
+    return SERVICES.getService(IStandardOutlineService.class).getPersonTableData(getCompanyId());
+  }
+
+  /**
+   * @return the CompanyId
+   */
   @FormData
   public String getCompanyId() {
     return m_companyId;
   }
 
+  /**
+   * @param companyId
+   *          the CompanyId to set
+   */
   @FormData
   public void setCompanyId(String companyId) {
     m_companyId = companyId;

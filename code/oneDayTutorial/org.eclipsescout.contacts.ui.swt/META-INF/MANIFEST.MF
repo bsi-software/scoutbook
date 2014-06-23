@@ -7,7 +7,6 @@ Bundle-ClassPath: .
 Bundle-Activator: org.eclipsescout.contacts.ui.swt.Activator
 Export-Package: org.eclipsescout.contacts.ui.swt;uses:="org.eclipse.scout.rt.ui.swt,org.eclipse.scout.rt.client.session,org.osgi.framework",
  org.eclipsescout.contacts.ui.swt.application,
- org.eclipsescout.contacts.ui.swt.application.button,
  org.eclipsescout.contacts.ui.swt.application.menu,
  org.eclipsescout.contacts.ui.swt.editor,
  org.eclipsescout.contacts.ui.swt.perspective,

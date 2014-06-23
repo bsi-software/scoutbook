@@ -1,11 +1,26 @@
+/**
+ * 
+ */
 package org.eclipsescout.contacts.shared.services;
 
-import org.eclipse.scout.service.IService2;
+import org.eclipse.scout.service.IService;
 import org.eclipse.scout.commons.exception.ProcessingException;
 
-public interface IStandardOutlineService extends IService2 {
+/**
+ * @author mzi
+ */
+public interface IStandardOutlineService extends IService {
 
-  public Object[][] getPersonTableData(String companyId) throws ProcessingException;
+  /**
+   * @param companyId
+   * @return
+   * @throws org.eclipse.scout.commons.exception.ProcessingException
+   */
+  Object[][] getPersonTableData(String companyId) throws ProcessingException;
 
-  public Object[][] getCompanyTableData() throws ProcessingException;
+  /**
+   * @return
+   * @throws org.eclipse.scout.commons.exception.ProcessingException
+   */
+  Object[][] getCompanyTableData() throws ProcessingException;
 }

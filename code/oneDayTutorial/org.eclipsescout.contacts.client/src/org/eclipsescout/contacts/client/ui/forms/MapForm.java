@@ -1,3 +1,6 @@
+/**
+ *
+ */
 package org.eclipsescout.contacts.client.ui.forms;
 
 import java.net.URL;
@@ -18,17 +21,36 @@ import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipsescout.contacts.client.ui.forms.MapForm.MainBox.MapField;
 import org.eclipsescout.contacts.client.ui.forms.MapForm.MainBox.OkButton;
 
+/**
+ * @author mzi
+ */
 public class MapForm extends AbstractForm {
 
+  private Long m_mapNr;
   private String m_address;
 
+  /**
+   * @throws org.eclipse.scout.commons.exception.ProcessingException
+   */
   public MapForm() throws ProcessingException {
     super();
   }
 
-  @Override
-  protected boolean getConfiguredAskIfNeedSave() {
-    return false;
+  /**
+   * @return the MapNr
+   */
+  @FormData
+  public Long getMapNr() {
+    return m_mapNr;
+  }
+
+  /**
+   * @param mapNr
+   *          the MapNr to set
+   */
+  @FormData
+  public void setMapNr(Long mapNr) {
+    m_mapNr = mapNr;
   }
 
   @Override
@@ -36,18 +58,30 @@ public class MapForm extends AbstractForm {
     return TEXTS.get("Map");
   }
 
+  /**
+   * @throws org.eclipse.scout.commons.exception.ProcessingException
+   */
   public void startModify() throws ProcessingException {
     startInternal(new ModifyHandler());
   }
 
+  /**
+   * @return the MainBox
+   */
   public MainBox getMainBox() {
     return getFieldByClass(MainBox.class);
   }
 
+  /**
+   * @return the MapField
+   */
   public MapField getMapField() {
     return getFieldByClass(MapField.class);
   }
 
+  /**
+   * @return the OkButton
+   */
   public OkButton getOkButton() {
     return getFieldByClass(OkButton.class);
   }
@@ -55,7 +89,7 @@ public class MapForm extends AbstractForm {
   @Order(10.0)
   public class MainBox extends AbstractGroupBox {
 
-    @Order(20.0)
+    @Order(10.0)
     public class MapField extends AbstractImageField {
 
       @Override
@@ -83,7 +117,6 @@ public class MapForm extends AbstractForm {
         String address = StringUtility.nvl(getAddress(), "");
         String size = "" + getConfiguredHeightInPixel() + "x" + getConfiguredWidthInPixel();
         String url = null;
-
         try {
           url = "http://maps.googleapis.com/maps/api/staticmap?center=" +
               URLEncoder.encode(address, "ISO-8859-1") +
@@ -91,7 +124,7 @@ public class MapForm extends AbstractForm {
           setImage(IOUtility.getContent((new URL(url)).openStream()));
         }
         catch (Exception e) {
-          setErrorStatus(new ProcessingStatus("Bad Link: '" + url + "', please check",
+          setErrorStatus(new ProcessingStatus("Bad Link: ’" + url + "’, please check",
               ProcessingStatus.ERROR));
           setImage(null);
           e.printStackTrace();
@@ -99,7 +132,7 @@ public class MapForm extends AbstractForm {
       }
     }
 
-    @Order(30.0)
+    @Order(20.0)
     public class OkButton extends AbstractOkButton {
     }
   }
@@ -107,13 +140,20 @@ public class MapForm extends AbstractForm {
   public class ModifyHandler extends AbstractFormHandler {
   }
 
+  /**
+   * @return the Name
+   */
   @FormData
   public String getAddress() {
     return m_address;
   }
 
+  /**
+   * @param name
+   *          the Name to set
+   */
   @FormData
-  public void setAddress(String address) {
-    m_address = address;
+  public void setAddress(String name) {
+    m_address = name;
   }
 }

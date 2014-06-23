@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package org.eclipsescout.contacts.server.services;
 
@@ -10,6 +10,9 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.ls.DOMImplementationLS;
 import org.w3c.dom.ls.LSSerializer;
 
+/**
+ * @author mzi
+ */
 public class DomUtility {
   private static Node getSubElement(Node parent, String name) {
     NodeList nodes = ((Element) parent).getElementsByTagName(name);

@@ -1,27 +1,34 @@
-package org.eclipsescout.contacts.client.ui.desktop.outlines.pages;
+/**
+ *
+ */
+package org.eclipsescout.contacts.client.ui.desktop.outline.pages;
 
+import java.util.Set;
+
+import org.eclipse.scout.commons.CollectionUtility;
 import org.eclipse.scout.commons.annotations.Order;
+import org.eclipse.scout.commons.annotations.PageData;
 import org.eclipse.scout.commons.exception.ProcessingException;
+import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
+import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
 import org.eclipse.scout.rt.client.ui.basic.table.ITableRow;
-import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractDoubleColumn;
 import org.eclipse.scout.rt.client.ui.basic.table.columns.AbstractStringColumn;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.AbstractPageWithTable;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.extension.client.ui.action.menu.AbstractExtensibleMenu;
 import org.eclipse.scout.rt.extension.client.ui.basic.table.AbstractExtensibleTable;
-import org.eclipse.scout.rt.shared.AbstractIcons;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.rt.shared.services.common.jdbc.SearchFilter;
 import org.eclipse.scout.service.SERVICES;
 import org.eclipsescout.contacts.client.ui.forms.CompanyForm;
 import org.eclipsescout.contacts.shared.services.IStandardOutlineService;
+import org.eclipsescout.contacts.shared.ui.desktop.outline.pages.CompanyTablePageData;
 
+/**
+ * @author mzi
+ */
+@PageData(CompanyTablePageData.class)
 public class CompanyTablePage extends AbstractPageWithTable<CompanyTablePage.Table> {
-
-  @Override
-  protected String getConfiguredIconId() {
-    return AbstractIcons.ComposerFieldEntity;
-  }
 
   @Override
   protected String getConfiguredTitle() {
@@ -43,23 +50,28 @@ public class CompanyTablePage extends AbstractPageWithTable<CompanyTablePage.Tab
   @Order(10.0)
   public class Table extends AbstractExtensibleTable {
 
+    /**
+     * @return the NameColumn
+     */
     public NameColumn getNameColumn() {
       return getColumnSet().getColumnByClass(NameColumn.class);
     }
 
+    /**
+     * @return the LocationColumn
+     */
     public LocationColumn getLocationColumn() {
       return getColumnSet().getColumnByClass(LocationColumn.class);
     }
 
     @Override
-    protected String getConfiguredDefaultIconId() {
-      return AbstractIcons.ComposerFieldEntity;
+    protected void execRowAction(ITableRow row) throws ProcessingException {
+      getMenu(EditCompanyMenu.class).execAction();
     }
 
-    public ScoreColumn getScoreColumn() {
-      return getColumnSet().getColumnByClass(ScoreColumn.class);
-    }
-
+    /**
+     * @return the CompanyIdColumn
+     */
     public CompanyIdColumn getCompanyIdColumn() {
       return getColumnSet().getColumnByClass(CompanyIdColumn.class);
     }
@@ -85,11 +97,6 @@ public class CompanyTablePage extends AbstractPageWithTable<CompanyTablePage.Tab
       protected String getConfiguredHeaderText() {
         return TEXTS.get("Name");
       }
-
-      @Override
-      protected int getConfiguredWidth() {
-        return 221;
-      }
     }
 
     @Order(30.0)
@@ -98,20 +105,6 @@ public class CompanyTablePage extends AbstractPageWithTable<CompanyTablePage.Tab
       @Override
       protected String getConfiguredHeaderText() {
         return TEXTS.get("Location");
-      }
-
-      @Override
-      protected int getConfiguredWidth() {
-        return 144;
-      }
-    }
-
-    @Order(40.0)
-    public class ScoreColumn extends AbstractDoubleColumn {
-
-      @Override
-      protected String getConfiguredHeaderText() {
-        return TEXTS.get("Score");
       }
     }
 
@@ -139,18 +132,13 @@ public class CompanyTablePage extends AbstractPageWithTable<CompanyTablePage.Tab
     public class NewCompanyMenu extends AbstractExtensibleMenu {
 
       @Override
+      protected Set<? extends IMenuType> getConfiguredMenuTypes() {
+        return CollectionUtility.<IMenuType> hashSet(TableMenuType.EmptySpace);
+      }
+
+      @Override
       protected String getConfiguredText() {
         return TEXTS.get("NewCompany");
-      }
-
-      @Override
-      protected boolean getConfiguredEmptySpaceAction() {
-        return true;
-      }
-
-      @Override
-      protected boolean getConfiguredSingleSelectionAction() {
-        return false;
       }
 
       @Override

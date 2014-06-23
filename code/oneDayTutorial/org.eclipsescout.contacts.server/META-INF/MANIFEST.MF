@@ -14,9 +14,10 @@ Export-Package: org.eclipsescout.contacts.server,
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipsescout.contacts.shared,
  org.eclipse.scout.rt.server,
- org.eclipse.scout.http.servletfilter,
+ org.eclipse.scout.rt.server.commons,
  org.eclipse.equinox.http.registry,
- org.eclipse.scout.rt.jdbc.derby,
+ org.eclipse.scout.rt.jdbc.derby10,
+ org.eclipse.scout.jaxws216;bundle-version="2.1.6",
  org.scribe
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Import-Package: javax.servlet;version="2.4.0",

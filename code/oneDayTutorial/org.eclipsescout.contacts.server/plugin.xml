@@ -41,12 +41,12 @@
       </service>
       <service
             factory="org.eclipse.scout.rt.server.services.ServerServiceFactory"
-            class="org.eclipsescout.contacts.server.ui.forms.CompanyService"
+            class="org.eclipsescout.contacts.server.services.lookup.CompanyLookupService"
             session="org.eclipsescout.contacts.server.ServerSession">
       </service>
       <service
             factory="org.eclipse.scout.rt.server.services.ServerServiceFactory"
-            class="org.eclipsescout.contacts.server.services.lookup.CompanyLookupService"
+            class="org.eclipsescout.contacts.server.ui.forms.CompanyService"
             session="org.eclipsescout.contacts.server.ServerSession">
       </service>
       <service
@@ -97,15 +97,15 @@
    </extension>
    <extension
          name=""
-         point="org.eclipse.scout.http.servletfilter.filters">
+         point="org.eclipse.scout.rt.server.commons.filters">
       <filter
             aliases="/process /remotefiles /updatesite"
-            class="org.eclipse.scout.http.servletfilter.security.BasicSecurityFilter"
+            class="org.eclipse.scout.rt.server.commons.servletfilter.security.BasicSecurityFilter"
             ranking="20">
       </filter>
       <filter
             aliases="/process /remotefiles /updatesite"
-            class="org.eclipse.scout.http.servletfilter.security.AnonymousSecurityFilter"
+            class="org.eclipse.scout.rt.server.commons.servletfilter.security.AnonymousSecurityFilter"
             ranking="30">
       </filter>
    </extension>

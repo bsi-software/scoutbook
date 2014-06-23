@@ -1,10 +1,12 @@
+/**
+ *
+ */
 package org.eclipsescout.contacts.client.ui.forms;
 
 import java.net.URL;
 
 import org.eclipse.scout.commons.IOUtility;
 import org.eclipse.scout.commons.annotations.FormData;
-import org.eclipse.scout.commons.annotations.FormData.SdkCommand;
 import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.form.AbstractForm;
@@ -20,7 +22,7 @@ import org.eclipse.scout.rt.client.ui.form.fields.smartfield.AbstractSmartField;
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.extension.client.ui.action.menu.AbstractExtensibleMenu;
 import org.eclipse.scout.rt.shared.TEXTS;
-import org.eclipse.scout.rt.shared.services.lookup.LookupCall;
+import org.eclipse.scout.rt.shared.services.lookup.ILookupCall;
 import org.eclipse.scout.service.SERVICES;
 import org.eclipsescout.contacts.client.ui.forms.PersonForm.MainBox.CancelButton;
 import org.eclipsescout.contacts.client.ui.forms.PersonForm.MainBox.DetailBox;
@@ -33,26 +35,44 @@ import org.eclipsescout.contacts.client.ui.forms.PersonForm.MainBox.PersonBox;
 import org.eclipsescout.contacts.client.ui.forms.PersonForm.MainBox.PersonBox.FirstNameField;
 import org.eclipsescout.contacts.client.ui.forms.PersonForm.MainBox.PersonBox.LastNameField;
 import org.eclipsescout.contacts.client.ui.forms.PersonForm.MainBox.PersonBox.PictureField;
-import org.eclipsescout.contacts.client.ui.forms.PersonForm.MainBox.PersonBox.PictureUrlField;
+import org.eclipsescout.contacts.client.ui.forms.PersonForm.MainBox.PersonBox.PictureURLField;
 import org.eclipsescout.contacts.client.ui.forms.PersonForm.MainBox.ShowMapButton;
-import org.eclipsescout.contacts.shared.Icons;
 import org.eclipsescout.contacts.shared.services.lookup.CompanyLookupCall;
 import org.eclipsescout.contacts.shared.ui.forms.IPersonService;
 import org.eclipsescout.contacts.shared.ui.forms.PersonFormData;
 import org.eclipsescout.contacts.shared.ui.forms.UpdatePersonPermission;
 
-@FormData(value = PersonFormData.class, sdkCommand = SdkCommand.CREATE)
+/**
+ * @author mzi
+ */
+@FormData(value = PersonFormData.class, sdkCommand = FormData.SdkCommand.CREATE)
 public class PersonForm extends AbstractForm {
 
+  private Long m_personNr;
   private String m_personId;
 
+  /**
+   * @throws org.eclipse.scout.commons.exception.ProcessingException
+   */
   public PersonForm() throws ProcessingException {
     super();
   }
 
-  @Override
-  protected String getConfiguredIconId() {
-    return Icons.Eye;
+  /**
+   * @return the PersonNr
+   */
+  @FormData
+  public Long getPersonNr() {
+    return m_personNr;
+  }
+
+  /**
+   * @param personNr
+   *          the PersonNr to set
+   */
+  @FormData
+  public void setPersonNr(Long personNr) {
+    m_personNr = personNr;
   }
 
   @Override
@@ -60,66 +80,114 @@ public class PersonForm extends AbstractForm {
     return TEXTS.get("Person");
   }
 
-  public CancelButton getCancelButton() {
-    return getFieldByClass(CancelButton.class);
-  }
-
+  /**
+   * @throws org.eclipse.scout.commons.exception.ProcessingException
+   */
   public void startModify() throws ProcessingException {
     startInternal(new ModifyHandler());
   }
 
+  /**
+   * @throws org.eclipse.scout.commons.exception.ProcessingException
+   */
   public void startNew() throws ProcessingException {
     startInternal(new NewHandler());
   }
 
+  /**
+   * @return the CancelButton
+   */
+  public CancelButton getCancelButton() {
+    return getFieldByClass(CancelButton.class);
+  }
+
+  /**
+   * @return the CompanyField
+   */
   public CompanyField getCompanyField() {
     return getFieldByClass(CompanyField.class);
   }
 
+  /**
+   * @return the DateOfBirthField
+   */
   public DateOfBirthField getDateOfBirthField() {
     return getFieldByClass(DateOfBirthField.class);
   }
 
+  /**
+   * @return the DetailBox
+   */
   public DetailBox getDetailBox() {
     return getFieldByClass(DetailBox.class);
   }
 
+  /**
+   * @return the FirstNameField
+   */
   public FirstNameField getFirstNameField() {
     return getFieldByClass(FirstNameField.class);
   }
 
+  /**
+   * @return the HeadlineField
+   */
   public HeadlineField getHeadlineField() {
     return getFieldByClass(HeadlineField.class);
   }
 
+  /**
+   * @return the LastNameField
+   */
   public LastNameField getLastNameField() {
     return getFieldByClass(LastNameField.class);
   }
 
+  /**
+   * @return the LocationField
+   */
   public LocationField getLocationField() {
     return getFieldByClass(LocationField.class);
   }
 
+  /**
+   * @return the MainBox
+   */
   public MainBox getMainBox() {
     return getFieldByClass(MainBox.class);
   }
 
+  /**
+   * @return the OkButton
+   */
   public OkButton getOkButton() {
     return getFieldByClass(OkButton.class);
   }
 
+  /**
+   * @return the PersonBox
+   */
   public PersonBox getPersonBox() {
     return getFieldByClass(PersonBox.class);
   }
 
+  /**
+   * @return the PictureField
+   */
   public PictureField getPictureField() {
     return getFieldByClass(PictureField.class);
   }
 
-  public PictureUrlField getPictureUrlField() {
-    return getFieldByClass(PictureUrlField.class);
+  /**
+   * @return the PictureURLField
+   */
+  public PictureURLField getPictureURLField() {
+    return getFieldByClass(PictureURLField.class);
   }
 
+  /**
+   * @return the ShowMapButton
+   */
   public ShowMapButton getShowMapButton() {
     return getFieldByClass(ShowMapButton.class);
   }
@@ -130,12 +198,44 @@ public class PersonForm extends AbstractForm {
     @Order(10.0)
     public class PersonBox extends AbstractGroupBox {
 
+      @Order(10.0)
+      public class FirstNameField extends AbstractStringField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("FirstName");
+        }
+      }
+
+      @Order(20.0)
+      public class LastNameField extends AbstractStringField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("LastName");
+        }
+      }
+
+      @Order(30.0)
+      public class PictureURLField extends AbstractStringField {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("PictureURL");
+        }
+
+        @Override
+        protected boolean getConfiguredVisible() {
+          return true;
+        }
+      }
+
       @Order(40.0)
       public class PictureField extends AbstractImageField {
 
         @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Picture");
+        protected boolean getConfiguredFocusable() {
+          return true;
         }
 
         @Override
@@ -150,7 +250,7 @@ public class PersonForm extends AbstractForm {
 
         @Override
         protected Class<? extends IValueField> getConfiguredMasterField() {
-          return PictureUrlField.class;
+          return PersonForm.MainBox.PersonBox.PictureURLField.class;
         }
 
         @Override
@@ -177,38 +277,7 @@ public class PersonForm extends AbstractForm {
           protected void execAction() throws ProcessingException {
             PictureURLForm form = new PictureURLForm();
             form.startModify();
-            form.waitFor();
-            if (form.isFormStored()) {
-              getPictureUrlField().setValue(form.getURLField().getValue());
-            }
           }
-        }
-      }
-
-      @Order(10.0)
-      public class FirstNameField extends AbstractStringField {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("FirstName");
-        }
-      }
-
-      @Order(20.0)
-      public class LastNameField extends AbstractStringField {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("LastName");
-        }
-      }
-
-      @Order(30.0)
-      public class PictureUrlField extends AbstractStringField {
-
-        @Override
-        protected boolean getConfiguredVisible() {
-          return false;
         }
       }
     }
@@ -231,21 +300,6 @@ public class PersonForm extends AbstractForm {
       }
 
       @Order(20.0)
-      public class CompanyField extends AbstractSmartField<String> {
-
-        @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Company");
-        }
-
-        @Override
-        protected Class<? extends LookupCall> getConfiguredLookupCall() {
-          return CompanyLookupCall.class;
-
-        }
-      }
-
-      @Order(30.0)
       public class LocationField extends AbstractStringField {
 
         @Override
@@ -254,12 +308,26 @@ public class PersonForm extends AbstractForm {
         }
       }
 
-      @Order(40.0)
+      @Order(30.0)
       public class DateOfBirthField extends AbstractDateField {
 
         @Override
         protected String getConfiguredLabel() {
           return TEXTS.get("DateOfBirth");
+        }
+      }
+
+      @Order(40.0)
+      public class CompanyField extends AbstractSmartField<String> {
+
+        @Override
+        protected String getConfiguredLabel() {
+          return TEXTS.get("Company");
+        }
+
+        @Override
+        protected Class<? extends ILookupCall<String>> getConfiguredLookupCall() {
+          return CompanyLookupCall.class;
         }
       }
     }
@@ -292,7 +360,7 @@ public class PersonForm extends AbstractForm {
   public class ModifyHandler extends AbstractFormHandler {
 
     @Override
-    public void execLoad() throws ProcessingException {
+    protected void execLoad() throws ProcessingException {
       IPersonService service = SERVICES.getService(IPersonService.class);
       PersonFormData formData = new PersonFormData();
       exportFormData(formData);
@@ -302,7 +370,7 @@ public class PersonForm extends AbstractForm {
     }
 
     @Override
-    public void execStore() throws ProcessingException {
+    protected void execStore() throws ProcessingException {
       IPersonService service = SERVICES.getService(IPersonService.class);
       PersonFormData formData = new PersonFormData();
       exportFormData(formData);
@@ -313,28 +381,37 @@ public class PersonForm extends AbstractForm {
   public class NewHandler extends AbstractFormHandler {
 
     @Override
-    public void execLoad() throws ProcessingException {
+    protected void execLoad() throws ProcessingException {
       IPersonService service = SERVICES.getService(IPersonService.class);
       PersonFormData formData = new PersonFormData();
       exportFormData(formData);
       formData = service.prepareCreate(formData);
       importFormData(formData);
+
     }
 
     @Override
-    public void execStore() throws ProcessingException {
+    protected void execStore() throws ProcessingException {
       IPersonService service = SERVICES.getService(IPersonService.class);
       PersonFormData formData = new PersonFormData();
       exportFormData(formData);
       formData = service.create(formData);
+
     }
   }
 
+  /**
+   * @return the PersonId
+   */
   @FormData
   public String getPersonId() {
     return m_personId;
   }
 
+  /**
+   * @param personId
+   *          the PersonId to set
+   */
   @FormData
   public void setPersonId(String personId) {
     m_personId = personId;
