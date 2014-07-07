@@ -215,7 +215,7 @@ Then the file is opened on the client using the \java{shellOpen} method.
 \end{figure}
 
 After this initial project setup step we first define the application's name shown on the main dialog. 
-For this, select the \node{Desktop} under the green client node in the Scout Explorer.
+For this, select the \node{Desktop} under the orange client node in the Scout Explorer.
 This opens it's Scout Object Properties as shown in \figref{desktop_properties}.
 In the \field{Title} enter the string ''My Contacts'' and create a new translated text entry.  
 
@@ -953,7 +953,7 @@ Here, we set the \property{Grid H} to 6 and update the \property{Width in Pixel}
 To add the Java code to display the map in the image field, click on the \link{execInitField} in the Scout Object Properties of the map field. 
 According to the implementation provided in \lstref{mycontacts.client.forms.map}, an URL for the Maps Image API is first constructed. 
 This url also contains the content of the map form's address variable and the configured dimension of the map field. 
-The map picture returned by the Google API is then read using \java{IOUtility.getContent} and directly fed into the image fields \java{setImage} method. 
+The map picture returned by the Google API is then read using \java{IOUtility.getContent} and directly fed into the image fields \texttt{setImage} method. 
 
 The last step involving the implementation of the map form feature is its integration into the person form. 
 As visible on the lower left part of the person form shown in \figref{my_contacts_swt}, a \link{Show Map ...} is available. 
@@ -965,8 +965,7 @@ Here, just enter the new translated text ''Show Map ...'' into the \field{Name} 
 
 \lstinputlisting[
   label=\lstlabel{mycontacts.client.forms.person.clickmaplink},
-  caption=The implementation of the ''Show Map ...'' link button. 
-  In method \java{execClickAction} a new map form is first created, the the address variable is set with the content of the person's location and the form is opened with \java{startModify}. 
+  caption=The implementation of the ''Show Map \dots'' link button. %In method \texttt{execClickAction} a new map form is first created, the the address variable is set with the content of the person's location and the form is opened with \texttt{startModify}., 
   index={execClickAction},
   linerange={347-362},
   float

@@ -9,6 +9,7 @@ Export-Package: org.eclipse.scout.widget.ui.swing;uses:="org.eclipse.scout.rt.ui
 Require-Bundle: org.eclipse.scout.rt.ui.swing,
  org.eclipse.scout.widget.client;visibility:=reexport,
  org.eclipse.scout.widget.shared,
- org.eclipse.scout.net
+ org.eclipse.scout.net,
+ com.bsiag.scout.rt.ui.swing.rayo
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy

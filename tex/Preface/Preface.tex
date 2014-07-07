@@ -6,7 +6,7 @@
 \ifx\wholebook\relax\else
   \documentclass[a4paper,10pt,twoside]{book}
   \input{../common}
-  \pagestyle{headings}
+	\pagestyle{headings}
   \graphicspath{{figures/} {../figures/}}
   \begin{document}
   \sloppy
@@ -16,74 +16,32 @@
 % --------------------------------------------------------------------------- %
 \chapter{Preface}
 
-% this chapter already contains the planned content. 
-% is not intended for contributions.
-% nevertheless: improvements regarding spelling, style, etc are welcome
+Today, the Java platform is widely seen as the primary choice for implementing enterprise applications. 
+While many successful frameworks support the development of persistence layers and business services, implementing front-ends in a simple and clean way remains a challenge. 
+This is exactly where Eclipse Scout fits in. 
+The primary goal of Scout is to make your life as a developer easier and to help organisations to save money and time. 
+For this, the Scout framework covers most of the recurring front-end aspects such as user authentication, client-server communication and the user interface. 
+This comprehensive scope reduces the amount of necessary boiler plate code, and let developers concentrate on understanding and implementing business functionality. 
 
-% --------------------------------------------------------------------------- %
-\section*{Who should read this Book?}
+The purpose of this book is to get the reader familiar with the Scout framework.
+In this book Scout's core features are introduced and explained using many practical examples. 
+And as both the Scout framework and Scout applications are written in Java, we make the assumption that you are familiar with the language too. 
+Ideally, you have worked with Java for some time now and feel comfortable with the basic language features. 
 
-\begin{itemize}
-\item You want to build a multi-user mobile application.
-\item You have to build a Java based business application. 
-\item You need to decide on the IT strategy of your organisation
-\item You would like to show off the great library you have built but have hardly time for the good looking UI that it deserves
-\end{itemize}
+In the first part of the book a general introduction into the runtime part of the framework and the tooling - the Scout SDK - is provided. 
+After the mandatory ''Hello World!'' application, the book walks you though a complete client server application including database access. 
+The focus of the book's second part is on the front-end side of Scout applications. 
+First, an overview of the Scout client model is introduced before Scout's most important UI components are described based on the Scout widget demo application. 
+To cover the the server-side of Scout applications, an additional part of the book is planned to be released jointly with version 5.0 of the Scout framework. 
+And finally, we intend to amend the book regarding building, testing and continuous integration for Scout applications. 
 
-\noindent If any of the above scenarios is relevant in your situation, you might want to consider \secref{whatshouldiread} on what to read and in which order.
-
-% --------------------------------------------------------------------------- %
-\section*{This Book is Open and Free}
-
-\begin{itemize}
-\item Access is simple. 
-To download the book you do not need to register or pay subscription fees. 
-To cater for individual preferences the book is avilable in various formats. 
-Eventually, there should also be a printed version. And translations.
-
-\item Reuse/rehash is simple. 
-This book is released under the Creative Commons (CC-BY) license. 
-See~\appref{cclicence} for details.
-
-\item Contribution is simple. 
-That's why the source files are all available on github and we maintain a continuous integration (CI) infrastucture for building the book. 
-The necessary information to help you to contribute is available on the Scout
-wiki.\footnote{The Scout book \url{http://wiki.eclipse.org/Scout/Book/}}
-\end{itemize}
-
-\noindent In short, you are allowed to freely use, share and adapt this book, as long as you respect the conditions of the license mentioned above.
-
-\newpage
-
-% --------------------------------------------------------------------------- %
-\section*{The Scout Community}
-
-The community around Scout is its most valuable asset.
-It is active, growing and friendly.
-This is why it deserves to be mentionend right here.
-The Scout forum\footnote{Scout forum \url{http://www.eclipse.org/forums/eclipse.scout}} is the central place for the Scout community to share ideas, ask questions and get help. 
-Other, less interactive community resources are the Scout wiki 
-pages\footnote{Scout wiki \url{http://wiki.eclipse.org/scout}}, the Scout 
-homepage\footnote{Scout homepage \url{http://www.eclipse.org/scout}}, 
-the blog\footnote{Scout blog \url{http://www.bsiag.com/scout}}, and 
-twitter\footnote{Scout twitter \url{http://twitter.com/EclipseScout}}.
-
-The simplest way to become a community member yourself is to start with downloading
-Scout from the Eclipse download site\footnote{Scout download \url{http://www.eclipse.org/downloads/}}, 
-installing the software as described in \appref{install_scout}, and continue reading here.
-
-% --------------------------------------------------------------------------- %
-\section*{Thanks!}
-
-First of all, our thanks go to the community members that have contributed to the first version of this book. 
-All people involved are mentioned by name in \secref{contributing_individuals}.
-
-Many ideas regarding various aspects of this book, such the book's setup, were copied from freely available resources on the web. 
-Significant impact had ''Pharo by Example''\footnote{''Pharo by Example'' \url{http://pharobyexample.org/}}.
-
-Last but not least, we thank BSI Business Systems Integration 
-AG\footnote{BSI Business Systems Integration AG \url{http://www.bsiag.com/}} for its contribution of Eclipse Scout to the open source community.
-For its dedication to open standards and the support to further evolve Scout and its growing community.
+Last but not least, we thank you for your interest in Scout, for being part of our community and for your friendly support of new community members.
+To allow for contributions to this book, the technical setup and the book's licence have been selected to minimize restrictions. 
+According to the terms of the Creative Commons (CC-BY) license, you are allowed to freely use, share and adapt this book. 
+All source files of the book including the Scout projects described in the book are available on github.
+For the first edition of this book, we did already receive a number of bug reports and comments that were pointing out mistakes, inconsistencies and suggestions for changes. 
+This feedback is very valuable to us as it helps to improve both the book's content and the quality for all future readers. 
+We hope that this book helps you to get started quickly and would love to get your feedback. 
 
 % --------------------------------------------------------------------------- %
 
