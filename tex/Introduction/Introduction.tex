@@ -18,18 +18,23 @@
 % --------------------------------------------------------------------------- %
 \section{What is Scout?}
 
-Scout is a mature framework for building business applications. 
-With its multi-frontend support, a single Scout applications may run as a desktop application, in a web browser or on a mobile phone with touch support. 
-The clean separation of Scout's client model from the user interface technologies allows the developer to concentrate on a single code base. 
-This approach has advantages for end users of Scout applications, Scout developers, and organisations implementing Scout applications.
-In the text below we will explain Scout from the perspective of these three roles.
+Scout is an open source framework for building business applications.
+The Scout framework covers most recurring aspects of a classical client server architecture with a strong focus on the application's front-end. 
+With its multi-device capability, a Scout client applications may run simultaneously as a rich client, in the browser and on mobile and tablet devices. 
+
+To different groups of people, Scout means different things. 
+End users are interested in a good usability, the management cares about the benefits a new framework can offers to the organisation and developers want to know if a framework is simple to use and helps them to solve practical issues. 
+This is why the text below describes Scout from the perspective of these three roles.
 
 % ........................................................................... %
 \subsection{End User Perspective}
 
-End users of enterprise applications typically care about friendly user interfaces (UI) and well designed functionality that support them in doing their job.
-Depending on the role and the current context of an end users, either mobile, web or desktop clients work best.
-In the text below, we use a real world enterprise application to highlight how Scout applications can provide user friendly UIs on the desktop, in the browser and on mobile phones.
+End users of enterprise applications care about friendly user interfaces (UI) and well designed functionality that support them in their everyday work. 
+Depending on the current context/location of an end user, either desktop, web or mobile clients work best. 
+If working in the office, a good integration of the enterprise software with Lotus Notes or Microsoft Office often help to boost the users productivity. 
+As office software is typically installed locally on the users PC, integrating this software also requires a desktop client for the enterprise application. 
+When a user is working on a computer outside of his company where the enterprise client is not installed (or the user lacks the permissions to install any software), the natural choice is to work with a web application.
+And when the user is on the move or sitting in a meeting, the only meaningful option is to work with a mobile device. 
 
 \begin{figure}
 \includegraphics[width=14cm]{bsi_crm_desktop.png}
@@ -37,15 +42,13 @@ In the text below, we use a real world enterprise application to highlight how S
 \figlabel{bsi_crm_desktop}
 \end{figure}
 
-If the user is working from a desk and frequently engaged in customer calls, good integration with locally installed software such as Lotus Notes or Microsoft Office products can significantly boost productivity.
-So far, such a scenario still requires a desktop client application.
-An example screenshot of a Scout desktop client application from a customer relationship management (CRM) solution is provided in \figref{bsi_crm_desktop}.
-The screenshot provides a good overview of the general layout of the application.
-On the left side a tree for simple navigation through the available entities, such as companies, persons and communications is provided.
-Once an entity is selected, a click on the magnifying glass opens a search form on the right hand side.
-In this search form a number of search fields is provided.
-After entering ''eclipse'' into the company search field -- and clicking the search button at the bottom of the search form -- the list of matching entries is presented to the user.
-With a right mouse click on the desired row, the corresponding company dialog can be opened for editing.
+To provide a concrete example, we briefly describe a real world enterprise application based on Scout. 
+A first screenshot of a Scout desktop client is provided in \figref{bsi_crm_desktop}. 
+The screenshot provides an overview of the layout of a customer relationship management (CRM) solution. 
+On the left hand side, an entity class such as companies can be selected. 
+Once an entity such is selected, a form is presented on the right hand side to enter the search criteria.
+After entering ''eclipse'' into the company search field, the list of matching companies is presented.
+Using the context menu on a specific company, the corresponding company dialog can be opened for editing.
 
 \begin{figure}
 \includegraphics[width=14cm]{bsi_crm_web.png}
@@ -53,10 +56,9 @@ With a right mouse click on the desired row, the corresponding company dialog ca
 \figlabel{bsi_crm_web}
 \end{figure}
 
-When a user needs to work from a computer that does not have a desktop client installed (or lacks the time or the necessary permission to install software) the natural choice is to work with a web application.
-As Scout offers multi-frontend capabilities out of the box, a web frontend can easily be provided for Scout business applications.
-The primary benefits of Scout web applications for end users are a consistent look and feel and behaviour for both the web client and the desktop client.
-In \figref{bsi_crm_web} a screenshot of the web client of the CRM Scout application is shown.
+In \figref{bsi_crm_web} a screenshot of the web client of the CRM Scout application is shown. 
+When comparing the screenshots of the desktop client with the web application it is interesting to note how Scout applications offer a consistent look and feel for the two clients. 
+This is important as it makes the end user feel ''at home'' on the web client. 
 
 \begin{figure}
 \includegraphics[width=7cm]{bsi_crm_mobile_galaxy.png}
@@ -64,17 +66,14 @@ In \figref{bsi_crm_web} a screenshot of the web client of the CRM Scout applicat
 \figlabel{bsi_crm_mobile}
 \end{figure}
 
-Often, user find themselves in meetings or on the move where it is not possible to work with desktop or laptop computers.
-In such situations, accessing applications via tablets or mobile phones is the only meaningful approach.
-As shown in \figref{bsi_crm_mobile}, a screenshot of the familiar CRM application is provided.
-The user still benefits from the familiar look and feel and the known functionality of the application.
-
+Finally, \figref{bsi_crm_mobile} provides a screenshot of the now familiar CRM application. 
 In contrast to desktop and web applications, most tablets and mobile phones are controlled using touch features instead of mouse clicks.
 In addition, less elements may be presented on a single screen compared to desktop devices.
 These two aspects makes it impractical to directly reuse the desktop user interface on mobile devices.
-Using the Scout mobile extension, the user interface of Scout applications can be transformed on the fly to adapt to touch control and the smaller form factor of mobile devices.
-This transformation can be observed when comparing the company table shown in the background of \figref{bsi_crm_desktop} with the company list presented in \figref{bsi_crm_mobile}.
-The multi-column table of the desktop client has been transformed into a list providing the content of the first few table columns on separate rows.
+The look and feel still relates to the desktop and web clients but is optimized to the different form factor of the mobile device. 
+And the end user benefits from the identical behaviour and the the known functionality of the application.
+
+Comparing the company table shown in the background of \figref{bsi_crm_desktop} with \figref{bsi_crm_mobile} it can be observed that the multi-column table of the desktop client has been transformed into a list on the mobile device. 
 In addition, the context menu ''New company'' is now provided as a touch button.
 As the navigation in the application and the offered choices remain the same for Scout desktop and mobile applications, the end user feels immediately comfortable working with Scout mobile applications.
 
@@ -131,7 +130,7 @@ First or all, Scout is completely based on Java and Eclipse.
 Chances are, that developers are already familiar with some of these technologies.
 This helps in getting developers up to speed and keeping training costs low. 
 
-On the UI side, Scout's multi-frontend support almost allows to skip the decision for a specific UI technology. 
+On the UI side, Scout's multi-device support almost allows to skip the decision for a specific UI technology. 
 Should a particular web framework become the de-facto standard in the next years, it will be the responsibility of the Scout framework to provide the necessary support. 
 Existing Scout applications can then switch to this new technology with only minimal effort. 
 This is possible because the Scout developers are designing and building the UI of an application using Scout's client model.
@@ -223,11 +222,8 @@ It is a responsibility that should be neither given nor taken lightly, nor is it
 With this new status, the Scout developer then gets write access to the Eclipse Scout repositories and gains voting rights and the possibility to shape the future of Scout. 
 
 % --------------------------------------------------------------------------- %
-\section{Why should I choose Scout?}
+\section{Why Scout?}
 \seclabel{why_scout}
-
-
-\section*{What Problems are solved by Scout?}
 
 % 1) in-house apps, large organisations
 Most large organizations develop and maintain enterprise applications that have a direct impact on the success of the ongoing business. 
