@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.eclipsescout.mqttclient.shared
+Bundle-SymbolicName: org.eclipsescout.mqttclient.shared;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.eclipsescout.mqttclient.shared.Activator
+Export-Package: org.eclipsescout.mqttclient.shared,
+ org.eclipsescout.mqttclient.shared.services,
+ org.eclipsescout.mqttclient.shared.services.common.text
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.scout.rt.shared;visibility:=reexport
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy

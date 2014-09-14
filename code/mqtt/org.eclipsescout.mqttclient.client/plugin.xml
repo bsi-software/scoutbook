@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+
+   <extension
+         name=""
+         point="org.eclipse.scout.service.services">
+      <service
+            factory="org.eclipse.scout.rt.client.services.ClientServiceFactory"
+            class="org.eclipsescout.mqttclient.client.services.LocalCodeService"
+            session="org.eclipsescout.mqttclient.client.ClientSession">
+      </service>
+      <service
+            factory="org.eclipse.scout.rt.client.services.ClientServiceFactory"
+            class="org.eclipsescout.mqttclient.client.services.LocalAccessControlService"
+            session="org.eclipsescout.mqttclient.client.ClientSession">
+      </service>
+      <service
+            factory="org.eclipse.scout.rt.client.services.ClientServiceFactory"
+            class="org.eclipsescout.mqttclient.client.services.MqttService"
+            session="org.eclipsescout.mqttclient.client.ClientSession">
+      </service>
+      <service
+            factory="org.eclipse.scout.rt.client.services.ClientServiceFactory"
+            class="org.eclipsescout.mqttclient.client.services.MessageHandlingService"
+            session="org.eclipsescout.mqttclient.client.ClientSession">
+      </service>
+   </extension>
+
+</plugin>

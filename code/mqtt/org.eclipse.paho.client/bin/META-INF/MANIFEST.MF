@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.eclipse.paho.client
+Bundle-Version: 1.0.0.qualifier
+Bundle-ClassPath: lib/mqtt-client-0.4.0.jar
+Export-Package: org.eclipse.paho.client.mqttv3,
+ org.eclipse.paho.client.mqttv3.internal,
+ org.eclipse.paho.client.mqttv3.internal.nls,
+ org.eclipse.paho.client.mqttv3.internal.security,
+ org.eclipse.paho.client.mqttv3.internal.wire,
+ org.eclipse.paho.client.mqttv3.logging,
+ org.eclipse.paho.client.mqttv3.persist,
+ org.eclipse.paho.client.mqttv3.util
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
