@@ -43,28 +43,20 @@ public class DesktopFormData extends AbstractFormData {
     return getFieldByClass(ConnectionTimeout.class);
   }
 
+  public DefaultQoS getDefaultQoS() {
+    return getFieldByClass(DefaultQoS.class);
+  }
+
+  public DefaultRetained getDefaultRetained() {
+    return getFieldByClass(DefaultRetained.class);
+  }
+
   public DefaultTopic getDefaultTopic() {
     return getFieldByClass(DefaultTopic.class);
   }
 
   public HidePassword getHidePassword() {
     return getFieldByClass(HidePassword.class);
-  }
-
-  public LwtMessage getLwtMessage() {
-    return getFieldByClass(LwtMessage.class);
-  }
-
-  public LwtQoS getLwtQoS() {
-    return getFieldByClass(LwtQoS.class);
-  }
-
-  public LwtRetained getLwtRetained() {
-    return getFieldByClass(LwtRetained.class);
-  }
-
-  public LwtTopic getLwtTopic() {
-    return getFieldByClass(LwtTopic.class);
   }
 
   public MaskedPassword getMaskedPassword() {
@@ -81,14 +73,6 @@ public class DesktopFormData extends AbstractFormData {
 
   public Password getPassword() {
     return getFieldByClass(Password.class);
-  }
-
-  public QoS getQoS() {
-    return getFieldByClass(QoS.class);
-  }
-
-  public Retained getRetained() {
-    return getFieldByClass(Retained.class);
   }
 
   public Status getStatus() {
@@ -113,6 +97,22 @@ public class DesktopFormData extends AbstractFormData {
 
   public UserName getUserName() {
     return getFieldByClass(UserName.class);
+  }
+
+  public WillMessage getWillMessage() {
+    return getFieldByClass(WillMessage.class);
+  }
+
+  public WillQoS getWillQoS() {
+    return getFieldByClass(WillQoS.class);
+  }
+
+  public WillRetained getWillRetained() {
+    return getFieldByClass(WillRetained.class);
+  }
+
+  public WillTopic getWillTopic() {
+    return getFieldByClass(WillTopic.class);
   }
 
   public static class BrokerURL extends AbstractValueFieldData<String> {
@@ -175,6 +175,32 @@ public class DesktopFormData extends AbstractFormData {
     }
   }
 
+  public static class DefaultQoS extends AbstractValueFieldData<Integer> {
+
+    private static final long serialVersionUID = 1L;
+
+    public DefaultQoS() {
+    }
+
+    /**
+     * list of derived validation rules.
+     */
+    @Override
+    protected void initValidationRules(Map<String, Object> ruleMap) {
+      super.initValidationRules(ruleMap);
+      ruleMap.put(ValidationRule.MAX_VALUE, 2);
+      ruleMap.put(ValidationRule.MIN_VALUE, 0);
+    }
+  }
+
+  public static class DefaultRetained extends AbstractValueFieldData<Boolean> {
+
+    private static final long serialVersionUID = 1L;
+
+    public DefaultRetained() {
+    }
+  }
+
   public static class DefaultTopic extends AbstractValueFieldData<String> {
 
     private static final long serialVersionUID = 1L;
@@ -197,66 +223,6 @@ public class DesktopFormData extends AbstractFormData {
     private static final long serialVersionUID = 1L;
 
     public HidePassword() {
-    }
-  }
-
-  public static class LwtMessage extends AbstractValueFieldData<String> {
-
-    private static final long serialVersionUID = 1L;
-
-    public LwtMessage() {
-    }
-
-    /**
-     * list of derived validation rules.
-     */
-    @Override
-    protected void initValidationRules(Map<String, Object> ruleMap) {
-      super.initValidationRules(ruleMap);
-      ruleMap.put(ValidationRule.MAX_LENGTH, 4000);
-    }
-  }
-
-  public static class LwtQoS extends AbstractValueFieldData<Integer> {
-
-    private static final long serialVersionUID = 1L;
-
-    public LwtQoS() {
-    }
-
-    /**
-     * list of derived validation rules.
-     */
-    @Override
-    protected void initValidationRules(Map<String, Object> ruleMap) {
-      super.initValidationRules(ruleMap);
-      ruleMap.put(ValidationRule.MAX_VALUE, Integer.MAX_VALUE);
-      ruleMap.put(ValidationRule.MIN_VALUE, Integer.MIN_VALUE);
-    }
-  }
-
-  public static class LwtRetained extends AbstractValueFieldData<Boolean> {
-
-    private static final long serialVersionUID = 1L;
-
-    public LwtRetained() {
-    }
-  }
-
-  public static class LwtTopic extends AbstractValueFieldData<String> {
-
-    private static final long serialVersionUID = 1L;
-
-    public LwtTopic() {
-    }
-
-    /**
-     * list of derived validation rules.
-     */
-    @Override
-    protected void initValidationRules(Map<String, Object> ruleMap) {
-      super.initValidationRules(ruleMap);
-      ruleMap.put(ValidationRule.MAX_LENGTH, 4000);
     }
   }
 
@@ -408,32 +374,6 @@ public class DesktopFormData extends AbstractFormData {
     }
   }
 
-  public static class QoS extends AbstractValueFieldData<Integer> {
-
-    private static final long serialVersionUID = 1L;
-
-    public QoS() {
-    }
-
-    /**
-     * list of derived validation rules.
-     */
-    @Override
-    protected void initValidationRules(Map<String, Object> ruleMap) {
-      super.initValidationRules(ruleMap);
-      ruleMap.put(ValidationRule.MAX_VALUE, 2);
-      ruleMap.put(ValidationRule.MIN_VALUE, 0);
-    }
-  }
-
-  public static class Retained extends AbstractValueFieldData<Boolean> {
-
-    private static final long serialVersionUID = 1L;
-
-    public Retained() {
-    }
-  }
-
   public static class Status extends AbstractValueFieldData<String> {
 
     private static final long serialVersionUID = 1L;
@@ -563,6 +503,66 @@ public class DesktopFormData extends AbstractFormData {
     private static final long serialVersionUID = 1L;
 
     public UserName() {
+    }
+
+    /**
+     * list of derived validation rules.
+     */
+    @Override
+    protected void initValidationRules(Map<String, Object> ruleMap) {
+      super.initValidationRules(ruleMap);
+      ruleMap.put(ValidationRule.MAX_LENGTH, 4000);
+    }
+  }
+
+  public static class WillMessage extends AbstractValueFieldData<String> {
+
+    private static final long serialVersionUID = 1L;
+
+    public WillMessage() {
+    }
+
+    /**
+     * list of derived validation rules.
+     */
+    @Override
+    protected void initValidationRules(Map<String, Object> ruleMap) {
+      super.initValidationRules(ruleMap);
+      ruleMap.put(ValidationRule.MAX_LENGTH, 4000);
+    }
+  }
+
+  public static class WillQoS extends AbstractValueFieldData<Integer> {
+
+    private static final long serialVersionUID = 1L;
+
+    public WillQoS() {
+    }
+
+    /**
+     * list of derived validation rules.
+     */
+    @Override
+    protected void initValidationRules(Map<String, Object> ruleMap) {
+      super.initValidationRules(ruleMap);
+      ruleMap.put(ValidationRule.MAX_VALUE, Integer.MAX_VALUE);
+      ruleMap.put(ValidationRule.MIN_VALUE, Integer.MIN_VALUE);
+    }
+  }
+
+  public static class WillRetained extends AbstractValueFieldData<Boolean> {
+
+    private static final long serialVersionUID = 1L;
+
+    public WillRetained() {
+    }
+  }
+
+  public static class WillTopic extends AbstractValueFieldData<String> {
+
+    private static final long serialVersionUID = 1L;
+
+    public WillTopic() {
     }
 
     /**

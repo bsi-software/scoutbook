@@ -24,6 +24,11 @@
             class="org.eclipsescout.mqttclient.client.services.MessageHandlingService"
             session="org.eclipsescout.mqttclient.client.ClientSession">
       </service>
+      <service
+            factory="org.eclipse.scout.rt.client.services.ClientServiceFactory"
+            class="org.eclipsescout.mqttclient.client.services.UserPreferencesService"
+            session="org.eclipsescout.mqttclient.client.ClientSession">
+      </service>
    </extension>
 
 </plugin>

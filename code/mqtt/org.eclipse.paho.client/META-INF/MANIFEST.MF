@@ -11,4 +11,4 @@ Export-Package: org.eclipse.paho.client.mqttv3,
  org.eclipse.paho.client.mqttv3.logging,
  org.eclipse.paho.client.mqttv3.persist,
  org.eclipse.paho.client.mqttv3.util
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7

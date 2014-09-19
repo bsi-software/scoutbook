@@ -34,25 +34,27 @@ import org.eclipse.scout.rt.client.ui.form.fields.sequencebox.AbstractSequenceBo
 import org.eclipse.scout.rt.client.ui.form.fields.stringfield.AbstractStringField;
 import org.eclipse.scout.rt.client.ui.form.fields.tabbox.AbstractTabBox;
 import org.eclipse.scout.rt.client.ui.form.fields.tablefield.AbstractTableField;
+import org.eclipse.scout.rt.client.ui.messagebox.MessageBox;
 import org.eclipse.scout.rt.extension.client.ui.action.menu.AbstractExtensibleMenu;
 import org.eclipse.scout.rt.extension.client.ui.basic.table.AbstractExtensibleTable;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.service.SERVICES;
 import org.eclipsescout.mqttclient.client.services.MqttService;
+import org.eclipsescout.mqttclient.client.services.UserPreferencesService;
 import org.eclipsescout.mqttclient.client.ui.forms.DesktopForm.MainBox.ControlBox;
 import org.eclipsescout.mqttclient.client.ui.forms.DesktopForm.MainBox.ControlBox.ConnectionBox;
 import org.eclipsescout.mqttclient.client.ui.forms.DesktopForm.MainBox.ControlBox.ConnectionBox.ClientBox;
 import org.eclipsescout.mqttclient.client.ui.forms.DesktopForm.MainBox.ControlBox.ConnectionBox.ClientBox.BrokerURLField;
 import org.eclipsescout.mqttclient.client.ui.forms.DesktopForm.MainBox.ControlBox.ConnectionBox.ClientBox.ClientIdField;
 import org.eclipsescout.mqttclient.client.ui.forms.DesktopForm.MainBox.ControlBox.ConnectionBox.LastWillAndTestamentBox;
-import org.eclipsescout.mqttclient.client.ui.forms.DesktopForm.MainBox.ControlBox.ConnectionBox.LastWillAndTestamentBox.LwtMessageField;
-import org.eclipsescout.mqttclient.client.ui.forms.DesktopForm.MainBox.ControlBox.ConnectionBox.LastWillAndTestamentBox.LwtQoSField;
-import org.eclipsescout.mqttclient.client.ui.forms.DesktopForm.MainBox.ControlBox.ConnectionBox.LastWillAndTestamentBox.LwtRetainedField;
-import org.eclipsescout.mqttclient.client.ui.forms.DesktopForm.MainBox.ControlBox.ConnectionBox.LastWillAndTestamentBox.LwtTopicField;
+import org.eclipsescout.mqttclient.client.ui.forms.DesktopForm.MainBox.ControlBox.ConnectionBox.LastWillAndTestamentBox.WillMessageField;
+import org.eclipsescout.mqttclient.client.ui.forms.DesktopForm.MainBox.ControlBox.ConnectionBox.LastWillAndTestamentBox.WillQoSField;
+import org.eclipsescout.mqttclient.client.ui.forms.DesktopForm.MainBox.ControlBox.ConnectionBox.LastWillAndTestamentBox.WillRetainedField;
+import org.eclipsescout.mqttclient.client.ui.forms.DesktopForm.MainBox.ControlBox.ConnectionBox.LastWillAndTestamentBox.WillTopicField;
 import org.eclipsescout.mqttclient.client.ui.forms.DesktopForm.MainBox.ControlBox.ConnectionBox.PublishParametersBox;
+import org.eclipsescout.mqttclient.client.ui.forms.DesktopForm.MainBox.ControlBox.ConnectionBox.PublishParametersBox.DefaultQoSField;
+import org.eclipsescout.mqttclient.client.ui.forms.DesktopForm.MainBox.ControlBox.ConnectionBox.PublishParametersBox.DefaultRetainedField;
 import org.eclipsescout.mqttclient.client.ui.forms.DesktopForm.MainBox.ControlBox.ConnectionBox.PublishParametersBox.DefaultTopicField;
-import org.eclipsescout.mqttclient.client.ui.forms.DesktopForm.MainBox.ControlBox.ConnectionBox.PublishParametersBox.QoSField;
-import org.eclipsescout.mqttclient.client.ui.forms.DesktopForm.MainBox.ControlBox.ConnectionBox.PublishParametersBox.RetainedField;
 import org.eclipsescout.mqttclient.client.ui.forms.DesktopForm.MainBox.ControlBox.ConnectionBox.StatusBox;
 import org.eclipsescout.mqttclient.client.ui.forms.DesktopForm.MainBox.ControlBox.ConnectionBox.StatusBox.ConnectButton;
 import org.eclipsescout.mqttclient.client.ui.forms.DesktopForm.MainBox.ControlBox.ConnectionBox.StatusBox.DisconnectButton;
@@ -86,19 +88,6 @@ import org.eclipsescout.mqttclient.shared.services.DesktopFormData;
 @FormData(value = DesktopFormData.class, sdkCommand = FormData.SdkCommand.CREATE)
 public class DesktopForm extends AbstractForm {
 
-  public static final String BROKER_URL = "tcp://localhost:1883";
-  public static final String CLIENT_ID = "ScoutMqttClient";
-
-  public static final String USER_NAME = "user1";
-  public static final String PASSWORD = "pw1";
-  public static final int CONNECTION_TIMEOUT = 30;
-  public static final boolean CLEAN_SESSION = true;
-
-  public static final String LWT_TOPIC = "ScoutMqttClient";
-  public static final String LWT_MESSAGE = "hello from Scout client";
-  public static final int LWT_QOS = 2;
-  public static final boolean LWT_RETAINED = true;
-
   /**
    * @throws org.eclipse.scout.commons.exception.ProcessingException
    */
@@ -126,21 +115,66 @@ public class DesktopForm extends AbstractForm {
     return Icons.EclipseScout;
   }
 
+  /**
+   * save current mqtt parameters to preferences
+   */
+  @Override
+  protected void execDisposeForm() throws ProcessingException {
+    UserPreferencesService prefs = SERVICES.getService(UserPreferencesService.class);
+
+    if (prefs != null) {
+      prefs.setBrokerUrl(getBrokerURLField().getValue());
+      prefs.setClientId(getClientIdField().getValue());
+      prefs.setUserName(getUserNameField().getValue());
+      prefs.setPassword(getPasswordField().getValue());
+      prefs.setConnectionTimeout(getConnectionTimeoutField().getValue().toString());
+      prefs.setCleanSession(getCleanSessionField().getValue().toString());
+      prefs.setWillTopic(getWillTopicField().getValue());
+      prefs.setWillMessage(getWillMessageField().getValue());
+      prefs.setWillQos(getWillQoSField().getValue().toString());
+      prefs.setWillRetained(getWillRetainedField().getValue().toString());
+      prefs.setDefaultTopic(getDefaultTopicField().getValue());
+      prefs.setDefaultQos(getDefaultQoSField().getValue().toString());
+      prefs.setDefaultRetained(getDefaultRetainedField().getValue().toString());
+
+      prefs.store();
+    }
+  }
+
+  /**
+   * load mqtt parameters to preferences
+   */
   @Override
   protected void execInitForm() throws ProcessingException {
     super.execInitForm();
 
-    getBrokerURLField().setValue(BROKER_URL);
-    getClientIdField().setValue(CLIENT_ID);
-    getUserNameField().setValue(USER_NAME);
-    getPasswordField().setValue(PASSWORD);
-    getConnectionTimeoutField().setValue(CONNECTION_TIMEOUT);
-    getCleanSessionField().setValue(CLEAN_SESSION);
-    getLwtTopicField().setValue(LWT_TOPIC);
-    getLwtMessageField().setValue(LWT_MESSAGE);
-    getLwtQoSField().setValue(LWT_QOS);
-    getLwtRetainedField().setValue(LWT_RETAINED);
+    UserPreferencesService prefs = SERVICES.getService(UserPreferencesService.class);
 
+    try {
+      prefs.load();
+
+      getBrokerURLField().setValue(prefs.getBrokerUrl());
+      getClientIdField().setValue(prefs.getClientId());
+
+      getUserNameField().setValue(prefs.getUserName());
+      getPasswordField().setValue(prefs.getPassword());
+      getConnectionTimeoutField().setValue(new Integer(prefs.getConnectionTimeout()));
+      getCleanSessionField().setValue(new Boolean(prefs.getCleanSession()));
+
+      getWillTopicField().setValue(prefs.getWillTopic());
+      getWillMessageField().setValue(prefs.getWillMessage());
+      getWillQoSField().setValue(new Integer(prefs.getWillQos()));
+      getWillRetainedField().setValue(new Boolean(prefs.getWillRetained()));
+
+      getDefaultTopicField().setValue(prefs.getDefaultTopic());
+      getDefaultQoSField().setValue(new Integer(prefs.getDefaultQos()));
+      getDefaultRetainedField().setValue(new Boolean(prefs.getDefaultRetained()));
+    }
+    catch (Exception e) {
+      MessageBox.showOkMessage(TEXTS.get("MQTTClient"), TEXTS.get("PrefExeption"), e.getMessage());
+    }
+
+    getControlBox().setSelectedTab(getConnectionBox());
   }
 
   private DesktopFormData getFormData()
@@ -243,10 +277,10 @@ public class DesktopForm extends AbstractForm {
   }
 
   /**
-   * @return the LwtMessageField
+   * @return the WillMessageField
    */
-  public LwtMessageField getLwtMessageField() {
-    return getFieldByClass(LwtMessageField.class);
+  public WillMessageField getWillMessageField() {
+    return getFieldByClass(WillMessageField.class);
   }
 
   /**
@@ -285,24 +319,24 @@ public class DesktopForm extends AbstractForm {
   }
 
   /**
-   * @return the LwtQoSField
+   * @return the WillQoSField
    */
-  public LwtQoSField getLwtQoSField() {
-    return getFieldByClass(LwtQoSField.class);
+  public WillQoSField getWillQoSField() {
+    return getFieldByClass(WillQoSField.class);
   }
 
   /**
-   * @return the LwtRetainedField
+   * @return the WillRetainedField
    */
-  public LwtRetainedField getLwtRetainedField() {
-    return getFieldByClass(LwtRetainedField.class);
+  public WillRetainedField getWillRetainedField() {
+    return getFieldByClass(WillRetainedField.class);
   }
 
   /**
-   * @return the LwtTopicField
+   * @return the WillTopicField
    */
-  public LwtTopicField getLwtTopicField() {
-    return getFieldByClass(LwtTopicField.class);
+  public WillTopicField getWillTopicField() {
+    return getFieldByClass(WillTopicField.class);
   }
 
   /**
@@ -313,10 +347,10 @@ public class DesktopForm extends AbstractForm {
   }
 
   /**
-   * @return the QoSField
+   * @return the DefaultQoSField
    */
-  public QoSField getQoSField() {
-    return getFieldByClass(QoSField.class);
+  public DefaultQoSField getDefaultQoSField() {
+    return getFieldByClass(DefaultQoSField.class);
   }
 
   /**
@@ -362,10 +396,10 @@ public class DesktopForm extends AbstractForm {
   }
 
   /**
-   * @return the RetainedField
+   * @return the DefaultRetainedField
    */
-  public RetainedField getRetainedField() {
-    return getFieldByClass(RetainedField.class);
+  public DefaultRetainedField getDefaultRetainedField() {
+    return getFieldByClass(DefaultRetainedField.class);
   }
 
   /**
@@ -442,6 +476,12 @@ public class DesktopForm extends AbstractForm {
     @Order(20.0)
     public class ControlBox extends AbstractTabBox {
 
+      @Override
+      protected void execInitField() throws ProcessingException {
+        //TODO [mzi] Auto-generated method stub.
+        super.execInitField();
+      }
+
       @Order(10.0)
       public class MessagesBox extends AbstractGroupBox {
 
@@ -495,6 +535,7 @@ public class DesktopForm extends AbstractForm {
             @Override
             protected void execRowAction(ITableRow row) throws ProcessingException {
               getMenu(ReplyMenu.class).execAction();
+              getMessageField().requestFocus();
             }
 
             /**
@@ -518,6 +559,11 @@ public class DesktopForm extends AbstractForm {
               protected String getConfiguredHeaderText() {
                 return TEXTS.get("Message");
               }
+
+              @Override
+              protected int getConfiguredWidth() {
+                return 400;
+              }
             }
 
             @Order(20.0)
@@ -526,6 +572,11 @@ public class DesktopForm extends AbstractForm {
               @Override
               protected String getConfiguredHeaderText() {
                 return TEXTS.get("Topic");
+              }
+
+              @Override
+              protected int getConfiguredWidth() {
+                return 250;
               }
             }
 
@@ -551,6 +602,11 @@ public class DesktopForm extends AbstractForm {
               protected int getConfiguredSortIndex() {
                 return 1;
               }
+
+              @Override
+              protected int getConfiguredWidth() {
+                return 120;
+              }
             }
 
             @Order(40.0)
@@ -559,6 +615,11 @@ public class DesktopForm extends AbstractForm {
               @Override
               protected String getConfiguredHeaderText() {
                 return TEXTS.get("QoS");
+              }
+
+              @Override
+              protected int getConfiguredWidth() {
+                return 40;
               }
             }
 
@@ -669,8 +730,8 @@ public class DesktopForm extends AbstractForm {
             protected void execClickAction() throws ProcessingException {
               AbstractStringField topic = getTopicField();
               AbstractStringField message = getMessageField();
-              AbstractIntegerField qos = getQoSField();
-              AbstractBooleanField retained = getRetainedField();
+              AbstractIntegerField qos = getDefaultQoSField();
+              AbstractBooleanField retained = getDefaultRetainedField();
 
               // use default topic if the publish topic is empty
               if (StringUtility.isNullOrEmpty(topic.getValue())) {
@@ -847,7 +908,7 @@ public class DesktopForm extends AbstractForm {
           }
 
           @Order(10.0)
-          public class LwtTopicField extends AbstractStringField {
+          public class WillTopicField extends AbstractStringField {
 
             @Override
             protected String getConfiguredLabel() {
@@ -856,7 +917,7 @@ public class DesktopForm extends AbstractForm {
           }
 
           @Order(20.0)
-          public class LwtMessageField extends AbstractStringField {
+          public class WillMessageField extends AbstractStringField {
 
             @Override
             protected String getConfiguredLabel() {
@@ -865,7 +926,7 @@ public class DesktopForm extends AbstractForm {
           }
 
           @Order(30.0)
-          public class LwtQoSField extends AbstractIntegerField {
+          public class WillQoSField extends AbstractIntegerField {
 
             @Override
             protected String getConfiguredLabel() {
@@ -874,7 +935,7 @@ public class DesktopForm extends AbstractForm {
           }
 
           @Order(40.0)
-          public class LwtRetainedField extends AbstractCheckBox {
+          public class WillRetainedField extends AbstractCheckBox {
 
             @Override
             protected String getConfiguredLabel() {
@@ -937,7 +998,7 @@ public class DesktopForm extends AbstractForm {
           }
 
           @Order(20.0)
-          public class QoSField extends AbstractIntegerField {
+          public class DefaultQoSField extends AbstractIntegerField {
 
             @Override
             protected String getConfiguredLabel() {
@@ -956,7 +1017,7 @@ public class DesktopForm extends AbstractForm {
           }
 
           @Order(30.0)
-          public class RetainedField extends AbstractCheckBox {
+          public class DefaultRetainedField extends AbstractCheckBox {
 
             @Override
             protected String getConfiguredLabel() {
@@ -1022,10 +1083,10 @@ public class DesktopForm extends AbstractForm {
                   getPasswordField().getValue(),
                   getCleanSessionField().getValue(),
                   getConnectionTimeoutField().getValue(),
-                  getLwtTopicField().getValue(),
-                  getLwtMessageField().getValue(),
-                  getLwtQoSField().getValue(),
-                  getLwtRetainedField().getValue()
+                  getWillTopicField().getValue(),
+                  getWillMessageField().getValue(),
+                  getWillQoSField().getValue(),
+                  getWillRetainedField().getValue()
                   );
 
               updateClientFields();
@@ -1246,6 +1307,11 @@ public class DesktopForm extends AbstractForm {
               @Override
               protected boolean getConfiguredPrimaryKey() {
                 return true;
+              }
+
+              @Override
+              protected int getConfiguredWidth() {
+                return 350;
               }
             }
 

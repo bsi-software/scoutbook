@@ -19,7 +19,9 @@ import org.eclipse.scout.commons.StringUtility;
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.commons.logger.IScoutLogger;
 import org.eclipse.scout.commons.logger.ScoutLogManager;
+import org.eclipse.scout.rt.client.ClientAsyncJob;
 import org.eclipse.scout.rt.client.ClientJob;
+import org.eclipse.scout.rt.client.ClientSyncJob;
 import org.eclipse.scout.rt.client.IClientSession;
 import org.eclipse.scout.rt.shared.TEXTS;
 import org.eclipse.scout.service.AbstractService;
@@ -132,12 +134,18 @@ public class MqttService extends AbstractService implements IMqttService, MqttCa
     final Date received = new Date();
 
     if (m_session != null) {
-      new ClientJob("mqtt message arrived", m_session, true) {
-
+      // prevent blocking of modal thread
+      new ClientAsyncJob("mqtt message arrived (async wrapper)", m_session, true) {
         @Override
         protected void runVoid(IProgressMonitor monitor) throws Exception {
-          MessageHandlingService service = SERVICES.getService(MessageHandlingService.class);
-          service.handleMessage(topic, message, qos, retained, received);
+          // implement ui changes in a sync job
+          new ClientSyncJob("mqtt message arrived", m_session) {
+            @Override
+            protected void runVoid(IProgressMonitor monitor1) throws Throwable {
+              MessageHandlingService service = SERVICES.getService(MessageHandlingService.class);
+              service.handleMessage(topic, message, qos, retained, received);
+            }
+          }.schedule();
         }
       }.schedule();
     }
