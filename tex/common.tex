@@ -176,18 +176,10 @@
 \newcommand{\figref}[1]{Figure~\ref{fig:#1}}
 \newcommand{\tabref}[1]{Table~\ref{tab:#1}}
 
-% --------------------------------------------------------------------------- %
-% graphics paths
-% --------------------------------------------------------------------------- %
-\graphicspath{
-  {figures/}
-  {Introduction/figures/}
-  {ScoutRuntime/figures/}
-  {ScoutTooling/figures/}
-  {OneDayTutorial/figures/}
-  {ScoutClient/figures/}
-  {ScoutInstallation/figures/}  
-  {EclipseBasics/figures/}  
-}
+\ifpdf
+  \newcommand{\htmlanchor}[1]{}
+\else
+  \newcommand{\htmlanchor}[1]{\HCode{<a id="#1"></a>}}
+\fi
 
 %=============================================================================%

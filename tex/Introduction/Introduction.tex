@@ -6,7 +6,7 @@
   \documentclass[a4paper,10pt,twoside]{book}
   \input{../common}
   \pagestyle{headings}
-  \graphicspath{{figures/} {../figures/}}
+  \graphicspath{{figures/} {../figures/} {../modules/figures/}}
   \begin{document}
   \sloppy
 \fi
@@ -472,45 +472,12 @@ For this, see the step-by-step installation guide provided in \appref{install_sc
 Once you have everything installed, you are ready to create your first Scout project.
 
 % --------------------------------------------------------------------------- %
+\htmlanchor{create_project_simple}
 \section{Create a new Project}
 \seclabel{create_project_simple}
 \index{Project creation}
 
-Start your Eclipse IDE and select an empty directory for your workspace.
-This workspace directory will then hold all the project code for the ''Hello World'' application.
-In the started Eclipse IDE, you can then create a new Scout project by selecting the \contextmenu{New Scout Project...} as shown in \figref{sdk_create_new_scout_project}.
-Alternatively, you can also use the Eclipse \menu{File|New|Project...}.
-In this case you are shown the generic \wizard{New Project} of Eclipse where you can select the \wizard{Scout Project} below the Scout folder as seen in \figref{sdk_new_project_wizard}.
-With the \button{Next} you will be directed to the next dialog step, the \wizard{New Scout Project}.
-
-\begin{figure}
-\includegraphics[width=15cm]{sdk_create_new_scout_project.png}
-\caption{Create a new Scout project using the Scout SDK perspective.}
-\figlabel{sdk_create_new_scout_project}
-\end{figure}
-
-In the \wizard{New Scout Project} enter a name for you Scout project. 
-As we are creating a ''Hello World'' application, use \java{org.eclipsescout.helloworld} for the \field{Project Name}.
-Now, click the \button{Finish} to let the Scout SDK create the initial project code for you.
-
-\begin{figure}
-\includegraphics[width=7cm]{sdk_new_project_1.png} \hspace{5mm}
-\includegraphics[width=7cm]{sdk_new_project_2.png}
-\caption{The new project wizard. The dialog on the left side is only shown when using the generic \wizard{New Project} of Eclipse}
-\index{SDK Wizard!New Scout Project}
-\figlabel{sdk_new_project_wizard}
-\end{figure}
-
-\begin{figure}
-\includegraphics[width=15cm]{sdk_initial_helloworld_project.png}
-\caption{The Scout SDK showing the tree representation of our ''Hello World'' application in the Scout Explorer.
-Scout Object Properties displays the product launchers for the server and the available clients.}
-\figlabel{sdk_initial_helloworld_project}
-\end{figure}
-
-Once the initial project code is built, the Scout SDK displays the application model in the \textit{Scout Explorer}.
-This model is visually presented as a tree structure covering both the client and the server part of the application.
-In \figref{sdk_initial_helloworld_project} the Scout Explorer displays the top level elements of the complete Scout application.
+\input{modules/CreateNewProject}
 
 % --------------------------------------------------------------------------- %
 \section{Run the Initial Application}
@@ -571,124 +538,13 @@ Having started the Scout server and all client products, the client applications
 \section{The User Interface Part}
 \seclabel{helloworld_ui}
 
-In this section we will define the user interface (UI) model for the ''Hello World'' application.
-More specifically, we add a text field widget to the client's empty desktop form of the ''Hello World'' application.
-In the steps described below, we use the \wizard{New Form Field} provided by the Scout SDK. 
-First, we add a group box field to the desktop form.
-Then, we apply this wizard a second time to add the actual text widget\footnote{
-Adding top level group boxes to a form helps in structuring the form layout, especially when a form contains a large number of form fields.
-}.
-
-\begin{figure}
-\includegraphics[width=8cm]{sdk_new_field_wizard_menu.png} 
-\caption{Using the \menu{New Form Field ...} to start the form field wizard provided by the Scout SDK.}
-\figlabel{new_field_context_menu}
-\end{figure}
-
-To add any widgets to the desktop form we first need to navigate to the \element{DesktopForm} in the Scout Explorer.
-By clicking on the small plus icon on the left hand side of the \element{DesktopForm} this element is expanded and the \element{MainBox} element becomes visible below.
-With a click of the right mouse button over the \element{MainBox}, the available context menus are displayed.
-To start the form field wizard we select the \menu{New Form Field ...} as shown in \figref{new_field_context_menu}.
-
-\begin{figure}
-\includegraphics[height=4.5cm]{sdk_new_field_groupbox_1.png} \hspace{8mm}
-\includegraphics[height=4.5cm]{sdk_new_field_groupbox_2.png}
-\caption{Adding the \textit{DesktopBox} field with the Scout SDK form field wizard.}
-\index{SDK Wizard!New Form Field}
-\figlabel{helloworld_groupboxfield}
-\end{figure}
-
-In the first dialog of the form field wizard shown on the left side of \figref{helloworld_groupboxfield}, we choose the form field type.
-To select the desired field type, we either select the desired type with the mouse or use the search field to filter the list of available field types.
-In the second wizard dialog, we do not provide a label for the group box in the \field{Name}.
-As we have only a single group box in the ''Hello World'' desktop form we omit the name and enter 'Desktop' into the \field{Class Name} before we close the wizard with the \button{Finish}.
-This step is shown on the right side of \figref{helloworld_groupboxfield}.
-The Scout SDK will add the necessary Java code for the \java{DesktopBox} in the background.
-
-\begin{figure}
-\includegraphics[height=4.2cm]{sdk_new_field_stringfield_1.png} \hspace{8mm}
-\includegraphics[height=4.2cm]{sdk_new_field_stringfield_2.png}
-\caption{Adding a \textit{StringField} and providing a new translation entry.}
-\index{SDK Wizard!Add Translation Entry}
-\figlabel{helloworld_stringfield}
-\end{figure}
-
-To add the text field widget to the group box just created, we navigate to the corresponding \element{DesktopBox} in the Scout Explorer.
-For this, we click on the small plus icon on the left hand side of the \element{MainBox} to expand this node and make the \element{DesktopBox} element visible.
-On \element{DesktopBox} we again use the \menu{New Form Field ...}.
-In the first wizard dialog, we select \element{StringField} using 'st' as a search criteria and click the \button{Next} to open the second wizard dialog.
-In the second wizard dialog, we enter 'Message' into the \field{Name}.
-As we do not yet have the text 'Message' available in our ''Hello World'' application the wizard prompts the user with the proposal \textsc{New Translated Text ...}.
-Selecting the provided option we can add a new text entry as shown in \figref{helloworld_stringfield}.
-Once we have provided some initial translation for our message label, we can close the translation dialog with the \button{Ok}.
-Finally, we close the form field wizard using the \button{Finish}.
-
-\begin{figure}
-\includegraphics[width=15cm]{sdk_helloworld_messagefield.png}
-\caption{Scout SDK showing the \it{MessageField}}
-\figlabel{helloworld_messagefield}
-\end{figure}
-
-By expanding the \element{DesktopBox} element in the Scout Explorer, the new message field becomes visible. 
-A double click on the message field element then loads the corresponding Java code into an Editor as shown in \figref{helloworld_messagefield}.
-If you are following this tutorial with your own Eclipse Scout installation compare your status with this screenshot.
-Make sure that the project structure in the Scout Explorer looks as shown in \figref{helloworld_messagefield} and a double click to the \element{MessageField} both loads the corresponding Java code and displays the message field's properties in the Scout Object Properties.
-
-Having verified your status of the ''Hello World'' application you can start the application as described in \secref{run_initial}.
-The client applications will then display your message widget.
-However, the text widget is still empty, as we did not yet load any initial content into it.
-This is the topic of the next section where we continue the tutorial with the server part.
+\input{modules/HelloWorldFrontend}
 
 % --------------------------------------------------------------------------- %
 \section{The Server Part}
 \seclabel{helloworld.server}
 
-The responsibility of the server part in our ''Hello World'' application is to provide an initial text content for the message field in the client's user interface.
-We implement this behaviour in the \java{load} method of the server's \java{DesktopService}.
-An empty stub for the \java{load} method and the \java{DesktopService} service have already been created during the initial project creation step described in \secref{create_project_simple}.
-The \java{DesktopService} represents the server service corresponding to the \java{DesktopForm} on the client side.
-This initial setup represents Scout's standard form processing mechanism where client forms and server services typically come in pairs.
-
-Whenever the client's user interface displays a form to the user, the client connects to the server and calls the \java{load} method of the corresponding server service.
-We can now add the business logic to the \java{load} method of the server's \java{DesktopService} to implement the desired behaviour.
-And this is the last missing piece to complete the ''Hello World'' application.
-
-\begin{figure}
-\includegraphics[width=14cm]{sdk_server_desktopservice_load.png}
-\caption{The Scout Explorer showing the blue server node expanded with the \folder{Services}.
-In this folder the \element{load} method of \element{DesktopService} is selected and its initial implementation is shown in the editor on the right side.}
-\figlabel{helloworld_load_servicemethod}
-\end{figure}
-
-To navigate to the implementation of the desktop service in the Scout SDK, we first expand the blue top-level \node{server} in the Scout Explorer.
-Below the server node, we then expand the \folder{Services} which shows the \element{DesktopService} element.
-Expanding this \element{DesktopService} node, the \java{load} method becomes visible as shown in \figref{helloworld_load_servicemethod}.
-
-\begin{lstlisting}[backgroundcolor=\color{white}]
-  @Override
-  public DesktopFormData load(DesktopFormData formData) throws ProcessingException {
-    //TODO [mzi] Auto-generated method stub.
-    return formData;
-  }
-\end{lstlisting}
-  
-According to the signature of the \java{load} method, a \java{formData} object is passed into this method that is then handed back in the return statement.
-To complete the implementation of the \java{load} method it is sufficient to assign the text 'hello world!' to the message field part of the form data.
-The only line of Java code we write in our ''Hello World'' application is printed below.
-For the complete implementation of the load method see \lstref{helloworld.load}.
-
-\begin{lstlisting}[backgroundcolor=\color{white}]
-  formData.getMessage().setValue("Hello World!");
-\end{lstlisting}
-
-\lstinputlisting[
-  label=\lstlabel{helloworld.load},
-  caption=Assigning ''Hello World!'' to the form data's message field.,
-  index={DesktopFormData,DesktopProcessService},
-  linerange={10-15},
-  float
-]
-{../code/helloworld/org.eclipse.scout.helloworld.server/src/org/eclipse/scout/helloworld/server/services/DesktopService.java}
+\input{modules/HelloWorldBackend}
 
 % --------------------------------------------------------------------------- %
 \section{Add the Rayo Look and Feel}

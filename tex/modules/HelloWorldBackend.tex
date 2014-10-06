@@ -1,0 +1,58 @@
+% =========================================================================== %
+% TeX input file: "Create the hello world backend"
+%
+% WARNING: this tex file does not compile standalone, it needs to be embedded
+% in a master tex document (e.g. Introduction.tex)
+% =========================================================================== %
+
+
+The responsibility of the server part in our ''Hello World'' application is to provide an initial text content for the message field in the client's user interface.
+We implement this behaviour in the \java{load} method of the server's \java{DesktopService}.
+An empty stub for the \java{load} method and the \java{DesktopService} service have already been created during the initial project creation step described in \secref{create_project_simple}.
+The \java{DesktopService} represents the server service corresponding to the \java{DesktopForm} on the client side.
+This initial setup represents Scout's standard form processing mechanism where client forms and server services typically come in pairs.
+
+Whenever the client's user interface displays a form to the user, the client connects to the server and calls the \java{load} method of the corresponding server service.
+We can now add the business logic to the \java{load} method of the server's \java{DesktopService} to implement the desired behaviour.
+And this is the last missing piece to complete the ''Hello World'' application.
+
+\begin{figure}
+\includegraphics[width=14cm]{sdk_server_desktopservice_load.png}
+\caption{The Scout Explorer showing the blue server node expanded with the \folder{Services}.
+In this folder the \element{load} method of \element{DesktopService} is selected and its initial implementation is shown in the editor on the right side.}
+\figlabel{helloworld_load_servicemethod}
+\end{figure}
+
+To navigate to the implementation of the desktop service in the Scout SDK, we first expand the blue top-level \node{server} in the Scout Explorer.
+Below the server node, we then expand the \folder{Services} which shows the \element{DesktopService} element.
+Expanding this \element{DesktopService} node, the \java{load} method becomes visible as shown in \figref{helloworld_load_servicemethod}.
+
+\begin{lstlisting}[backgroundcolor=\color{white}]
+  @Override
+  public DesktopFormData load(DesktopFormData formData) throws ProcessingException {
+    //TODO [mzi] Auto-generated method stub.
+    return formData;
+  }
+\end{lstlisting}
+  
+According to the signature of the \java{load} method, a \java{formData} object is passed into this method that is then handed back in the return statement.
+To complete the implementation of the \java{load} method it is sufficient to assign the text 'hello world!' to the message field part of the form data.
+The only line of Java code we write in our ''Hello World'' application is printed below.
+For the complete implementation of the load method see \lstref{helloworld.load}.
+
+\begin{lstlisting}[backgroundcolor=\color{white}]
+  formData.getMessage().setValue("Hello World!");
+\end{lstlisting}
+
+\lstinputlisting[
+  label=\lstlabel{helloworld.load},
+  caption=Assigning ''Hello World!'' to the form data's message field.,
+  index={DesktopFormData,DesktopProcessService},
+  linerange={10-15},
+  float
+]
+{../code/helloworld/org.eclipse.scout.helloworld.server/src/org/eclipse/scout/helloworld/server/services/DesktopService.java}
+
+% =========================================================================== %
+% EOF TeX input file
+% =========================================================================== %
