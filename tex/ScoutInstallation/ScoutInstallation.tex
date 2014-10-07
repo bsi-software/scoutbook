@@ -34,7 +34,7 @@ As Scout applications have been built primarily on the Windows platform in the p
 % --------------------------------------------------------------------------- %
 \section{Download and Install a JDK}
 
-The first step to install Scout is to have an existing and working installation of a JDK.
+The first step to install Scout is to have an existing and working installation of a JDK version 7 or 8.
 It is currently recommended to go for the most recent download of Java 7.
 
 Using Scout with Java 8 is possible and has been tested as part of Eclipse release train testing\footnote{
@@ -89,14 +89,12 @@ needs text
 \section{Download and Install Scout}
 \seclabel{download_install}
 
-Installing Eclipse Scout 4.0 requires a working JDK installation of version 7 or 8.
-If this is missing, see the previous section for installation instructions.
+\input{modules/DownloadAndInstallScout}
 
-As the Eclipse Luna release is officially shipping on June 25, 2014 we need to download Scout 4.0 from the download page for the developer builds\footnote{
-Eclipse developer builds download: \url{http://www.eclipse.org/downloads/index-developer.php}
-} until then.
-The download page should look as shown in \figref{scout_download}.
-In this screenshot, the packages available for \textit{Eclipse Luna (4.4) RC3} are shown and \textit{Windows} is preselected in the dropdown list.
+Installing Eclipse Scout 4.0 requires a working JDK installation of version 7 or 8. 
+
+Download the Eclipse Scout package from the official Eclipse download page as shown in  \figref{scout_download}.
+In this screenshot, the packages x	or \textit{Eclipse Luna (4.4.1)} are shown and \textit{Windows} is preselected in the dropdown list.
 Should the download page show the wrong platform in the dropdown list, you will need to choose the correct one manually.
 
 \begin{figure}
@@ -124,7 +122,7 @@ The output will then look similar to the one provided below.
 \begin{lstlisting}[
   language=console
 ]
-C:\Users\scouty>java -version
+your-console-prompt>java -version
 java version "1.7.0_55"
 Java(TM) SE Runtime Environment (build 1.7.0_55-b13)
 Java HotSpot(TM) 64-Bit Server VM (build 24.55-b03, mixed mode)
@@ -136,7 +134,7 @@ See below for an example output of a 32-bit installation.
 \begin{lstlisting}[
   language=console
 ]
-C:\Users\scouty>java -version
+your-console-prompt>java -version
 java version "1.7.0_55"
 Java(TM) SE Runtime Environment (build 1.7.0_55-b13)
 Java HotSpot(TM) Client VM (build 24.55-b03, mixed mode, sharing)
