@@ -72,7 +72,13 @@
 
 \renewcommand{\lstlistlistingname}{List of Listings}
 
-% general settings
+% --------------------------------------------------------------------------- %
+% listings package works well for pdf, but not for html
+% therefore, use normal settings for pdf and a hack for html
+% --------------------------------------------------------------------------- %
+% listings pdf settings
+\ifpdf
+
 \lstset{
   basicstyle=\small\ttfamily,
   columns=fullflexible,
@@ -120,6 +126,64 @@
   morecomment=[s][\color{lightblue}]{/**}{*/},
   stringstyle=\color{darkblue},
 }
+
+\else
+% --------------------------------------------------------------------------- %
+% listings html settings (hack)
+% also see http://www.itisnotoverengineering.com/2013/06/syntax-highlighting-with-tex4ht.html
+
+\lstset{
+  emphstyle=\color{red}\bfseries,
+}
+
+\lstset{
+  language=Java,
+  basicstyle=\sffamily,
+  identifierstyle=\sffamily\itshape,
+  keywordstyle=\sffamily\bfseries,
+  commentstyle=\rmfamily\itshape,
+  emphstyle=\rmfamily\itshape,
+  stringstyle=\rmfamily\bfseries,
+  numberstyle=\scriptsize,
+  morecomment=[s][\color{lightblue}]{/**}{*/},
+  columns=fullflexible,
+  breaklines=true,
+  breakindent=10pt,
+  prebreak=\mbox{{\color{blue}\tiny$\searrow$}},
+  postbreak=\mbox{{\color{blue}\tiny$\rightarrow$}},
+  showstringspaces=false,
+  backgroundcolor=\color{lightgray}
+}
+
+% settings for xml files
+\lstdefinelanguage{xml}
+{
+  stringstyle=\color{black},
+  identifierstyle=\color{darkblue},
+  keywordstyle=\color{cyan},
+  commentstyle=\color{darkgrey}\upshape,
+  morestring=[b]",
+  morestring=[s]{>}{<},
+  morecomment=[s]{<?}{?>},
+  morekeywords={xmlns,name,point,factory,class}% list your attributes here
+}
+
+% settings for ini files
+\lstdefinelanguage{ini}
+{
+  stringstyle=\color{black},
+  morecomment=[f][\color{darkgrey}\upshape][0]\# % # is comment iff it's the first char on the line
+}
+
+% settings for console output
+\lstdefinelanguage{console}
+{
+  commentstyle=\color{darkblue},
+  morecomment=[l]{C:}
+}
+
+\fi
+% --------------------------------------------------------------------------- %
 
 % --------------------------------------------------------------------------- %
 % eclipse stuff macros
