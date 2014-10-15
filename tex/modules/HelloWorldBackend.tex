@@ -29,7 +29,6 @@ According to the signature of the \java{load} method, a \java{formData} object i
 To complete the implementation of the \java{load} method it is sufficient to assign the text 'hello world!' to the message field part of the form data according to the following line.
 
 \begin{lstlisting}[backgroundcolor=\color{white}]
-// test comment
 formData.getMessage().setValue("Hello World!");
 \end{lstlisting}
 
@@ -39,8 +38,7 @@ With this last element we have completed the Scout ''Hello World'' application.
 \begin{lstlisting}
 @Override
 public DesktopFormData load(DesktopFormData formData) 
-    throws ProcessingException 
-{
+  throws ProcessingException {
     formData.getMessage().setValue("Hello World!"); 
     return formData;
 }

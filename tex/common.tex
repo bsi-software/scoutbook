@@ -61,6 +61,7 @@
 % Setting up listings
 % --------------------------------------------------------------------------- %
 
+%\usepackage[T1]{fontenc}
 \usepackage{listings}
  
 \definecolor{darkviolet}{rgb}{0.5,0,0.4}
@@ -90,6 +91,10 @@
   backgroundcolor=\color{lightgray}
 }
 
+% double quotes for listings: http://tex.stackexchange.com/questions/166790/how-can-i-get-straight-double-quotes-in-listings
+%\lstset{  upquote=true}
+\lstset{basicstyle=\ttfamily} % <<< This line added
+
 % settings for xml files
 \lstdefinelanguage{xml}
 {
@@ -100,7 +105,7 @@
   stringstyle=\color{black},
   identifierstyle=\color{darkblue},
   keywordstyle=\color{cyan},
-  morekeywords={xmlns,name,point,factory,class}% list your attributes here
+  morekeywords={xmlns,name,point,factory,class} % list your attributes here
 }
 
 % settings for ini files
