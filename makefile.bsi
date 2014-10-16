@@ -70,8 +70,7 @@ homepage: cleanworking
 	cd out\html & ${UNZIP} ${FILE}.zip
 # --------------------------------------------------------------------------------
 clean: cleanworking
-	rmdir /s /q out
-	mkdir out
+	if exist out\ (rmdir /s /q out)
 	mkdir out\pdf
 	mkdir out\html
 	mkdir out\epub
