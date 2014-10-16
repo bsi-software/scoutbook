@@ -71,6 +71,7 @@ homepage: cleanworking
 # --------------------------------------------------------------------------------
 clean: cleanworking
 	rmdir /s /q out
+	mkdir out
 	mkdir out\pdf
 	mkdir out\html
 	mkdir out\epub
