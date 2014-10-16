@@ -24,13 +24,17 @@ ZIP ="c:\Program Files\7-Zip\7z.exe" a -r
 UNZIP ="c:\Program Files\7-Zip\7z.exe" x
 COPY =copy
 
-HTMLOUTPARAM = "html,2,info" # use "html,3,next" to produce output on section level
+HTMLOUTPARAM = "html,2,info,NoFonts"  # use "html,3,next,NoFonts" to produce output on section level
+HTMLOUTPARAMSIMPLE = "html"  # use "html,3,next,NoFonts" to produce output on section level
+BOOKCSS= "scoutbook.css"
+HOMEPAGECSS= "scouthomepage.css"
 
 # TO-DO: get referenced scout project right
 # TO-DO: properly copy images for html (and epub?)
 # TO-DO: do some meaningful splitting of html into individual files
 
-BOOK=book
+BOOK=scout_intro
+FILE=scout_install
 
 # --------------------------------------------------------------------------------
 all: pdf html epub
@@ -50,6 +54,7 @@ html: cleanworking
 	-cd tex & ${TEX} "\def\filename{{${BOOK}}{idx}{4dx}{ind}} \input idxmake.4ht"
 	-cd tex & ${MAKEINDEX} -o ${BOOK}.ind ${BOOK}.4dx
 	-cd tex & ${HTLATEX} ${BOOK}.tex ${HTMLOUTPARAM}
+	copy tex/${BOOKCSS} tex/${BOOK}.css
 	cd tex & ${ZIP} ${BOOK}.zip *.html ${BOOK}.css *.png
 	copy tex\${BOOK}.zip out\html
 	cd out\html & ${UNZIP} ${BOOK}.zip
@@ -63,6 +68,18 @@ epub: cleanworking
 	copy tex\${BOOK}.epub out\epub
 
 # --------------------------------------------------------------------------------
+file-pdf: cleanworking
+	-cd tex && ${PDFLATEX} ${FILE}.tex
+	-cd tex && ${PDFLATEX} ${FILE}.tex
+	-cd tex && ${PDFLATEX} ${FILE}.tex
+	copy tex/${FILE}.pdf out/pdf
+homepage: cleanworking
+	-cd tex && ${HTLATEX} ${FILE}.tex ${HTMLOUTPARAMSIMPLE}
+	copy tex/${HOMEPAGECSS} tex/${FILE}.css
+	cd tex && ${ZIP} ${FILE}.zip *.html ${FILE}.css modules/figures/*.png fonts/*
+	copy tex/${FILE}.zip out/html
+	cd out/html & ${UNZIP} ${FILE}.zip
+# --------------------------------------------------------------------------------
 clean: cleanworking
 	rmdir /Q /S out
 	mkdir out\pdf
@@ -70,7 +87,8 @@ clean: cleanworking
 	mkdir out\epub
 
 cleanworking:
-	del /S *.dvi *.aux *.log *.out *.glo *.toc *.ilg *.blg *.idx *.idv *.ind 
-	cd tex & del ${BOOK}.pdf ${BOOK}*.html ${BOOK}*.zip ${BOOK}.css ${BOOK}.epub ${BOOK}.xref ${BOOK}.tmp ${BOOK}.4* ${BOOK}.l*
+	rm -f *.dvi *.aux *.log *.out *.glo *.toc *.ilg *.blg *.idx *.idv *.ind 
+	cd tex && rm -f ${BOOK}.pdf ${BOOK}*.html ${BOOK}*.zip ${BOOK}.css ${BOOK}.epub ${BOOK}.xref ${BOOK}.tmp ${BOOK}.4* ${BOOK}.l*
+	cd tex && del ${FILE}.pdf ${FILE}*.html ${FILE}*.zip ${FILE}.css ${FILE}.epub ${FILE}.xref ${FILE}.tmp ${FILE}.4* ${FILE}.l*
 
 # --------------------------------------------------------------------------------
