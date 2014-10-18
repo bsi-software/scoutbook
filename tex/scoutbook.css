@@ -194,7 +194,7 @@ body {
     font-weight:300;    
     line-height: 20px;
     padding:0em 1em 0em 1em;
-    margin: 0px 0px 0px 0px;
+	margin-top:80px;
     background:#fefefe;
     color:#333;
 }
@@ -288,21 +288,42 @@ hr.figure { display: none; }
 hr.endfigure { display: none; }
 
 /* ==========================================================================
-	scource code listings
+	crosslinks
 ========================================================================== */
 div.crosslinks {
-    background-color: #ccc;
-    margin-left: -1em;
-	margin-right: -1em;
-	margin-bottom: -1em;
 	text-transform: capitalize;
+    background: url(figures/ScoutIcon.png) #f2f2f2;
+    background-position: 40px center;
+    background-size: 42px;
+    background-repeat: no-repeat;
+    padding-left: 40px;	
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;	
 }
 
+h2.chapterHead a { position: relative; top: -140px; float: left;}
+h3.sectionHead a { position: relative; top: -100px; float: left;}
+
 div.crosslinks > p {
-    color: #ccc;
+    color: #f2f2f2;
     margin: 0px;
     border: 0;
-    padding: 1em;}
+    padding-top: 27px;
+    padding-bottom: 27px;
+    padding-left: 70px;
+}
+
+div.crosslinks a {
+	font-size: 17px;
+	color: #0184a3; 
+}
+
+div.crosslinks a:hover {
+    color: #faa635;
+}
 
 div.crosslinks ~ a, a:visited  {
     color: #0000aa;
