@@ -306,6 +306,7 @@ div.crosslinks {
 
 h2.chapterHead a { position: relative; top: -140px; float: left;}
 h3.sectionHead a { position: relative; top: -100px; float: left;}
+div.figure a { position: relative; top: -100px; float: left;}
 
 div.crosslinks > p {
     color: #f2f2f2;
