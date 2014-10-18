@@ -83,7 +83,7 @@ As the navigation in the application and the offered choices remain the same for
 For the management, Scout is best explained in terms of benefits it brings to the organisation in question. 
 This is why we are going to concentrate on a (typical) application migration scenario here. 
 Let us assume that to support the company's business, a fairly large landscape of multi-tier applications has to be maintained and developed. 
-Including host systems, client server applications including desktop clients, as well as newer web based applications. 
+Including host systems, client server applications with desktop clients, as well as applications with a web based front-end. 
 
 \begin{figure}
 \includediagram{14cm}{scout_with_other_apps}
@@ -184,8 +184,6 @@ With the exception of the \filename{plugin.xml} and \filename{MANIFEST.MF} files
 Developers preferring to write the necessary code manually, may do so. 
 The Scout SDK parses the application's Java code in the background to present the updated Scout application model to the developers preferring to work with the Scout SDK. 
 
-TODO What should we focus on the server side? transaction handling, services, ...? 
-
 Finally, Scout is an open source framework hosted at the Eclipse foundation. 
 This provides a number of interesting options to developers that are not available for closed source frameworks. 
 First of all, it is simple to get all the source code of Scout and the underlying Eclipse platform. 
@@ -212,9 +210,11 @@ for nominating and electing a new committer:
 
 \begin{quotation}
 \begin{em}
+\htmlit
 A Committer gains voting rights allowing them to affect the future of the Project. 
 Becoming a Committer is a privilege that is earned by contributing and showing discipline and good judgment. 
 It is a responsibility that should be neither given nor taken lightly, nor is it a right based on employment by an Eclipse Member company or any company employing existing committers.
+\htmlitend
 \end{em}
 \end{quotation}
 
@@ -225,32 +225,24 @@ With this new status, the Scout developer then gets write access to the Eclipse 
 \section{Why Scout?}
 \seclabel{why_scout}
 
-% 1) in-house apps, large organisations
 Most large organizations develop and maintain enterprise applications that have a direct impact on the success of the ongoing business. 
-And at the same time, those responsible for the development and maintenance of these applications often struggle with this task. 
+And at the same time, those responsible for the development and maintenance of these applications struggle with this task. 
 It is a big challenge to adapt to changing business demands and complying with the latest legal requirements in time. 
 And the increasing pressure to lower recurring maintenance costs does not make the situation any easier.
 
 It often seems that too many resources are required to keep a heterogeneous set of legacy technologies alive. 
 In this situation, modernizing mission critical applications can help to improve over the current situation. 
-And for the target platform stack, Java is a natural choice as it is mature, widely adopted by in the industries and unlikely to become legacy in the foreseeable future. 
+For the target platform stack, Java is a natural choice as it is mature, widely adopted by in the industries and unlikely to become legacy in the foreseeable future. 
 While for the back-end side of enterprise applications well-known and proven frameworks do exist, the situation on the client side is less clear. 
-Unfortunately, user interface (UI) technologies often have lifetimes that are shorter than the average lifetimes of larger mission critical applications. 
-This is particularly true for the web where many of today's frameworks will no longer be relevant in five or more years. 
-To close the gab between services provided on the backend and the user interface on the client side the Scout framework covers most of the recurring needs of business applications. 
-At the same time Scout forces a clean separation between the user interface and the specific UI technology used for rendering. 
+Unfortunately, user interface (UI) technologies often have lifetimes that are substantially shorter than the lifetimes of larger mission critical applications. 
+This is particularly true for the web, where many of today's frameworks will no longer be relevant in five or more years. 
+
+Enter Eclipse Scout. This open source framework covers most of the recurring needs that are relevant to the front-end development of business applications. 
+And Scout forces a clean separation between the user interface and the specific UI technology used for rendering. 
 This has two major benefits. 
 First, Scout developers implement the user interface against an abstraction layer, which helps to focus on the business functionality and saves development time. 
 And second, long term maintenance costs are lower, as the Scout code remains valid even when the rendering technology needs to be exchanged. 
 Therefore, Scout helps to improve the productivity of the development teams and reduces the risk of major application rewrites. 
-
-% 2) startups and small orgs special purpose software
-Smaller companies (and startup organisations) bla bla
-short time to market is one of the most critical 
-
-% 3) scout as basis to create products, example bsi
-
-
 
 To provide a first impression on the scope and goals of the Scout framework, a number of scenarios where Scout typically contributes to your projects success are listed below . 
 
@@ -282,70 +274,30 @@ As all the implemented business functionality is written against abstractions on
 Instead, it is sufficient to exchange the implementation for the legacy technology with a new one. 
 And often, an implementation for a new technology/framework is already provided by a more recent version of Scout. 
 
-
-Protect your investment
-\begin{itemize}
-  \item Scout is proven in production for more than 10 years
-  \item Scout is based on Java and the Eclipse platform
-  \item Scout is an open source project hosted at the Eclipse foundation
-  \item Scout has an active and growing community
-  \item Scout is moving with the best available technologies.
-
-\end{itemize}
-
-Lower your cost for inhouse applications (Money)
-\begin{itemize}
-  \item Increase your development productivity with Scout
-  \item Take advantage of low maintenance costs for Scout applications
-  \item Leverage existing experience in Java
-\end{itemize}
-
-Run your app on any device (desktop, tablet, mobile phone)
-\begin{itemize}
-  \item Scout developers implement the application model only
-  \item In Scout, the user interface is modeled independently of any specific UI technology
-  \item At runtime, the user interface is rendered using a specific Scout UI plugin
-  \item For desktop apps, choose SWT or Swing
-  \item For browser or mobile apps, choose RAP
-\end{itemize}
-
-Get up to speed in days (5' clock)
-\begin{itemize}
-  \item Any Java developer quickly learns Scout
-  \item The Scout SDK provides great tooling
-  \item The Scout tutorials provide step-by-step guidance
-\end{itemize}
-
-Scout is production ready
-\begin{itemize}
-  \item 10 years history of being used in production
-  \item technology transitions
-  \item significant number of product installations based on scout, some with large number of users (> 3'000)
-  \item proven in several industries: banking, insurance, transportation, government, retail
-\end{itemize}
-
 % --------------------------------------------------------------------------- %
 \section{What should I read?} 
 \seclabel{whatshouldiread}
 
 The text below provides guidelines on what to read (or what to skip) depending on your existing background.
-
 We first address the needs of junior Java developers that like to learn more about developing enterprise applications.
 Then, we suggest a list of sections relevant for software wizards that already have a solid understanding of the Eclipse platform, Java enterprise technologies, and real world applications.
 Finally, the information needs of IT managers are considered.
 
 % ........................................................................... %
-\subsection{I know some Java}
+\subsection{I am only familiar with the Java Standard Edition}
 
 The good news first.
 This book is written for you! 
-No prior knowledge of the Eclipse Platform\footnote{Eclipse Platform: \url{http://wiki.eclipse.org/Platform}} is needed. 
-We do not even assume that you have a meaningful understanding of the Java Enterprise Edition 
-(Java EE)\footnote{Java Enterprise Edition: \url{http://en.wikipedia.org/wiki/Java_Platform,_Enterprise_Edition}}.
+For the purpose of this book we do not assume any significant understanding of the Java Enterprise Edition (Java EE)\footnote{
+Java Enterprise Edition: \url{http://en.wikipedia.org/wiki/Java_Platform,_Enterprise_Edition}
+}
+and the Eclipse Platform\footnote{Eclipse Platform: \url{http://wiki.eclipse.org/Platform}}. 
+
 Of course, having prior experience in client server programming with Java is helpful.
-It also helps having used the Eclipse IDE for Java development before --- please do not mistake the IDE with the Eclipse 
-platform\footnote{By reading through the book you will learn that there is much more to the Eclipse platform than just the IDE}.
-However, prior knowledge of Java EE and the Eclipse platform is not required for this book.
+And having used the Eclipse IDE for Java development before --- please do not mistake the IDE with the Eclipse platform\footnote{
+By reading through the book you will learn that there is much more to the Eclipse platform than just the IDE
+}
+is certainly of benefit.
 
 The ``bad'' news is, that writing Scout applications requires a solid understanding of Java.
 To properly benefit from this book, we assume that you have been developing software for a year or more.
@@ -356,37 +308,20 @@ Exam\footnote{Level I Exam: \url{docs.oracle.com/javase/tutorial/extra/certifica
 and most of the material required for 
 Level II\footnote{Level II Exam: \url{docs.oracle.com/javase/tutorial/extra/certification/javase-7-programmer2.html}}.
 
-As the focus of this book is on writing Scout applications and not on learning Java, Java EE, or the Eclipse platform, the necessary background material has been moved into corresponding appendices.
-To get a more precise picture which parts of Java and Eclipse are important to Scout applications, consult the appendices listed below.
-
-\begin{itemize}
-  \item \appref{java_basics} highlights relevant advanced Java SE concepts and necessary Java EE topics. 
-        In addition, the appendix contains recommendations for introductory material as well as pointers to further reading regarding Java EE technology.
-  \item \appref{eclipse_basics} provides a brief introduction for Eclipse concepts used in Scout. 
-        This includes the OSGi/Equinox foundation as well as additional elements such as Eclipse plugins, feature and product files.
-\end{itemize}
-
 We now propose to start downloading and installing Scout as described in \appref{install_scout} and do some actual coding.
 To do so, please continue with the ``Hello World'' example provided in \charef{helloworld}.
-You can expect to complete this example in less than two hours including the necessary download and installation steps.
+You can expect to complete this example in less than one hour including the necessary download and installation steps.
 Afterwards, you might want to continue with the remaining material in ``Getting Started''. 
-Working through the complete ``Getting Started'' should take no more than two days. 
-This exercise will provide you with a broad overview of Eclipse Scout and enough hands-on material to decide how much Scout will help you with your current and future projects.
-
-How you continue after ``Getting Started'' will depend on your current interests or your specific project. 
-``The Frontend'' and ``The Backend'' walk you through the Scout application model covering the client, the server, and the necessary communication in the context of a typical business application.
-``Developing Applications'' contains additional Scout features, relevant aspects for integrating Scout applications in an enterprise environment, and typical topics important to professional software development.
+Working through the complete book should take no more than two days. 
 
 Once you work with the Scout framework on a regular basis, you might want to ask questions in the Scout 
 forum\footnote{Eclipse Scout forum: \url{http://www.eclipse.org/forums/eclipse.scout}}.
 When your question gets answered, please ask yourself if your initial problem could have been solved by better documentation.
 In that case, you might want to help the Scout community by fixing or amending the Scout wiki pages\footnote{Eclipse Scout wiki: \url{http://wiki.eclipse.org/Scout}}.
 Or this book. 
-If you find a bug in Eclipse Scout that makes your life miserable you can report it. 
-When your bug is fixed, you can test the fix.
-To help speed up the bug fixing process you can contribute patches.
+If you find a bug in Eclipse Scout that makes your life miserable you can report it or even propose a patch. 
+And when your bug is fixed, you can test the fix.
 All of these actions will add to the healthy grow of the Scout community.
-And this is exactly the topic of ``Contributing'', the last part of this book.
 
 % ........................................................................... %
 \subsection{I know tons of both Java and Eclipse}
@@ -394,41 +329,22 @@ And this is exactly the topic of ``Contributing'', the last part of this book.
 This means that you are one of these software wizards that get easily bored.
 You probably hate going through lengthy descriptions of widely known concepts.
 In that case let us assume that you are prepared to spend two hours to grasp the scope of Eclipse Scout and get an impression of its strengths and limitations.
-
-In that case you will not need to actually download, install, and code. 
-Rather, it will suffice to flip through a couple of diagrams and screenshots, read about some central Scout concepts, and look at some code snippets provided in this book.
 The list below suggests a sequence of sections to digest including a brief motivation for each one.
 
 \begin{itemize}
-  \item \prtref{getting_started} ``Getting Started'' 
-      Provides you with the big picture. Skip the larger example in \charef{large_example}
-  \item \charef{client_overview} ``Overview'' and \charef{client_modeling} ``Client Modeling''
-      Get familiar with the Scout frontend architecture. 
-	  The client modeling makes Scout applications independent of any particular UI technology
-  \item \charef{fields} ``Form Fields'' and \charef{custom_fields} ``Custom Fields''
-      Browse through the screenshots in \charef{fields} to get an impression over the form fields that are available out of the box. 
-	  Look at the diagrams in \charef{custom_fields} to get an idea of how to extend the Scout framework with missing field types.
-  \charef{server_overview} ``Overview'', \charef{services} Scout server
-  % \item read overview and transaction management in backend
-  % \item read application extensions to learn how scout applications can be properly modularized 
-  % \item maybe check how to use your favorite logging framework with scout
-  % \item glance at web and mobile application to learn how scout can use a single code base to run an application on the desktop in the web, and on mobile devices
-  % \item glance over the showcase sections in "integrating 3rd party" to see how scout applications integrate with other frameworks
-  % \item flip though testing/profiling to convince yourself that developing scout applications is not different from developing other java/Eclipse applications	
+  \item \charef{helloworld} ''Hello World'' Tutorial. 
+      Download and installation of the Scout package should take less than 30 minutes, going through the ''Hello World'' takes another 15 minutes. 
+  \item \secref{initial_helloworld} ``Walking through the Initial Application''
+      Read about some key elements used in every Scout client application including integration of server services and data binding.
+  \item \charef{tooling} ``Scout Tooling''.
+      Browse through the tooling chapter to get an impression on the tooling provided with Scout. 
+	  Make sure you understand that the Scout SDK is supporting the developer without restricting the developer.
+  \item \charef{large_example} ``The My Contacts Application''. 
+      Check out the slightly larger demo application. 
+	  In case you are not yet running out of time, download the demo app as described in the Scout wiki\footnote{
+		Download and installation of the ''My Contacts'' application: \url{http://wiki.eclipse.org/Scout/Book/\#Download_and_Run_the_Scout_Sample_Applications}.
+	  }.
 \end{itemize}
-
-% \begin{itemize}
-  % \item read ''getting started'' but skip the larger example
-  % \item read overview and client modeling in frontend 
-  % \item flip though the form fields provided out of the box
-  % \item maybe check custom fields to see how to add missing form fields
-  % \item read overview and transaction management in backend
-  % \item read application extensions to learn how scout applications can be properly modularized 
-  % \item maybe check how to use your favorite logging framework with scout
-  % \item glance at web and mobile application to learn how scout can use a single code base to run an application on the desktop in the web, and on mobile devices
-  % \item glance over the showcase sections in "integrating 3rd party" to see how scout applications integrate with other frameworks
-  % \item flip though testing/profiling to convince yourself that developing scout applications is not different from developing other java/eclipse applications	
-% \end{itemize}
 
 % ........................................................................... %
 \subsection{I am a manager}
@@ -438,8 +354,17 @@ Being a manager and actually reading this book may indicate one of the following
 \begin{itemize}
   \item Your developer tried to convince you that Eclipse Scout can help you with implementing business applications in a shorter time and for less money.
         And you did not understand why (again) a new technology should work better than the ones you already use. 
-	
+  \item Your are a product manager of a valuable product that is based on legacy technology. 
+        And you are now evaluating options to modernize your product.
+  \item Fill in your current situation. There must be a reason why you are checking out this book.
 \end{itemize}
+
+If you did not already go through \secref{what_is_scout} please do so now. 
+Then, flip through \secref{my_contacts_guide} to get an impression of the ''My Contacts'' application. 
+In case you like the idea that your developers should be able to build such an application in a single day, you might want to talk to us\footnote{
+To contact the Scout team, use the email provided on the Scout homepage: \url{http://eclipse.org/scout/support/}.
+}.
+
 
 % =========================================================================== %
 \chapter{''Hello World'' Tutorial}

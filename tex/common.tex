@@ -251,4 +251,12 @@
   \newcommand{\htmlanchor}[1]{\HCode{<a id="#1"></a>}}
 \fi
 
+\ifpdf
+  \newcommand{\htmlit}{}
+  \newcommand{\htmlitend}{}
+\else
+  \newcommand{\htmlit}{\HCode{<i>}}
+  \newcommand{\htmlitend}{\HCode{</i>}}
+\fi
+
 %=============================================================================%

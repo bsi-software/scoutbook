@@ -24,7 +24,7 @@
 p.noindent { text-indent: 0em }
 td p.noindent { text-indent: 0em; margin-top:0em; }
 p.nopar { text-indent: 0em; }
-p.indent{ text-indent: 1.5em }
+p.indent{ text-indent: 1.5em; }
 @media print {div.crosslinks {visibility:hidden;}}
 a img { border-top: 0; border-left: 0; border-right: 0; }
 center { margin-top:1em; margin-bottom:1em; }
@@ -141,32 +141,66 @@ h1.partHead{text-align: center}
 div.verbatiminput {font-family: monospace; white-space: nowrap; }
 /* end css.sty */
 
+/* ==========================================================================
+	#Fonts
+========================================================================== */
+@font-face {
+    font-family: 'Open Sans';
+    src: url('css/fonts/opensans-regular.eot');
+    src: url('css/fonts/opensans-regular.eot?#iefix') format('embedded-opentype'),
+         url('css/fonts/opensans-regular.woff') format('woff'),
+         url('css/fonts/opensans-regular.ttf') format('truetype'),
+         url('css/fonts/opensans-regular.svg#open_sansregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Open Sans Italic';
+    src: url('css/fonts/opensans-italic.eot');
+    src: url('css/fonts/opensans-italic.eot?#iefix') format('embedded-opentype'),
+         url('css/fonts/opensans-italic.woff') format('woff'),
+         url('css/fonts/opensans-italic.ttf') format('truetype'),
+         url('css/fonts/opensans-italic.svg#open_sansitalic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Open Sans Bold';
+    src: url('css/fonts/opensans-bold.eot');
+    src: url('css/fonts/opensans-bold.eot?#iefix') format('embedded-opentype'),
+         url('css/fonts/opensans-bold.woff') format('woff'),
+         url('css/fonts/opensans-bold.ttf') format('truetype'),
+         url('css/fonts/opensans-bold.svg#open_sansbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+  font-family: 'Dax-Regular';
+  src: url('css/fonts/Dax-Regular.eot');
+  src: url('css/fonts/Dax-Regular.eot?#iefix') format('embedded-opentype'),  
+       url('css/fonts/Dax-Regular.woff') format('woff'), 
+       url('css/fonts/Dax-Regular.ttf')  format('truetype'),
+       url('css/fonts/Dax-Regular.svg#Dax-Regular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
-    /* Serif options */
-    /*font-family: "Times New Roman", Times, serif;*/
-    /*font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif    */
-
-    /*Sans Serif options */
-    /*font-family: "Helvetica", Arial, Freesans, clean, sans-serif;*/
-    font-family: "Helvetica Neue", Arial, Freesans, clean, sans-serif;
-    /*font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;*/
-    /*font-family: "Trebuchet MS", Helvetica, sans-serif;*/
-    /*font-family: Verdana, Geneva, sans-serif;*/
-    /*font-family: Tahoma, Geneva, sans-serif;*/
-    /*font-family: Baskerville, 'Times New Roman', Times, serif;*/
-
-
-    padding:0em 1em 0em 1em;
+    font-family: 'Open Sans', sans-serif;
     font-size: 14px;
     font-weight:300;    
     line-height: 20px;
+    padding:0em 1em 0em 1em;
     margin: 0px 0px 0px 0px;
-    /* max-width:42em; */
     background:#fefefe;
     color:#333;
 }
 
 h1, h2, h3, h4, h5, h6 {
+    font-family: 'Dax-Regular', sans-serif; 
     font-weight: bold;
     margin: 2em 0px 15px 0px;
 }
@@ -246,15 +280,26 @@ img {
     max-width: 100%;
 }
 
+/* ==========================================================================
+	figures
+========================================================================== */
+
+hr.figure { display: none; }
+hr.endfigure { display: none; }
+
+/* ==========================================================================
+	scource code listings
+========================================================================== */
 div.crosslinks {
-    margin: 0px;
-    border: 0;
-    padding: 0;
+    background-color: #ccc;
+    margin-left: -1em;
+	margin-right: -1em;
+	margin-bottom: -1em;
+	text-transform: capitalize;
 }
 
 div.crosslinks > p {
-    color: #cccccc;
-    background-color: #cccccc;
+    color: #ccc;
     margin: 0px;
     border: 0;
     padding: 1em;}
@@ -263,10 +308,29 @@ div.crosslinks ~ a, a:visited  {
     color: #0000aa;
 }
 
-hr{ height: 0px; margin:0px; width:0px;}
-
+/* ==========================================================================
+	scource code listings
+========================================================================== */
 .lstlisting .label{margin-right:0.5em; }
-div.lstlisting  {font-family: monospace; white-space: nowrap; margin-top:0.5em; margin-bottom:0.5em; background-color:#eeeeee;}
-div.lstinputlisting { font-family: monospace; white-space: nowrap;  background-color:#eeeeee; }
-div.lstinputlisting div.caption { padding:0.5em; font-family: sans-serif; white-space: normal; background-color:#ffffff; width:100%;}
-.lstinputlisting  .label{margin-right:0.5em;}
+div.lstlisting  {padding:0.5em; font-family: 'Consolas', 'Courier New', monospace; font-size: 15px; background-color:#eeeeee; margin-top:0.5em; margin-bottom:0.5em;}
+div.lstinputlisting { padding-bottom:0.5em; font-family: 'Consolas', 'Courier New', monospace; font-size: 15px; background-color:#eeeeee; margin-top:0.5em; margin-bottom:0.5em;}
+div.lstinputlisting p.indent { display: none }
+div.lstinputlisting div.caption { text-indent:0em; margin-left:0em; padding:0.5em; font-family: sans-serif; white-space: normal; background-color:#ffffff; width:100%;}
+div.lstinputlisting hr { display: none; }
+
+/* basicstyle */
+div.lstlisting .cmtt-10, div.lstinputlisting .cmtt-10 {color:Black;}
+/*  identifierstyle */
+div.lstlisting .cmssi-10, div.lstinputlisting .cmssi-10 {color:#444444;}
+/*  keywordstyle */
+div.lstlisting .cmssbx-10, div.lstinputlisting .cmssbx-10 {font-weight: bold; color:#880088;}
+/*  commentstyle */
+div.lstlisting .cmr-10, div.lstinputlisting .cmr-10 {color:#006644;}
+/*  stringstyle */
+div.lstlisting .cmbx-10, div.lstinputlisting .cmbx-10 {font-weight: normal; color:Blue;}
+/*  commentstyle */
+div.lstlisting .cmti-10, div.lstinputlisting .cmti-10 {font-style: normal; color:#aaaaaa;}
+/*  numberstyle */
+div.lstlisting .cmr-8, div.lstinputlisting .cmr-8 {display:'Courier New', inline-block; width:20px;}
+
+/* */

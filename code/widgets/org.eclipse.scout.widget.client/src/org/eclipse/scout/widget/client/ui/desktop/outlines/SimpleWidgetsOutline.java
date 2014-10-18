@@ -3,7 +3,7 @@
  */
 package org.eclipse.scout.widget.client.ui.desktop.outlines;
 
-import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.scout.commons.exception.ProcessingException;
 import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
@@ -31,7 +31,7 @@ public class SimpleWidgetsOutline extends AbstractExtensibleOutline {
   }
 
   @Override
-  protected void execCreateChildPages(Collection<IPage> pageList) throws ProcessingException {
+  protected void execCreateChildPages(List<IPage> pageList) throws ProcessingException {
 
     FormPage labelFieldPage = new FormPage(LabelFieldForm.class);
     pageList.add(labelFieldPage);
