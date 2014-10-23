@@ -36,6 +36,7 @@ To be able to easily follow the text, we assume that the reader is familiar with
 
 % --------------------------------------------------------------------------- %
 \section{The ''My Contacts'' Application}
+\seclabel{my_contacts_guide}
 
 The ''My Contacts'' application is a client server application to manage personal contacts. 
 Persistence of entered data is achieved through a database backend. 
@@ -197,7 +198,7 @@ first.
   label=\lstlabel{mycontacts.desktop.menu.exportoexcel},
   caption=The \java{ExportToExcelMenu} class added by the Docx4j support to the application's tools menu.,
   index={ScoutXlsxSpreadsheetAdapter,IShellService,shellOpen},
-  linerange={138-155},
+  linerange={154-170},
   float
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/Desktop.java}
@@ -263,7 +264,7 @@ Make sure the other fields are filled in as shown in \figref{new_page_person} an
   label=\lstlabel{mycontacts.desktop.outline.personpage},
   caption=The \java{execCreateChildPages} method of the standard outline. At the current implementation step the company table page is not (yet) added.,
   index={execCreateChildPages, StandardOutline},
-  linerange={24-30},
+  linerange={25-32},
   float
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outlines/StandardOutline.java}
@@ -1167,7 +1168,15 @@ Once we have both the access token and the user id available in method {refreshT
   label=\lstlabel{mycontacts.server.linkedin.readcontacts},
   caption=The \java{readContacts} method to fetch the users connection using the LinkedIn API.
   The necessary access token is created in method \java{getToken} based on the information stored in the database for the logged in user.,
-  linerange={136-195},
+  linerange={136-166},
+  float
+]
+{../code/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/LinkedInService.java}
+
+\lstinputlisting[
+  label=\lstlabel{mycontacts.server.linkedin.gettoken},
+  caption=The necessary access token is created in method \java{getToken} based on the information stored in the database for the logged in user.,
+  linerange={168-195},
   float
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/LinkedInService.java}
@@ -1176,7 +1185,7 @@ The next step is to add a method \java{readContacts} to fetch the list of contac
 According to \lstref{mycontacts.server.linkedin.readcontacts}, this private \java{LinkedInService} method reads the data from LinkedIn into a DOM tree\footnote{
 DOM stands for Document Object Model. See \url{http://www.w3.org/DOM/} for more information.
 }. 
-For this, a signed OAuth request is first created using the access token provided by method \java{getToken}. 
+For this, a signed OAuth request is first created using the access token provided by method \java{getToken} according to \lstref{mycontacts.server.linkedin.gettoken}. 
 The request specified by constant \java{LINKEDIN\_CONNECTIONS} is defined as \java{http://api.linkedin.com/v1/people/\textasciitilde/connections}. 
 According to the API specification\footnote{
 See the LinkedIn API documented for more specific information: \url{https://developer.linkedin.com/documents/linkedin-api-resource-map}.
@@ -1348,7 +1357,7 @@ For this, we first retrieve the necessary parameters to call the backend service
 \lstinputlisting[
   label=\lstlabel{mycontacts.client.desktop.updatecontacts},
   caption=The menu to update the stored persons with current LinkedIn data.,
-  linerange={156-171},
+  linerange={154-171},
   float
 ]
 {../code/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/Desktop.java}

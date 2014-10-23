@@ -74,6 +74,14 @@
 \renewcommand{\lstlistlistingname}{List of Listings}
 
 % --------------------------------------------------------------------------- %
+% centering content of images
+% http://tex.stackexchange.com/questions/2651/should-i-use-center-or-centering-for-figures-and-tables
+% --------------------------------------------------------------------------- %
+\makeatletter
+\g@addto@macro\@floatboxreset\centering
+\makeatother
+
+% --------------------------------------------------------------------------- %
 % listings package works well for pdf, but not for html
 % therefore, use normal settings for pdf and a hack for html
 % --------------------------------------------------------------------------- %

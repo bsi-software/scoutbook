@@ -74,20 +74,10 @@
 \pagestyle{headings}
 \pagenumbering{arabic}
 
-% --------------------------------------------------------------------------- %
 \include{Introduction/Introduction}
-\include{ScoutRuntime/ScoutRuntime}
+% \include{ScoutRuntime/ScoutRuntime}
 \include{ScoutTooling/ScoutTooling}
 \include{OneDayTutorial/OneDayTutorial}
-
-
-% --------------------------------------------------------------------------- %
-\part{Contributing}
-\prtlabel{contributing}
-% --------------------------------------------------------------------------- %
-
-\include{Contributing/Contributing}
-
 
 % =========================================================================== %
 % Main content of book ends here 
@@ -96,8 +86,6 @@
 % --------------------------------------------------------------------------- %
 \appendix
 % --------------------------------------------------------------------------- %
-
-\part{Appendices}
 
 % --------------------------------------------------------------------------- %
 % Licence/Copyright
@@ -111,9 +99,6 @@
 
 \clearpage
 \include{ScoutInstallation/ScoutInstallation}
-\include{UsefulUtilities/UsefulUtilities}
-\include{JavaBasics/JavaBasics}
-\include{EclipseBasics/EclipseBasics}
 
 % --------------------------------------------------------------------------- %
 % Lists of various things
@@ -123,33 +108,27 @@
 
 % lstlistoflistings seems to be broken for tex4ht
 % skip complete reference section for html output
-\ifpdf
-  \listoffigures
-  \addcontentsline{toc}{chapter}{Figures}
-
-  \listoftables
-  \addcontentsline{toc}{chapter}{Tables}
-  
-  \lstlistoflistings
-  \addcontentsline{toc}{chapter}{Listings}
-\fi
+% \ifpdf
+  % \lstlistoflistings
+  % \addcontentsline{toc}{chapter}{Listings}
+% \fi
 
 % --------------------------------------------------------------------------- %
 % Bibliography
 % --------------------------------------------------------------------------- %
 
-\clearpage
-\input{bibliography}
+% \clearpage
+% \input{bibliography}
 
 % --------------------------------------------------------------------------- %
 % Index
 % --------------------------------------------------------------------------- %
 
-\clearpage
-\printindex
-\addcontentsline{toc}{chapter}{Index}
+% \clearpage
+% \printindex
+% \addcontentsline{toc}{chapter}{Index}
 
-\clearpage
+% \clearpage
 ~~~~
 \end{document}
 % =========================================================================== %

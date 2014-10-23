@@ -17,6 +17,7 @@
 
 % --------------------------------------------------------------------------- %
 \section{What is Scout?}
+\seclabel{what_is_scout}
 
 Scout is an open source framework for building business applications.
 The Scout framework covers most recurring aspects of a classical client server architecture with a strong focus on the application's front-end. 
@@ -284,14 +285,16 @@ Then, we suggest a list of sections relevant for software wizards that already h
 Finally, the information needs of IT managers are considered.
 
 % ........................................................................... %
-\subsection{I am only familiar with the Java Standard Edition}
+\subsection{I know Java}
 
 The good news first.
 This book is written for you! 
 For the purpose of this book we do not assume any significant understanding of the Java Enterprise Edition (Java EE)\footnote{
 Java Enterprise Edition: \url{http://en.wikipedia.org/wiki/Java_Platform,_Enterprise_Edition}
 }
-and the Eclipse Platform\footnote{Eclipse Platform: \url{http://wiki.eclipse.org/Platform}}. 
+and the Eclipse Platform\footnote{
+Eclipse Platform: \url{http://wiki.eclipse.org/Platform}
+}. 
 
 Of course, having prior experience in client server programming with Java is helpful.
 And having used the Eclipse IDE for Java development before --- please do not mistake the IDE with the Eclipse platform\footnote{
@@ -302,11 +305,18 @@ is certainly of benefit.
 The ``bad'' news is, that writing Scout applications requires a solid understanding of Java.
 To properly benefit from this book, we assume that you have been developing software for a year or more.
 And you should have mastered the Java Standard Edition 
-(Java SE)\footnote{Java Standard Edition: \url{http://en.wikipedia.org/wiki/Java_SE}} to a significant extent. 
+(Java SE)\footnote{
+Java Standard Edition: \url{http://en.wikipedia.org/wiki/Java_SE}
+} 
+to a significant extent. 
 To be more explicit, you are expected to be comfortable with all material required for the Java Programmer Level I 
-Exam\footnote{Level I Exam: \url{docs.oracle.com/javase/tutorial/extra/certification/javase-7-programmer1.html}}
+Exam\footnote{
+Level I Exam: \url{docs.oracle.com/javase/tutorial/extra/certification/javase-7-programmer1.html}
+}
 and most of the material required for 
-Level II\footnote{Level II Exam: \url{docs.oracle.com/javase/tutorial/extra/certification/javase-7-programmer2.html}}.
+Level II\footnote{
+Level II Exam: \url{docs.oracle.com/javase/tutorial/extra/certification/javase-7-programmer2.html}
+}.
 
 We now propose to start downloading and installing Scout as described in \appref{install_scout} and do some actual coding.
 To do so, please continue with the ``Hello World'' example provided in \charef{helloworld}.
@@ -315,9 +325,13 @@ Afterwards, you might want to continue with the remaining material in ``Getting 
 Working through the complete book should take no more than two days. 
 
 Once you work with the Scout framework on a regular basis, you might want to ask questions in the Scout 
-forum\footnote{Eclipse Scout forum: \url{http://www.eclipse.org/forums/eclipse.scout}}.
+forum\footnote{
+Eclipse Scout forum: \url{http://www.eclipse.org/forums/eclipse.scout}
+}.
 When your question gets answered, please ask yourself if your initial problem could have been solved by better documentation.
-In that case, you might want to help the Scout community by fixing or amending the Scout wiki pages\footnote{Eclipse Scout wiki: \url{http://wiki.eclipse.org/Scout}}.
+In that case, you might want to help the Scout community by fixing or amending the Scout wiki pages\footnote{
+Eclipse Scout wiki: \url{http://wiki.eclipse.org/Scout}
+}.
 Or this book. 
 If you find a bug in Eclipse Scout that makes your life miserable you can report it or even propose a patch. 
 And when your bug is fixed, you can test the fix.
@@ -356,13 +370,13 @@ Being a manager and actually reading this book may indicate one of the following
         And you did not understand why (again) a new technology should work better than the ones you already use. 
   \item Your are a product manager of a valuable product that is based on legacy technology. 
         And you are now evaluating options to modernize your product.
-  \item Fill in your current situation. There must be a reason why you are checking out this book.
+  \item Think about your current situation. There must be a reason why you are checking out this book.
 \end{itemize}
 
-If you did not already go through \secref{what_is_scout} please do so now. 
+To learn about Scout and about its benefits first go through \secref{what_is_scout} and \secref{why_scout}.
 Then, flip through \secref{my_contacts_guide} to get an impression of the ''My Contacts'' application. 
 In case you like the idea that your developers should be able to build such an application in a single day, you might want to talk to us\footnote{
-To contact the Scout team, use the email provided on the Scout homepage: \url{http://eclipse.org/scout/support/}.
+To contact the Scout team, use the feedback provided on the Scout homepage: \url{https://eclipse.org/scout}.
 }.
 
 
@@ -886,8 +900,8 @@ In the case of the ''Hello World'' project, four executable applications --- wit
 The four applications, one for the server application and one for each client technology, have already been discussed in \secref{run_initial}.
 
 \begin{figure}
-\includegraphics[height=10cm]{sdk_server_node_properties.png} \hspace{0.5cm}
-\includegraphics[height=10cm]{sdk_server_plugin_explorer.png}
+\includegraphics[height=8.5cm]{sdk_server_node_properties.png} \hspace{0.5cm}
+\includegraphics[height=8.5cm]{sdk_server_plugin_explorer.png}
 \caption{The production and development launcher boxes associated with the ''Hello World'' server application are shown on the left side. 
 In the Package Explorer shown on the right side, the production and development products are located under the \folder{products} in the server plugin project.
 }

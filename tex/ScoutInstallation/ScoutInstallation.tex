@@ -46,15 +46,18 @@ You may still use Scout with Java 6.
 However, this version is no longer tested with Scout and has reached Oracle's end of public updates on February 2013.
 Older Java versions will no longer work together with the Scout framework. 
 
-\subsection{Windows}
-
-On the Windows platform, we recommend to install the Oracle JDK 7 together with Scout. 
+Currently, we recommend to install the Oracle JDK 7 together with Scout. Although, using OpenJDK with Scout should work too. 
 To successfully install the JDK you need to have at least local admin rights.
 You also need to know your hardware architecture in order to download the correct JDK installer. 
-The steps necessary to determine your hardware architecture are described on Microsoft's support 
+
+For Windows, the steps necessary to determine your hardware architecture are described on Microsoft's support 
 site\footnote{
 Windows 32/64-bit installation: \url{http://support.microsoft.com/kb/827218}
 }.
+For Linux several ways to determine if your os is running with 32 or with 64 bits can be found on the web\footnote{
+Linux 32/64-bit installation example page: \url{http://mylinuxbook.com/5-ways-to-check-if-linux-is-32-bit-or-64-bit/}
+}
+For Mac this step is simple, as only a 64 bit package is provided on JDK the download page.
 
 Once you know your hardware architecture, go to Oracle's official download 
 site\footnote{
@@ -75,15 +78,17 @@ Java API documentation download: \url{http://www.oracle.com/technetwork/java/jav
 \end{figure}
 
 Once you have successfully downloaded the JDK installer, follow the Windows installation guide\footnote{
-Install the JDK: \url{http://docs.oracle.com/javase/7/docs/webnotes/install/windows/jdk-installation-windows.html\#Run}}.
+Install the JDK on Windows: \url{http://docs.oracle.com/javase/7/docs/webnotes/install/windows/jdk-installation-windows.html\#Run}}.
 To verify the installation you might want to go through this Java ''Hello World!'' 
 tutorial\footnote{Windows Java ''Hello World!'': \url{http://docs.oracle.com/javase/tutorial/getStarted/cupojava/win32.html}}.
 
-\subsection{Mac}
-needs text
-
-\subsection{Linux}
-needs text
+Installation instructions for Linux\footnote{
+Install the JDK on Linux: \url{http://docs.oracle.com/javase/7/docs/webnotes/install/linux/linux-jdk.html}
+}
+and Mac\footnote{
+Install the JDK on Mac: \url{http://docs.oracle.com/javase/7/docs/webnotes/install/mac/mac-jdk.html}.
+}
+are also available from Oracle.
 
 % --------------------------------------------------------------------------- %
 \section{Download and Install Scout}
@@ -91,70 +96,7 @@ needs text
 
 \input{modules/DownloadAndInstallScout}
 
-Installing Eclipse Scout 4.0 requires a working JDK installation of version 7 or 8. 
-
-Download the Eclipse Scout package from the official Eclipse download page as shown in  \figref{scout_download}.
-In this screenshot, the packages x	or \textit{Eclipse Luna (4.4.1)} are shown and \textit{Windows} is preselected in the dropdown list.
-Should the download page show the wrong platform in the dropdown list, you will need to choose the correct one manually.
-
-\begin{figure}
-\includegraphics[width=15cm]{scout_download.png}
-\caption{The download page for the developer builds of the Eclipse packages.}
-\figlabel{scout_download}
-\end{figure}
-
-The following sections describe the installation steps depending on the operating system of your environment.
-
-\subsection{Windows}
-
-For Windows, the Eclipse download page offers two versions for each package.
-In \figref{scout_download}, the links for these two versions are called \textit{Windows 32 Bit} and \textit{Windows 64 Bit}.
-To decide which version to download you first need to know if you have installed a 64-bit JDK or a 32-bit JDK and then download the corresponding Eclipse installation.
-This is important, so let us be very explicit: \textbf{If you are using a 64-bit JDK you must download the 64-bit version of the Eclipse Scout package. 
-If you are using a 32-bit JDK you must download the 32-bit version of the Eclipse Scout package.}
-Any other combination will simply not work.
-
-If you just installed the JDK yourself you will remember what you have installed. 
-In case you have a JDK pre-installed you can find out by typing \texttt{java -version} on your console.
-For 64-bit JDK installations this fact is explicitly mentioned in the text printed by this command.
-The output will then look similar to the one provided below.
-
-\begin{lstlisting}[
-  language=console
-]
-your-console-prompt>java -version
-java version "1.7.0_55"
-Java(TM) SE Runtime Environment (build 1.7.0_55-b13)
-Java HotSpot(TM) 64-Bit Server VM (build 24.55-b03, mixed mode)
-\end{lstlisting}
-
-If you have installed a 32-bit version this fact is not explicitly mentioned.
-See below for an example output of a 32-bit installation.
-
-\begin{lstlisting}[
-  language=console
-]
-your-console-prompt>java -version
-java version "1.7.0_55"
-Java(TM) SE Runtime Environment (build 1.7.0_55-b13)
-Java HotSpot(TM) Client VM (build 24.55-b03, mixed mode, sharing)
-\end{lstlisting}
-
-Now you know which version of the Eclipse Scout package to download.
-In contrast to the JDK installation, installation of the Scout package does not require any administrative priviledges.
-As the package is a simple ZIP file, you may unpack its content to a location of your choice as shown in \figref{scout_unzip}. 
-If possible, we recommend a target directory such as 
-\filename{C:\scout\luna}.
-Such a target directory avoids two problems that we had to deal with in the past:
-path names including spaces, and very long path names that may break the functionality of your zip/unzip tool.
-
-\begin{figure}
-\includegraphics[width=13cm]{scout_extract_zip.png}
-\caption{Extracting Eclipse Scout to its target directory}
-\figlabel{scout_unzip}
-\end{figure}
-
-After unzipping the Scout package, navigate into the subfolder \texttt{Eclipse}.
+If you have only installed a single JDK you will not need to change the default \texttt{eclipse.ini} file of your Eclipse installation.
 In case you have installed multiple JDKs coming with their individual Java Runtime Environments (JREs), you might want to explicitly specifiy which JRE to use.
 Open the file \texttt{eclipse.ini} in a editor of your choice and insert the following two lines at the top of the file:
 
@@ -166,34 +108,6 @@ C:\java\jre7\bin\javaw.exe
 \end{lstlisting}
 
 where the second line specifies the exact path to the JRE to be used to start your Eclipse Scout installation.
-If you have only installed a single JDK you will not need to change the default \texttt{eclipse.ini} file of your Eclipse installation.
-
-\begin{figure}
-\includegraphics[width=15cm]{scout_startup_select_workspace.png}
-\caption{Starting the Eclipse Scout package.}
-\figlabel{scout_start}
-\end{figure}
-
-You are now ready to start Eclipse Scout via the \texttt{eclipse.exe} file. 
-This brings up the workspace launcher as shown in \figref{scout_start}.
-Into the \field{Workspace} you enter the target directory of your Scout project.
-For a new project you can also enter a path to a directory that does not yet exist.
-After clicking the \button{Ok}, Eclipse will create directories that do not yet exist and start the workspace from the specified location.
-
-\begin{figure}
-\includegraphics[width=13cm]{scout_startup_welcome.png}
-\caption{Eclipse Scout welcome screen.}
-\figlabel{scout_welcome}
-\end{figure}
-
-\begin{figure}
-\includegraphics[width=13cm]{scout_startup_scout_explorer.png}
-\caption{Eclipse Scout started in the Scout SDK perspective. }
-\figlabel{scout_perspective}
-\end{figure}
-
-When opening a new workspace for the first time you will be shown the welcome screen as shown in \figref{scout_welcome}.
-Click on the \icon{Workbench} to open the Eclipse Scout perspective as shown in \figref{scout_perspective}.
 
 If you have explicitly specified the JRE to be used you verify this in the running Eclipse installation.
 Fist, select the \menu{Help|About Eclipse} to open the about dialog.
@@ -218,20 +132,6 @@ sun.java.command=... vm C:\java\jre7\bin\javaw.exe -vmargs ...
 You have now successfully completed the Eclipse Scout installation on your Windows environment.
 With this running Scout installation you may skip the following section on how to add Scout to an existing Eclipse installation.
 
-\subsection{Mac}
-needs text
-
-\subsection{Linux}
-needs text
-
-\fbox{
-  \parbox{12cm}{
-    \noindent Existing Documentation
-    \begin{itemize}
-      \item wiki howto \url{http://wiki.eclipse.org/Scout/HowTo/3.8/Install_Scout_SDK}
-    \end{itemize}
-  }
-}
 % --------------------------------------------------------------------------- %
 \section{Add Scout to your Eclipse Installation}
 
@@ -280,10 +180,7 @@ After you can start your Eclipse Scout package you need to verify that Scout is 
 The simplest way to verify your Scout installation is to create a ''Hello World'' Scout project and run the corresponding Scout application as described in \charef{helloworld}.
 
 % =========================================================================== %
-\chapter{Further Installations}
-
-% --------------------------------------------------------------------------- %
-\section{Apache Tomcat Installation}
+\chapter{Apache Tomcat Installation}
 \applabel{install_tomcat}
 
 Apache Tomcat is an open source web server that is a widely used implementation of the Java Servlet Specification.
@@ -316,7 +213,7 @@ To verify that Tomcat is actually running open a web browser of your choice and 
 You should then see a confirmation of the successful installation according to \figref{tomcat_install}.
 
 % ........................................................................... %
-\subsection{Platform Specific Installation}
+\section{Platform Specific Instructions}
 
 According to the Tomcat setup installation for Windows\footnote{
 Tomcat Windows setup: \url{http://tomcat.apache.org/tomcat-7.0-doc/setup.html#Windows}
@@ -341,7 +238,7 @@ for downloading and installing Tomcat provided by Lars Vogel.
 
 
 % ........................................................................... %
-\subsection{Directories and Files}
+\section{Directories and Files}
 \applabel{tomcat_dirs_and_files}
 
 Tomcat's installation directory follows the same organisation on all platforms.
@@ -376,7 +273,7 @@ Finally, folder \filename{work} contains Tomcat's runtime ''cache'' for the depl
 It is organized according to the hierarchy of the engine (Catalina), the host (localhost), and the web application (\filename{helloworld_server}).
 
 % ........................................................................... %
-\subsection{The Tomcat Manager Application}
+\section{The Tomcat Manager Application}
 \applabel{tomcat_manager_app}
 
 Tomcat comes with the pre installed ''Manager App''.
@@ -415,45 +312,6 @@ Just append a comma to the existing right(s) followed by the string \java{manage
 Note that you will need to restart your Tomcat application after adapting the content of file \filename{tomcat-users.xml}.
 
 With working credentials you can now start the ''Manager App'' as described the ''Hello World'' tutorial in \secref{helloworld_deploy}.
-
-% --------------------------------------------------------------------------- %
-\section{Jenkins Installation}
-needs text
-
-\subsection{Windows}
-needs text
-
-\subsection{Mac}
-needs text
-
-\subsection{Linux}
-needs text
-
-% --------------------------------------------------------------------------- %
-\section{Download and Install Maven/Tycho}
-needs text
-
-\subsection{Windows}
-needs text
-
-\subsection{Mac}
-needs text
-
-\subsection{Linux}
-needs text
-
-% --------------------------------------------------------------------------- %
-\section{Download a Git Client}
-needs text
-
-\subsection{Windows}
-needs text
-
-\subsection{Mac}
-needs text
-
-\subsection{Linux}
-needs text
 
 % --------------------------------------------------------------------------- %
 
