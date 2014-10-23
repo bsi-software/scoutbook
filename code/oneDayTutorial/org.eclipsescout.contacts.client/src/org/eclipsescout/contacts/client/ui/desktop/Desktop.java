@@ -1,6 +1,5 @@
 package org.eclipsescout.contacts.client.ui.desktop;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -22,11 +21,9 @@ import org.eclipse.scout.rt.client.ui.desktop.outline.pages.IPage;
 import org.eclipse.scout.rt.client.ui.form.ScoutInfoForm;
 import org.eclipse.scout.rt.client.ui.form.outline.DefaultOutlineTableForm;
 import org.eclipse.scout.rt.client.ui.form.outline.DefaultOutlineTreeForm;
-import org.eclipse.scout.rt.docx4j.client.ScoutXlsxSpreadsheetAdapter;
 import org.eclipse.scout.rt.extension.client.ui.action.menu.AbstractExtensibleMenu;
 import org.eclipse.scout.rt.extension.client.ui.desktop.AbstractExtensibleDesktop;
 import org.eclipse.scout.rt.shared.TEXTS;
-import org.eclipse.scout.rt.shared.services.common.shell.IShellService;
 import org.eclipse.scout.rt.shared.ui.UserAgentUtility;
 import org.eclipse.scout.service.SERVICES;
 import org.eclipsescout.contacts.client.ClientSession;
@@ -34,6 +31,9 @@ import org.eclipsescout.contacts.client.ui.desktop.outlines.StandardOutline;
 import org.eclipsescout.contacts.client.ui.forms.RefreshLinkedInTokenForm;
 import org.eclipsescout.contacts.shared.Icons;
 import org.eclipsescout.contacts.shared.services.ILinkedInService;
+import java.io.File;
+import org.eclipse.scout.rt.docx4j.client.ScoutXlsxSpreadsheetAdapter;
+import org.eclipse.scout.rt.shared.services.common.shell.IShellService;
 
 public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
   private static IScoutLogger logger = ScoutLogManager.getLogger(Desktop.class);
@@ -136,6 +136,22 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
     }
 
     @Order(10.0)
+    public class UpdateLinkedInContactsMenu extends AbstractExtensibleMenu {
+
+      @Override
+      protected String getConfiguredText() {
+        return TEXTS.get("UpdateLinkedInContacts");
+      }
+
+      @Override
+      protected void execAction() throws ProcessingException {
+        Desktop.this.setStatusText(TEXTS.get("ImportingLinkedIn"));
+        SERVICES.getService(ILinkedInService.class).updateContacts();
+        Desktop.this.setStatusText(null);
+      }
+    }
+
+    @Order(20.0)
     public class ExportToExcelMenu extends AbstractExtensibleMenu {
 
       @Override
@@ -150,22 +166,6 @@ public class Desktop extends AbstractExtensibleDesktop implements IDesktop {
           File xlsx = s.exportPage(null, 0, 0, getOutline().getActivePage());
           SERVICES.getService(IShellService.class).shellOpen(xlsx.getAbsolutePath());
         }
-      }
-    }
-
-    @Order(20.0)
-    public class UpdateLinkedInContactsMenu extends AbstractExtensibleMenu {
-
-      @Override
-      protected String getConfiguredText() {
-        return TEXTS.get("UpdateLinkedInContacts");
-      }
-
-      @Override
-      protected void execAction() throws ProcessingException {
-        Desktop.this.setStatusText(TEXTS.get("ImportingLinkedIn"));
-        SERVICES.getService(ILinkedInService.class).updateContacts();
-        Desktop.this.setStatusText(null);
       }
     }
   }
