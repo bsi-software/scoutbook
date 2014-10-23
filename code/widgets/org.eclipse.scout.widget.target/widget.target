@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="hellowrold" sequenceNumber="67">
+<?pde version="3.8"?><target name="hellowrold" sequenceNumber="68">
 <locations>
 <location path="${eclipse_home}\" type="Directory"/>
 <location path="${scout_rap_target}" type="Directory"/>
@@ -12,7 +12,7 @@
 <repository location="http://download.eclipse.org/rt/rap/incubator/2.3/fileupload/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
-<unit id="com.bsiag.scout.rt.ui.swing.laf.rayo.feature.group" version="4.0.0.20140522-1250"/>
+<unit id="com.bsiag.scout.rt.ui.swing.laf.rayo.feature.group" version="4.0.100.20140903-1234"/>
 <unit id="com.bsiag.scout.rt.ui.swing.laf.rayo.source.feature.group" version="4.0.100.20140903-1234"/>
 <repository location="http://tools.bsiag.com/marketplace/rayo/4.0"/>
 </location>
