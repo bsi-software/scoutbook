@@ -140,7 +140,8 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
   @Order(10.0)
   public class MainBox extends AbstractGroupBox {
 
-    public static final String SCOUT_LOGO = "http://wiki.eclipse.org/images/e/eb/ScoutIconLarge.gif";
+    public static final String SCOUT_LOGO = "/resources/images/eclipse_scout_logo.png";
+    public static final String SCOUT_LOGO_FILENAME = "eclipse_scout_logo.png";
     public static final String BIRD = "http://2.bp.blogspot.com/_LDF9z4ZzZHo/TQZI-CUPl2I/AAAAAAAAAfc/--DuSZRxywM/s1600/bird_1008.jpg";
     public static final String BIRD_OFFLINE = "/resources/images/bird_1008.jpg";
 
@@ -181,13 +182,13 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
         }
 
         @Override
-        protected String getConfiguredImageId() {
-          return AbstractIcons.ApplicationLogo;
+        protected String getConfiguredLabel() {
+          return TEXTS.get("Default");
         }
 
         @Override
-        protected String getConfiguredLabel() {
-          return TEXTS.get("Default");
+        protected String getConfiguredTooltipText() {
+          return TEXTS.get("ImageDragDropSupport");
         }
 
         @Override
@@ -223,6 +224,21 @@ public class ImageFieldForm extends AbstractForm implements IPageForm {
                 setErrorStatus(e.getMessage());
               }
             }
+          }
+        }
+
+        @Override
+        protected void execInitField() throws ProcessingException {
+          clearErrorStatus();
+
+          try {
+            URL url = Activator.getDefault().getBundle().getResource(SCOUT_LOGO);
+            setImage(IOUtility.getContent(url.openStream()));
+            setImageId(SCOUT_LOGO_FILENAME);
+          }
+          catch (Exception e) {
+            e.printStackTrace();
+            setErrorStatus(e.getMessage());
           }
         }
       }

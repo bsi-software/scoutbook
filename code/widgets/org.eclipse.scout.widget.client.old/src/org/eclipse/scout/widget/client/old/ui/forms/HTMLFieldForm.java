@@ -215,7 +215,7 @@ public class HTMLFieldForm extends AbstractForm implements IPageForm {
         protected void execClickAction() throws ProcessingException {
           List<RemoteFile> attachments = new ArrayList<RemoteFile>();
           Bundle clientBundle = Activator.getDefault().getBundle();
-          attachments.add(new RemoteFile(clientBundle.getResource("/resources/icons/scout_logo.jpg"), true));
+          attachments.add(new RemoteFile(clientBundle.getResource("/resources/icons/eclipse_scout_logo.png"), true));
           loadFile("HtmlFieldCustomHtml.html", attachments);
         }
       }

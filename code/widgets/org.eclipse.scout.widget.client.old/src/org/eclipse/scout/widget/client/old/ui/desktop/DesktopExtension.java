@@ -28,23 +28,15 @@ public class DesktopExtension extends AbstractDesktopExtension {
     return outlines;
   }
 
-  @Order(10.0)
+  @Order(40.0)
   public class WidgetsOutlineViewButton extends AbstractOutlineViewButton {
-
-    /**
-     *
-     */
     public WidgetsOutlineViewButton() {
       super(getCoreDesktop(), WidgetsOutline.class);
     }
   }
 
-  @Order(20.0)
+  @Order(50.0)
   public class PagesSearchFormsOutlineViewButton extends AbstractOutlineViewButton {
-
-    /**
-     *
-     */
     public PagesSearchFormsOutlineViewButton() {
       super(getCoreDesktop(), PagesSearchFormsOutline.class);
     }
