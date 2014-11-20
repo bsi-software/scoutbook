@@ -45,7 +45,7 @@ pdf: cleanworking
 	-cd tex & ${PDFLATEX} ${BOOK}.tex
 	cd tex & ${MAKEINDEX} ${BOOK}
 	-cd tex & ${PDFLATEX} ${BOOK}.tex
-	copy tex\${BOOK}.pdf out\pdf\${FILE}.pdf
+	copy tex\${BOOK}.pdf out\pdf\${BOOK}.pdf
 
 html: cleanworking
 	-cd tex & ${HTLATEX} ${BOOK}.tex ${HTMLOUTPARAM}
@@ -63,7 +63,8 @@ epub: cleanworking
 	-cd tex & ${MAKEINDEX} -o ${BOOK}.ind ${BOOK}.4dx
 	-cd tex & ${HTLATEX} ${BOOK}.tex html
 	-cd tex & ${EBOOKCONVERT} ${BOOK}.html ${BOOK}.epub
-	copy tex\${BOOK}.epub out\epub
+	copy tex\${BOOK}.epub out\epub\${BOOK}.epub
+
 
 # --------------------------------------------------------------------------------
 file-pdf: cleanworking
