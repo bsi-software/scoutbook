@@ -37,7 +37,7 @@ pdf: cleanworking
 	-cd tex & ${PDFLATEX} ${BOOK}.tex
 	cd tex & ${MAKEINDEX} ${BOOK}
 	-cd tex & ${PDFLATEX} ${BOOK}.tex
-	copy tex\${BOOK}.pdf out\pdf
+	copy tex\${BOOK}.pdf out\pdf\${FILE}.pdf
 
 html: cleanworking
 	-cd tex & ${HTLATEX} ${BOOK}.tex ${HTMLOUTPARAM}
@@ -46,7 +46,7 @@ html: cleanworking
 	-cd tex & ${HTLATEX} ${BOOK}.tex ${HTMLOUTPARAM}
 	copy tex\${BOOKCSS} tex\${BOOK}.css
 	cd tex & ${ZIP} ${BOOK}.zip *.html ${BOOK}.css *.png
-	copy tex\${BOOK}.zip out\html
+	copy tex\${BOOK}.zip out\html\${BOOK}.zip
 	cd out\html & ${UNZIP} ${BOOK}.zip
 
 epub: cleanworking
@@ -63,13 +63,13 @@ file-pdf: cleanworking
 	-cd tex & ${PDFLATEX} ${FILE}.tex
 	-cd tex & ${PDFLATEX} ${FILE}.tex
 	-cd tex & ${PDFLATEX} ${FILE}.tex
-	copy tex\${FILE}.pdf out\pdf
+	copy tex\${FILE}.pdf out\pdf\${FILE}.pdf
 
 homepage: cleanworking
 	-cd tex & ${HTLATEX} ${FILE}.tex ${HTMLOUTPARAMSIMPLE}
 	copy tex\${HOMEPAGECSS} tex\${FILE}.css
 	cd tex & ${ZIP} ${FILE}.zip *.html ${FILE}.css modules\figures\*.png fonts\*
-	copy tex\${FILE}.zip out\html
+	copy tex\${FILE}.zip out\html\${FILE}.zip
 	cd out\html & ${UNZIP} ${FILE}.zip
 
 # --------------------------------------------------------------------------------
@@ -80,7 +80,7 @@ clean: cleanworking
 	mkdir out\epub
 
 cleanworking:
-	del /S *.dvi *.aux *.log *.out *.glo *.toc *.ilg *.blg *.idx *.idv *.ind 
+	cd tex & del /S *.dvi *.aux *.log *.out *.glo *.toc *.ilg *.blg *.idx *.idv *.ind 
 	cd tex & del ${BOOK}.pdf ${BOOK}*.html ${BOOK}*.zip ${BOOK}.css ${BOOK}.epub ${BOOK}.xref ${BOOK}.tmp ${BOOK}.4* ${BOOK}.l*
 	cd tex & del ${FILE}.pdf ${FILE}*.html ${FILE}*.zip ${FILE}.css ${FILE}.epub ${FILE}.xref ${FILE}.tmp ${FILE}.4* ${FILE}.l*
 
