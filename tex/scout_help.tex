@@ -1,0 +1,141 @@
+% =========================================================================== %
+% This is the main file for the Eclipse Help.
+% 
+% The technical latex setup and organisation of the book heavily borrows from
+% "Pharo by Example" https://github.com/SquareBracketAssociates/PharoByExample-english 
+% 
+% =========================================================================== %
+\documentclass[a4paper,10pt,twoside]{book}
+
+% --------------------------------------------------------------------------- %
+% definitions etc. common to all sub content
+% --------------------------------------------------------------------------- %
+\input{common}
+
+% --------------------------------------------------------------------------- %
+% graphics paths
+% --------------------------------------------------------------------------- %
+\graphicspath{
+  {figures/}
+  {modules/figures/}
+}
+
+\let\wholebook=\relax
+\makeindex
+
+% --------------------------------------------------------------------------- %
+% use this if you are working on individual chapters
+% --------------------------------------------------------------------------- %
+% \includeonly{Introduction/Introduction}
+% \includeonly{ScoutRuntime/ScoutRuntime}
+
+% =========================================================================== %
+% Start content of book
+% for usage of frontmatter etc. see
+% http://tex.stackexchange.com/questions/20538/what-is-the-right-order-when-using-tableofcontents-frontmatter-mainmatter
+% =========================================================================== %
+\begin{document}
+
+\thispagestyle{empty}
+\frontmatter
+
+% --------------------------------------------------------------------------- %
+% Title page, copyright, table of contents, preface
+% --------------------------------------------------------------------------- %
+
+\input{scout_help_title}
+
+\pagenumbering{roman}
+\pagestyle{plain}
+
+\tableofcontents
+\sloppy
+
+\mainmatter
+
+% =========================================================================== %
+% Main content of book starts here
+% =========================================================================== %
+
+\pagestyle{headings}
+\pagenumbering{arabic}
+
+\chapter*{Getting Started}
+% =========================================================================== %
+
+\section*{Scout ''Hello World!'' Tutorial}
+% --------------------------------------------------------------------------- %
+\subsection*{Create a Scout Project}
+\input{modules/CreateNewProject}
+% --------------------------------------------------------------------------- %
+\subsection*{Run the Application}
+\input{modules/RunTheApplication}
+% --------------------------------------------------------------------------- %
+\subsection*{Add the User Interface Widgets}
+\input{modules/HelloWorldFrontend}
+% --------------------------------------------------------------------------- %
+\subsection*{Implement the Server Service}
+\input{modules/HelloWorldBackend}
+% --------------------------------------------------------------------------- %
+\subsection*{Run the Final Application}
+\input{modules/HelloWorldRunTheFinalApplication}
+% --------------------------------------------------------------------------- %
+
+\chapter*{Scout Tooling}
+% =========================================================================== %
+
+\section*{The Scout Perspective}
+TODO: the Scout Perspective
+% --------------------------------------------------------------------------- %
+\subsection*{Scout Explorer View}
+TODO: the Scout Explorer View
+% \input{modules/HelloWorldBackend}
+% --------------------------------------------------------------------------- %
+\subsection*{Scout Object Properties View}
+TODO: the Scout Object Properties View
+% \input{modules/HelloWorldBackend}
+% --------------------------------------------------------------------------- %
+
+% \include{Introduction/Introduction}
+% \include{ScoutRuntime/ScoutRuntime}
+% \include{ScoutTooling/ScoutTooling}
+% \include{OneDayTutorial/OneDayTutorial}
+
+% =========================================================================== %
+% Main content of book ends here 
+% =========================================================================== %
+
+% --------------------------------------------------------------------------- %
+% Lists of various things
+% --------------------------------------------------------------------------- %
+
+\pagestyle{plain}
+
+% lstlistoflistings seems to be broken for tex4ht
+% skip complete reference section for html output
+% \ifpdf
+  % \lstlistoflistings
+  % \addcontentsline{toc}{chapter}{Listings}
+% \fi
+
+% --------------------------------------------------------------------------- %
+% Bibliography
+% --------------------------------------------------------------------------- %
+
+% \clearpage
+% \input{bibliography}
+
+% --------------------------------------------------------------------------- %
+% Index
+% --------------------------------------------------------------------------- %
+
+% \clearpage
+% \printindex
+% \addcontentsline{toc}{chapter}{Index}
+
+% \clearpage
+~~~~
+\end{document}
+% =========================================================================== %
+% End content of book
+% =========================================================================== %
