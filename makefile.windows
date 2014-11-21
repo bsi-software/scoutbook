@@ -77,7 +77,7 @@ file-pdf: cleanworking
 	-cd tex & ${PDFLATEX} ${FILE}.tex
 	copy tex\${FILE}.pdf out\pdf\${FILE}.pdf
 
-homepage: cleanworking
+file-html: cleanworking
 	-cd tex & ${HTLATEX} ${FILE}.tex ${HTMLOUTPARAMSIMPLE}
 	copy tex\${HOMEPAGECSS} tex\${FILE}.css
 	cd tex & ${ZIP} ${FILE}.zip *.html ${FILE}.css modules\figures\*.png fonts\*
