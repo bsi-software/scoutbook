@@ -633,20 +633,14 @@ To create a new module the \wizard{Create new Scout Bundles} can be started by u
 \index{Managing translated application texts}
 \index{Adding application languages}
 
-\begin{figure}
-\includegraphics[width=14cm]{sdk_nls_editor2.png}
-\caption{The NLS editor provided by the Scout SDK. This editor is opened via the \link{Open NLS Editor ...} in the Scout Object Properties of the \node{DefaultTextProviderService}.}
-\index{NLS editor}
-\figlabel{nls_editor}
-\end{figure}
+\input{modules/SdkEditorNls_figure}
+
 
 Access to translated texts in Scout applications is provided through text provider services located in the application's shared plugin. 
 This setup makes translated texts available in the client and the server part of the application. 
 Consequently, the Scout SDK provides access to the NLS Editor to manage translated texts and application languages under the green shared node in the Scout Explorer view as shown in \figref{nls_editor}.
 
-To open the NLS editor, select the green \node{shared} in the Scout Explorer and expand its \folder{Text Provider Services}.
-Then, select the contained element \element{<Project Alias>TextProviderService}.
-As shown in \figref{nls_editor}, the NLS editor can be opened using the \link{Open NLS Editor ...} in the Scout Object Properties view.
+\input{modules/SdkEditorNls_open}
 In the NLS editor translations can be edited individually by pressing F2 or double-clicking into a text cell.
 This opens the editor to change the text to the desired value.
 To add a new translated text, the corresponding dialog can be opened by clicking on the button with the 'T' icon next to the 'New language' button (shown in \figref{nls_editor}).

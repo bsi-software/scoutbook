@@ -12,6 +12,11 @@
 % --------------------------------------------------------------------------- %
 \input{common}
 
+\newcommand{\scoutExplorerView}[0]{\nameref{subsec:scout_explorer_view} }
+\newcommand{\scoutPropView}[0]{\nameref{subsec:scout_object_properties_view} }
+
+\setcounter{secnumdepth}{0}
+
 % --------------------------------------------------------------------------- %
 % graphics paths
 % --------------------------------------------------------------------------- %
@@ -64,26 +69,26 @@
 
 To get started with Eclipse Scout, we propose you to follow this tutorial:
 
-\section*{Scout ''Hello World!'' Tutorial}
+\section{Scout ''Hello World!'' Tutorial}
 
 New to Eclipse Scout? Get started by creating a simple hello world application.
 
 Go through the following steps:
 
 % --------------------------------------------------------------------------- %
-\subsection*{Create a Scout Project}
+\subsection{Create a Scout Project}
 \input{modules/CreateNewProject}
 % --------------------------------------------------------------------------- %
-\subsection*{Run the Application}
+\subsection{Run the Application}
 \input{modules/RunTheApplication}
 % --------------------------------------------------------------------------- %
-\subsection*{Add the User Interface Widgets}
+\subsection{Add the User Interface Widgets}
 \input{modules/HelloWorldFrontend}
 % --------------------------------------------------------------------------- %
-\subsection*{Implement the Server Service}
+\subsection{Implement the Server Service}
 \input{modules/HelloWorldBackend}
 % --------------------------------------------------------------------------- %
-\subsection*{Run the Final Application}
+\subsection{Run the Final Application}
 \input{modules/HelloWorldRunTheFinalApplication}
 % --------------------------------------------------------------------------- %
 
@@ -96,74 +101,80 @@ Eclipse Scout comes with a comprehensive tooling, the Scout SDK.
 The Scout Tooling provides:
 
 % --------------------------------------------------------------------------- %
-\section*{Scout Perspective}
+\section{Scout Perspective}
 \input{modules/SdkPerspective}
 
 % --------------------------------------------------------------------------- %
-\section*{Scout Views}
+\section{Scout Views}
 
 The Scout SDK provides following Views:
 
 % --------------------------------------------------------------------------- %
-\subsection*{Scout Explorer View}
+\subsection{Scout Explorer View}
+\subseclabel{scout_explorer_view}
 \input{modules/SdkViewScoutExplorer}
 % --------------------------------------------------------------------------- %
-\subsection*{Scout Object Properties View}
+\subsection{Scout Object Properties View}\label{subsec:xxxxxxxxxxxx}
+\subseclabel{scout_object_properties_view}
 \input{modules/SdkViewScoutObjectProperties}
 % --------------------------------------------------------------------------- %
-\section*{Scout Wizards}
+\section{Scout Wizards}
 
 The Scout SDK provides following Wizards:
 % --------------------------------------------------------------------------- %
-\subsection*{New Scout Project}
+\subsection{New Scout Project}
 \input{modules/SdkWizardNewScoutProject}
 % --------------------------------------------------------------------------- %
-\subsection*{Export a Scout Project}
+\subsection{Export a Scout Project}
 \input{modules/SdkWizardExportAScoutProject}
 % --------------------------------------------------------------------------- %
-\subsection*{New Form}
+\subsection{New Form}
 \input{modules/SdkWizardNewForm}
 % --------------------------------------------------------------------------- %
-\subsection*{New Form Field}
+\subsection{New Entry}
+\input{modules/SdkWizardNewTextEntry}
+% --------------------------------------------------------------------------- %
+\subsection{Add a Language}
+\input{modules/SdkWizardAddALanguage}
+% --------------------------------------------------------------------------- %
+\subsection{New Form Field}
 \input{modules/SdkWizardNewFormField}
 % --------------------------------------------------------------------------- %
-\subsection*{New Outline}
+\subsection{New Outline}
 \input{modules/SdkWizardNewOutline}
 % --------------------------------------------------------------------------- %
-\subsection*{New Page}
+\subsection{New Page}
 \input{modules/SdkWizardNewPage}
 % --------------------------------------------------------------------------- %
-\subsection*{New Table Column}
+\subsection{New Table Column}
 \input{modules/SdkWizardNewTableColumn}
 % --------------------------------------------------------------------------- %
-\subsection*{New Service}
+\subsection{New Service}
 \input{modules/SdkWizardNewService}
 % --------------------------------------------------------------------------- %
-\subsection*{New Code Type}
+\subsection{New Code Type}
 \input{modules/SdkWizardNewCodeType}
 % --------------------------------------------------------------------------- %
-\subsection*{New Code}
+\subsection{New Code}
 \input{modules/SdkWizardNewCode}
 % --------------------------------------------------------------------------- %
-\subsection*{New Library Bundle}
+\subsection{New Library Bundle}
 \input{modules/SdkWizardNewLibraryBundle}
 % --------------------------------------------------------------------------- %
-\subsection*{New Scout Bundle}
+\subsection{New Scout Bundle}
 \input{modules/SdkWizardNewScoutBundles}
 
 
+
 % --------------------------------------------------------------------------- %
-\subsection*{Scout Object Properties View}
-\input{modules/SdkViewScoutObjectProperties}
-% --------------------------------------------------------------------------- %
-\section*{Scout Editors}
+\section{Scout Editors}
 
 The Scout SDK provides following Editors:
 % --------------------------------------------------------------------------- %
-\subsection*{NLS Editor}
+\subsection{NLS Editor}
 \input{modules/SdkEditorNls}
 % --------------------------------------------------------------------------- %
-\subsection*{Icons Editor}
+\subsection{Icons Editor}
 \input{modules/SdkEditorIcons}
 % --------------------------------------------------------------------------- %
 
