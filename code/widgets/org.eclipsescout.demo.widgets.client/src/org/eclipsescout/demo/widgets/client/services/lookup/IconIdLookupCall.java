@@ -31,6 +31,7 @@ public class IconIdLookupCall extends LocalLookupCall<String> {
     // TODO: there might be a better way via reflection over AbstractIcon
     rows.add(new LookupRow<String>("null", "null"));
     rows.add(new LookupRow<String>("empty", "empty"));
+    rows.add(new LookupRow<String>("cog", "cog"));
     rows.add(new LookupRow<String>("status_info", "status_info"));
     rows.add(new LookupRow<String>("status_warning", "status_warning"));
     rows.add(new LookupRow<String>("status_error", "status_error"));
