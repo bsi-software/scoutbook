@@ -26,9 +26,18 @@ public abstract class AbstractViewSourceOnGitHubMenu extends AbstractMenu {
   @Override
   protected void execAction() throws ProcessingException {
     String linkaddress = "https://github.com/BSI-Business-Systems-Integration-AG/scoutbook/" +
-        "blob/master/" +
-        "code/widgets/org.eclipsescout.demo.widgets.client/src/" +
-        provideSourceClass().getCanonicalName().replace(".", "/") + ".java";
+        "blob/master/";
+
+    String canonicalName = provideSourceClass().getCanonicalName();
+
+    if (canonicalName.contains("widgets.client.old")) {
+      linkaddress += "code/widgets/org.eclipsescout.demo.widgets.client.old/src/";
+    }
+    else {
+      linkaddress += "code/widgets/org.eclipsescout.demo.widgets.client/src/";
+    }
+
+    linkaddress += canonicalName.replace(".", "/") + ".java";
 
     SERVICES.getService(IShellService.class).shellOpen(linkaddress);
   }
