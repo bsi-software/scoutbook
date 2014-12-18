@@ -9,7 +9,9 @@ tex/book.pdf
 out/pdf/book.pdf
 
 # code stuff
-code/*/.metadata/**/*
+.metadata/
+target/
+bin/
 *.class
 
 # leave makefile alone
