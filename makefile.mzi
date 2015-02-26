@@ -14,8 +14,8 @@ ZIP = "C:\Program Files\7-Zip\7z.exe" a -r
 UNZIP = "C:\Program Files\7-Zip\7z.exe" x -r
 COPY =copy
 
-HTMLOUTPARAM = "html,2,info,NoFonts"  # use "html,3,next,NoFonts" to produce output on section level
-HTMLOUTPARAMSIMPLE = "html"  # use "html,3,next,NoFonts" to produce output on section level
+HTMLOUTPARAM = "html,2,info"  # use "html,3,next" to produce output on section level
+HTMLOUTPARAMSIMPLE = "html"  # for homepage files
 HTMLOUTPARAMHELP = "html,4,next,NoFonts"
 
 BOOKCSS= "scoutbook.css"
@@ -49,7 +49,7 @@ html: cleanworking
 	-cd tex & ${MAKEINDEX} -o ${BOOK}.ind ${BOOK}.4dx
 	-cd tex & ${HTLATEX} ${BOOK}.tex ${HTMLOUTPARAM}
 	copy tex\${BOOKCSS} tex\${BOOK}.css
-	cd tex & ${ZIP} ${BOOK}.zip *.html ${BOOK}.css *.png
+	cd tex & ${ZIP} ${BOOK}.zip *.html ${BOOK}.css *.png css\*
 	copy tex\${BOOK}.zip out\html\${BOOK}.zip
 	cd out\html & ${UNZIP} ${BOOK}.zip
 
@@ -69,7 +69,7 @@ file-pdf: cleanworking
 	-cd tex & ${PDFLATEX} ${FILE}.tex
 	copy tex\${FILE}.pdf out\pdf\${FILE}.pdf
 
-file-html: cleanworking
+homepage: cleanworking
 	-cd tex & ${HTLATEX} ${FILE}.tex ${HTMLOUTPARAMSIMPLE}
 	copy tex\${HOMEPAGECSS} tex\${FILE}.css
 	cd tex & ${ZIP} ${FILE}.zip *.html ${FILE}.css modules\figures\*.png fonts\*
