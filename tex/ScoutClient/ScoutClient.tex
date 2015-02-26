@@ -89,7 +89,7 @@ See \lstref{codetype.simple} for a possible implementation of such a code type.
   linerange={15-66,89},
   float
 ]
-{../code/widgets/org.eclipse.scout.widget.shared/src/org/eclipse/scout/widget/shared/services/code/EventTypeCodeType.java}
+{../code/widgets/org.eclipsescout.demo.widgets.shared/src/org/eclipsescout/demo/widgets/shared/services/code/EventTypeCodeType.java}
 
 The code type class and its codes shown in \lstref{codetype.simple} have been created using the creation wizards provided by the Scout SDK as described in \secref{wizard_code_type}. 
 In Scout, code type classes are derived from class \java{AbstractCodeType<CODE\_TYPE\_ID, CODE\_ID>}. 
@@ -116,7 +116,7 @@ In fact, any Java class may be used as a key type for code types and codes as lo
   linerange={68-88},
   float
 ]
-{../code/widgets/org.eclipse.scout.widget.shared/src/org/eclipse/scout/widget/shared/services/code/EventTypeCodeType.java}
+{../code/widgets/org.eclipsescout.demo.widgets.shared/src/org/eclipsescout/demo/widgets/shared/services/code/EventTypeCodeType.java}
 
 To allow for language specific translations, the configuration method \java{getConfiguredText} is used for both the names of code types and codes. 
 A frequently used code property is the active flag to mark obsolete codes. 
@@ -144,7 +144,7 @@ This setup can easily be transferred to a hierarchical Scout code type.
   linerange={12-34,2942-2942},
   float
 ]
-{../code/widgets/org.eclipse.scout.widget.shared/src/org/eclipse/scout/widget/shared/services/code/IndustryICBCodeType.java}
+{../code/widgets/org.eclipsescout.demo.widgets.shared/src/org/eclipsescout/demo/widgets/shared/services/code/IndustryICBCodeType.java}
 
 \begin{figure}
 \includegraphics[width=9cm]{hierarchicalcodetype.png}
@@ -170,7 +170,7 @@ Clearly, such a setup is not sustainable and this is why Scout allows to dynamic
   linerange={21-51,195-211},
   float
 ]
-{../code/widgets/org.eclipse.scout.widget.shared/src/org/eclipse/scout/widget/shared/services/code/ColorsCodeType.java}
+{../code/widgets/org.eclipsescout.demo.widgets.shared/src/org/eclipsescout/demo/widgets/shared/services/code/ColorsCodeType.java}
 
 At startup of a Scout application the codes of all defined code types are loaded into memory. 
 For this, Scout internally calls method \java{loadCodes} for each code type class derived from class \java{AbstractCodeType}. 
@@ -229,7 +229,7 @@ in the text below
   linerange={17-30},
   float
 ]
-{../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/services/lookup/FontStyleLookupCall.java}
+{../code/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/services/lookup/FontStyleLookupCall.java}
 
 \lstinputlisting[
   label=\lstlabel{lookup.local.simple},
@@ -238,7 +238,7 @@ in the text below
   linerange={14-36},
   float
 ]
-{../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/services/lookup/EventTypeLookupCall.java}
+{../code/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/services/lookup/EventTypeLookupCall.java}
 
 TODO: fix \figref{lookup_call}: MyLookupService extends AbstractLookupService and implements IMyLookupService that extends ILookupService which 
 
@@ -614,7 +614,7 @@ In the text below the client only setup of the widget demo application is explai
   linerange={25-33},
   float
 ]
-{../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ClientSession.java}
+{../code/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ClientSession.java}
 
 The most obvious difference of the widget demo application to the ``Hello World'' client server example is the missing server (plugin). 
 Consequently, the widget demo application also does not need a service tunnel to handle client server communication.
@@ -675,7 +675,7 @@ A subset of these properties are shown in the list below.
   linerange={66-73},
   float
 ]
-{../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ui/forms/LabelFieldForm.java}
+{../code/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/LabelFieldForm.java}
 
 To display text in the right hand area an empty string can be used as label text and the text for the value area of the label field can be set with method \java{setValue} in method \java{execInitField} according to \lstref{field.label.value}.
 
@@ -686,7 +686,7 @@ To display text in the right hand area an empty string can be used as label text
   linerange={168-195},
   float
 ]
-{../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ui/forms/LabelFieldForm.java}
+{../code/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/LabelFieldForm.java}
 
 To display multiline text across both the label and the value area a combination of label field properties has to be used.
 See \lstref{field.label.multiline} for the configuration used in the last label field shown in \figref{labelfield}.
@@ -722,7 +722,7 @@ Please note that changing this property dynamically at runtime currently only wo
   linerange={595-607},
   float
 ]
-{../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ui/forms/StringFieldForm.java}
+{../code/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/StringFieldForm.java}
 
 Additional use cases for the string field are shown in the right column of the configuration section of the string field demo form. 
 Specific string fields are located for the default case, a string field only accepting upper case letters, and a masked field. 
@@ -763,7 +763,7 @@ See \lstref{field.integer.input} for the code corresponding to the input integer
   linerange={510-517},
   float
 ]
-{../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ui/forms/NumberFieldsForm.java}
+{../code/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/NumberFieldsForm.java}
 
 As already indicated by the class names of the three number fields, the fields serve to enter values that fit into the ranges defined by the Java classes \java{Integer}, \java{Long} and \java{BigInteger}.
 To further restrict the bounds of valid numbers you may use the methods \java{getConfiguredMinValue} and \java{getConfiguredMaxValue}.
@@ -808,7 +808,7 @@ This example form is defined in class \java{DecimalFieldsForm} of the Scout widg
   linerange={313-337},
   float
 ]
-{../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ui/forms/DecimalFieldsForm.java}
+{../code/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/DecimalFieldsForm.java}
 
 The styled double field in the example section of the form displays negative values in red and postive values in the default black color. 
 This behaviour is implemented in method \java{execChangedValue} according to \lstref{field.double.styled}. 
@@ -875,7 +875,7 @@ Simultaneously pressing the \key{Shift} or the \key{Ctrl} allows to step to the 
   linerange={448-465},
   float
 ]
-{../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ui/forms/DateTimeFieldsForm.java}
+{../code/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/DateTimeFieldsForm.java}
 
 The code of the \java{DateTimeDisabledField} field shown in \lstref{field.datetime.disabled} represents the disabled combined date time in the example form. 
 Before the form is opened Scout executes its \java{execInitField} method and sets the fields value to the current date and time. 
@@ -912,7 +912,7 @@ This naming reflects the boolean state of a check boxes and differs from the oth
   linerange={144-163},
   float
 ]
-{../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ui/forms/CheckboxFieldForm.java}
+{../code/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/CheckboxFieldForm.java}
 
 A coding example is provided in \lstref{field.checkbox.disabled} for the disabled check box. 
 The initial value is set in method \java{execInitField} using the method \java{setChecked}.
@@ -942,7 +942,7 @@ As shown in the example section of the form, radio buttons may have labes and/or
   linerange={186-202},
   float
 ]
-{../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ui/forms/RadioButtonGroupFieldForm.java}
+{../code/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/RadioButtonGroupFieldForm.java}
 
 The simplest way to define the content of a radio button group is by using its configuration properties \java{getConfiguredCodeType} or \java{getConfiguredLookupCall}. 
 \lstref{field.radiobuttongroup} provides the implementation of ''Default´´ radio button group \java{DefaultGroup}. 
@@ -956,7 +956,7 @@ The generic parameter used in the definition of a radio button group also determ
   linerange={257-296},
   float
 ]
-{../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ui/forms/RadioButtonGroupFieldForm.java}
+{../code/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/RadioButtonGroupFieldForm.java}
 
 Alternatively, the individual buttons in a radio button group can also be defined as inner classes. 
 This approach has been used for the ''Styled´´ radio button group in the example section of the \java{RadioButtonGroupFieldForm}. 
@@ -992,7 +992,7 @@ Example uses of buttons and links are shown in the form \java{ButtonLinkFieldsFo
   linerange={207-229},
   float
 ]
-{../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ui/forms/ButtonLinkFieldsForm.java}
+{../code/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/ButtonLinkFieldsForm.java}
 
 In it's simplest form a button just extends class \java{AbstractButton} and overrides \java{getConfiguredLabel} to set the label. 
 The example in \lstref{field.button.styled} also has an icon assigned and stretches over the whole column width. 
@@ -1007,7 +1007,7 @@ Otherwise, buttons (and links) are placed at the bottom of the container they ar
   linerange={244-271},
   float
 ]
-{../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ui/forms/ButtonLinkFieldsForm.java}
+{../code/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/ButtonLinkFieldsForm.java}
 
 The code of the default toggle button in the example form of the widget application is provided in \lstref{field.togglebutton}. 
 To query the state of a toggle button method \java{isSelected} can be used. 
@@ -1049,7 +1049,7 @@ For example, calling \java{MessageBox.showOkMessage(title, header, info)} opens 
   linerange={434-453},
   float
 ]
-{../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ui/forms/MessageBoxForm.java}
+{../code/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/MessageBoxForm.java}
 
 In addition to the static convenience methods, message boxes can be configured to meet specific requirements by a number of parameters. 
 These parameters are shown in \figref{messagebox} in the configuration section of the sample form \java{MessageBoxForm} of the Scout widget application.  
@@ -1102,7 +1102,7 @@ See \figref{listbox} for a screenshot of the example form.
   linerange={172-189},
   float
 ]
-{../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ui/forms/ListBoxForm.java}
+{../code/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/ListBoxForm.java}
 
 In the example section of \figref{listbox} the list boxes in the left column retrieve the elements to be displayed from code types. 
 And in the right column, the displayed elements are retrieved from lookup calls. 
@@ -1126,7 +1126,7 @@ For this, the configuration method \java{getConfiguredFilterCheckedNodes} may be
   linerange={356-379},
   float
 ]
-{../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ui/forms/ListBoxForm.java}
+{../code/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/ListBoxForm.java}
 
 To access the currently selected elements of a list box method \java{getCheckedKeys} may be used. 
 This is demonstrated in \lstref{field.getcheckedkeys} using the \field{getCheckedKeys} in the example form. 
@@ -1163,7 +1163,7 @@ A screenshot of the tree box example form is shown in \figref{treebox}.
   linerange={252-269},
   float
 ]
-{../code/widgets/org.eclipse.scout.widget.client/src/org/eclipse/scout/widget/client/ui/forms/TreeBoxForm.java}
+{../code/widgets/org.eclipsescout.demo.widgets.client/src/org/eclipsescout/demo/widgets/client/ui/forms/TreeBoxForm.java}
 
 In the example section of \figref{treebox} the tree boxes in the left column retrieve the elements to be displayed from hierarchical code types. 
 And in the right column, the displayed elements are retrieved from hierarchical lookup calls. 
