@@ -16,7 +16,7 @@ TEX = "${LATEXROOT}\tex.exe"
 
 EBOOKCONVERT = "${BIN}\Calibre2\ebook-convert.exe" 
 ZIP = "C:\Program Files\7-Zip\7z.exe" a -r
-UNZIP = "C:\Program Files\7-Zip\7z.exe" x -r
+UNZIP = "C:\Program Files\7-Zip\7z.exe" x -r -y
 COPY =copy
 
 HTMLOUTPARAM = "html,2,info"  # use "html,3,next" to produce output on section level
