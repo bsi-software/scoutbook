@@ -26,7 +26,6 @@ import org.eclipse.scout.commons.annotations.Order;
 import org.eclipse.scout.commons.dnd.FileListTransferObject;
 import org.eclipse.scout.commons.dnd.TransferObject;
 import org.eclipse.scout.commons.exception.ProcessingException;
-import org.eclipse.scout.rt.client.ui.MouseButton;
 import org.eclipse.scout.rt.client.ui.action.keystroke.AbstractKeyStroke;
 import org.eclipse.scout.rt.client.ui.action.menu.IMenuType;
 import org.eclipse.scout.rt.client.ui.action.menu.TableMenuType;
@@ -204,7 +203,7 @@ public abstract class AbstractFileTableField extends AbstractTableField {
     }
 
     @Override
-    protected void execRowClick(ITableRow row, MouseButton mouseButton) throws ProcessingException {
+    protected void execRowClick(ITableRow row) throws ProcessingException {
       execFileRowClick((File) row.getKeyValues().get(0));
     }
 
