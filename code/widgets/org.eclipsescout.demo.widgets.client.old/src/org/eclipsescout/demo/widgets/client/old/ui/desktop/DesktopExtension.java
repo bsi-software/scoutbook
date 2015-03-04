@@ -24,7 +24,6 @@ import org.eclipsescout.demo.widgets.client.old.ui.desktop.outlines.PagesSearchF
 import org.eclipsescout.demo.widgets.client.old.ui.desktop.outlines.WidgetsOutline;
 import org.eclipsescout.demo.widgets.client.old.ui.forms.ToolButton1Form;
 import org.eclipsescout.demo.widgets.client.old.ui.forms.ToolButton2Form;
-import org.eclipsescout.demo.widgets.shared.Icons;
 
 public class DesktopExtension extends AbstractDesktopExtension {
   public DesktopExtension() {
@@ -62,7 +61,8 @@ public class DesktopExtension extends AbstractDesktopExtension {
 
     @Override
     protected String getConfiguredIconId() {
-      return Icons.StarYellow;
+//      return Icons.StarYellow;
+      return "font:search!16";
     }
 
     @Override
@@ -79,7 +79,8 @@ public class DesktopExtension extends AbstractDesktopExtension {
 
     @Override
     protected String getConfiguredIconId() {
-      return Icons.StarRed;
+//      return Icons.StarRed;
+      return "font:gear!16";
     }
 
     @Override

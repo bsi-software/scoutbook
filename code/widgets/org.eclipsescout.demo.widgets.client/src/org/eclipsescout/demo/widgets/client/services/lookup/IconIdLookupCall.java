@@ -30,14 +30,14 @@ public class IconIdLookupCall extends LocalLookupCall<String> {
 
     // TODO: there might be a better way via reflection over AbstractIcon
     rows.add(new LookupRow<String>("null", "null"));
-    rows.add(new LookupRow<String>("empty", "empty"));
-    rows.add(new LookupRow<String>("cog", "cog"));
-    rows.add(new LookupRow<String>("status_info", "status_info"));
-    rows.add(new LookupRow<String>("status_warning", "status_warning"));
-    rows.add(new LookupRow<String>("status_error", "status_error"));
-    rows.add(new LookupRow<String>("wizard_back", "wizard_back"));
-    rows.add(new LookupRow<String>("wizard_next", "wizard_next"));
-    rows.add(new LookupRow<String>("bookmark", "bookmark"));
+    rows.add(new LookupRow<String>("empty", "empty", "empty"));
+    rows.add(new LookupRow<String>("gears", "gears", "gears"));
+    rows.add(new LookupRow<String>("status_info", "status_info", "status_info"));
+    rows.add(new LookupRow<String>("status_warning", "status_warning", "status_warning"));
+    rows.add(new LookupRow<String>("status_error", "status_error", "status_error"));
+    rows.add(new LookupRow<String>("wizard_back", "wizard_back", "wizard_back"));
+    rows.add(new LookupRow<String>("wizard_next", "wizard_next", "wizard_next"));
+    rows.add(new LookupRow<String>("bookmark", "bookmark", "bookmark"));
 
     return rows;
   }
