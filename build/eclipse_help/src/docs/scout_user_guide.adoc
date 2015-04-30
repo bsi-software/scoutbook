@@ -1,0 +1,9 @@
+= Eclipse Scout User Guide
+:doctype: article
+:revnumber: {project-version}
+include::_initDoc.adoc[]
+
+Eclipse Scout User Guide 
+
+* <<tutorial.adoc#, Getting Started>>
+* <<sdk.adoc#, Scout Tooling>>

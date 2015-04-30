@@ -1,0 +1,11 @@
+
+ifndef::finaldoc[]
+include::_initDoc.adoc[]
+endif::finaldoc[]
+
+//-----------------------------------------------------------------------------
+//Asciidoctor input file: "SDK - Wizard - New Code"
+//
+//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
+//-----------------------------------------------------------------------------
+TODO: the Scout "New Code" Wizard

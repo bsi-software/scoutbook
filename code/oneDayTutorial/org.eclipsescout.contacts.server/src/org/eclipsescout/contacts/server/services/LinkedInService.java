@@ -184,7 +184,7 @@ public class LinkedInService extends AbstractService implements ILinkedInService
 
     if (StringUtility.isNullOrEmpty(value.getValue())) {
       String message = "No valid LinkedIn token stored for user "
-          + "’" + userName + "’. Please (re)create a token";
+          + "'" + userName + "'. Please (re)create a token";
       LOG.error(message);
 
       throw new ProcessingException(message);

@@ -1,0 +1,35 @@
+
+ifndef::finaldoc[]
+include::_initDoc.adoc[]
+endif::finaldoc[]
+
+//-----------------------------------------------------------------------------
+//Asciidoctor input file: "SDK - Editor - NLS"
+//
+//WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
+//-----------------------------------------------------------------------------
+
+\subsubsection*{Open the NLS Editor}
+
+\input{modules/SdkEditorNls_open}
+
+\subsubsection*{Description of the NLS Editor}
+
+\input{modules/SdkEditorNls_figure}
+
+In the NLS editor translations can be edited individually by pressing F2 or double-clicking into a text cell.
+This opens an editor where the text can be changed to the desired value.
+
+\begin{itemize}
+  \item Refresh: 
+  \item Show NLS entry usage:
+  \item New entry...: this will open the 
+  \item New language...
+  \item Import...
+  \item Export...
+\end{itemize}
+
+
+To add a new translated text, the corresponding dialog can be opened by clicking on the button with the '`T`' icon next to the 'New language' button (shown in <<img-nls_editor>>).
+
+

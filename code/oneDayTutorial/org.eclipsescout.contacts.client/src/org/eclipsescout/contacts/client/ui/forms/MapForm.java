@@ -124,7 +124,7 @@ public class MapForm extends AbstractForm {
           setImage(IOUtility.getContent((new URL(url)).openStream()));
         }
         catch (Exception e) {
-          setErrorStatus(new ProcessingStatus("Bad Link: ’" + url + "’, please check",
+          setErrorStatus(new ProcessingStatus("Bad Link: '" + url + "', please check",
               ProcessingStatus.ERROR));
           setImage(null);
           e.printStackTrace();

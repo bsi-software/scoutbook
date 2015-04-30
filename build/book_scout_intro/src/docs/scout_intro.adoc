@@ -1,0 +1,19 @@
+= Eclipse Scout: an Introduction
+:doctype: book
+:author: Matthias Zimmermann
+:email: matthias.zimmermann@bsiag.com
+:revnumber: {project-version}
+include::_initDoc.adoc[]
+
+include::{mdledir}/BookPreface.adoc[]
+
+:numbered:
+include::_Introduction.adoc[]
+include::_ScoutTooling.adoc[]
+include::_OneDayTutorial.adoc[]
+
+//Appendix:
+
+include::{mdledir}/BookCopyright.adoc[]
+include::{mdledir}/BookScoutInstallation.adoc[]
+

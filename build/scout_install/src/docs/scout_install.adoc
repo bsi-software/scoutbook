@@ -1,0 +1,23 @@
+= Download and Install Eclipse Scout
+:doctype: article
+:author: Scout Team
+:email: scout@bsiag.com
+:revnumber: {project-version}
+:revdate: 2015-22-01
+include::_initDoc.adoc[]
+
+This describes how to install an Eclipse IDE ready to create scout Applications.
+
+== Get the Package
+
+include::{mdledir}/DownloadScout.adoc[]
+
+== Install Scout
+
+include::{mdledir}/InstallAndVerifyScout.adoc[]
+
+== What's Next?
+
+With your working Scout installation you are now ready to create your first Scout application. 
+Go ahead and follow the '`Hello World!`' tutorial.
+

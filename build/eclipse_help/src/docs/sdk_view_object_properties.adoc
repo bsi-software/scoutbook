@@ -1,0 +1,7 @@
+==== Scout Object Properties View
+:doctype: article
+:revnumber: {project-version}
+include::_initDoc.adoc[]
+
+include::{mdledir}/SdkViewScoutObjectProperties.adoc[]
+

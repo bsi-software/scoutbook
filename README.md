@@ -5,101 +5,19 @@ Scout Book
 * [Distribution folder (PDF, HTML, EPUB)](http://tools.bsiag.com/scoutbook/)
 
 
-Building the Book with make
----------------------------
+Organisation of the Repository
+------------------------------
 
-### Initial work:
+* `adoc`: contains text modules (Asciidoc files) that are included in the final documents
+* `build`: contains the final document and the script to build them. [read more](build/)
+* `code`: contains demo application (code snippets in the document are taken from this code base)
+* `imgs`: contains all the images.
 
-1. Depending on your local platform copy the file `makefile._platform_` to `makefile`.
-1. Adjust your `makefile` according to your local installation.
-1. Do not push you `makefile` to the books main repository.
-1. Do not include your `makefile` in pull requests you send us.
 
-### Clean
+Build the documents
+-------------------
 
-Run:
-
-    >make clean
-
-This will remove the files in the `tex/` folder (for the configured `BOOK`, `FILE` and `HELPBOOK`) and erase the content of `out/`.
-
-### Build a book
-
-Change the name of the book in the makefi line in the `makefile`:
-
-    BOOK=scout_intro
-
-Possible values:
-
-* `scout_intro`
-* `scout_frontend`
-
-#### PDF version of a book
-
-To obtain the PDF Version run:
-
-    >make pdf
- 
- The result will be copied in `/out/pdf/`.
-
-#### HTML version of a book
- 
-To obtain the HTML Version run:
-
-    >make html
- 
- The result will be copied in `/out/html/`.
-
-#### EPub version of a book
-
-To obtain the HTML Version run:
-
-    >make epub
- 
- The result will be copied in `/out/epub/`.
-
-### Build a page
-Change the name of the book in the makefi line in the `makefile`:
-
-    FILE=scout_install
-
-Possible values:
-
-* `scout_install`
-* `scout_helloworld`
-
-#### PDF version of a page
-
-To obtain the PDF Version run:
-
-    >make file-pdf
- 
- The result will be copied in `/out/pdf/`.
-
-#### HTML version of a page
- 
-To obtain the HTML Version run:
-
-    >make file-html
- 
- The result will be copied in `/out/html/`.
-
-### Build the eclipse help (special type of book)
-
-Check the name of the book in the makefi line in the `makefile`:
-
-    HELPBOOK=scout_help
-
-For the moment this is the only possible value.
-
-#### HTML version of the eclipse help
- 
-To obtain the HTML Version run:
-
-    >make help-html
- 
-The result will be copied in `/out/html/`.
-
+Check the [README of the build folder](build/README.adoc)
 
 
 Issue tracker / Get in touch
@@ -107,7 +25,6 @@ Issue tracker / Get in touch
 
 * Use the [issue tracker](http://github.com/BSI-Business-Systems-Integration-AG/scoutbook/issues) on GitHub.
 * Use the [Eclipse Scout Forum](http://www.eclipse.org/forums/eclipse.scout)
-
 
 
 License

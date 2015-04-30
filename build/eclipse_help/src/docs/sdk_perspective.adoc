@@ -1,0 +1,7 @@
+=== Scout Perspective
+:doctype: article
+:revnumber: {project-version}
+include::_initDoc.adoc[]
+
+include::{mdledir}/SdkPerspective.adoc[]
+

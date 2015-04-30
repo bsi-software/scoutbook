@@ -1,0 +1,15 @@
+== Scout Tooling
+:doctype: article
+:revnumber: {project-version}
+include::_initDoc.adoc[]
+
+Eclipse Scout comes with a comprehensive tooling, the Scout SDK.
+
+include::{mdledir}/SdkScoutTooling.adoc[]
+
+The Scout Tooling provides: 
+
+* <<sdk_perspective.adoc#, Scout Perspective>>
+* <<sdk_view.adoc#, Scout Views>>
+* <<sdk_wizard.adoc#, Scout Wizards>>
+* <<sdk_editors.adoc#, Scout Editors>>
