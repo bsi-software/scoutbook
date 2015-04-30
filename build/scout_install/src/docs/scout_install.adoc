@@ -6,6 +6,12 @@
 :revdate: 2015-22-01
 include::_initDoc.adoc[]
 
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../../../../imgs]
+ifndef::codedir[:codedir: ../../../../code]
+ifndef::mdledir[:mdledir: ../../../../adoc]
+:experimental:
+
 This describes how to install an Eclipse IDE ready to create scout Applications.
 
 == Get the Package

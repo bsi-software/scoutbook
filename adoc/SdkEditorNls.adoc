@@ -3,6 +3,12 @@ ifndef::finaldoc[]
 include::_initDoc.adoc[]
 endif::finaldoc[]
 
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../imgs]
+ifndef::codedir[:codedir: ../code]
+ifndef::mdledir[:mdledir: .]
+:experimental:
+
 //-----------------------------------------------------------------------------
 //Asciidoctor input file: "SDK - Editor - NLS"
 //

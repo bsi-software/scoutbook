@@ -3,6 +3,12 @@
 :revnumber: {project-version}
 include::_initDoc.adoc[]
 
+//fallback for safe mode == secure:
+ifndef::imgsdir[:imgsdir: ../../../../imgs]
+ifndef::codedir[:codedir: ../../../../code]
+ifndef::mdledir[:mdledir: ../../../../adoc]
+:experimental:
+
 To get started with Eclipse Scout, we propose you to follow this tutorial: 
 
 * <<tutorial_helloworld.adoc#hello-world-tutorial, Hello world Tutorial>>
