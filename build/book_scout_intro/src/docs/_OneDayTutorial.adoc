@@ -294,8 +294,7 @@ image::{imgsdir}/new_bean_companyid.png[]
 [source,java]  
 .The company id variable of the [java]+PersonTablePage+ class.
 ---- 
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outline/pages/PersonTablePage.java[lines=31..35]
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outline/pages/PersonTablePage.java[lines=172..183]
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/desktop/outline/pages/PersonTablePage.java[lines=31..35;172..183]
 ----
 
 
@@ -381,8 +380,7 @@ image::{imgsdir}/new_operation_installstorage.png[]
 [source,java]  
 .New tables are created if they are not found by [java]+getExistingTables+ in the existing schema.
 ---- 
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/DBInstallService.java[lines=20..50]
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/DBInstallService.java[lines=107..108]
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/DBInstallService.java[lines=20..50;107..108]
 ----
 
 
@@ -445,8 +443,7 @@ To create a data object for the persons day of birth, the Scout utility class [j
 [source,java]  
 .Scheduling the database installation in the [java]+start+ method of the [java]+ServerApplication+ class during the server application startup.
 ---- 
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/ServerApplication.java[lines=30..57]
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/ServerApplication.java[lines=62..63]
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/ServerApplication.java[lines=30..57;62..63]
 ----
 
 
@@ -642,9 +639,7 @@ This results in the picture to cover the vertical space of 5 form fields.
 [source,java]  
 .The behaviour of the person form's [java]+PictureField+ is triggered by changes in field [java]+PictureUrlField+.
 ---- 
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PersonForm.java[lines=233..235]
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PersonForm.java[lines=251..267]
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PersonForm.java[lines=286..287]
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PersonForm.java[lines=233..235;251..267;286..287]
 ----
 
 
@@ -671,10 +666,7 @@ That is why almost all form and service artefacts are deselected in the second w
 [source,java]
 .The UI structure of the [java]+PictureURLForm+ used to update the URL of the picture field in the person form.
 ---- 
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PictureURLForm.java[lines=24..25]
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PictureURLForm.java[lines=99..113]
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PictureURLForm.java[lines=122..122]
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PictureURLForm.java[lines=126..127]
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/PictureURLForm.java[lines=24..25;99..113;122..122;126..127]
 ----
 
 
@@ -921,8 +913,7 @@ And method [java]+execStore+ is called by the Scout framework after the user has
 [source,java]  
 .The [java]+load+ and the [java]+store+ methods of the server's [java]+PersonService+.
 ---- 
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/ui/forms/PersonService.java[lines=24..25]
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/ui/forms/PersonService.java[lines=55..104]
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/ui/forms/PersonService.java[lines=24..25;55..104]
 ----
 
 
@@ -945,9 +936,7 @@ As its implementation has been created by the Scout SDK wizard, it does not do a
 [source,java]  
 .The [java]+create+ method of the server's [java]+PersonService+.
 ---- 
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/ui/forms/PersonService.java[lines=24..25]
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/ui/forms/PersonService.java[lines=35..54]
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/ui/forms/PersonService.java[lines=103..104]
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/ui/forms/PersonService.java[lines=24..25;35..54;103..104]
 ----
 
 
@@ -1025,8 +1014,7 @@ Once the wizard has completed the classes defined in the two JAR files can direc
 [source,java]  
 .The [java]+LinkedInService+ service with it's [java]+initializeService+ method defined in the [java]+IService+ interface.
 ---- 
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/LinkedInService.java[lines=38..57]
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/LinkedInService.java[lines=195..196]
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.server/src/org/eclipsescout/contacts/server/services/LinkedInService.java[lines=38..57;195..196]
 ----
 
 
@@ -1217,10 +1205,7 @@ As shown on the right side of <<img-tokenform_securitycode>>, deselect the [prop
 [source,java]  
 .The structure of the refresh token form. The security code field gets enabled in method [java]+execClickAction+ after the authentication link button is pressed.
 ---- 
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/RefreshLinkedInTokenForm.java[lines=29..30]
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/RefreshLinkedInTokenForm.java[lines=113..133]
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/RefreshLinkedInTokenForm.java[lines=142..158]
-include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/RefreshLinkedInTokenForm.java[lines=195..196]
+include::{codedir}/oneDayTutorial/org.eclipsescout.contacts.client/src/org/eclipsescout/contacts/client/ui/forms/RefreshLinkedInTokenForm.java[lines=29..30;113..133;142..158;195..196]
 ----
 
 

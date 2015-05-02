@@ -3,7 +3,6 @@
 :author: Scout Team
 :email: scout@bsiag.com
 :revnumber: {project-version}
-:revdate: 2015-22-01
 include::_initDoc.adoc[]
 
 //fallback for safe mode == secure:

@@ -89,8 +89,7 @@ See Listing <<lst-codetype.simple>> for a possible implementation of such a code
 [source,java]  
 .A code type with associated codes.
 ---- 
-include::{codedir}/widgets/org.eclipsescout.demo.widgets.shared/src/org/eclipsescout/demo/widgets/shared/services/code/EventTypeCodeType.java[lines=15..66]
-include::{codedir}/widgets/org.eclipsescout.demo.widgets.shared/src/org/eclipsescout/demo/widgets/shared/services/code/EventTypeCodeType.java[lines=89..90]
+include::{codedir}/widgets/org.eclipsescout.demo.widgets.shared/src/org/eclipsescout/demo/widgets/shared/services/code/EventTypeCodeType.java[lines=15..66;89..90]
 ----
 
 
@@ -144,8 +143,7 @@ This setup can easily be transferred to a hierarchical Scout code type.
 [source,java]  
 .A hierarchical code type for the Industry Classification Benchmark.
 ---- 
-include::{codedir}/widgets/org.eclipsescout.demo.widgets.shared/src/org/eclipsescout/demo/widgets/shared/services/code/IndustryICBCodeType.java[lines=12..34]
-include::{codedir}/widgets/org.eclipsescout.demo.widgets.shared/src/org/eclipsescout/demo/widgets/shared/services/code/IndustryICBCodeType.java[lines=2942..2942]
+include::{codedir}/widgets/org.eclipsescout.demo.widgets.shared/src/org/eclipsescout/demo/widgets/shared/services/code/IndustryICBCodeType.java[lines=12..34;2942..2942]
 ----
 
 [[img-hierarchicalcodetype, Figure 000]]
@@ -168,8 +166,7 @@ Clearly, such a setup is not sustainable and this is why Scout allows to dynamic
 [source,java]  
 .Adding codes dynamically in method [java]+execLoadCodes+.
 ---- 
-include::{codedir}/widgets/org.eclipsescout.demo.widgets.shared/src/org/eclipsescout/demo/widgets/shared/services/code/EventTypeCodeType.java[lines=21..51]
-include::{codedir}/widgets/org.eclipsescout.demo.widgets.shared/src/org/eclipsescout/demo/widgets/shared/services/code/EventTypeCodeType.java[lines=195..211]
+include::{codedir}/widgets/org.eclipsescout.demo.widgets.shared/src/org/eclipsescout/demo/widgets/shared/services/code/EventTypeCodeType.java[lines=21..51;195..211]
 ----
 
 At startup of a Scout application the codes of all defined code types are loaded into memory. 
