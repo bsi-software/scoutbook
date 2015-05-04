@@ -1,7 +1,7 @@
 = Eclipse Scout: an Introduction
 :doctype: book
 :author: Matthias Zimmermann
-:email: matthias.zimmermann@bsiag.com
+:email: matthias.zimmermann@bsi-software.com
 :revnumber: {project-version}
 include::_initDoc.adoc[]
 

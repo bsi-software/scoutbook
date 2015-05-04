@@ -1,7 +1,7 @@
 = Download and Install Eclipse Scout
 :doctype: article
 :author: Scout Team
-:email: scout@bsiag.com
+:email: scout@bsi-software.com
 :revnumber: {project-version}
 include::_initDoc.adoc[]
 
