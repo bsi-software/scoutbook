@@ -34,9 +34,11 @@ We just need to add our business logic to the [java]+load+ method of the server'
 
 According to the signature of the [java]+load+ method, a [java]+formData+ object is passed into this method that is then handed back in the return statement.
 To complete the implementation of the [java]+load+ method it is sufficient to assign the text 'hello world!' to the message field part of the form data.
-The complete implementation of the [java]+load+ method is provided below.
+The complete implementation of the [java]+load+ method is provided in <<lst-helloworld.desktopservice.load>>.
 
+[[lst-helloworld.desktopservice.load, Listing load() implementation]]
 [source,java]
+.load() implementation in the DesktopService.
 ----
 @Override
 public DesktopFormData load(DesktopFormData formData) 

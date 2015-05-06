@@ -55,6 +55,7 @@ public class PublishUtility {
     Document doc = Jsoup.parse(html);
     doc.outputSettings().charset("ASCII");
 
+    fixListingLink(doc);
     fixFigureLink(doc);
 
     Files.createParentDirs(outFile);
@@ -176,10 +177,34 @@ public class PublishUtility {
     }
   }
 
-  static private Pattern pattern = Pattern.compile("Figure ([0-9]+)\\.");
+  static private Pattern listingPattern = Pattern.compile("(Listing [0-9]+)\\.");
 
   /**
-   * Main method for the #858 workaround.
+   * #858 workaround for listing
+   * https://github.com/asciidoctor/asciidoctor/issues/858
+   *
+   * @param doc
+   *          JSoup document (type is {@link org.jsoup.nodes.Document})
+   */
+  public static void fixListingLink(Document doc) {
+    Elements elements = doc.getElementsByTag("a");
+    for (Element link : elements) {
+      String href = link.attr("href");
+      if (href != null && href.startsWith("#")) {
+        String id = href.substring(1);
+        Element idElement = doc.getElementById(id);
+        if (idElement != null && "listingblock".equals(idElement.attr("class"))) {
+          fixLink(link, idElement, listingPattern);
+        }
+      }
+    }
+  }
+
+  static private Pattern figurePattern = Pattern.compile("(Figure [0-9]+)\\.");
+
+  /**
+   * #858 workaround for figure
+   * https://github.com/asciidoctor/asciidoctor/issues/858
    *
    * @param doc
    *          JSoup document (type is {@link org.jsoup.nodes.Document})
@@ -193,7 +218,7 @@ public class PublishUtility {
         Element idElement = doc.getElementById(id);
         boolean fixedText = false;
         if (idElement != null && "imageblock".equals(idElement.attr("class"))) {
-          fixedText = fixLink(link, idElement);
+          fixedText = fixLink(link, idElement, figurePattern);
         }
         //Support for the multiple Images in one figure workaround (see Issue 1287)
         if (!fixedText && idElement != null) {
@@ -206,7 +231,7 @@ public class PublishUtility {
             }
             if (!fixedText && checkNext) {
               if ("imageblock".equals(childNode.attr("class")) && childNode instanceof Element) {
-                fixedText = fixLink(link, (Element) childNode);
+                fixedText = fixLink(link, (Element) childNode, figurePattern);
               }
               else if (!(childNode instanceof Element)) {
                 //do nothing.
@@ -222,12 +247,12 @@ public class PublishUtility {
     }
   }
 
-  private static boolean fixLink(Element link, Element element) {
+  private static boolean fixLink(Element link, Element element, Pattern pattern) {
     Element titleDiv = findTitleDiv(element);
     if (titleDiv != null) {
       Matcher matcher = pattern.matcher(titleDiv.text());
       if (matcher.find()) {
-        link.text("Figure " + matcher.group(1));
+        link.text(matcher.group(1));
         return true;
       }
     }
@@ -237,7 +262,7 @@ public class PublishUtility {
   private static Element findTitleDiv(Element element) {
     Elements elements = element.getElementsByTag("div");
     for (Element e : elements) {
-      if ("imageblock".equals(e.attr("class"))) {
+      if ("title".equals(e.attr("class"))) {
         return e;
       }
     }

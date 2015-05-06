@@ -140,6 +140,7 @@ public class PublishHelpUtility {
       PublishUtility.moveAndcopyCss(doc, inFile.getParentFile(), htmlFolder, "css/");
 
       //Fix Figure Links:
+      PublishUtility.fixListingLink(doc);
       PublishUtility.fixFigureLink(doc);
 
       //Write as file:

@@ -198,7 +198,7 @@ In the [field]_Title_ field enter the string "`My Contacts`" and create a new tr
 
 
 (((execOpened,Desktop,UserAgentUtility)))
-[[lst-mycontacts.desktop.execopened, Listring execOpened]]
+[[lst-mycontacts.desktop.execopened, Listing execOpened]]
 [source,java]  
 .The [java]+execOpened+ method of desktop class of the "My Contacts" application. The application's organisation into a tree and a table form is defined here.
 ---- 
