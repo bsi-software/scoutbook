@@ -1,4 +1,6 @@
-= Build
+= Scout Docs - Build
+
+== Description
 
 This folder contains the documents that are build.
 
@@ -6,18 +8,18 @@ This folder contains the documents that are build.
 * `scout_install`: produces an article as single page to explain how to downlaod the scout IDE (the html version is published on the scout webpage)
 * `book_scout_intro`: produces a book called "Eclipse Scout: an Introduction"
 * `book_scout_frontend`: produces a book called "Eclipse Scout: Frontend Development"
-* `eclipse_help`
+* `eclipse_help`: produces the necessary pages for the "Eclipse Scout User Guide" (in the `org.eclipse.scout.sdk.help` plugin). The list of pages needs to be kept up to date and ordered in link:eclipse_help/help-pages.txt[help-pages.txt].
 
 == Usage
 
 You can generate all documents using maven at the root of the `build` folder:
 
- $ mvn
+ mvn
 
 You can generate one document by switching to one of subfolder and unsing maven:
 
- cd scout_helloworld:
- $ mvn
+ cd scout_helloworld/
+ mvn
  
 The results are generated in the `target` subfolder. For example for `scout_helloworld`:
 
