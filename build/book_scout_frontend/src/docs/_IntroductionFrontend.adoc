@@ -411,12 +411,12 @@ For this, we switch to the Scout Explorer and select the root node [element]_org
 Selecting the application's [node]_org.eclipse.scout.helloworld_ node in the Scout Explorer displays the product launchers in the _Scout Object Properties_.
 As we can see in <<img-start_client>>, we have product launchers for four different development products.
 
-\begin{tabular}{ l l }
-  \textbf{Server} & The Scout server application\\
-  \textbf{RAP}    & The RAP server application for web and mobile clients\\
-  \textbf{Swing}  & The Scout Swing desktop client application\\
-  \textbf{SWT}    & The Scout SWT desktop client application\\
-\end{tabular}
+|=== 
+| *Server* | The Scout server application
+| *RAP* | The RAP server application for web and mobile clients
+| *Swing* | The Scout Swing desktop client application
+| *SWT* | The Scout SWT desktop client application
+|=== 
 
 [[img-start_client, Figure 000]]
 .Starting the web client in the Scout SDK using the provided RAP product launcher. Make sure to start the server before starting any client product.

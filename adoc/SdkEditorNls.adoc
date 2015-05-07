@@ -15,25 +15,23 @@ ifndef::mdledir[:mdledir: .]
 //WARNING: this file is a text module, it should be embedded in a master asciidoctor document.
 //-----------------------------------------------------------------------------
 
-\subsubsection*{Open the NLS Editor}
+===== Open the NLS Editor
 
-\input{modules/SdkEditorNls_open}
+include::{mdledir}/SdkEditorNls_open.adoc[]
 
-\subsubsection*{Description of the NLS Editor}
+===== Description of the NLS Editor
 
-\input{modules/SdkEditorNls_figure}
+include::{mdledir}/SdkEditorNls_figure.adoc[]
 
 In the NLS editor translations can be edited individually by pressing F2 or double-clicking into a text cell.
 This opens an editor where the text can be changed to the desired value.
 
-\begin{itemize}
-  \item Refresh: 
-  \item Show NLS entry usage:
-  \item New entry...: this will open the 
-  \item New language...
-  \item Import...
-  \item Export...
-\end{itemize}
+* Refresh: 
+* Show NLS entry usage:
+* New entry...: this will open the 
+* New language...
+* Import...
+* Export...
 
 
 To add a new translated text, the corresponding dialog can be opened by clicking on the button with the '`T`' icon next to the 'New language' button (shown in <<img-nls_editor>>).

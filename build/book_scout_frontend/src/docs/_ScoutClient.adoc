@@ -798,7 +798,7 @@ And if the user just enters a "`3`", the field will display "`3.000`" and hold t
 
 Decimal fields can also be configured to enter percentages in a convenient way. 
 For this use case the [property]_Multiplier_ property can be set to 100 and the [property]_Multiplier_ property to [java]+true+. 
-If the user now enters "`5`" into such a decimal field, it will show the text "`5\%`" and hold the value 0.05.
+If the user now enters "`5`" into such a decimal field, it will show the text "`5%`" and hold the value 0.05.
 
 As in the case of number fields more extensive options to specify the formatting of the numbers is provided by [java]+setFormat+ method of the decimal field. 
 Method [java]+setFormat+ is accepting an argument of the Java class [java]+DecimalFormat+. 
@@ -1064,7 +1064,7 @@ In our example, the list box type [java]+Color+ matches the key type of the code
 In the [field]_List Content_ field located on the right hand side of the configuration section of <<img-listbox>> it is also possible to enter user defined content. 
 After entering some example data and pressing the kbd:[Tab], the user content is parsed and used to update the elements displayed in the [field]_ListBox_ field. 
 To get the initial example data shown in <<img-listbox>>, use the btn:[Sample Content] button of the list box example form. 
-Basically, the content of each text row is parsed into a lookup row according to the format provided in the first row of the sample content: `\# key;text;iconId;...`. 
+Basically, the content of each text row is parsed into a lookup row according to the format provided in the first row of the sample content: `# key;text;iconId;...`. 
 The resulting lookup rows are then used to dynamically update the content of the lookup call associated with the [field]_ListBox_ field. 
 List boxes can be configured to only display the checked elements. 
 For this, the configuration method [java]+getConfiguredFilterCheckedNodes+ may be used. 
@@ -1304,7 +1304,7 @@ Existing Documentation
 
  * forum: file chooser field http://www.eclipse.org/forums/index.php/t/377581/
  * forum: open with default file name: http://www.eclipse.org/forums/index.php/t/351352/
- * how-to wiki: rap file chooser \url {http://wiki.eclipse.org/Scout/HowTo/3.8/Add_FileChooser_support_for_RAP_UI}
+ * how-to wiki: rap file chooser http://wiki.eclipse.org/Scout/HowTo/3.8/Add_FileChooser_support_for_RAP_UI
 
 
 === Master Slave Fields

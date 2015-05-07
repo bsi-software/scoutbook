@@ -271,7 +271,7 @@ The [field]_Project Name_ field is used as base name of the application's plugin
 If the project name is written as parts separated by periods, the last part is copied into the [field]_Project Alias_ field.
 
 When building multi module applications, the optional [field]_Project Postfix_ field can be specified to apply a common naming schemes for the different modules.
-The resulting application plugins (UI, client, shared, server) are then named following the scheme [java]+$<$Project Name$>$.$<$plugin$>$.$<$Project Postfix$>$+. 
+The resulting application plugins (UI, client, shared, server) are then named following the scheme [java]+<Project Name>.<plugin>.<Project Postfix>+. 
 
 In the box below the postfix field the list of possible application plugins is provided. 
 Initially, all possible plugins are checked which is useful to quickly demonstrate a "`Hello World`" application.
